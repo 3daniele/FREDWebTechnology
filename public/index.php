@@ -1,5 +1,8 @@
+<?php include "../inc/init.php" ?>
+<?php include ROOT_PATH . "public/template-parts/title.php" ?>
+<title>Home</title>
 <?php
-    include './template-parts/header.php';
+include ROOT_PATH . 'public/template-parts/header.php';
 ?>
 
 <div class="container" id="main-area" style="margin-top: 70px;">
@@ -8,9 +11,9 @@
 
         </div>
         <?php
-            include './template-parts/sidebar.php';
-       ?>
+        include ROOT_PATH . 'public/template-parts/sidebar.php';
+        ?>
 
         <?php
-    include './template-parts/footer.php';
-?>
+        include ROOT_PATH . 'public/template-parts/footer.php';
+        ?>
