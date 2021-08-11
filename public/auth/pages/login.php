@@ -10,9 +10,8 @@
 ?>
 
 <div class="container" id="main-area" style="margin-top: 70px;">
-    <div class="row">
-    <div class="col-1"></div>    
-    <div class="col-4">
+    <div class="row">   
+    <div class="col-4" style="margin-left: 9px;">
         <main class="form-signin">
   <form>
    
@@ -27,7 +26,7 @@
       <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Password</label>
     </div>
-
+    <br>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
@@ -37,6 +36,8 @@
   </form>
 </main>
         </div>
+
+<div class="spazio" id="spazio_vuoto" style="margin-top: 110px;">
 <?php
     include ROOT_PATH . "public/template-parts/footer.php";
 ?>
