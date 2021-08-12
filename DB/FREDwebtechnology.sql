@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 11, 2021 at 09:21 AM
--- Server version: 5.7.32
--- PHP Version: 7.4.12
+-- Host: localhost:8889
+-- Generation Time: Aug 12, 2021 at 09:37 AM
+-- Server version: 5.7.30
+-- PHP Version: 7.4.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -8300,6 +8300,21 @@ CREATE TABLE IF NOT EXISTS `Payments` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `Photo`
+--
+
+CREATE TABLE IF NOT EXISTS `Photo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `product_id` int(11) NOT NULL,
+  `link` text NOT NULL,
+  `thumbnail` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `product_id` (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Product`
 --
 
@@ -8655,6 +8670,12 @@ ALTER TABLE `Orders_items`
 --
 ALTER TABLE `Payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
+
+--
+-- Constraints for table `Photo`
+--
+ALTER TABLE `Photo`
+  ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
 --
 -- Constraints for table `Product`
