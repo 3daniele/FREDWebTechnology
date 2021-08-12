@@ -20,12 +20,8 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item">Prezzo</li>
                 </ul>
                 <div class="card-body text-center">
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-primary btn-sm">Dettagli</button>
-                    </a>
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-success btn-sm">Aggiungi al carrello</button>
-                    </a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
                 </div>
             </div>
 
@@ -44,12 +40,8 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item">Prezzo</li>
                 </ul>
                 <div class="card-body text-center">
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-primary btn-sm">Dettagli</button>
-                    </a>
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-success btn-sm">Aggiungi al carrello</button>
-                    </a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
                 </div>
 
             </div>
@@ -68,12 +60,8 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item">Prezzo</li>
                 </ul>
                 <div class="card-body text-center">
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-primary btn-sm">Dettagli</button>
-                    </a>
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-success btn-sm">Aggiungi al carrello</button>
-                    </a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
                 </div>
 
             </div>
@@ -92,16 +80,10 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item">Prezzo</li>
                 </ul>
                 <div class="card-body text-center">
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-primary btn-sm">Dettagli</button>
-                    </a>
-                    <a href="#" class="card-link">
-                        <button type="button" class="btn btn-outline-success btn-sm">Aggiungi al carrello</button>
-                    </a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
                 </div>
-
             </div>
-
         </div>
     </div>
 </div>

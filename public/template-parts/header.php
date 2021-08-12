@@ -15,7 +15,7 @@
                 </form>
 
                 <ul class="nav col-12 col-lg-auto me-lg-3  mb-md-1">
-                    <li><a href="#" class="nav-link px-2 link-secondary"><img src="<?php echo ROOT_URL;?>public/img/shopping_bag.svg" alt="Cart"
+                    <li><a href="<?php echo ROOT_URL; ?>shop" class="nav-link px-2 link-secondary"><img src="<?php echo ROOT_URL;?>public/img/shopping_bag.svg" alt="Cart"
                                 width="32" height="32"></a></li>
                 </ul>
 
