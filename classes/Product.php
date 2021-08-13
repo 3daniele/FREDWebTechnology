@@ -1,11 +1,12 @@
 <?php
 
-class ProductManager extends DbManager {
+class ProductManager extends DbManager
+{
 
-  public function __construct(){
+  public function __construct()
+  {
     parent::__construct();
-    $this->columns = array('id', 'name', 'description', 'price', 'images', 'manufaturer_id', 'category_id');
+    $this->columns = array('id', 'name', 'description', 'price', 'manufaturer_id', 'category_id');
     $this->tableName = 'Product';
   }
-
 }
