@@ -8,4 +8,8 @@ class CategoryManager extends DbManager {
     $this->tableName = 'Category';
   }
 
+  public function getCategory($id) {
+    return $this->db->query("SELECT * FROM Category WHERE id = $id");
+  }
+
 }

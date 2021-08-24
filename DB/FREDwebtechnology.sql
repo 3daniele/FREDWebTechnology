@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `Category` (
 
 INSERT INTO `Category` (`id`, `name`, `description`) VALUES
 (1, 'Cosmetici', '!'),
-(2, 'Bagnodiccia', '!'),
+(2, 'Bagnodoccia', '!'),
 (3, 'Creme', '!'),
 (4, 'Cura della persona', '!'),
 (5, 'Deodoranti', '!'),
@@ -8445,7 +8445,7 @@ CREATE TABLE IF NOT EXISTS `Photo` (
 INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 (5, 116, 'public/img/product/Bagnodocciabio/1.png', 1),
 (6, 116, 'public/img/product/Bagnodocciabio/2.png', 0),
-(7, 117, 'public/img/product/Cremacorpobio/1.pnh', 1),
+(7, 117, 'public/img/product/Cremacorpobio/1.png', 1),
 (8, 117, 'public/img/product/Cremacorpobio/2.png', 0),
 (9, 117, 'public/img/product/Cremacorpobio/3.png', 0),
 (10, 118, 'public/img/product/Cremalavandabio/1.png', 1),
