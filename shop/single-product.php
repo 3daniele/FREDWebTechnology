@@ -1,10 +1,21 @@
 <?php include "../inc/init.php"; ?>
 <?php
-$productid = isset($_GET["product"]) ? $_GET["product"] : 'homepage';
+    if (!defined('ROOT_URL')) {
+        die;
+    }
+
+    if ($_GET["product"] == null) {
+        header("Location: " . ROOT_URL);
+    }
+
+    $productid = $_GET["product"];
 ?>
 <?php include ROOT_PATH . "public/template-parts/title.php" ?>
 <?php $productmgr = new ProductManager();
 $product = $productmgr->get($productid);
+if($product->name == ""){
+    header("Location: " . ROOT_URL);
+}
 ?>
 <title><?php echo $product->name; ?></title>
 <?php include ROOT_PATH . 'public/template-parts/header.php'; ?>

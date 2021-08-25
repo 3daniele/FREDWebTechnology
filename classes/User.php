@@ -8,4 +8,8 @@ class UserManager extends DbManager {
     $this->tableName = 'User';
   }
 
+  public function login($email, $password) {
+    return $this->db->query("SELECT* FROM User WHERE email = '$email' AND password = '$password'");
+  }
+ 
 }

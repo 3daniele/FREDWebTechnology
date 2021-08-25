@@ -1,5 +1,9 @@
 <?php
 include "../../../inc/init.php";
+    session_start();
+    if(isset($_SESSION["email"])){
+        header("Location: " . ROOT_URL);
+    }
 ?>
 <?php
 include ROOT_PATH . "public/template-parts/title.php";
@@ -13,17 +17,17 @@ include ROOT_PATH . "public/template-parts/header.php";
   <div class="row">
     <div class="col-4" style="margin-left: 9px;">
       <main class="form-signin">
-        <form>
+        <form action="./login-action.php" method="post" >
 
           <h1 class="h3 mb-3 fw-normal">Login</h1>
 
           <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
             <label for="floatingInput">Indirizzo Email</label>
           </div>
           <br>
           <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password">
             <label for="floatingPassword">Password</label>
           </div>
           <br>
@@ -34,6 +38,7 @@ include ROOT_PATH . "public/template-parts/header.php";
           </div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
         </form>
+        <a href=".\register.php">Registrati</a>
       </main>
     </div>
 
