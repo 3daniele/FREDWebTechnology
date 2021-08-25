@@ -28,8 +28,7 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     $img = $imgMgr->get_thumbnail($product->id);
                     foreach($img as $i){
                         echo ROOT_URL . $i['link'];
-                    }?>" class="d-block user-select-none" width="100%" height="200" aria-label="Placeholder: Image cap" focusable="false" role="img" preserveAspectRatio="xMidYMid slice" viewBox="0 0 318 180" style="font-size:1.125rem;text-anchor:middle">
-                    <rect width="100%" height="100%" fill="#868e96"></rect>
+                    }?>" class="d-block user-select-none" aria-label="Placeholder: Image cap" focusable="false" role="img" viewBox="0 0 318 180" style="width:auto; height:250" alt="<?php echo $product->name; ?>">
                     
                 </img>
                 <ul class="list-group list-group-flush">
@@ -44,9 +43,9 @@ include ROOT_PATH . 'public/template-parts/header.php';
                             foreach ($categories as $category){
                                 $results = $categoryMgr->getCategory($category['category_id']);
                                 foreach ($results as $result) {
-                                    echo("<span class=\"badge rounded-pill bg-info\">");
+                                    echo "<span class=\"badge rounded-pill bg-info\">";
                                     echo $result['name'];
-                                    echo("</span>");
+                                    echo"</span>";
                                     echo " ";
                                 }
                             }
@@ -61,7 +60,7 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item"> <?php echo $product->price." €" ?></li>
                 </ul>
                 <div class="card-body text-center">
-                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                    <a href=<?php echo ROOT_URL . 'shop/single-product.php?product='.$product->id;?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
                     <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
                 </div>
             </div>
