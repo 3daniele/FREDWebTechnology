@@ -13,7 +13,11 @@ if ($login == null) {
     //ALLERT
 }else{
     $_SESSION["email"] = $email;
-    $_SESSION["img"] = $login["img"];
+    foreach ($login as $log) {
+        $_SESSION["img"] = $log["img"];
+        $_SESSION["admin"] = $log["user_type"];
+        $_SESSION["name"] = $log["name"];
+    }
     header("Location: " . ROOT_URL . "shop");
 }
 
