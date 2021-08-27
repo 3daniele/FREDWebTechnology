@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 4.9.3
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Aug 13, 2021 at 03:33 PM
--- Server version: 5.7.32
--- PHP Version: 7.4.12
+-- Host: localhost:8889
+-- Generation Time: Aug 27, 2021 at 04:52 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -28,14 +28,11 @@ USE `FREDwebtechnology`;
 -- Table structure for table `Answer`
 --
 
-CREATE TABLE IF NOT EXISTS `Answer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Answer` (
+  `id` int(11) NOT NULL,
   `support_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `message` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `support_id` (`support_id`)
+  `message` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -44,11 +41,9 @@ CREATE TABLE IF NOT EXISTS `Answer` (
 -- Table structure for table `Cart`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+CREATE TABLE `Cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -57,14 +52,11 @@ CREATE TABLE IF NOT EXISTS `Cart` (
 -- Table structure for table `Cart_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Cart_item` (
+  `id` int(11) NOT NULL,
   `cart_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `cart_id` (`cart_id`)
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -73,12 +65,11 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
 -- Table structure for table `Category`
 --
 
-CREATE TABLE IF NOT EXISTS `Category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Category` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Category`
@@ -105,14 +96,11 @@ INSERT INTO `Category` (`id`, `name`, `description`) VALUES
 -- Table structure for table `Category_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Category_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Category_item` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `product_id` (`product_id`,`category_id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Category_item`
@@ -197,7 +185,33 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 (85, 137, 11),
 (88, 138, 10),
 (87, 138, 11),
-(89, 138, 12);
+(89, 138, 12),
+(91, 139, 10),
+(90, 139, 11),
+(92, 140, 1),
+(94, 140, 4),
+(95, 140, 9),
+(93, 140, 11),
+(96, 140, 12),
+(97, 141, 1),
+(99, 141, 4),
+(98, 141, 11),
+(100, 142, 10),
+(101, 143, 1),
+(102, 143, 4),
+(103, 143, 11),
+(104, 143, 12),
+(105, 144, 4),
+(108, 145, 10),
+(106, 145, 12),
+(107, 145, 13),
+(111, 146, 10),
+(109, 146, 12),
+(110, 146, 13),
+(112, 147, 1),
+(113, 147, 4),
+(114, 147, 11),
+(115, 148, 4);
 
 -- --------------------------------------------------------
 
@@ -205,13 +219,11 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 -- Table structure for table `City`
 --
 
-CREATE TABLE IF NOT EXISTS `City` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `City` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `provinces_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `provinces_id` (`provinces_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110011 DEFAULT CHARSET=utf8;
+  `provinces_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `City`
@@ -8323,15 +8335,12 @@ INSERT INTO `City` (`id`, `name`, `provinces_id`) VALUES
 -- Table structure for table `Faq`
 --
 
-CREATE TABLE IF NOT EXISTS `Faq` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Faq` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `user_id` (`user_id`)
+  `user_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8340,20 +8349,20 @@ CREATE TABLE IF NOT EXISTS `Faq` (
 -- Table structure for table `Manufacturer`
 --
 
-CREATE TABLE IF NOT EXISTS `Manufacturer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Manufacturer` (
+  `id` int(11) NOT NULL,
   `name` varchar(70) NOT NULL,
   `info` text NOT NULL,
-  `site` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `site` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Manufacturer`
 --
 
 INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
-(1, 'Verde Naturale', 'L\'azienda produce piantine in alveolo e in vaso, tra cui: aromatiche, medicinali, essenziere, \r\n\r\nda profumo e ortive. --> DISPONIBILITÀ PIANTINE ORTAGGI 2021\r\n\r\nSi propagano tutte le specie botaniche presenti in azienda e qualsiasi pianta di interesse del cliente, purchè facilmente reperibile sul mercato ordinario.\r\nMateriale di propagazione, fornito dal cliente stesso in conto lavorazione.', 'via per Montalboddo,  Corinaldo (AN), 60013​');
+(1, 'Verde Naturale', 'L\'azienda produce piantine in alveolo e in vaso, tra cui: aromatiche, medicinali, essenziere, \r\n\r\nda profumo e ortive. --> DISPONIBILITÀ PIANTINE ORTAGGI 2021\r\n\r\nSi propagano tutte le specie botaniche presenti in azienda e qualsiasi pianta di interesse del cliente, purchè facilmente reperibile sul mercato ordinario.\r\nMateriale di propagazione, fornito dal cliente stesso in conto lavorazione.', 'via per Montalboddo,  Corinaldo (AN), 60013​'),
+(2, 'Iris bio', 'La cooperativa agricola Iris è a produzione esclusivamente biologiche dalla sua fondazione. È situata all’interno del Parco Naturale Oglio Sud, ricco di fauna e flora. Nell’azienda abbiamo piantato moltissime siepi e filari di alberi per contornare i campi che coltiviamo, lasciamo i fossi di irrigazione naturalizzati, permettendo ad insetti ed anfibi di riprodursi.', 'via Napoleone, Pescara ');
 
 -- --------------------------------------------------------
 
@@ -8361,15 +8370,11 @@ INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 -- Table structure for table `Newsletter`
 --
 
-CREATE TABLE IF NOT EXISTS `Newsletter` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Newsletter` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `category` int(11) DEFAULT NULL,
-  `manufacturer` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manufacturer` (`manufacturer`),
-  KEY `category` (`category`),
-  KEY `user_id` (`user_id`)
+  `manufacturer` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8378,17 +8383,14 @@ CREATE TABLE IF NOT EXISTS `Newsletter` (
 -- Table structure for table `Orders`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Orders` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('Ordine ricevuto','In lavorazione','Spedito','In consegna','Consegnato') NOT NULL,
   `tracking_information` text,
   `stimate_delivery` int(11) NOT NULL,
-  `shipment_user_info` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `shipment_user_info` (`shipment_user_info`)
+  `shipment_user_info` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8397,13 +8399,11 @@ CREATE TABLE IF NOT EXISTS `Orders` (
 -- Table structure for table `Orders_items`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders_items` (
+CREATE TABLE `Orders_items` (
   `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  KEY `order_id` (`order_id`),
-  KEY `product_id` (`product_id`)
+  `quantity` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8412,15 +8412,13 @@ CREATE TABLE IF NOT EXISTS `Orders_items` (
 -- Table structure for table `Payments`
 --
 
-CREATE TABLE IF NOT EXISTS `Payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Payments` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `credit_card_number` varchar(16) DEFAULT NULL,
   `cvv` int(3) DEFAULT NULL,
   `expiration` varchar(5) DEFAULT NULL,
-  `paypal` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  `paypal` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8429,14 +8427,12 @@ CREATE TABLE IF NOT EXISTS `Payments` (
 -- Table structure for table `Photo`
 --
 
-CREATE TABLE IF NOT EXISTS `Photo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Photo` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `link` text NOT NULL,
-  `thumbnail` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+  `thumbnail` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Photo`
@@ -8447,7 +8443,6 @@ INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 (6, 116, 'public/img/product/Bagnodocciabio/2.png', 0),
 (7, 117, 'public/img/product/Cremacorpobio/1.png', 1),
 (8, 117, 'public/img/product/Cremacorpobio/2.png', 0),
-(9, 117, 'public/img/product/Cremacorpobio/3.png', 0),
 (10, 118, 'public/img/product/Cremalavandabio/1.png', 1),
 (11, 120, 'public/img/product/Diffusori/1.png', 1),
 (12, 120, 'public/img/product/Diffusori/2.png', 0),
@@ -8461,7 +8456,55 @@ INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 (20, 122, 'public/img/product/Profumauto/2.png', 0),
 (21, 122, 'public/img/product/Profumauto/3.png', 0),
 (22, 122, 'public/img/product/Profumauto/4.png', 0),
-(23, 122, 'public/img/product/Profumauto/5.png', 0);
+(23, 122, 'public/img/product/Profumauto/5.png', 0),
+(24, 119, 'public/img/product/Cremavisobio/1.png', 1),
+(25, 119, 'public/img/product/Cremavisobio/2.png', 0),
+(26, 123, 'public/img/product/Sacchettiprofumati/1.png', 1),
+(27, 123, 'public/img/product/Sacchettiprofumati/2.png', 0),
+(28, 123, 'public/img/product/Sacchettiprofumati/3.png', 0),
+(29, 123, 'public/img/product/Sacchettiprofumati/4.png', 0),
+(30, 123, 'public/img/product/Sacchettiprofumati/5.png', 0),
+(31, 123, 'public/img/product/Sacchettiprofumati/6.png', 0),
+(32, 124, 'public/img/product/Saponeliquido/1.png', 1),
+(33, 124, 'public/img/product/Saponeliquido/2.png', 0),
+(34, 125, 'public/img/product/Shampo/1.png', 1),
+(35, 126, 'public/img/product/Balsamo/1.png', 1),
+(36, 127, 'public/img/product/Burrocacao/1.png', 1),
+(37, 128, 'public/img/product/Confezione1/1.png', 1),
+(38, 128, 'public/img/product/Confezione1/2.png', 0),
+(39, 129, 'public/img/product/Confezione2/1.png', 1),
+(40, 129, 'public/img/product/Confezione2/2.png', 0),
+(41, 130, 'public/img/product/Confezione3/1.png', 1),
+(42, 130, 'public/img/product/Confezione3/1.png', 0),
+(43, 131, 'public/img/product/Confezionecosmetici/1.png', 1),
+(44, 131, 'public/img/product/Confezionecosmetici/2.png', 0),
+(45, 132, 'public/img/product/Confezionetopcreme/1.png', 1),
+(46, 132, 'public/img/product/Confezionetopcreme/2.png', 0),
+(47, 133, 'public/img/product/Cremaelicriso/1.png', 1),
+(48, 134, 'public/img/product/Cremasilhouette/1.png', 1),
+(49, 134, 'public/img/product/Cremasilhouette/2.png', 0),
+(50, 134, 'public/img/product/Cremasilhouette/3.png', 0),
+(51, 135, 'public/img/product/Deodorante/1.png', 1),
+(52, 136, 'public/img/product/Detergenteintimo/1.png', 1),
+(53, 137, 'public/img/product/Diffusoreinceramica/1.png', 1),
+(54, 137, 'public/img/product/Diffusoreinceramica/2.png', 0),
+(55, 138, 'public/img/product/Diffusoriambienti/1.png', 1),
+(56, 138, 'public/img/product/Diffusoriambienti/1.png', 0),
+(57, 138, 'public/img/product/Diffusoriambienti/2.png', 0),
+(58, 139, 'public/img/product/Diffusoreambientiset/1.png', 1),
+(59, 139, 'public/img/product/Diffusoreambientiset/2.png', 0),
+(60, 140, 'public/img/product/Idrolatibio/1.png', 1),
+(61, 140, 'public/img/product/Idrolatibio/1.png', 0),
+(62, 141, 'public/img/product/Lattedetergente/1.png', 1),
+(63, 142, 'public/img/product/Olioessenzialesacchetto/1.png', 1),
+(64, 142, 'public/img/product/Olioessenzialesacchetto/2.png', 0),
+(65, 143, 'public/img/product/Oliotonificante/1.png', 1),
+(66, 144, 'public/img/product/Postzanza/1.png', 1),
+(67, 145, 'public/img/product/Setspezie/1.png', 1),
+(68, 145, 'public/img/product/Setspezie/2.png', 0),
+(69, 146, 'public/img/product/Setspeziebio/1.png', 1),
+(70, 147, 'public/img/product/Tonico/1.png', 1),
+(71, 148, 'public/img/product/Zanzino/1.png', 1);
 
 -- --------------------------------------------------------
 
@@ -8469,44 +8512,52 @@ INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 -- Table structure for table `Product`
 --
 
-CREATE TABLE IF NOT EXISTS `Product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Product` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
-  `price` double NOT NULL,
-  `manufacturer_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manufacturer_id` (`manufacturer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+  `price` decimal(10,2) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Product`
 --
 
 INSERT INTO `Product` (`id`, `name`, `description`, `price`, `manufacturer_id`) VALUES
-(116, 'Bagno Doccia BIO', 'Il Bagno Doccia Bio di Verde Naturale è delicato sulla pelle, grazie alla presenza di estratti di avena e riso. L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il sebo cutaneo, detergendo in modo delicato.\r\nE’ disponibile in due varianti:\r\nCon olio essenziale di lavanda per pelli normali\r\nCon olio essenziale di rosmarino dedicato alle pelli squilibrate, secche o grasse\r\n\r\nQuesto prodotto è eco-friendly : non è testata sugli animali ed è prodotta senza sostanze aggressive e/o tossiche.', 3.2, 1),
-(117, 'Crema Corpo Bio', 'La Crema Corpo Biologica di Verde Naturale, grazie alla presenza dell’olio essenziale di Lavanda Officinale e dell’Olio d’Argan, idrata e nutre ogni tipo di pelle garantendone la corretta fisiologia, prevenendone l’invecchiamento cutaneo e la formazione di smagliature.\r\n\r\nQuesta crema è eco-friendly: non testata sugli animali e senza sostanze aggressive e tossiche.', 19.7, 1),
-(118, 'Crema Lavanda Bio', 'La Crema Lavanda Bio di Verde Naturale, grazie alla presenza di olii vegetali biologici(di Lavanda Officinale, d’Argan, d’oliva) ha un forte effetto emolliente ed idratante.\r\nE’ indicata per tutti i tipi di pelle, in particolare per riequilibrare la corretta fisiologia delle pelli secche.\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', 10.35, 1),
-(119, 'Crema Viso Elicriso e Lavanda Bio', 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso e Lavanda (di nostra produzione) è idratante, lenitiva, emoliente e tonica. Gli oli essenziali scelti hanno un’azione delicata purificante e normalizzante cutanea.\r\nÈ adatta ad ogni tipo di pelle, anche alle più sensibili.\r\n\r\nConfezione da 50 ml\r\n', 16.6, 1),
-(120, 'Diffusore Ambientale', 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n\r\nÈ possibile scegliere tra:\r\n- Lavanda Officianale\r\n- Lavanda\r\n- Lavanda & Rosmarino\r\n- Menta\r\n- Agrumi\r\n', 8.3, 1),
-(121, 'Oli essenziali', 'Oli essenziali Biologici prodotti da Verde Naturale.\r\nPer più informazioni consultare la scheda tecnica relativa ad ogni pianta aromatica nella sezione in alto a sinistra \"Oli Essenziali\".', 28.95, 1),
-(122, 'Profumauto', 'Immagina di entrare in macchina ed essere travolto dalla delicatezza della lavanda, dalla freschezza della menta, o dall’intensità dell’alloro e del cipresso.. e ora immagina che non serva immaginarlo: i nostri Profumauto, naturali al 100%, sono pensati proprio per questo!\r\n\r\nI piccoli flaconcini in vetro contengono 5 ml di olio essenziale puro che viene assorbito e diffuso nell’aria da un apposito tappo in legno, provvisto di gancio e nastro per appendere il prodotto all’auto.\r\n\r\nÈ possibile scegliere tra:\r\n- Lavanda\r\n- Lavanda Officinale\r\n- Menta\r\n- Cipresso\r\n- Alloro\r\n- Rosmarino', 6.2, 1),
-(123, 'Sacchetti profumati', 'Sacchetti cuciti a mano contenenti fiori essicati di lavanda.\r\nIdeali per profumare i capi e proteggerli dalle tarme.', 2, 1),
-(124, 'Sapone Liquido Bio', 'Sapone liquido Bio per mani con olio essenziale di Lavanda Abrialis', 15.5, 1),
-(125, 'Shampoo BIO', 'L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il cuoio capelluto, detergendo in modo delicato. Leggeri e profumati, i capelli ritrovano durevolmente brillantezza e morbidezza.\r\n\r\nE’ disponibile in tre varianti:\r\n- Con olio essenziale di lavanda per capelli normali\r\n- Con olio essenziale di rosmarino dedicato alle capelli squilibrati, secchi o grassi\r\n- Con olio essenziale di elicriso: esercita sul cuoio capelluto una delicata azione astringente, decongestionante e detossinante, il prodotto è particolarmente indicato per trattare la pelle affetta da rossore, desquamazione, dermatite seborroica e prurito.\r\n\r\nQuesto prodotto è eco-friendly : non è testato sugli animali ed è prodottosenza sostanze aggressive e/o tossiche.', 7.25, 1),
-(126, 'Balsamo Bio', 'Balsamo Bio con olio essenziale di Lavanda Officinale, olio di semi di Lino, olio di Mandorle dolci.\r\nEffetto districante e nutriente.', 8.8, 1),
-(127, 'Burrocacao Bio', 'Il burrocacao Bio di Verde Naturale è realizzato con estratti di agrumi ed elicriso. Gli agrumi concedono un nutrimento multivitaminico, l\'elicriso è antinfiammatorio, rinfrescante, emoliente e lenitivo. Protegge dalle screpolature ed idrata le labbra in tutte le condizioni atmosferiche.\r\n', 3.9, 1),
-(128, 'Confezione \"Cura della persona N°1\"', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.\r\n\r\nIn questa confezione trovi:\r\n\r\nShampoo BIO Lavanda (200 ml)\r\nBagno Doccia BIO Lavanda (200 ml)\r\nBalsamo BIO (200 ml)\r\nSapone Liquido Mani BIO Lavanda (250 ml)\r\n\r\nNel prezzo è inclusa la scatola.', 28, 1),
-(129, 'Confezione \"Cura della persona N°2\"', 'In questa confezione trovi:\r\n\r\nBurrocacao Lavanda & Elicriso\r\nShampoo BIO Rosmarino (100 ml)\r\nBagno Doccia BIO Lavanda (100 ml)\r\nBalsamo BIO (200 ml)\r\nLatte Detergente (250 ml)\r\n\r\nNel prezzo è inclusa la confezione.', 27, 1),
-(130, 'Confezione \"Cura della persona N°3\"', 'In questa confezione trovi:\r\n\r\nDeodorante Spray BIO con Bicarbonato, Agrumi e Lavanda\r\nShampoo BIO Lavanda (200 ml)\r\nDetergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO\r\n\r\nNel prezzo è inclusa la confezione.', 27.5, 1),
-(131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.\r\n\r\nIn questa confezione trovi:\r\n- Crema corpo BIO (200 ml)\r\n- Crema Viso BIO (50 ml)\r\n- Crema Mani Lavanda (100 ml)\r\n- Burrocacao BIO\r\n- Deo Spray BIO\r\n- Sacchetto Lavanda\r\n\r\nNel prezzo è inclusa la scatola.\r\n', 60, 1),
-(132, 'Confezione Top Creme', 'In questa confezione troverai:\r\n- Crema Corpo BIO 200 ml (Lavanda)\r\n- Crema Silhouette BIO 200 ml (Rosmarino)\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)\r\n- Crema Lavanda BIO 100 ml\r\n- Crema Elicriso BIO 100 ml\r\n\r\nLa scatola è inclusa nel prezzo.', 90, 1),
-(133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', 16.55, 1),
-(134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n\r\n200 ml.\r\n\r\nVuoi regalare questo prodotto? Aggiungi la confezione regalo!', 24.8, 1),
-(135, 'Deodorante Bio', 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici. Ideale per contrastare i cattivi odori senza però impedire la normale sudorazione, proteggendo quindi l\'equilibrio della pelle.\r\nIl risultato sarà una pelle fresca, igienizzata e profumata naturalmente.\r\n\r\nDisponibile in 4 versioni:\r\n- Spray (Senza Alcool) con Bicarbonato, Agrumi e Lavanda\r\n- Roll-On con Salvia\r\n- Roll-On con Salvia e Menta\r\n- Roll-On con Timo e Malaleuca', 7.2, 1),
-(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.\r\n\r\nDisponibile in due versioni:\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', 7.2, 1),
-(137, 'Diffusore in ceramica + Olio essenziale', '- Diffusore in ceramica decorato a mano\r\n- Olio essenziale di lavanda grossò (10 ml)\r\n\r\nLa confezione regalo è compresa nel prezzo.', 18, 1),
-(138, 'Diffusori Ambientali (2) + Sacchetto', 'Questa confezione contiene:\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:\r\n\r\n- Lavanda Officianale\r\n- Lavanda\r\n- Lavanda & Rosmarino\r\n- Menta\r\n- Agrumi\r\n\r\nSacchetto profumato a scelta tra:\r\n- Farfalla\r\n- Gufetto\r\n- Cuscino\r\n- 2 sacchetti normali\r\n\r\nLa confezione regalo è inclusa nel prezzo', 21.5, 1);
+(116, 'Bagno Doccia BIO', 'Il Bagno Doccia Bio di Verde Naturale è delicato sulla pelle, grazie alla presenza di estratti di avena e riso. <br> L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il sebo cutaneo, detergendo in modo delicato. <br><br>\r\nE’ disponibile in due varianti:<br>\r\n- Con olio essenziale di lavanda per pelli normali<br>\r\n- Con olio essenziale di rosmarino dedicato alle pelli squilibrate, secche o grasse\r\n<br> <br>\r\nQuesto prodotto è eco-friendly : non è testata sugli animali ed è prodotta senza sostanze aggressive e/o tossiche.', '3.20', 1),
+(117, 'Crema Corpo Bio', 'La Crema Corpo Biologica di Verde Naturale, grazie alla presenza dell’olio essenziale di Lavanda Officinale e dell’Olio d’Argan, idrata e nutre ogni tipo di pelle garantendone la corretta fisiologia, prevenendone l’invecchiamento cutaneo e la formazione di smagliature.\r\n<br><br>\r\nQuesta crema è eco-friendly: non testata sugli animali e senza sostanze aggressive e tossiche.', '19.70', 1),
+(118, 'Crema Lavanda Bio', 'La Crema Lavanda Bio di Verde Naturale, grazie alla presenza di olii vegetali biologici(di Lavanda Officinale, d’Argan, d’oliva) ha un forte effetto emolliente ed idratante.<br>\r\nE’ indicata per tutti i tipi di pelle, in particolare per riequilibrare la corretta fisiologia delle pelli secche.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '10.35', 1),
+(119, 'Crema Viso Elicriso e Lavanda Bio', 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso e Lavanda (di nostra produzione) è idratante, lenitiva, emoliente e tonica. <br>Gli oli essenziali scelti hanno un’azione delicata purificante e normalizzante cutanea.<br>\r\nÈ adatta ad ogni tipo di pelle, anche alle più sensibili.\r\n<br><br>\r\nConfezione da 50 ml\r\n', '16.60', 1),
+(120, 'Diffusore Ambientale', 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. <br>Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n', '8.30', 1),
+(121, 'Oli essenziali', 'Oli essenziali Biologici prodotti da Verde Naturale.<br>\r\n', '28.95', 1),
+(122, 'Profumauto', 'Immagina di entrare in macchina ed essere travolto dalla delicatezza della lavanda, dalla freschezza della menta, o dall’intensità dell’alloro e del cipresso.. e ora immagina che non serva immaginarlo: i nostri Profumauto, naturali al 100%, sono pensati proprio per questo!\r\n<br>\r\nI piccoli flaconcini in vetro contengono 5 ml di olio essenziale puro che viene assorbito e diffuso nell’aria da un apposito tappo in legno, provvisto di gancio e nastro per appendere il prodotto all’auto.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda<br>\r\n- Lavanda Officinale<br>\r\n- Menta<br>\r\n- Cipresso<br>\r\n- Alloro<br>\r\n- Rosmarino<br>', '6.20', 1),
+(123, 'Sacchetti profumati', 'Sacchetti cuciti a mano contenenti fiori essicati di lavanda.<br>\r\nIdeali per profumare i capi e proteggerli dalle tarme.', '2.00', 1),
+(124, 'Sapone Liquido Bio', 'Sapone liquido Bio per mani con olio essenziale di Lavanda Abrialis', '15.50', 1),
+(125, 'Shampoo BIO', 'L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il cuoio capelluto, detergendo in modo delicato. <br>Leggeri e profumati, i capelli ritrovano durevolmente brillantezza e morbidezza.\r\n<br><br>\r\nE’ disponibile in tre varianti:<br>\r\n- Con olio essenziale di lavanda per capelli normali<br>\r\n- Con olio essenziale di rosmarino dedicato alle capelli squilibrati, secchi o grassi<br>\r\n- Con olio essenziale di elicriso, è indicato per trattare la pelle affetta da rossore, desquamazione, dermatite seborroica e prurito.\r\n<br><br>\r\nQuesto prodotto è eco-friendly : non è testato sugli animali ed è prodottosenza sostanze aggressive e/o tossiche.', '7.25', 1),
+(126, 'Balsamo Bio', 'Balsamo Bio con olio essenziale di Lavanda Officinale, olio di semi di Lino, olio di Mandorle dolci.<br>\r\nEffetto districante e nutriente.', '8.80', 1),
+(127, 'Burrocacao Bio', 'Il burrocacao Bio di Verde Naturale è realizzato con estratti di agrumi ed elicriso. <br>Gli agrumi concedono un nutrimento multivitaminico, l\'elicriso è antinfiammatorio, rinfrescante, emoliente e lenitivo.<br> Protegge dalle screpolature ed idrata le labbra in tutte le condizioni atmosferiche.\r\n', '3.90', 1),
+(128, 'Confezione \"Cura della persona N°1\"', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?<br>\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:\r\n<br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Bagno Doccia BIO Lavanda (200 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Sapone Liquido Mani BIO Lavanda (250 ml) <br><br>\r\n\r\nNel prezzo è inclusa la scatola.', '28.00', 1),
+(129, 'Confezione \"Cura della persona N°2\"', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 1),
+(130, 'Confezione \"Cura della persona N°3\"', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 1),
+(131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? <br><br> \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:<br>\r\n- Crema corpo BIO (200 ml)<br>\r\n- Crema Viso BIO (50 ml)<br>\r\n- Crema Mani Lavanda (100 ml) <br>\r\n- Burrocacao BIO <br>\r\n- Deo Spray BIO<br>\r\n- Sacchetto Lavanda<br>\r\n<br><br>\r\nNel prezzo è inclusa la scatola.\r\n', '60.00', 1),
+(132, 'Confezione Top Creme', 'In questa confezione troverai:<br>\r\n- Crema Corpo BIO 200 ml (Lavanda)<br>\r\n- Crema Silhouette BIO 200 ml (Rosmarino)<br>\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)<br>\r\n- Crema Lavanda BIO 100 ml<br>\r\n- Crema Elicriso BIO 100 ml\r\n<br><br>\r\nLa scatola è inclusa nel prezzo.', '90.00', 1),
+(133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '16.55', 1),
+(134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.<br>\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n<br><br>\r\n Confezione da 200 ml.\r\n<br><br>\r\nVuoi regalare questo prodotto? <br>Aggiungi la confezione regalo!', '24.80', 1),
+(135, 'Deodorante Bio', 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici. <br>Ideale per contrastare i cattivi odori senza però impedire la normale sudorazione, proteggendo quindi l\'equilibrio della pelle.<br>\r\nIl risultato sarà una pelle fresca, igienizzata e profumata naturalmente.\r\n<br><br>\r\nDisponibile in 4 versioni:<br>\r\n- Spray (Senza Alcool) con Bicarbonato, Agrumi e Lavanda<br>\r\n- Roll-On con Salvia <br>\r\n- Roll-On con Salvia e Menta <br>\r\n- Roll-On con Timo e Malaleuca <br>', '7.20', 1),
+(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 1),
+(137, 'Diffusore in ceramica + Olio essenziale', '- Diffusore in ceramica decorato a mano <br>\r\n- Olio essenziale di lavanda grossò (10 ml)<br><br>\r\n\r\nLa confezione regalo è compresa nel prezzo.', '18.00', 1),
+(138, 'Diffusori Ambientali (2) + Sacchetto', 'Questa confezione contiene:<br>\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:<br>\r\n\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n<br>\r\nSacchetto profumato a scelta tra:<br>\r\n- Farfalla<br>\r\n- Gufetto<br>\r\n- Cuscino<br>\r\n- 2 sacchetti normali<br>\r\n<br>\r\nLa confezione regalo è inclusa nel prezzo', '21.50', 1),
+(139, 'Diffusori Ambientali Set ', 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.<br> Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br><br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. <br>Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\n', '25.50', 2),
+(140, 'Idrolati Bio', 'Idrolati 100% naturali e biologici ottenuti attraverso la distillazione a vapore. Disponibili in boccioni in vetro da 500 ml.\r\n<br><br>\r\nLavanda:<br>\r\ncalma, rinfresca, lenisce e decongestiona l\'epidermide.<br> Calma e distende il sistema nervoso. <br>Può essere usato puro, applicato direttamente sulla pelle. <br>Essendo completamente senza alcool, è perfetto anche per i bambini, come dopo sole o struccante. <br>Adatto anche alle pelli sensibili.\r\n<br><br>\r\nRosmarino:\r\neffetto dermopurificante e riequilibrante del sebo in eccesso.<br> Perfetto anche per la cura dei capelli, è purificante e antiforfora, tonificante e rinfrescante. <br>È inoltre un ingrediente ideale per la creazione di deodoranti naturali, in quanto ha un effetto astringente contro la sudorazione eccessiva. <br>Può essere usato puro, applicato direttamente sulla pelle. <br>Essendo completamente senza alcool, è perfetto anche per i bambini, come dopo sole o struccante.<br>\r\nAdatto per pelle grassa e impura.<br>\r\n<br>\r\nElicriso:<br>\r\neffetto rinfrescante, astringente e dermopurificante. <br>Ideale per rigenerare la pelle, stimola la circolazione e la cicatrizzazione dell\'epidermide sensibile e con couperose. <br>Perfetto inoltre per contrastare le occhiaie, agisce come calmante e sgonfiante.<br>\r\nPuò essere inoltre utilizzato per la cura dei capelli, ha un effetto rinforzante sulla crescita, lenitivo contro la forfora e purificante. <br>È inoltre un ingrediente ideale per la creazione di deodoranti naturali, in quanto ha un effetto astringente contro la sudorazione eccessiva.<br>\r\nAdatto per pelli irritate e/o sensibili.<br>\r\n<br>\r\nMenta:\r\nEffetto rinfrescante, tonificante e decongestionante.<br>\r\nSe utilizzato come tonico, agisce come purificante, astringente e rivitalizzante della pelle opaca e stressata. <br>Inoltre, la menta piperita è nota per alleviare i pruriti ed è quindi utile utilizzare l\'idrolato dopo la rasatura. <br>Questo prodotto è spesso usato per trattare la sudorazione eccessiva, anche durante le vampate di calore. <br>\r\nAdatto per ogni tipo di pelle.', '5.20', 2),
+(141, 'Latte detergente Bio', 'Latte Detergente Bio con olio essenziale di lavanda.<br>\r\nÈ adatto a tutti i tipi di pelle: deterge delicatamente, grazie all\'assenza di sostanze aggressive e tossiche, rimuovendo le impurità ed i residui del make-up.<br>\r\nL’olio essenziale di lavanda svolge un’azione purificante e riequilibrante e lascia la pelle tonica e profumata senza mai essere invadente.<br><br>\r\n\r\nConfezione da 200 ml.\r\n<br><br>\r\nQuesta prodotto è eco-friendly: non testato sugli animali e senza sostanze aggressive e tossiche.\r\n', '6.20', 2),
+(142, 'Olio Essenziale + Sacchetto', 'In questa confezione trovi: <br>\r\n- Una boccetta di olio essenziale di Lavanda Grossò Bio (10 ml)<br>\r\n- Sacchetto  forma di farfalla.\r\n\r\n<br><br>\r\nNel prezzo è inclusa la confezione regalo.', '15.00', 2),
+(143, 'Olio Tonificante Bio', 'Olio tonificante drenante Bio.\r\n<br>\r\nConfezione da 100 ml', '13.45', 2),
+(144, 'Post Zanza', 'Lenitivo e rinfrescante', '6.20', 2),
+(145, 'Set Spezie', 'Set spezie BIO + Confezione Regalo\r\n<br><br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>', '40.00', 2),
+(146, 'Set Spezie Bio', 'Spezie Bio in confezioni da 25 g con dispenser.\r\n<br>\r\n<br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br>\r\n<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>\r\n- Mix Patate<br>', '15.00', 2),
+(147, 'Tonico Bio', 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. <br> Fresco, legger, delicato, questo tonico viso è a base di estratti naturali e più nello specifico di idrolati.<br>\r\nPer ottenere una pelle luminosa, rivitalizzata e distesa.<br><br>\r\nConfezione da 200 ml', '3.60', 2),
+(148, 'ZanziNo ', 'Repellente zanzare', '9.30', 2);
 
 -- --------------------------------------------------------
 
@@ -8514,13 +8565,11 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `manufacturer_id`) 
 -- Table structure for table `Provinces`
 --
 
-CREATE TABLE IF NOT EXISTS `Provinces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Provinces` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `region_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `region_id` (`region_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+  `region_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Provinces`
@@ -8644,11 +8693,10 @@ INSERT INTO `Provinces` (`id`, `name`, `region_id`) VALUES
 -- Table structure for table `Region`
 --
 
-CREATE TABLE IF NOT EXISTS `Region` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+CREATE TABLE `Region` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Region`
@@ -8682,16 +8730,13 @@ INSERT INTO `Region` (`id`, `name`) VALUES
 -- Table structure for table `Review`
 --
 
-CREATE TABLE IF NOT EXISTS `Review` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Review` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `vote` enum('1','2','3','4','5') NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `user_id` (`user_id`)
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8700,19 +8745,14 @@ CREATE TABLE IF NOT EXISTS `Review` (
 -- Table structure for table `Shipment_information`
 --
 
-CREATE TABLE IF NOT EXISTS `Shipment_information` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Shipment_information` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `region` int(11) NOT NULL,
   `province` int(11) NOT NULL,
   `city` int(11) NOT NULL,
   `code` int(5) NOT NULL,
-  `address` varchar(70) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `region` (`region`),
-  KEY `city` (`city`),
-  KEY `province` (`province`)
+  `address` varchar(70) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8721,14 +8761,12 @@ CREATE TABLE IF NOT EXISTS `Shipment_information` (
 -- Table structure for table `Support`
 --
 
-CREATE TABLE IF NOT EXISTS `Support` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Support` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `message` text NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
+  `order_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8737,25 +8775,24 @@ CREATE TABLE IF NOT EXISTS `Support` (
 -- Table structure for table `User`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `User` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(70) NOT NULL,
   `email` varchar(70) NOT NULL,
   `password` varchar(41) NOT NULL,
-  `img` text NOT NULL,
-  `user_type` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_type` (`user_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `img` varchar(1000) NOT NULL DEFAULT 'public/img/account.png',
+  `user_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `User`
 --
 
 INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_type`) VALUES
-(1, 'Admin', 'Admin', 'admin@admin.it', 'dd94709528bb1c83d08f3088d4043f4742891f4f', '', 2),
-(2, 'Daniele', 'Di Desidero', 'daniele@danieledd.it', '6f6e3676359b849ceaa8799a07ed9382fc12ecb1', '', 1);
+(1, 'Admin', 'Admin', 'admin@admin.it', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'public/img/user/admin@admin.it.png', 2),
+(2, 'Daniele', 'Di Desidero', 'daniele@danieledd.it', '6f6e3676359b849ceaa8799a07ed9382fc12ecb1', 'public/img/user/daniele@danieledd.it.png', 1),
+(3, 'User', 'User', 'user@user.it', 'F6D053374C2F3E37C686201A40365E1250F6DA11', 'public/img/account.png', 1);
 
 -- --------------------------------------------------------
 
@@ -8763,11 +8800,10 @@ INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_t
 -- Table structure for table `User_type`
 --
 
-CREATE TABLE IF NOT EXISTS `User_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` enum('Regular','Admin') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `User_type` (
+  `id` int(11) NOT NULL,
+  `type` enum('Regular','Admin') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `User_type`
@@ -8783,14 +8819,301 @@ INSERT INTO `User_type` (`id`, `type`) VALUES
 -- Table structure for table `Wishlist`
 --
 
-CREATE TABLE IF NOT EXISTS `Wishlist` (
+CREATE TABLE `Wishlist` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `product_id` (`product_id`)
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Answer`
+--
+ALTER TABLE `Answer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `support_id` (`support_id`);
+
+--
+-- Indexes for table `Cart`
+--
+ALTER TABLE `Cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `cart_id` (`cart_id`);
+
+--
+-- Indexes for table `Category`
+--
+ALTER TABLE `Category`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Category_item`
+--
+ALTER TABLE `Category_item`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_id` (`product_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `City`
+--
+ALTER TABLE `City`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `provinces_id` (`provinces_id`);
+
+--
+-- Indexes for table `Faq`
+--
+ALTER TABLE `Faq`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Newsletter`
+--
+ALTER TABLE `Newsletter`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manufacturer` (`manufacturer`),
+  ADD KEY `category` (`category`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `shipment_user_info` (`shipment_user_info`);
+
+--
+-- Indexes for table `Orders_items`
+--
+ALTER TABLE `Orders_items`
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `Payments`
+--
+ALTER TABLE `Payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Photo`
+--
+ALTER TABLE `Photo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `Product`
+--
+ALTER TABLE `Product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manufacturer_id` (`manufacturer_id`);
+
+--
+-- Indexes for table `Provinces`
+--
+ALTER TABLE `Provinces`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `region_id` (`region_id`);
+
+--
+-- Indexes for table `Region`
+--
+ALTER TABLE `Region`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Review`
+--
+ALTER TABLE `Review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `region` (`region`),
+  ADD KEY `city` (`city`),
+  ADD KEY `province` (`province`);
+
+--
+-- Indexes for table `Support`
+--
+ALTER TABLE `Support`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `User`
+--
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_type` (`user_type`);
+
+--
+-- Indexes for table `User_type`
+--
+ALTER TABLE `User_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `Answer`
+--
+ALTER TABLE `Answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Cart`
+--
+ALTER TABLE `Cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Category`
+--
+ALTER TABLE `Category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `Category_item`
+--
+ALTER TABLE `Category_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+
+--
+-- AUTO_INCREMENT for table `City`
+--
+ALTER TABLE `City`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110011;
+
+--
+-- AUTO_INCREMENT for table `Faq`
+--
+ALTER TABLE `Faq`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Newsletter`
+--
+ALTER TABLE `Newsletter`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Orders`
+--
+ALTER TABLE `Orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Payments`
+--
+ALTER TABLE `Payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Photo`
+--
+ALTER TABLE `Photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `Product`
+--
+ALTER TABLE `Product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+
+--
+-- AUTO_INCREMENT for table `Provinces`
+--
+ALTER TABLE `Provinces`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT for table `Region`
+--
+ALTER TABLE `Region`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `Review`
+--
+ALTER TABLE `Review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `Support`
+--
+ALTER TABLE `Support`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `User`
+--
+ALTER TABLE `User`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `User_type`
+--
+ALTER TABLE `User_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
