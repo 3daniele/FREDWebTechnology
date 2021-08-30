@@ -53,7 +53,7 @@
                         </li>
                         
                         <li>
-                            <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="#">
+                            <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="<?php echo ROOT_URL;?>user/pages/account.php">
                                 <img src="<?php echo ROOT_URL;?>public/img/account.png" alt="" width="16" height="16">
                                 Account
                             </a>
