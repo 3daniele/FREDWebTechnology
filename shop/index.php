@@ -76,9 +76,5 @@ include ROOT_PATH . 'public/template-parts/header.php';
         
 </div>
 <?php
-include ROOT_PATH . 'public/template-parts/sidebar.php';
-?>
-
-<?php
 include ROOT_PATH . 'public/template-parts/footer.php';
 ?>
