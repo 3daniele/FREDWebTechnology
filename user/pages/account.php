@@ -18,7 +18,7 @@ include ROOT_PATH . "public/template-parts/header.php";
 <div class="container" id="main-area" style="margin-top: 25px;">
     <div class="row">
         <div class="col-4">
-            <div class="card" style="width: 25rem;">
+            <div class="card" style="width: 100%;">
                 <img src=<?php echo ROOT_URL . $_SESSION["img"]; ?> class="card-img-top" alt="...">
                 </img>
             </div>

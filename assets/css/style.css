@@ -1,0 +1,37 @@
+/* style.css */
+
+/* style product-card */
+.product-card {
+    padding: 0;
+    position: relative;
+    height: 250px;
+  }
+  
+  .product-card small {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+  }
+  
+  .product-card .list-group-item {
+    height: 200px;
+  }
+  
+  .product-card .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  /* style product-card fine */
+  
+  /* Cart */
+  
+  .cart-buttons span {
+    width: 50px;
+    text-align: center;
+    border: 1px solid;
+  }
+  
+  .cart-total {
+    font-size: 20px;
+  }
