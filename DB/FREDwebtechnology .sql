@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Aug 27, 2021 at 04:52 PM
+-- Generation Time: Sep 01, 2021 at 09:09 AM
 -- Server version: 5.7.26
 -- PHP Version: 7.4.2
 
@@ -43,7 +43,8 @@ CREATE TABLE `Answer` (
 
 CREATE TABLE `Cart` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) DEFAULT NULL,
+  `client_id` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -8752,8 +8753,16 @@ CREATE TABLE `Shipment_information` (
   `province` int(11) NOT NULL,
   `city` int(11) NOT NULL,
   `code` int(5) NOT NULL,
-  `address` varchar(70) NOT NULL
+  `address` varchar(70) NOT NULL,
+  `principal` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Shipment_information`
+--
+
+INSERT INTO `Shipment_information` (`id`, `user_id`, `region`, `province`, `city`, `code`, `address`, `principal`) VALUES
+(1, 2, 14, 70, 70055, 86045, 'Via Padre Pio, 1', 1);
 
 -- --------------------------------------------------------
 
@@ -9095,7 +9104,7 @@ ALTER TABLE `Review`
 -- AUTO_INCREMENT for table `Shipment_information`
 --
 ALTER TABLE `Shipment_information`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `Support`

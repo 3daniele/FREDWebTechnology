@@ -12,6 +12,7 @@ require_once ROOT_PATH . 'classes/Product.php';
 require_once ROOT_PATH . 'classes/CategoryItem.php';
 require_once ROOT_PATH . 'classes/Category.php';
 require_once ROOT_PATH . 'classes/Img.php';
+require_once ROOT_PATH . 'classes/Cart.php';
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';
 

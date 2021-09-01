@@ -10,6 +10,23 @@ include ROOT_PATH . 'public/template-parts/header.php';
   if (!defined('ROOT_URL')) {
     die;
   }
+
+  if (isset($_POST['product_id'])) {
+
+    $productId = $_POST['product_id'];
+    // addToCart Logic
+    $cm = new CartManager();
+    $cartId = $cm->getCurrentCartId();
+  
+    // aggiumngi al carrello "cartId" il prodotto "productId"
+    $cm->addToCart($productId, $cartId);
+  
+    // stampato un messaggio per l'utente
+    echo 'ok';
+  }
+  
+  $id = htmlspecialchars(trim($_GET['product_id']));
+
   $productMgr = new ProductManager();
   $products = $productMgr->getAll();
 
@@ -60,8 +77,10 @@ include ROOT_PATH . 'public/template-parts/header.php';
                     <li class="list-group-item"> <?php echo $product->price." €" ?></li>
                 </ul>
                 <div class="card-body text-center">
+                <form method="POST">
                     <a href=<?php echo ROOT_URL . 'shop/single-product.php?product='.$product->id;?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
-                    <a href=<?php echo ROOT_URL; ?> class="btn btn-outline-success btn-sm">Aggiungi al carrello</a>
+                        <button  class="btn btn-outline-success btn-sm" name="product_id"  type = "submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
+                    </form>
                 </div>
             </div>
 
