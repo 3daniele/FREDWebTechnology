@@ -14,14 +14,14 @@ class CartManager extends DbManager {
 
   public function addToCart($productId, $cartId){
     $quantity = 0;
-    $result = $this->db->query("SELECT quantity FROM cart_item WHERE cart_id = $cartId AND product_id = $productId");
+    $result = $this->db->query("SELECT quantity FROM Cart_item WHERE cart_id = $cartId AND product_id = $productId");
     if (count($result) > 0){
       $quantity = $result[0]['quantity'];
     } 
     $quantity++;
 
     if (count($result) > 0) {
-      $this->db->execute("UPDATE cart_item SET quantity = $quantity WHERE cart_id = $cartId AND product_id = $productId");
+      $this->db->execute("UPDATE Cart_item SET quantity = $quantity WHERE cart_id = $cartId AND product_id = $productId");
     } else {
       $cartItemMgr = new CartItemManager();
       $newId = $cartItemMgr->create([
@@ -66,7 +66,7 @@ class CartManager extends DbManager {
 }
 
 
-class CartltemManager extends DbManager {
+class CartItemManager extends DbManager {
 
   public function __construct(){
     parent::__construct();

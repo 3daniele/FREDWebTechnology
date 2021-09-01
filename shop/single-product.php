@@ -1,19 +1,19 @@
 <?php include "../inc/init.php"; ?>
 <?php
-    if (!defined('ROOT_URL')) {
-        die;
-    }
+if (!defined('ROOT_URL')) {
+    die;
+}
 
-    if ($_GET["product"] == null) {
-        header("Location: " . ROOT_URL);
-    }
+if ($_GET["product"] == null) {
+    header("Location: " . ROOT_URL);
+}
 
-    $productid = $_GET["product"];
+$productid = $_GET["product"];
 ?>
 <?php include ROOT_PATH . "public/template-parts/title.php" ?>
 <?php $productmgr = new ProductManager();
 $product = $productmgr->get($productid);
-if($product->name == ""){
+if ($product->name == "") {
     header("Location: " . ROOT_URL);
 }
 ?>
@@ -41,6 +41,16 @@ if($product->name == ""){
             <h4><?php echo $product->price . "€"; ?></h4>
             <hr>
             <?php echo $product->description; ?>
+            <br><br><br>
+            <div class="row">
+                <form method="POST">
+                    <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
+                </form>
+                <form acrion="whis-list.php" method="POST">
+                    <button class="btn btn-outline-primary btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Lista desideri</button>
+                </form>
+            </div>
+
         </div>
 
     </div>
@@ -148,3 +158,24 @@ if($product->name == ""){
 </div>
 
 <?php include ROOT_PATH . 'public/template-parts/footer.php'; ?>
+<!-- AGGIUNTA AL CARRELLO -->
+<?php
+if (!defined('ROOT_URL')) {
+    die;
+}
+
+if (isset($_POST['product_id'])) {
+
+    $productId = $_POST['product_id'];
+    // addToCart Logic
+    $cm = new CartManager();
+    $cartId = $cm->getCurrentCartId();
+
+    // aggiumngi al carrello "cartId" il prodotto "productId"
+    $cm->addToCart($productId, $cartId);
+}
+
+$id = htmlspecialchars(trim($_GET['product_id']));
+
+
+?>
