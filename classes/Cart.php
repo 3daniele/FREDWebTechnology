@@ -12,6 +12,25 @@ class CartManager extends DbManager {
     $this->_initializeClientIdFromSession();
   }
 
+  public function getCart($client_id) {
+    $data = false;
+    $result = $this->db->query("SELECT id FROM Cart WHERE client_id = '$client_id'");
+    if (count($result) > 0) {
+      $data = $this->checkCart($result[0]['id']);
+    }
+    return $data;
+  }
+
+  // funzione di appoggio per vedere se sono presenti elementi nel carrello
+  private function checkCart($id) {
+    $data = false;
+    $result = $this->db->query("SELECT * FROM Cart_item WHERE cart_id = $id");
+    if (count($result) > 0) {
+      $data = $id;
+    }
+    return $data;
+  }
+
   public function addToCart($productId, $cartId){
     $quantity = 0;
     $result = $this->db->query("SELECT quantity FROM Cart_item WHERE cart_id = $cartId AND product_id = $productId");
@@ -62,6 +81,7 @@ class CartManager extends DbManager {
   private function _random_string(){
     return substr(md5(mt_rand()), 0, 20);
   }
+  
 
 }
 
@@ -73,4 +93,19 @@ class CartItemManager extends DbManager {
     $this->columns = array('id', 'cart_id', 'product_id', 'quantity');
     $this->tableName = 'Cart_item';
   }
+
+  public function getItems($cartId){
+    return $this->db->query("SELECT * FROM Cart_item WHERE cart_id = '$cartId'");
+  }
+
+  public function countTotalItem($cartId){
+    $result = $this->getItems($cartId);
+    $count = 0;
+    foreach ($result as $key) {
+        $count = $count + $key['quantity'];
+    }
+    return $count;
+
+  }
+
 }
