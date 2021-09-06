@@ -26,7 +26,7 @@
                                           <img src="<?php echo ROOT_URL; ?>public/img/order.png" alt="" width="16" height="16">Ordini</a>
                                   </li>
                                   <li>
-                                      <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                                      <a class="dropdown-item d-flex gap-2 align-items-center" href=<?php echo ROOT_URL . "shop/pages/wishlist.php" ?>>
                                           <img src="<?php echo ROOT_URL; ?>public/img/star.png" alt="" width="16" height="16">Preferiti</a>
                                   </li>
                                   <li>

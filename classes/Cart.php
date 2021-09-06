@@ -136,6 +136,8 @@ class CartManager extends DbManager
 
     if (count($result) > 0) {
       $cartID = $result[0]['id'];
+    }else{
+      $cartID = $this->createCart();
     }
     return $cartID;
   }

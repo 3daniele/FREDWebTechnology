@@ -158,7 +158,10 @@ function testInput()
 
             $cartID = $cartMgr->createCart();
             $currentCartID = $cartMgr->getCurrentCartId();
-            $cartMgr->mergeCarts($cartID, $currentCartID);
+            if($cartID != $currentCartID){
+                $cartMgr->mergeCarts($cartID, $currentCartID);
+            }
+            
 
             // redirect alla home
             header("Location: " . ROOT_URL . "shop");

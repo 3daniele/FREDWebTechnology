@@ -1,4 +1,5 @@
 <?php include "../../inc/init.php"; ?>
+<!DOCTYPE html>
 <html lang="it">
 
 <head>

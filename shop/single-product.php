@@ -45,9 +45,7 @@ if ($product->name == "") {
             <div class="row">
                 <form method="POST">
                     <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
-                </form>
-                <form acrion="whis-list.php" method="POST">
-                    <button class="btn btn-outline-primary btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Lista desideri</button>
+                    <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" value=<?php echo $product->id; ?>>Preferiti</button>
                 </form>
             </div>
 
@@ -178,6 +176,15 @@ if (isset($_POST['product_id'])) {
     }
     // aggiungi al carrello "cartID" il prodotto "productID"
     $cartMgr->addToCart($productID, $cartID);
+}
+
+if(isset($_POST["wishlist"])){
+    $wishlistMgr = new WishlistManager();
+
+    $userid = $_SESSION["userid"];
+    $productID = $_POST["wishlist"];
+
+    $wishlistMgr->addProduct($userid,$productID);
 }
 
 $id = htmlspecialchars(trim($_GET['product_id']));
