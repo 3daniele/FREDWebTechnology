@@ -25,7 +25,13 @@ include ROOT_PATH . "public/template-parts/title.php";
       <?php
       $cartMgr = new CartManager();
       $cartItemMgr = new CartItemManager();
-      $cartID = $cartMgr->getCart($_SESSION['client_id']);
+
+      if (isset($_SESSION['userid'])) {
+        $cartID = $cartMgr->findCart($_SESSION['userid']);
+      } else {
+        $cartID = $cartMgr->getCart($_SESSION['client_id']);
+      }
+
       $sum = 0;
 
       if ($cartID) :
@@ -46,7 +52,6 @@ include ROOT_PATH . "public/template-parts/title.php";
             $img = $imgMgr->get_thumbnail($product->id);
           ?>
 
-            <?php ?>
             <li class="list-group-item d-flex justify-content-between lh-sm p-4">
               <div class="row w-100">
                 <div class="col-lg-3 col-6">
@@ -87,7 +92,7 @@ include ROOT_PATH . "public/template-parts/title.php";
               <div class="col-lg-7 col-6">
               </div>
               <div class="col-lg-2 col-6">
-                <strong class="text-primary"><?php echo $sum ?> €</strong>
+                <strong class="text-primary"><?php echo number_format($sum, 2) ?> €</strong>
               </div>
             </div>
           </li>

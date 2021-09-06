@@ -23,7 +23,7 @@ include ROOT_PATH . 'public/template-parts/header.php';
                                     $img = $imgMgr->get_thumbnail($product->id);
                                     foreach ($img as $i) {
                                         echo ROOT_URL . $i['link'];
-                                    } ?>" class="d-block user-select-none" aria-label="Placeholder: Image cap" focusable="false" role="img" viewBox="0 0 318 180" style="width:auto; height:250" alt="<?php echo $product->name; ?>">
+                                    } ?>" class="d-block user-select-none" width="100%" alt="<?php echo $product->name; ?>">
 
                         </img>
                         <ul class="list-group list-group-flush">
@@ -85,16 +85,22 @@ if (!defined('ROOT_URL')) {
 
 if (isset($_POST['product_id'])) {
 
-    $productId = $_POST['product_id'];
-    // addToCart Logic
-    $cm = new CartManager();
-    $cartId = $cm->getCurrentCartId();
+    $productID = $_POST['product_id'];
 
-    // aggiumngi al carrello "cartId" il prodotto "productId"
-    $cm->addToCart($productId, $cartId);
+    // addToCart Logic
+    $cartMgr = new CartManager();
+
+    if (isset($_SESSION['userid'])) {
+        $cartID = $cartMgr->findCart($_SESSION['userid']);
+        echo $cartID;
+    } else {
+        $cartID = $cartMgr->getCurrentCartId();
+        echo $cartID;
+    }
+    // aggiungi al carrello "cartID" il prodotto "productID"
+    $cartMgr->addToCart($productID, $cartID);
 }
 
 $id = htmlspecialchars(trim($_GET['product_id']));
-
 
 ?>

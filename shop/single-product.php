@@ -166,13 +166,18 @@ if (!defined('ROOT_URL')) {
 
 if (isset($_POST['product_id'])) {
 
-    $productId = $_POST['product_id'];
-    // addToCart Logic
-    $cm = new CartManager();
-    $cartId = $cm->getCurrentCartId();
+    $productID = $_POST['product_id'];
 
-    // aggiumngi al carrello "cartId" il prodotto "productId"
-    $cm->addToCart($productId, $cartId);
+    // addToCart Logic
+    $cartMgr = new CartManager();
+
+    if (isset($_SESSION['userid'])) {
+        $cartID = $cartMgr->findCart($_SESSION['userid']);
+    } else {
+        $cartID = $cartMgr->getCurrentCartId();
+    }
+    // aggiungi al carrello "cartID" il prodotto "productID"
+    $cartMgr->addToCart($productID, $cartID);
 }
 
 $id = htmlspecialchars(trim($_GET['product_id']));
