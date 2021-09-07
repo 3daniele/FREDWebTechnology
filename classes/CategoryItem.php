@@ -19,4 +19,8 @@ class CategoryItemManager extends DbManager
     return $this->db->query("SELECT name FROM Category WHERE id = '$category_id' LIMIT 3");
   }
 
+  public function getProductFromCategory($categoryID){
+    return $this->db->query("SELECT product_id FROM CategoryItemManager WHERE category_id = '$categoryID'");
+  }
+
 }

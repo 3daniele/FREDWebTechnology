@@ -1,7 +1,7 @@
 <?php include "../../inc/init.php"; ?>
 <!DOCTYPE html>
 <html lang="it">
-
+<link href="../img/favicon.ico" rel="icon" type="image/x-icon" />
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

@@ -8,8 +8,8 @@
                           <li><a href=<?php echo ROOT_URL ?> class="nav-link px-2 link-secondary"><img src="<?php echo ROOT_URL ?>public/img/logo.jpeg" alt="BIO" width="100px"></img></a></li>
                       </ul>
 
-                      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                      <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action = "<?php echo ROOT_URL; ?>shop" method="GET">
+                          <input type="search" name="search" class="form-control" placeholder="Carca..." aria-label="Search">
                       </form>
 
                       <ul class="nav col-12 col-lg-auto me-lg-3  mb-md-1">

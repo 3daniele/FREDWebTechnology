@@ -1,15 +1,37 @@
 <?php include "../inc/init.php" ?>
+
 <?php include ROOT_PATH . "public/template-parts/title.php" ?>
+
 <title>Shop</title>
+
+<?php include ROOT_PATH . 'public/template-parts/header.php'; ?>
+
 <?php
-include ROOT_PATH . 'public/template-parts/header.php';
+    $productMgr = new ProductManager();
+    if(isset($_GET["search"])){
+        $search = $_GET["search"];
+        $searchName = $productMgr->searchByName($search);
+        if(count($searchName) > 0){
+            $products = $searchName;
+            echo $searchName;
+        }else{
+            $searchCategory = $productMgr->searchByCategory($search);
+            if(count($searchCategory) > 0){
+                $products = $searchCategory;
+            }else{
+                $products = false;
+            }
+        }
+        
+    }else{    
+        $products = $productMgr->getAll();
+    }
+    
+
+    
 ?>
 
 <div class="container" id="main-area" style="margin-top: 70px;">
-    <?php
-    $productMgr = new ProductManager();
-    $products = $productMgr->getAll();
-    ?>
     <div class="row">
         <?php if ($products) : ?>
             <?php foreach ($products as $product) : ?>
