@@ -44,8 +44,12 @@ if ($product->name == "") {
             <br><br><br>
             <div class="row">
                 <form method="POST">
-                    <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
-                    <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" value=<?php echo $product->id; ?>>Preferiti</button>
+                    <button class="btn btn-outline-success btn-sm" name="product_id" type="submit"
+                        value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
+                        <?php if (!(isset($_SESSION["email"]))) : ?>
+                    <?php else : ?>
+                        <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" value=<?php echo $product->id; ?>>Preferiti</button>
+                    <?php endif; ?>
                 </form>
             </div>
 
@@ -186,6 +190,7 @@ if(isset($_POST["wishlist"])){
 
     $wishlistMgr->addProduct($userid,$productID);
 }
+
 
 $id = htmlspecialchars(trim($_GET['product_id']));
 

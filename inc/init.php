@@ -14,7 +14,7 @@ require_once ROOT_PATH . 'classes/Category.php';
 require_once ROOT_PATH . 'classes/Img.php';
 require_once ROOT_PATH . 'classes/Cart.php';
 require_once ROOT_PATH . 'classes/Wishlist.php';
-//require_once ROOT_PATH . 'classes/ProductCategory.php';
+require_once ROOT_PATH . 'classes/ProductCategory.php';
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';
 

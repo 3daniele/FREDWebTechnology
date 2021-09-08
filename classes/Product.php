@@ -9,17 +9,18 @@ class Product
   public $manufacturer_id;
 
 
-  public function __construct()
-  {
-  }
-
-  public function setData($id, $name, $description, $price, $manufacturer_id)
+  public function __construct($id, $name, $description, $price, $manufacturer_id)
   {
     $this->id = (int)$id;
     $this->name = $name;
     $this->description = $description;
     $this->price = $price;
     $this->manufacturer_id = $manufacturer_id;
+  }
+
+  public function setData($id, $name, $description, $price, $manufacturer_id)
+  {
+    
   }
 }
 

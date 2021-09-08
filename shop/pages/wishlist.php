@@ -70,7 +70,7 @@
 
 
             <?php else : ?>
-                <p class="lead">Nessun elemento nel carrello...</p>
+                <p class="lead">Nessun elemento nella lista...</p>
                 <a href="<?php echo ROOT_URL . 'shop?page=products-list'; ?>" class="btn btn-primary btn-lg mb-5 mt-3">Vai allo Shopping &raquo;</a>
             <?php endif; ?>
 

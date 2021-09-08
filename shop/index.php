@@ -8,25 +8,24 @@
 
 <?php
     $productMgr = new ProductManager();
-    //$productCategoryMgr = new ProductCategoryManager();
+    $productCategoryMgr = new ProductCategoryManager();
     if(isset($_GET["search"])){
         $search = $_GET["search"];
         $searchName = $productMgr->searchByName($search);
-        //$searchCategory=$productCategoryMgr->searchByCategory($search);
-
+        $searchCategory=$productCategoryMgr->searchByCategory($search);
+        
         if($searchName[0]['id']!=0){
             $products = $searchName;
         }else{
-            echo "Sono qui";
+            
             if(count($searchCategory) > 0){
                 $products = $searchCategory;
-            }else{
-                echo ("<div class \"row\"><p>Nessun prodotto disponibile...</p></div>");
             }
         }
         
     }else{    
         $products = $productMgr->getAll();
+        gettype($product);
     }
     
 
@@ -40,6 +39,12 @@
                 <div class="col-3">
                     <div class="card mb-3">
                         <h3 class="card-header text-center">
+                        
+
+                        <?php if(gettype($product) == "array"){
+                            $product = new Product($product['id'], $product['name'], $product['description'], $product['price'], $product['manufacturer_id'], $product['category']);
+                        } ?>
+
                             <?php echo $product->name; ?>
                         </h3>
                         <img src="<?php
