@@ -1,5 +1,28 @@
 <?php
 
+class Product
+{
+  public $id;
+  public $name;
+  public $description;
+  public $price;
+  public $manufacturer_id;
+
+
+  public function __construct()
+  {
+  }
+
+  public function setData($id, $name, $description, $price, $manufacturer_id)
+  {
+    $this->id = (int)$id;
+    $this->name = $name;
+    $this->description = $description;
+    $this->price = $price;
+    $this->manufacturer_id = $manufacturer_id;
+  }
+}
+
 class ProductManager extends DbManager
 {
   public function __construct()
@@ -11,25 +34,11 @@ class ProductManager extends DbManager
 
   public function searchByName($name)
   {
-    return $this->db->query("SELECT * FROM Product WHERE name = '$name' LIMIT 1");
+    return $this->db->query("SELECT * FROM Product WHERE name = '$name'");
   }
 
   public function searchByCategory($category)
   {
-    $categoryMgr = new CategoryManager();
-    $categoryid = $categoryMgr->getCategoryByName($category);
-
-    $categoryItemMgr = new CategoryItemManager();
-    $product_id = $categoryItemMgr->getProductFromCategory($categoryid[0]["id"]);
-
-    $productMgr = new ProductManager();
-
-    for ($i = 0; $i < count($product_id); $i++) {
-      foreach ($product_id as $singleProduct) {
-        $product[$i] = $productMgr->get($singleProduct);
-      }
-    }
-
-    return $product;
+    return $this->db->query("SELECT * FROM productcategory WHERE category_name = '$category'");
   }
 }

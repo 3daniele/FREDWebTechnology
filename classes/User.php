@@ -63,4 +63,8 @@ class UserManager extends DbManager
   {
     return $this->db->query("SELECT * FROM User WHERE email = '$email'");
   }
+
+  public function getName($id){
+    return $this->db->query("SELECT name FROM User WHERE id = $id");
+  }
 }

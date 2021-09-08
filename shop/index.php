@@ -8,18 +8,20 @@
 
 <?php
     $productMgr = new ProductManager();
+    //$productCategoryMgr = new ProductCategoryManager();
     if(isset($_GET["search"])){
         $search = $_GET["search"];
         $searchName = $productMgr->searchByName($search);
-        if(count($searchName) > 0){
+        //$searchCategory=$productCategoryMgr->searchByCategory($search);
+
+        if($searchName[0]['id']!=0){
             $products = $searchName;
-            echo $searchName;
         }else{
-            $searchCategory = $productMgr->searchByCategory($search);
+            echo "Sono qui";
             if(count($searchCategory) > 0){
                 $products = $searchCategory;
             }else{
-                $products = false;
+                echo ("<div class \"row\"><p>Nessun prodotto disponibile...</p></div>");
             }
         }
         

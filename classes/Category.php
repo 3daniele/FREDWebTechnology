@@ -13,7 +13,7 @@ class CategoryManager extends DbManager {
   }
 
   public function getCategoryByName($name){
-    return $this->db->query("SELECT id FROM Category WHERE name = '$name'");
+    return $this->db->query("SELECT * FROM Category WHERE name = '$name'");
   }
 
 }
