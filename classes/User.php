@@ -65,6 +65,6 @@ class UserManager extends DbManager
   }
 
   public function getName($id){
-    return $this->db->query("SELECT name FROM User WHERE id = $id");
+    return $this->db->query("SELECT name, img FROM User WHERE id = $id");
   }
 }

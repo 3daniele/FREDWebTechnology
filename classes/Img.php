@@ -14,6 +14,6 @@ class ImgManager extends DbManager{
   }
 
   public function get_all_photo($product_id){
-    return $this->db->query("SELECT * FROM Photo WHERE product_id = '$product_id'");
+    return $this->db->query("SELECT * FROM Photo WHERE product_id = '$product_id' AND thumbnail= 0 LIMIT 4");
   }
 }

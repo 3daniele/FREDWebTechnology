@@ -10,3 +10,5 @@
     <link rel="stylesheet" href="<?php echo ROOT_URL; ?>assets/css/style.css">
     <link rel="stylesheet" href="https://bootswatch.com/_vendor/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://bootswatch.com/_vendor/prismjs/themes/prism-okaidia.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo ROOT_URL; ?>assets/js/main.js"></script>
