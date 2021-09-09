@@ -40,7 +40,7 @@ include ROOT_PATH . "public/template-parts/title.php";
 
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-primary">Carrello</span>
-                <span class="badge bg-secondary rounded-pill text-white"><?php echo $quantity ?> elementi nel
+                <span class="badge bg-primary rounded-pill text-white"><?php echo $quantity ?> elementi nel
                     carrello</span>
             </h4>
             <ul class="list-group mb-3">

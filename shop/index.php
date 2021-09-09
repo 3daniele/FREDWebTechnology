@@ -25,10 +25,7 @@
         
     }else{    
         $products = $productMgr->getAll();
-        gettype($product);
     }
-    
-
     
 ?>
 
