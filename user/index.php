@@ -9,7 +9,7 @@
 <div class="container" id="main-area" style="margin-top: 70px;">
     <div class="row">
         <div class="col-sm-4">
-            <a href="#" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>shop/pages/order.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -52,7 +52,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>user/andress.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -78,7 +78,7 @@
     <div class="row"><br></div>
     <div class="row">
         <div class="col-sm-4">
-            <a href="#" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>user/payment.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -100,7 +100,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>user/invoice.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -122,7 +122,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="#" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>user/support.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
