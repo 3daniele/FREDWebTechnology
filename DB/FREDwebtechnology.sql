@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 08, 2021 at 10:29 AM
+-- Generation Time: Sep 10, 2021 at 03:38 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Cart`
@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS `Cart` (
 
 INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
 (5, 2, '8a890bae365cd72cdc37'),
-(6, 1, 'dc0c3af63a477914cf35');
+(6, 1, 'dc0c3af63a477914cf35'),
+(9, 3, 'aa23e0a8dfc7e1dd4722');
 
 -- --------------------------------------------------------
 
@@ -81,8 +82,6 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
 --
 
 INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
-(21, 5, 116, 1),
-(22, 5, 117, 2),
 (23, 5, 118, 1),
 (24, 6, 116, 1),
 (25, 6, 117, 3),
@@ -238,7 +237,6 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 (102, 143, 4),
 (103, 143, 11),
 (104, 143, 12),
-(105, 144, 4),
 (108, 145, 10),
 (106, 145, 12),
 (107, 145, 13),
@@ -8371,23 +8369,6 @@ INSERT INTO `City` (`id`, `name`, `provinces_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Faq`
---
-
-CREATE TABLE IF NOT EXISTS `Faq` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(50) NOT NULL,
-  `message` text NOT NULL,
-  `product_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `Manufacturer`
 --
 
@@ -8406,23 +8387,6 @@ CREATE TABLE IF NOT EXISTS `Manufacturer` (
 INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 (1, 'Verde Naturale', 'L\'azienda produce piantine in alveolo e in vaso, tra cui: aromatiche, medicinali, essenziere, \r\n\r\nda profumo e ortive. --> DISPONIBILITÀ PIANTINE ORTAGGI 2021\r\n\r\nSi propagano tutte le specie botaniche presenti in azienda e qualsiasi pianta di interesse del cliente, purchè facilmente reperibile sul mercato ordinario.\r\nMateriale di propagazione, fornito dal cliente stesso in conto lavorazione.', 'via per Montalboddo,  Corinaldo (AN), 60013​'),
 (2, 'Iris bio', 'La cooperativa agricola Iris è a produzione esclusivamente biologiche dalla sua fondazione. È situata all’interno del Parco Naturale Oglio Sud, ricco di fauna e flora. Nell’azienda abbiamo piantato moltissime siepi e filari di alberi per contornare i campi che coltiviamo, lasciamo i fossi di irrigazione naturalizzati, permettendo ad insetti ed anfibi di riprodursi.', 'via Napoleone, Pescara ');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `Newsletter`
---
-
-CREATE TABLE IF NOT EXISTS `Newsletter` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `category` int(11) DEFAULT NULL,
-  `manufacturer` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manufacturer` (`manufacturer`),
-  KEY `category` (`category`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -8555,7 +8519,6 @@ INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 (63, 142, 'public/img/product/Olioessenzialesacchetto/1.png', 1),
 (64, 142, 'public/img/product/Olioessenzialesacchetto/2.png', 0),
 (65, 143, 'public/img/product/Oliotonificante/1.png', 1),
-(66, 144, 'public/img/product/Postzanza/1.png', 1),
 (67, 145, 'public/img/product/Setspezie/1.png', 1),
 (68, 145, 'public/img/product/Setspezie/2.png', 0),
 (69, 146, 'public/img/product/Setspeziebio/1.png', 1),
@@ -8583,10 +8546,10 @@ CREATE TABLE IF NOT EXISTS `Product` (
 --
 
 INSERT INTO `Product` (`id`, `name`, `description`, `price`, `manufacturer_id`) VALUES
-(116, 'BagnoDocciaBIO', 'Il Bagno Doccia Bio di Verde Naturale è delicato sulla pelle, grazie alla presenza di estratti di avena e riso. <br> L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il sebo cutaneo, detergendo in modo delicato. <br><br>\r\nE’ disponibile in due varianti:<br>\r\n- Con olio essenziale di lavanda per pelli normali<br>\r\n- Con olio essenziale di rosmarino dedicato alle pelli squilibrate, secche o grasse\r\n<br> <br>\r\nQuesto prodotto è eco-friendly : non è testata sugli animali ed è prodotta senza sostanze aggressive e/o tossiche.', '3.20', 1),
+(116, 'Bagno Doccia BIO', 'Il Bagno Doccia Bio di Verde Naturale è delicato sulla pelle, grazie alla presenza di estratti di avena e riso. <br> L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il sebo cutaneo, detergendo in modo delicato. <br><br>\r\nE’ disponibile in due varianti:<br>\r\n- Con olio essenziale di lavanda per pelli normali<br>\r\n- Con olio essenziale di rosmarino dedicato alle pelli squilibrate, secche o grasse\r\n<br> <br>\r\nQuesto prodotto è eco-friendly : non è testata sugli animali ed è prodotta senza sostanze aggressive e/o tossiche.', '3.20', 1),
 (117, 'Crema Corpo Bio', 'La Crema Corpo Biologica di Verde Naturale, grazie alla presenza dell’olio essenziale di Lavanda Officinale e dell’Olio d’Argan, idrata e nutre ogni tipo di pelle garantendone la corretta fisiologia, prevenendone l’invecchiamento cutaneo e la formazione di smagliature.\r\n<br><br>\r\nQuesta crema è eco-friendly: non testata sugli animali e senza sostanze aggressive e tossiche.', '19.70', 1),
 (118, 'Crema Lavanda Bio', 'La Crema Lavanda Bio di Verde Naturale, grazie alla presenza di olii vegetali biologici(di Lavanda Officinale, d’Argan, d’oliva) ha un forte effetto emolliente ed idratante.<br>\r\nE’ indicata per tutti i tipi di pelle, in particolare per riequilibrare la corretta fisiologia delle pelli secche.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '10.35', 1),
-(119, 'Crema Viso Elicriso e Lavanda Bio', 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso e Lavanda (di nostra produzione) è idratante, lenitiva, emoliente e tonica. <br>Gli oli essenziali scelti hanno un’azione delicata purificante e normalizzante cutanea.<br>\r\nÈ adatta ad ogni tipo di pelle, anche alle più sensibili.\r\n<br><br>\r\nConfezione da 50 ml\r\n', '16.60', 1),
+(119, 'Crema Viso Elicriso', 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso e Lavanda (di nostra produzione) è idratante, lenitiva, emoliente e tonica. <br>Gli oli essenziali scelti hanno un’azione delicata purificante e normalizzante cutanea.<br>\r\nÈ adatta ad ogni tipo di pelle, anche alle più sensibili.\r\n<br><br>\r\nConfezione da 50 ml\r\n', '16.60', 1),
 (120, 'Diffusore Ambientale', 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. <br>Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n', '8.30', 1),
 (121, 'Oli essenziali', 'Oli essenziali Biologici prodotti da Verde Naturale.<br>\r\n', '28.95', 1),
 (122, 'Profumauto', 'Immagina di entrare in macchina ed essere travolto dalla delicatezza della lavanda, dalla freschezza della menta, o dall’intensità dell’alloro e del cipresso.. e ora immagina che non serva immaginarlo: i nostri Profumauto, naturali al 100%, sono pensati proprio per questo!\r\n<br>\r\nI piccoli flaconcini in vetro contengono 5 ml di olio essenziale puro che viene assorbito e diffuso nell’aria da un apposito tappo in legno, provvisto di gancio e nastro per appendere il prodotto all’auto.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda<br>\r\n- Lavanda Officinale<br>\r\n- Menta<br>\r\n- Cipresso<br>\r\n- Alloro<br>\r\n- Rosmarino<br>', '6.20', 1),
@@ -8595,23 +8558,22 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `manufacturer_id`) 
 (125, 'Shampoo BIO', 'L’assenza di sostanze aggressive e tossiche, l’utilizzo di tensioattivi naturali e delicati fanno di questo prodotto un ottimo sapone detergente che rispetta ed equilibra il cuoio capelluto, detergendo in modo delicato. <br>Leggeri e profumati, i capelli ritrovano durevolmente brillantezza e morbidezza.\r\n<br><br>\r\nE’ disponibile in tre varianti:<br>\r\n- Con olio essenziale di lavanda per capelli normali<br>\r\n- Con olio essenziale di rosmarino dedicato alle capelli squilibrati, secchi o grassi<br>\r\n- Con olio essenziale di elicriso, è indicato per trattare la pelle affetta da rossore, desquamazione, dermatite seborroica e prurito.\r\n<br><br>\r\nQuesto prodotto è eco-friendly : non è testato sugli animali ed è prodottosenza sostanze aggressive e/o tossiche.', '7.25', 1),
 (126, 'Balsamo Bio', 'Balsamo Bio con olio essenziale di Lavanda Officinale, olio di semi di Lino, olio di Mandorle dolci.<br>\r\nEffetto districante e nutriente.', '8.80', 1),
 (127, 'Burrocacao Bio', 'Il burrocacao Bio di Verde Naturale è realizzato con estratti di agrumi ed elicriso. <br>Gli agrumi concedono un nutrimento multivitaminico, l\'elicriso è antinfiammatorio, rinfrescante, emoliente e lenitivo.<br> Protegge dalle screpolature ed idrata le labbra in tutte le condizioni atmosferiche.\r\n', '3.90', 1),
-(128, 'Confezione \"Cura della persona N°1\"', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?<br>\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:\r\n<br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Bagno Doccia BIO Lavanda (200 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Sapone Liquido Mani BIO Lavanda (250 ml) <br><br>\r\n\r\nNel prezzo è inclusa la scatola.', '28.00', 1),
-(129, 'Confezione \"Cura della persona N°2\"', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 1),
-(130, 'Confezione \"Cura della persona N°3\"', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 1),
+(128, 'Cura della persona N°1', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?<br>\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:\r\n<br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Bagno Doccia BIO Lavanda (200 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Sapone Liquido Mani BIO Lavanda (250 ml) <br><br>\r\n\r\nNel prezzo è inclusa la scatola.', '28.00', 1),
+(129, 'Cura della persona N°2', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 1),
+(130, 'Cura della persona N°3', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 1),
 (131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? <br><br> \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:<br>\r\n- Crema corpo BIO (200 ml)<br>\r\n- Crema Viso BIO (50 ml)<br>\r\n- Crema Mani Lavanda (100 ml) <br>\r\n- Burrocacao BIO <br>\r\n- Deo Spray BIO<br>\r\n- Sacchetto Lavanda<br>\r\n<br><br>\r\nNel prezzo è inclusa la scatola.\r\n', '60.00', 1),
 (132, 'Confezione Top Creme', 'In questa confezione troverai:<br>\r\n- Crema Corpo BIO 200 ml (Lavanda)<br>\r\n- Crema Silhouette BIO 200 ml (Rosmarino)<br>\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)<br>\r\n- Crema Lavanda BIO 100 ml<br>\r\n- Crema Elicriso BIO 100 ml\r\n<br><br>\r\nLa scatola è inclusa nel prezzo.', '90.00', 1),
 (133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '16.55', 1),
 (134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.<br>\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n<br><br>\r\n Confezione da 200 ml.\r\n<br><br>\r\nVuoi regalare questo prodotto? <br>Aggiungi la confezione regalo!', '24.80', 1),
 (135, 'Deodorante Bio', 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici. <br>Ideale per contrastare i cattivi odori senza però impedire la normale sudorazione, proteggendo quindi l\'equilibrio della pelle.<br>\r\nIl risultato sarà una pelle fresca, igienizzata e profumata naturalmente.\r\n<br><br>\r\nDisponibile in 4 versioni:<br>\r\n- Spray (Senza Alcool) con Bicarbonato, Agrumi e Lavanda<br>\r\n- Roll-On con Salvia <br>\r\n- Roll-On con Salvia e Menta <br>\r\n- Roll-On con Timo e Malaleuca <br>', '7.20', 1),
 (136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 1),
-(137, 'Diffusore in ceramica + Olio essenziale', '- Diffusore in ceramica decorato a mano <br>\r\n- Olio essenziale di lavanda grossò (10 ml)<br><br>\r\n\r\nLa confezione regalo è compresa nel prezzo.', '18.00', 1),
-(138, 'Diffusori Ambientali (2) + Sacchetto', 'Questa confezione contiene:<br>\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:<br>\r\n\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n<br>\r\nSacchetto profumato a scelta tra:<br>\r\n- Farfalla<br>\r\n- Gufetto<br>\r\n- Cuscino<br>\r\n- 2 sacchetti normali<br>\r\n<br>\r\nLa confezione regalo è inclusa nel prezzo', '21.50', 1),
-(139, 'Diffusori Ambientali Set ', 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.<br> Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br><br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. <br>Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\n', '25.50', 2),
+(137, 'Diffusore in ceramica', '- Diffusore in ceramica decorato a mano <br>\r\n- Olio essenziale di lavanda grossò (10 ml)<br><br>\r\n\r\nLa confezione regalo è compresa nel prezzo.', '18.00', 1),
+(138, 'Sacchetti + Diffusori', 'Questa confezione contiene:<br>\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:<br>\r\n\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n<br>\r\nSacchetto profumato a scelta tra:<br>\r\n- Farfalla<br>\r\n- Gufetto<br>\r\n- Cuscino<br>\r\n- 2 sacchetti normali<br>\r\n<br>\r\nLa confezione regalo è inclusa nel prezzo', '21.50', 1),
+(139, '2 Diffusori Ambientali', 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.<br> Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br><br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. <br>Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\n', '25.50', 2),
 (140, 'Idrolati Bio', 'Idrolati 100% naturali e biologici ottenuti attraverso la distillazione a vapore. Disponibili in boccioni in vetro da 500 ml.\r\n<br><br>\r\nLavanda:<br>\r\ncalma, rinfresca, lenisce e decongestiona l\'epidermide.<br> Calma e distende il sistema nervoso. <br>Può essere usato puro, applicato direttamente sulla pelle. <br>Essendo completamente senza alcool, è perfetto anche per i bambini, come dopo sole o struccante. <br>Adatto anche alle pelli sensibili.\r\n<br><br>\r\nRosmarino:\r\neffetto dermopurificante e riequilibrante del sebo in eccesso.<br> Perfetto anche per la cura dei capelli, è purificante e antiforfora, tonificante e rinfrescante. <br>È inoltre un ingrediente ideale per la creazione di deodoranti naturali, in quanto ha un effetto astringente contro la sudorazione eccessiva. <br>Può essere usato puro, applicato direttamente sulla pelle. <br>Essendo completamente senza alcool, è perfetto anche per i bambini, come dopo sole o struccante.<br>\r\nAdatto per pelle grassa e impura.<br>\r\n<br>\r\nElicriso:<br>\r\neffetto rinfrescante, astringente e dermopurificante. <br>Ideale per rigenerare la pelle, stimola la circolazione e la cicatrizzazione dell\'epidermide sensibile e con couperose. <br>Perfetto inoltre per contrastare le occhiaie, agisce come calmante e sgonfiante.<br>\r\nPuò essere inoltre utilizzato per la cura dei capelli, ha un effetto rinforzante sulla crescita, lenitivo contro la forfora e purificante. <br>È inoltre un ingrediente ideale per la creazione di deodoranti naturali, in quanto ha un effetto astringente contro la sudorazione eccessiva.<br>\r\nAdatto per pelli irritate e/o sensibili.<br>\r\n<br>\r\nMenta:\r\nEffetto rinfrescante, tonificante e decongestionante.<br>\r\nSe utilizzato come tonico, agisce come purificante, astringente e rivitalizzante della pelle opaca e stressata. <br>Inoltre, la menta piperita è nota per alleviare i pruriti ed è quindi utile utilizzare l\'idrolato dopo la rasatura. <br>Questo prodotto è spesso usato per trattare la sudorazione eccessiva, anche durante le vampate di calore. <br>\r\nAdatto per ogni tipo di pelle.', '5.20', 2),
 (141, 'Latte detergente Bio', 'Latte Detergente Bio con olio essenziale di lavanda.<br>\r\nÈ adatto a tutti i tipi di pelle: deterge delicatamente, grazie all\'assenza di sostanze aggressive e tossiche, rimuovendo le impurità ed i residui del make-up.<br>\r\nL’olio essenziale di lavanda svolge un’azione purificante e riequilibrante e lascia la pelle tonica e profumata senza mai essere invadente.<br><br>\r\n\r\nConfezione da 200 ml.\r\n<br><br>\r\nQuesta prodotto è eco-friendly: non testato sugli animali e senza sostanze aggressive e tossiche.\r\n', '6.20', 2),
-(142, 'Olio Essenziale + Sacchetto', 'In questa confezione trovi: <br>\r\n- Una boccetta di olio essenziale di Lavanda Grossò Bio (10 ml)<br>\r\n- Sacchetto  forma di farfalla.\r\n\r\n<br><br>\r\nNel prezzo è inclusa la confezione regalo.', '15.00', 2),
+(142, 'Olio Essenziale', 'In questa confezione trovi: <br>\r\n- Una boccetta di olio essenziale di Lavanda Grossò Bio (10 ml)<br>\r\n- Sacchetto  forma di farfalla.\r\n\r\n<br><br>\r\nNel prezzo è inclusa la confezione regalo.', '15.00', 2),
 (143, 'Olio Tonificante Bio', 'Olio tonificante drenante Bio.\r\n<br>\r\nConfezione da 100 ml', '13.45', 2),
-(144, 'Post Zanza', 'Lenitivo e rinfrescante', '6.20', 2),
 (145, 'Set Spezie', 'Set spezie BIO + Confezione Regalo\r\n<br><br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>', '40.00', 2),
 (146, 'Set Spezie Bio', 'Spezie Bio in confezioni da 25 g con dispenser.\r\n<br>\r\n<br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br>\r\n<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>\r\n- Mix Patate<br>', '15.00', 2),
 (147, 'Tonico Bio', 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. <br> Fresco, legger, delicato, questo tonico viso è a base di estratti naturali e più nello specifico di idrolati.<br>\r\nPer ottenere una pelle luminosa, rivitalizzata e distesa.<br><br>\r\nConfezione da 200 ml', '3.60', 2),
@@ -8875,11 +8837,11 @@ CREATE TABLE IF NOT EXISTS `User` (
   `surname` varchar(70) NOT NULL,
   `email` varchar(70) NOT NULL,
   `password` varchar(41) NOT NULL,
-  `img` varchar(1000) NOT NULL DEFAULT 'public/img/account.png',
+  `img` varchar(1000) NOT NULL DEFAULT 'public/img/account.svg',
   `user_type` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_type` (`user_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `User`
@@ -8888,9 +8850,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_type`) VALUES
 (1, 'Admin', 'Admin', 'admin@admin.it', 'dd94709528bb1c83d08f3088d4043f4742891f4f', 'public/img/user/admin@admin.it.png', 2),
 (2, 'Daniele', 'Di Desidero', 'daniele@danieledd.it', '6f6e3676359b849ceaa8799a07ed9382fc12ecb1', 'public/img/user/daniele@danieledd.it.png', 1),
-(3, 'User', 'User', 'user@user.it', 'F6D053374C2F3E37C686201A40365E1250F6DA11', 'public/img/account.png', 1),
-(4, 'Asdrubale', 'Annibale', 'asdrubale@a.it', '1e4e888ac66f8dd41e00c5a7ac36a32a9950d271', 'public/img/account.png', 1),
-(5, 'dante', 'labs', 'dante@dante.it', '1e4e888ac66f8dd41e00c5a7ac36a32a9950d271', 'public/img/account.png', 1);
+(3, 'User', 'User', 'user@user.it', 'F6D053374C2F3E37C686201A40365E1250F6DA11', 'public/img/account.svg', 1);
 
 -- --------------------------------------------------------
 
@@ -8926,7 +8886,7 @@ CREATE TABLE IF NOT EXISTS `Wishlist` (
   UNIQUE KEY `user_id_2` (`user_id`,`product_id`),
   KEY `user_id` (`user_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Wishlist`
@@ -8934,7 +8894,8 @@ CREATE TABLE IF NOT EXISTS `Wishlist` (
 
 INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 (9, 1, 117),
-(8, 1, 118);
+(8, 1, 118),
+(10, 2, 117);
 
 -- --------------------------------------------------------
 
@@ -8944,6 +8905,20 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 DROP TABLE IF EXISTS `productcategory`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `productcategory`  AS  (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category` from ((`product` join `category`) join `category_item`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`))) ;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `Category`
+--
+ALTER TABLE `Category` ADD FULLTEXT KEY `name` (`name`);
+
+--
+-- Indexes for table `Product`
+--
+ALTER TABLE `Product` ADD FULLTEXT KEY `name` (`name`);
 
 --
 -- Constraints for dumped tables
@@ -8981,21 +8956,6 @@ ALTER TABLE `Category_item`
 --
 ALTER TABLE `City`
   ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`provinces_id`) REFERENCES `Provinces` (`id`);
-
---
--- Constraints for table `Faq`
---
-ALTER TABLE `Faq`
-  ADD CONSTRAINT `faq_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`),
-  ADD CONSTRAINT `faq_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
-
---
--- Constraints for table `Newsletter`
---
-ALTER TABLE `Newsletter`
-  ADD CONSTRAINT `newsletter_ibfk_1` FOREIGN KEY (`manufacturer`) REFERENCES `Manufacturer` (`id`),
-  ADD CONSTRAINT `newsletter_ibfk_2` FOREIGN KEY (`category`) REFERENCES `Category` (`id`),
-  ADD CONSTRAINT `newsletter_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
 -- Constraints for table `Orders`
