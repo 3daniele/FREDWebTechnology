@@ -42,7 +42,7 @@ if (isset($_GET["search"])) {
                                     $img = $imgMgr->get_thumbnail($product->id);
                                     foreach ($img as $i) {
                                         echo ROOT_URL . $i['link'];
-                                    } ?>" class="d-block user-select-none" width="100%" alt="<?php echo $product->name; ?>">
+                                    } ?>" class="d-block user-select-none" height="304px" width="304px" alt="<?php echo $product->name; ?>">
 
                         </img>
                         <ul class="list-group list-group-flush">
