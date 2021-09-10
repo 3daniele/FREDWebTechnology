@@ -278,13 +278,6 @@ if (isset($_POST['add'])) {
     $userID = $_SESSION['userid'];
     $productID = $product->id;
 
-    echo $title . "<br>";
-    echo $message . "<br>";
-    echo $vote . "<br>";
-    echo $userID . "<br>";
-    echo $productID . "<br>";
-
-
     $review = $reviewMgr->add($title, $message, $vote, $userID, $productID);
     
     if (count($review) > 0) {
