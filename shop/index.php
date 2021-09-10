@@ -11,16 +11,10 @@ $productMgr = new ProductManager();
 $productCategoryMgr = new ProductCategoryManager();
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
-    $searchName = $productMgr->searchByName($search);
-    $searchCategory = $productCategoryMgr->searchByCategory($search);
+    $searchCategory = $productCategoryMgr->search($search);
 
-    if ($searchName[0]['id'] != 0) {
-        $products = $searchName;
-    } else {
-
-        if (count($searchCategory) > 0) {
-            $products = $searchCategory;
-        }
+    if ($searchCategory[0]['id'] != 0) {
+        $products = $searchCategory;
     }
 } else {
     $products = $productMgr->getAll();

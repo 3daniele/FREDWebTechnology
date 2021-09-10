@@ -8,9 +8,10 @@ class ProductCategoryManager extends DBManager
     $this->tableName = 'productcategory';
   }
 
-  public function searchByCategory($category)
+  public function search($search)
   {
-    return $this->db->query("SELECT * FROM productcategory WHERE category = '$category'");
+    return $this->db->query("SELECT DISTINCT id, name, description, price FROM productcategory WHERE MATCH (name) AGAINST ('$search' IN NATURAL LANGUAGE MODE)
+                             UNION SELECT DISTINCT id, name, description, price FROM productcategory WHERE MATCH (category) AGAINST ('$search' IN NATURAL LANGUAGE MODE)");
   }
 }
 

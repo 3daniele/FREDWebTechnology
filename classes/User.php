@@ -39,7 +39,7 @@ class UserManager extends DbManager
 
   public function register($name, $surname, $email, $password)
   {
-    $user = new User(0, $name, $surname, $email, $password, 'public/img/account.png', 1);
+    $user = new User(0, $name, $surname, $email, $password, 'public/img/account.svg', 1);
     $userID = $this->create($user);
 
     return $userID;

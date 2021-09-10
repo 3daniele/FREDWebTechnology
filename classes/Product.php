@@ -17,11 +17,6 @@ class Product
     $this->price = $price;
     $this->manufacturer_id = $manufacturer_id;
   }
-
-  public function setData($id, $name, $description, $price, $manufacturer_id)
-  {
-    
-  }
 }
 
 class ProductManager extends DbManager
@@ -31,15 +26,5 @@ class ProductManager extends DbManager
     parent::__construct();
     $this->columns = array('id', 'name', 'description', 'price', 'manufacturer_id');
     $this->tableName = 'Product';
-  }
-
-  public function searchByName($name)
-  {
-    return $this->db->query("SELECT * FROM Product WHERE name = '$name'");
-  }
-
-  public function searchByCategory($category)
-  {
-    return $this->db->query("SELECT * FROM productcategory WHERE category_name = '$category'");
   }
 }
