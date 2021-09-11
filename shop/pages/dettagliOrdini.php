@@ -1,5 +1,5 @@
 <?php
-include "../inc/init.php";
+include "../../inc/init.php";
 if (!isset($_SESSION["email"])) {
     header("Location: " . ROOT_URL);
 }

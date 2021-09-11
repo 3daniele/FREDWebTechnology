@@ -1,4 +1,4 @@
-<?php include "../inc/init.php"; ?>
+<?php include "../../inc/init.php"; ?>
 
 <?php if ($_SESSION["admin"] == 1) {
     header("Location: " . ROOT_URL);
@@ -7,7 +7,7 @@
 
 <?php include ROOT_PATH . "public/template-parts/title.php"; ?>
 
-<title>Dashboard</title>
+<title>Ordini</title>
 
 <?php include ROOT_PATH . "public/template-parts/header.php"; ?>
 
@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h2><strong class="text-primary">Dashboard</strong></h2>
+        <h2><strong class="text-primary">Ordini</strong></h2>
     </div>
     <div class="row">
     

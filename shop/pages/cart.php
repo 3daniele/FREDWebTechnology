@@ -102,7 +102,7 @@ include ROOT_PATH . "public/template-parts/title.php";
                 </li>
             </ul>
             <hr>
-            <button class="btn btn-primary btn-block">Checkout</button>
+            <a href="<?php echo ROOT_URL . 'shop/pages/checkout.php' ?>" class="btn btn-primary btn-block">Checkout</a>
             <?php else : ?>
             <p class="lead">Nessun elemento nel carrello...</p>
             <a href="<?php echo ROOT_URL . 'shop?page=products-list'; ?>" class="btn btn-primary btn-lg mb-5 mt-3">Vai

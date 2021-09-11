@@ -37,7 +37,7 @@
                                   </li>
                                   <?php if ($_SESSION["admin"] == 2) : ?>
                                       <li>
-                                          <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                                          <a class="dropdown-item d-flex gap-2 align-items-center" href="<?php echo ROOT_URL . 'admin/'?>">
 
                                               <img src="<?php echo ROOT_URL; ?>public/img/admin.png" alt="" width="16" height="16">
                                               Amministrazione
