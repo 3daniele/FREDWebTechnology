@@ -16,6 +16,10 @@ require_once ROOT_PATH . 'classes/Cart.php';
 require_once ROOT_PATH . 'classes/Wishlist.php';
 require_once ROOT_PATH . 'classes/ProductCategory.php';
 require_once ROOT_PATH . 'classes/Review.php';
+require_once ROOT_PATH . 'classes/ShipmentInformation.php';
+require_once ROOT_PATH . 'classes/Region.php';
+require_once ROOT_PATH . 'classes/Provinces.php';
+require_once ROOT_PATH . 'classes/City.php';
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';
 

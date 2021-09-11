@@ -8,4 +8,8 @@ class CityManager extends DbManager {
     $this->tableName = 'City';
   }
 
+
+  public function getCitta($city_id){
+    return $this->db->query("SELECT * FROM City WHERE id = '$city_id'");
+  }
 }

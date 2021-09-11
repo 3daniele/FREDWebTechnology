@@ -11,6 +11,8 @@ if ($_GET["product"] == null) {
 $productid = $_GET["product"];
 ?>
 <?php include ROOT_PATH . "public/template-parts/title.php" ?>
+<script type="text/javascript" src="<?php echo ROOT_URL; ?>assets/js/review.js"></script>
+
 <?php $productmgr = new ProductManager();
 $product = $productmgr->get($productid);
 if ($product->name == "") {
@@ -267,7 +269,6 @@ if ($product->name == "") {
             </div>
         </div>
 </form>
-
 <!-- AGGIUNTA RECENSIONE -->
 <?php
 
@@ -279,12 +280,6 @@ if (isset($_POST['add'])) {
     $productID = $product->id;
 
     $review = $reviewMgr->add($title, $message, $vote, $userID, $productID);
-    
-    if (count($review) > 0) {
-        header("Location: " . ROOT_URL . "shop/single-product.php?product=" . $product->id);
-    } else {
-        echo "ERRORE";
-    }
 }
 
 

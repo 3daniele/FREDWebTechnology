@@ -8,4 +8,8 @@ class ProvincesManager extends DbManager {
     $this->tableName = 'Provinces';
   }
 
+  public function getProvincia($provinces_id){
+    return $this->db->query("SELECT * FROM Provinces WHERE id = '$provinces_id'");
+  }
+  
 }
