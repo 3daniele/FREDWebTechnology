@@ -26,7 +26,7 @@ class ReviewManager extends DbManager
   public function __construct()
   {
     parent::__construct();
-    $this->columns = array('id', 'title', 'message', 'vote', 'user_id', 'product_id');
+    $this->columns = array('id', 'title', 'message', 'vote', 'blocked','user_id', 'product_id');
     $this->tableName = 'Review';
   }
 
@@ -45,20 +45,6 @@ class ReviewManager extends DbManager
 
   public function add($title, $message, $vote, $userID, $productID)
   {
-    /*
-    $reviewID = 0;
-
-    $reviewID = $this->create([
-      'title' => $title,
-      'message' => $message,
-      'vote' => $vote,
-      'user_id' => $userID,
-      'product_id' => $productID
-    ]);
-
-    return $reviewID;
-    */
-
     return $this->db->query("INSERT INTO Review (title, message, vote, user_id, product_id) VALUES('$title', '$message', '$vote', '$userID', '$productID')");
   }
 
@@ -76,5 +62,10 @@ class ReviewManager extends DbManager
       return true;
     }
     return false;
+  }
+
+  /* FUNZIONIO PER LA DASHBOARD */
+  public function getLastReview(){
+    return $this->db->query("SELECT * FROM Review WHERE blocked = 0 ORDER BY id DESC LIMIT 3");
   }
 }
