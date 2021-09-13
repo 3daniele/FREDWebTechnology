@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 13, 2021 at 11:39 AM
+-- Generation Time: Sep 13, 2021 at 03:03 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -21,6 +21,24 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `FREDwebtechnology` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `FREDwebtechnology`;
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `address`
+-- (See below for the actual view)
+--
+CREATE TABLE IF NOT EXISTS `address` (
+`user` int(11)
+,`region_id` int(11)
+,`region_name` varchar(100)
+,`provinces_id` int(11)
+,`provinces_name` varchar(100)
+,`city_id` int(11)
+,`city_name` varchar(100)
+,`code` int(5)
+,`address` varchar(70)
+);
 
 -- --------------------------------------------------------
 
@@ -50,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Cart`
@@ -8391,6 +8409,25 @@ INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `orderaddress`
+-- (See below for the actual view)
+--
+CREATE TABLE IF NOT EXISTS `orderaddress` (
+`order_id` int(11)
+,`user` int(11)
+,`region_id` int(11)
+,`region_name` varchar(100)
+,`provinces_id` int(11)
+,`provinces_name` varchar(100)
+,`city_id` int(11)
+,`city_name` varchar(100)
+,`code` int(5)
+,`address` varchar(70)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `Orders`
 --
 
@@ -8398,14 +8435,23 @@ CREATE TABLE IF NOT EXISTS `Orders` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `date_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` enum('Ordine ricevuto','In lavorazione','Spedito','In consegna','Consegnato') NOT NULL,
+  `status` enum('Ordine ricevuto','In lavorazione','Spedito','In consegna','Consegnato') NOT NULL DEFAULT 'Ordine ricevuto',
   `tracking_information` text,
-  `stimate_delivery` int(11) NOT NULL,
+  `stimate_delivery` date NOT NULL,
   `shipment_user_info` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `shipment_user_info` (`shipment_user_info`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Orders`
+--
+
+INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_information`, `stimate_delivery`, `shipment_user_info`) VALUES
+(1, 2, '2021-09-13 14:22:00', 'Ordine ricevuto', NULL, '2021-09-16', 1),
+(2, 2, '2021-09-13 14:59:24', 'Ordine ricevuto', NULL, '2021-09-23', 1),
+(3, 1, '2021-09-13 15:01:35', 'Ordine ricevuto', NULL, '2021-09-30', 3);
 
 -- --------------------------------------------------------
 
@@ -8414,13 +8460,24 @@ CREATE TABLE IF NOT EXISTS `Orders` (
 --
 
 CREATE TABLE IF NOT EXISTS `Orders_items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Orders_items`
+--
+
+INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
+(1, 1, 139, 1),
+(2, 2, 132, 2),
+(3, 3, 139, 1),
+(4, 3, 137, 1);
 
 -- --------------------------------------------------------
 
@@ -8560,14 +8617,14 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (126, 'Balsamo Bio', 'Balsamo Bio con olio essenziale di Lavanda Officinale, olio di semi di Lino, olio di Mandorle dolci.<br>\r\nEffetto districante e nutriente.', '8.80', 100, 1),
 (127, 'Burrocacao Bio', 'Il burrocacao Bio di Verde Naturale è realizzato con estratti di agrumi ed elicriso. <br>Gli agrumi concedono un nutrimento multivitaminico, l\'elicriso è antinfiammatorio, rinfrescante, emoliente e lenitivo.<br> Protegge dalle screpolature ed idrata le labbra in tutte le condizioni atmosferiche.\r\n', '3.90', 100, 1),
 (128, 'Cura della persona N°1', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?<br>\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:\r\n<br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Bagno Doccia BIO Lavanda (200 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Sapone Liquido Mani BIO Lavanda (250 ml) <br><br>\r\n\r\nNel prezzo è inclusa la scatola.', '28.00', 100, 1),
-(129, 'Cura della persona N°2', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 100, 1),
-(130, 'Cura della persona N°3', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 100, 1),
+(129, 'Cura della persona N°2', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 8, 1),
+(130, 'Cura della persona N°3', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 4, 1),
 (131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? <br><br> \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:<br>\r\n- Crema corpo BIO (200 ml)<br>\r\n- Crema Viso BIO (50 ml)<br>\r\n- Crema Mani Lavanda (100 ml) <br>\r\n- Burrocacao BIO <br>\r\n- Deo Spray BIO<br>\r\n- Sacchetto Lavanda<br>\r\n<br><br>\r\nNel prezzo è inclusa la scatola.\r\n', '60.00', 100, 1),
-(132, 'Confezione Top Creme', 'In questa confezione troverai:<br>\r\n- Crema Corpo BIO 200 ml (Lavanda)<br>\r\n- Crema Silhouette BIO 200 ml (Rosmarino)<br>\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)<br>\r\n- Crema Lavanda BIO 100 ml<br>\r\n- Crema Elicriso BIO 100 ml\r\n<br><br>\r\nLa scatola è inclusa nel prezzo.', '90.00', 100, 1),
+(132, 'Confezione Top Creme', 'In questa confezione troverai:<br>\r\n- Crema Corpo BIO 200 ml (Lavanda)<br>\r\n- Crema Silhouette BIO 200 ml (Rosmarino)<br>\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)<br>\r\n- Crema Lavanda BIO 100 ml<br>\r\n- Crema Elicriso BIO 100 ml\r\n<br><br>\r\nLa scatola è inclusa nel prezzo.', '90.00', 3, 1),
 (133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '16.55', 100, 1),
 (134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.<br>\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n<br><br>\r\n Confezione da 200 ml.\r\n<br><br>\r\nVuoi regalare questo prodotto? <br>Aggiungi la confezione regalo!', '24.80', 100, 1),
 (135, 'Deodorante Bio', 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici. <br>Ideale per contrastare i cattivi odori senza però impedire la normale sudorazione, proteggendo quindi l\'equilibrio della pelle.<br>\r\nIl risultato sarà una pelle fresca, igienizzata e profumata naturalmente.\r\n<br><br>\r\nDisponibile in 4 versioni:<br>\r\n- Spray (Senza Alcool) con Bicarbonato, Agrumi e Lavanda<br>\r\n- Roll-On con Salvia <br>\r\n- Roll-On con Salvia e Menta <br>\r\n- Roll-On con Timo e Malaleuca <br>', '7.20', 100, 1),
-(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 100, 1),
+(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 5, 1),
 (137, 'Diffusore in ceramica', '- Diffusore in ceramica decorato a mano <br>\r\n- Olio essenziale di lavanda grossò (10 ml)<br><br>\r\n\r\nLa confezione regalo è compresa nel prezzo.', '18.00', 9, 1),
 (138, 'Sacchetti + Diffusori', 'Questa confezione contiene:<br>\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:<br>\r\n\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n<br>\r\nSacchetto profumato a scelta tra:<br>\r\n- Farfalla<br>\r\n- Gufetto<br>\r\n- Cuscino<br>\r\n- 2 sacchetti normali<br>\r\n<br>\r\nLa confezione regalo è inclusa nel prezzo', '21.50', 7, 1),
 (139, '2 Diffusori Ambientali', 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.<br> Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br><br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. <br>Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\n', '25.50', 5, 2),
@@ -8780,14 +8837,15 @@ CREATE TABLE IF NOT EXISTS `Review` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Review`
 --
 
 INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `product_id`) VALUES
-(1, 'Ottimo Prodotto', 'Super consigliato', '5', 0, 1, 116);
+(1, 'Ottimo Prodotto', 'Super consigliato', '5', 0, 1, 116),
+(2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '3', 0, 1, 118);
 
 -- --------------------------------------------------------
 
@@ -8809,14 +8867,16 @@ CREATE TABLE IF NOT EXISTS `Shipment_information` (
   KEY `region` (`region`),
   KEY `city` (`city`),
   KEY `province` (`province`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Shipment_information`
 --
 
 INSERT INTO `Shipment_information` (`id`, `user_id`, `region`, `province`, `city`, `code`, `address`, `principal`) VALUES
-(1, 2, 14, 70, 70055, 86045, 'Via Padre Pio, 1', 1);
+(1, 2, 14, 70, 70055, 86045, 'Via Padre Pio, 1', 1),
+(2, 3, 13, 66, 66049, 67100, 'Via Del Mandorlo, 8', 1),
+(3, 1, 13, 66, 66095, 67019, 'Via dei gerani, 13', 1);
 
 -- --------------------------------------------------------
 
@@ -8905,6 +8965,24 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 (9, 1, 117),
 (8, 1, 118),
 (10, 2, 117);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `address`
+--
+DROP TABLE IF EXISTS `address`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `address`  AS  (select `shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address` from (((`region` join `provinces`) join `city`) join `shipment_information`) where ((`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`))) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `orderaddress`
+--
+DROP TABLE IF EXISTS `orderaddress`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderaddress`  AS  (select `orders`.`id` AS `order_id`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address` from ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) where ((`orders`.`shipment_user_info` = `shipment_information`.`id`) and (`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`))) ;
 
 -- --------------------------------------------------------
 

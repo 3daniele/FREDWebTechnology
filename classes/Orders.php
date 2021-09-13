@@ -8,4 +8,10 @@ class OrdersManager extends DbManager {
     $this->tableName = 'Orders';
   }
 
+  /* DASHBOARD */
+
+  public function getLastOrders(){
+    return $this->db->query("SELECT * FROM Orders ORDER BY id DESC");                                 
+  }
+
 }

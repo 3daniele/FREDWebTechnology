@@ -20,6 +20,8 @@ require_once ROOT_PATH . 'classes/ShipmentInformation.php';
 require_once ROOT_PATH . 'classes/Region.php';
 require_once ROOT_PATH . 'classes/Provinces.php';
 require_once ROOT_PATH . 'classes/City.php';
+require_once ROOT_PATH . 'classes/OrderAddress.php';
+require_once ROOT_PATH . 'classes/Orders.php';
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';
 

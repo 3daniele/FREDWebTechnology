@@ -46,12 +46,46 @@
 
                 </div>
                 <div class="card-body">
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <?php 
+                        $orderMgr = new OrdersManager();
+                        $orders = $orderMgr->getLastOrders();
+                        $i=0;
+                        foreach($orders as $order) : $i++;
+                    ?>
 
+                    <div class="row">
+                    <p class="card-text">
+                        <div class="col-1">
+                            <?php echo $order['id']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php echo $order['date_order']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php echo $order['status']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php
+                                $userMgr = new UserManager();
+                                $users = $userMgr->getName($order['user_id']);
+                                echo $users[0]['name']. ", ";
+                                $users = $userMgr->getSurname($order['user_id']);
+                                echo $users[0]['surname'];
+                            ?>
+                        </div>
+                        <div class="col-5">
+                            <?php
+                                $orderAddressMgr = new OrderAddressManager();
+                                $addressinfo = $orderAddressMgr->getAddressByOrder($order['id']);
+                                $string = $addressinfo[0]['address'].", ".$addressinfo[0]['city_name'].", ".$addressinfo[0]['code'].", ".$addressinfo[0]['provinces_name']."."; 
+                            echo $string; ?>
+                        </div>
+                    </p>
+                    </div>
+                    <?php if($i != count($orders)) : ?>
+                        <hr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <hr>
@@ -102,12 +136,31 @@
                 <div class="card-body">
                     <?php $reviewMgr = new ReviewManager();
                         $reviews = $reviewMgr->getLastReview();
-                        foreach($reviews as $review) :
+                        $i = 0;
+                        foreach($reviews as $review) : $i++;
                     ?>
+                    <div class="row">
                     <p class="card-text">
-                    
+                        <div class="col-1">
+                            <?php echo $review['vote']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php echo $review['title']; ?>
+                        </div>
+                        <div class="col-5">
+                            <?php echo $review['message']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php echo $review['product']; ?>
+                        </div>
+                        <div class="col-2">
+                            <?php echo $review['user']; ?>
+                        </div>
                     </p>
-                    <hr>
+                    </div>
+                    <?php if($i != count($reviews)) : ?>
+                        <hr>
+                        <?php endif; ?>
                     <?php endforeach; ?>
                     
 
@@ -137,7 +190,8 @@
                 <div class="card-body">
                     <?php $productMgr = new ProductManager();
                     $products = $productMgr->getEsaurimenti();
-                    foreach ($products as $product) : ?>
+                    $i=0;
+                    foreach ($products as $product) : $i++;?>
                     <div class="row">
                         <p class="card-text">
                         <div class="col-7"><?php echo $product['name']; ?></div>
@@ -154,7 +208,9 @@
                             ?>
                             </div>
                         </p>
+                        <?php if($i != count($products)) : ?>
                         <hr>
+                        <?php endif; ?>
                     </div>
                     <?php endforeach; ?>
 

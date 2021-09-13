@@ -66,6 +66,6 @@ class ReviewManager extends DbManager
 
   /* FUNZIONIO PER LA DASHBOARD */
   public function getLastReview(){
-    return $this->db->query("SELECT * FROM Review WHERE blocked = 0 ORDER BY id DESC LIMIT 3");
+    return $this->db->query("SELECT Review.vote AS 'vote', Review.title AS 'title', Review.message AS 'message', User.name AS 'user', Product.name AS 'product' FROM Review, User, Product WHERE user.id=Review.user_id AND product.id=Review.product_id ORDER BY Review.id DESC LIMIT 3");
   }
 }
