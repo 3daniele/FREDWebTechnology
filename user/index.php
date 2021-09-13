@@ -52,7 +52,7 @@
             </a>
         </div>
         <div class="col-sm-4">
-            <a href="<?php echo ROOT_URL; ?>user/andress.php" class="btn text-start">
+            <a href="<?php echo ROOT_URL; ?>user/address.php" class="btn text-start">
                 <div class="card">
                     <div class="card-body">
                         <div class="row">
