@@ -12,4 +12,7 @@ class ProvincesManager extends DbManager {
     return $this->db->query("SELECT * FROM Provinces WHERE id = '$provinces_id'");
   }
   
+  public function getProvinciaByRegion($region_id){
+    return $this->db->query("SELECT * FROM Provinces WHERE region_id = '$region_id'");
+  }
 }

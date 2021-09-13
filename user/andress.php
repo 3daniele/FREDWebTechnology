@@ -36,8 +36,10 @@ include ROOT_PATH . "public/template-parts/header.php";
                             <option selected>Seleziona la regione</option>
                             <?php foreach($regions as $region) : ?>
                                 <option value=<?php echo $region->id ?>><?php echo $region->name ?></option>
+                                <?php $provinces = $provinceMgr->getProvinciaByRegion($region->id); ?>
                             <?php endforeach; ?>
                         </select>
+                        <span id="regionID" hidden><?php echo json_encode($provinces) ?></span>
                     </div>
                 </div>
                 <br>
@@ -46,6 +48,7 @@ include ROOT_PATH . "public/template-parts/header.php";
                         <label class="form-label" for="disabledInput">Provincia:</label><br>
                         <select class="form-select" id="provincia" disabled>
                             <option selected>Seleziona la provincia</option>
+                            
                         </select>
                     </div>
                 </div>
@@ -53,7 +56,7 @@ include ROOT_PATH . "public/template-parts/header.php";
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label">Comune:</label><br>
-                        <select class="form-select" id="comune" disabled>
+                        <select class="form-select" id="comune">
                             <option selected>Seleziona il comune</option>
                         </select>
                     </div>
@@ -62,7 +65,7 @@ include ROOT_PATH . "public/template-parts/header.php";
                 <div class="row">
                     <div class="col-6">
                         <label class="form-label" for="disabledInput">Via /Piazza numero civico:</label><br>
-                        <input class="form-control" id="disabledInput" type="text" value="bvgf" disabled>
+                        <input class="form-control" id="disabledInput" type="text" value="bvgf">
                     </div>
                 </div>
             </div>
