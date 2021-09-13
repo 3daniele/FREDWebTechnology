@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Sep 13, 2021 at 03:03 PM
+-- Generation Time: Sep 13, 2021 at 03:07 PM
 -- Server version: 5.7.32
 -- PHP Version: 7.4.12
 
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Cart`
@@ -8837,7 +8837,7 @@ CREATE TABLE IF NOT EXISTS `Review` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `Review`
@@ -8845,7 +8845,8 @@ CREATE TABLE IF NOT EXISTS `Review` (
 
 INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `product_id`) VALUES
 (1, 'Ottimo Prodotto', 'Super consigliato', '5', 0, 1, 116),
-(2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '3', 0, 1, 118);
+(2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '3', 0, 1, 118),
+(3, 'Ottimo rapporto qualità prezzo', 'Donec euismod, lorem ac fringilla lobortis, dolor quam ullamcorper urna, in lacinia arcu ligula non velit. Nam quis nisl at purus faucibus consequat. Sed rhoncus auctor urna a imperdiet. Sed vel vestibulum leo. Fusce rhoncus, nisl eget vestibulum placerat, lectus mi eleifend massa, eu gravida enim lectus malesuada odio. Vivamus eu volutpat leo, eget eleifend lorem. Integer varius non felis sed sagittis. Aenean maximus elit vitae mauris suscipit molestie. Cras rhoncus, nunc a molestie imperdiet, risus elit porttitor justo, id facilisis odio turpis in nisi. Quisque at ullamcorper massa.', '4', 0, 3, 117);
 
 -- --------------------------------------------------------
 
