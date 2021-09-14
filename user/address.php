@@ -16,13 +16,13 @@ include ROOT_PATH . "public/template-parts/header.php";
 ?>
 
 <?php
-$shipIMg = new ShipmentInformationManager();
+$shipIMgr = new ShipmentInformationManager();
 $addressMgr = new AddressManager();
 $regionMgr =  new RegionManager();
 $provinceMgr = new ProvincesManager();
 $cityMgr = new CityManager();
 
-$indirizzi = $shipIMg->getIndirizzi($_SESSION['userid']);
+$indirizzi = $shipIMgr->getIndirizzi($_SESSION['userid']);
 
 $addresses = $addressMgr->getAll();
 $regions = $regionMgr->getAll();
@@ -169,7 +169,7 @@ if (isset($_POST['add'])) {
     $code = $_POST['cap'];
     $address = $_POST['address'];
 
-    $shipID = $shipIMg->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
+    $shipID = $shipIMgr->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
 }
 
 ?>
@@ -185,7 +185,7 @@ if (isset($_POST['update'])) {
     $code = $_POST['cap'];
     $address = $_POST['address'];
 
-    $shipID = $shipIMg->updateShipmentInformation($shipmentID, $regionID, $provinceID, $cityID, $code, $address);
+    $shipID = $shipIMgr->updateShipmentInformation($shipmentID, $regionID, $provinceID, $cityID, $code, $address);
 }
 
 ?>
@@ -196,7 +196,7 @@ if (isset($_POST['update'])) {
 if (isset($_POST['delete'])) {
     $shipmentID = $_POST['delete'];
 
-    $shipIMg->remove($shipmentID);
+    $shipIMgr->remove($shipmentID);
 }
 
 ?>
