@@ -37,11 +37,23 @@ class ShipmentInformationManager extends DbManager {
   }
 
   public function getIndirizzi($userid){
-    return $this->db->query("SELECT * FROM Shipment_information WHERE user_id = '$userid'");
+    return $this->db->query("SELECT * FROM address WHERE user = '$userid'");
   }
 
   public function addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address) {
     return $this->db->query("INSERT INTO Shipment_information (user_id, region, province, city, code, address) VALUES($userID, $regionID, $provinceID, $cityID, '$code', '$address')");
+  }
+
+  public function updateShipmentInformation($id, $userID, $regionID, $provinceID, $cityID, $code, $address) {
+    return $this->db->query("UPDATE Shipment_information SET region = $regionID, province = $provinceID, city = $cityID, code = '$code', address = '$address' WHERE id` = $id");
+  }
+
+  public function setPrincipal($id, $principal) {
+    return $this->db->query("UPDATE Shipment_information SET principal = $principal WHERE id` = $id");
+  }
+
+  public function remove($shipmentInfoID) {
+    return $this->delete($shipmentInfoID);
   }
 
 }

@@ -66,4 +66,14 @@ $( document ).ready(function() {
         $('#address').removeAttr('disabled');
     });
 
+    $('button').on('click', function () {
+        value = $(this).attr('data-whatever');
+        console.log(value);
+        $('#modal').attr('value', value);
+    });
+
+    $('#modal').on('show.bs.modal', function (event) {
+        console.log(this);
+    });
+
 });

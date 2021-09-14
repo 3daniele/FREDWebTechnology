@@ -20,6 +20,7 @@ $shipIMg = new ShipmentInformationManager();
 $regionMgr =  new RegionManager();
 $provinceMgr = new ProvincesManager();
 $cityMgr = new CityManager();
+
 $indirizzi = $shipIMg->getIndirizzi($_SESSION['userid']);
 
 $regions = $regionMgr->getAll();
@@ -35,26 +36,42 @@ $cities = $cityMgr->getAll();
 <span id="cities" hidden><?php echo json_encode($cities) ?></span>
 
 
-<?php 
 
-if (isset($_POST['add'])) {
-    $userID = $_SESSION['userid'];
-    $regionID = (int) $_POST['regione'];
-    $provinceID = $_POST['provincia'];
-    $cityID = $_POST['comune'];
-    $code = $_POST['cap'];
-    $address = $_POST['address'];
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        <?php if ($indirizzi) : ?>
+            <?php foreach ($indirizzi as $indirizzo) : ?>
+                <div class="col-3">
+                    <div class="card mb-3">
+                        <h3 class="card-header text-center">Indirizzo  <?php if ($indirizzo['principal'] == 1) echo " predefinito" ?> </h3>
+                           
+                            <li class="list-group-item"> <?php echo $indirizzo['address'] . "<br>". $indirizzo['city_name'].", ". $indirizzo['code']. "<br>". $indirizzo['provinces_name']. "<br>";  ?></li>
+                        </ul>
+                        <div class="card-body text-center">
 
-    $shipID = $shipIMg->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
-}
-
-?>
-
+                            <form method="POST">
+                                <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" value=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>                                
+                                <button class="btn btn-outline-danger btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Elimina</button>
+                                <?php if  ($indirizzo['principal'] == 0)  :?>
+                                <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Rendi indirizzo predefinito</button>
+                                <?php else : ?>
+                                <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Rimuovi indirizzo predefinito</button>
+                                <?php endif; ?>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>Nessun indirizzo presente...</p>
+        <?php endif; ?>
+    </div>
+</div>
 <div class="container" id="main-area" style="margin-top: 25px; ">
     <form action="" method="POST">
         <div class="row">
             <div class="col-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi" >
                     Aggiungi nuovo indirizzo
                 </button>
             </div>
@@ -64,10 +81,10 @@ if (isset($_POST['add'])) {
 
 <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
 
-<!-- Finestra di dialogo per la scrittura della recensione -->
+<!-- Finestra di dialogo per l'aggiunta di un nuovo indirizzzo -->
 <!-- Modal -->
 <form method="POST">
-    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -135,3 +152,20 @@ if (isset($_POST['add'])) {
         </div>
     </div>
 </form>
+
+
+<!-- Aggiunta nuovo indirizzo -->
+<?php 
+
+if (isset($_POST['add'])) {
+    $userID = $_SESSION['userid'];
+    $regionID = (int) $_POST['regione'];
+    $provinceID = $_POST['provincia'];
+    $cityID = $_POST['comune'];
+    $code = $_POST['cap'];
+    $address = $_POST['address'];
+
+    $shipID = $shipIMg->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
+}
+
+?>
