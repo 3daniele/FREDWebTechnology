@@ -24,7 +24,7 @@ class ProductManager extends DbManager
   public function __construct()
   {
     parent::__construct();
-    $this->columns = array('id', 'name', 'description', 'price', 'stock','manufacturer_id');
+    $this->columns = array('id', 'name', 'description','small_description', 'price', 'stock','manufacturer_id');
     $this->tableName = 'Product';
   }
 
@@ -32,4 +32,8 @@ class ProductManager extends DbManager
   public function getEsaurimenti(){
     return $this->db->query("SELECT * FROM Product WHERE stock < 10  ORDER BY stock LIMIT 15");
   } 
+
+  public function getProductOrderByStock(){
+    return $this->db->query("SELECT * FROM Product ORDER BY stock");
+  }
 }
