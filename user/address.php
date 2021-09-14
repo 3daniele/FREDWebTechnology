@@ -17,12 +17,14 @@ include ROOT_PATH . "public/template-parts/header.php";
 
 <?php
 $shipIMg = new ShipmentInformationManager();
+$addressMgr = new AddressManager();
 $regionMgr =  new RegionManager();
 $provinceMgr = new ProvincesManager();
 $cityMgr = new CityManager();
 
 $indirizzi = $shipIMg->getIndirizzi($_SESSION['userid']);
 
+$addresses = $addressMgr->getAll();
 $regions = $regionMgr->getAll();
 $provinces = $provinceMgr->getAll();
 $cities = $cityMgr->getAll();
@@ -30,12 +32,12 @@ $cities = $cityMgr->getAll();
 
 <span id="flagRegion" hidden>0</span>
 <span id="flagProvince" hidden>0</span>
+<span id="flagCity" hidden>0</span>
 
+<span id="addresses" hidden><?php echo json_encode($addresses) ?></span>
 <span id="regions" hidden><?php echo json_encode($regions) ?></span>
 <span id="provinces" hidden><?php echo json_encode($provinces) ?></span>
 <span id="cities" hidden><?php echo json_encode($cities) ?></span>
-
-
 
 <div class="container" id="main-area" style="margin-top: 70px;">
     <div class="row">
@@ -50,12 +52,13 @@ $cities = $cityMgr->getAll();
                         <div class="card-body text-center">
 
                             <form method="POST">
-                                <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" value=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>                                
-                                <button class="btn btn-outline-danger btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Elimina</button>
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" data-bs-whatever=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>                                
+                                <button class="btn btn-outline-danger btn-sm" name="delete" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Elimina</button>
+                                <div class="row"><br></div>
                                 <?php if  ($indirizzo['principal'] == 0)  :?>
-                                <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Rendi indirizzo predefinito</button>
+                                <button class="btn btn-outline-success btn-sm" name="set" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Rendi indirizzo predefinito</button>
                                 <?php else : ?>
-                                <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $indirizzo->id_shipment; ?>>Rimuovi indirizzo predefinito</button>
+                                <button class="btn btn-outline-success btn-sm" name="unset" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Rimuovi indirizzo predefinito</button>
                                 <?php endif; ?>
                             </form>
                         </div>
@@ -71,7 +74,7 @@ $cities = $cityMgr->getAll();
     <form action="" method="POST">
         <div class="row">
             <div class="col-2">
-                <button type="button" id="modalBtn" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi" >
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi" >
                     Aggiungi nuovo indirizzo
                 </button>
             </div>
@@ -88,7 +91,7 @@ $cities = $cityMgr->getAll();
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="text-primary"><strong>Inserisci un nuovo indirizzo</strong></h5>
+                    <h5 class="text-primary"><strong id="modalTitle">Inserisci un nuovo indirizzo</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"></span>
                     </button>
@@ -100,6 +103,7 @@ $cities = $cityMgr->getAll();
                                 <div class="row">
                                     <div class="col-12">
                                         <label class="form-label">Regione:</label><br>
+                                        <input class="form-control" id="shipmentID" name="shipmentID" type="text" hidden>
                                         <select class="form-select" id="regione" name="regione">
                                             <option selected>Seleziona la regione</option>
                                             <?php foreach ($regions as $region) : ?>
@@ -145,7 +149,7 @@ $cities = $cityMgr->getAll();
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" name="add">Invia</button>
+                    <button type="submit" id="modalBtn" class="btn btn-primary" name="add">Invia</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                 </div>
             </div>
@@ -159,13 +163,40 @@ $cities = $cityMgr->getAll();
 
 if (isset($_POST['add'])) {
     $userID = $_SESSION['userid'];
-    $regionID = (int) $_POST['regione'];
+    $regionID = $_POST['regione'];
     $provinceID = $_POST['provincia'];
     $cityID = $_POST['comune'];
     $code = $_POST['cap'];
     $address = $_POST['address'];
 
     $shipID = $shipIMg->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
+}
+
+?>
+
+<!-- Modifunica di nuovo indirizzo -->
+<?php 
+
+if (isset($_POST['update'])) {
+    $shipmentID = $_POST['shipmentID'];
+    $regionID = $_POST['regione'];
+    $provinceID = $_POST['provincia'];
+    $cityID = $_POST['comune'];
+    $code = $_POST['cap'];
+    $address = $_POST['address'];
+
+    $shipID = $shipIMg->updateShipmentInformation($shipmentID, $regionID, $provinceID, $cityID, $code, $address);
+}
+
+?>
+
+<!-- Eliminazione di un indirizzo-->
+<?php
+
+if (isset($_POST['delete'])) {
+    $shipmentID = $_POST['delete'];
+
+    $shipIMg->remove($shipmentID);
 }
 
 ?>

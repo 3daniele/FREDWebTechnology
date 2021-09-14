@@ -1,5 +1,6 @@
 <?php
-class ShipmentInformation {
+class ShipmentInformation
+{
 
   public $id;
   public $userID;
@@ -21,39 +22,55 @@ class ShipmentInformation {
     $this->address = $address;
     $this->principal = $principal;
   }
-
 }
 
-class ShipmentInformationManager extends DbManager {
+class ShipmentInformationManager extends DbManager
+{
 
-  public function __construct(){
+  public function __construct()
+  {
     parent::__construct();
     $this->columns = array('id', 'user_id', 'region', 'province', 'city', 'code', 'address', 'principal');
     $this->tableName = 'Shipment_information';
   }
 
-  public function getFatturazione($userid){
+  public function getFatturazione($userid)
+  {
     return $this->db->query("SELECT * FROM Shipment_information WHERE user_id = '$userid' AND principal = 1");
   }
 
-  public function getIndirizzi($userid){
+  public function getIndirizzi($userid)
+  {
     return $this->db->query("SELECT * FROM address WHERE user = '$userid'");
   }
 
-  public function addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address) {
+  public function addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address)
+  {
     return $this->db->query("INSERT INTO Shipment_information (user_id, region, province, city, code, address) VALUES($userID, $regionID, $provinceID, $cityID, '$code', '$address')");
   }
 
-  public function updateShipmentInformation($id, $userID, $regionID, $provinceID, $cityID, $code, $address) {
-    return $this->db->query("UPDATE Shipment_information SET region = $regionID, province = $provinceID, city = $cityID, code = '$code', address = '$address' WHERE id` = $id");
+  public function updateShipmentInformation($id, $regionID, $provinceID, $cityID, $code, $address)
+  {
+    return $this->db->query("UPDATE Shipment_information SET region = $regionID, province = $provinceID, city = $cityID, code = '$code', address = '$address' WHERE id = $id");
   }
 
-  public function setPrincipal($id, $principal) {
+  public function setPrincipal($id, $principal)
+  {
     return $this->db->query("UPDATE Shipment_information SET principal = $principal WHERE id` = $id");
   }
 
-  public function remove($shipmentInfoID) {
+  public function remove($shipmentInfoID)
+  {
     return $this->delete($shipmentInfoID);
   }
+}
 
+class AddressManager extends DBManager
+{
+  public function __construct()
+  {
+    parent::__construct();
+    $this->columns = array('id_shipment', 'user', 'region_id', 'region_name', 'provinces_id', 'provinces_name', 'city_id', 'city_name', 'code', 'address', 'principal');
+    $this->tableName = 'address';
+  }
 }
