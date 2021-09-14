@@ -169,7 +169,7 @@
             <hr>
 
         </div>
-        <div class="col-md-3 col-lg-3 px-md-4">
+        <div class="col-md-4 col-lg-4 px-md-4">
             <div class="card">
                 <div class="card-header">
 
