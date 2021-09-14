@@ -14,14 +14,6 @@
 <?php include ROOT_PATH . "admin/pages/template-parts/adminSidebar.php"; ?>
 
 <main class="col-md-8 col-lg-9 px-md-4">
-    <div class="chartjs-size-monitor">
-        <div class="chartjs-size-monitor-expand">
-            <div class=""></div>
-        </div>
-        <div class="chartjs-size-monitor-shrink">
-            <div class=""></div>
-        </div>
-    </div>
     <div class="row border-bottom">
         <div class="col-4"><h2><strong class="text-primary">Prodotti</strong></h2></div>
         <div class="col-4"></div>
@@ -59,7 +51,7 @@
             $products = $productMgr->getProductOrderByStock();
             ?>
             <?php foreach ($products as $product) : ?>
-            <?php $path = "admin/pages/single-product.php?product=" . $product['id']; ?>
+            <?php $path = "admin/pages/edit-product.php?product=" . $product['id']; ?>
             <?php if ($product['stock'] >= 20) : ?>
                 <div class="row" style="cursor:pointer" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
                 <?php else : ?>
