@@ -49,7 +49,7 @@
                                 </div>
 
                                 <div class="col-lg-3 col-6">
-                                    <span class="text-muted" maxlength="15"><?php echo substr($product->description, 0, 200)." " ?><a href="<?php echo ROOT_URL; ?>shop/single-product.php?product=<?php echo $product->id; ?>"> continua</a></span>
+                                    <span class="text-muted"><?php echo substr($product->small_description, 0, 200)." " ?><a href="<?php echo ROOT_URL; ?>shop/single-product.php?product=<?php echo $product->id; ?>"> continua</a></span>
                                 </div>
 
                                 <div class="col-lg-2 col-6">

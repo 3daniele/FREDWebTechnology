@@ -41,6 +41,8 @@ class ProductManager extends DbManager
 
   public function updateProduct($productID, $name, $description, $small_description, $price, $stock)
   {
-    return $this->db->query("UPDATE Product SET name='$name', description='$description', small_description='$small_description', price='$price', stock='$stock' WHERE id='$productID'");
+    $descriptionbis = addslashes($description);
+    $small_descriptionbis= addslashes($small_description);
+    return $this->db->query("UPDATE Product SET name='$name', description='$descriptionbis', small_description='$small_descriptionbis', price='$price', stock='$stock' WHERE id='$productID'");
   }
 }
