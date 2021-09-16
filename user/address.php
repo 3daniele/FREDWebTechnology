@@ -45,20 +45,18 @@ $cities = $cityMgr->getAll();
             <?php foreach ($indirizzi as $indirizzo) : ?>
                 <div class="col-3">
                     <div class="card mb-3">
-                        <h3 class="card-header text-center">Indirizzo  <?php if ($indirizzo['principal'] == 1) echo " predefinito" ?> </h3>
-                           
-                            <li class="list-group-item"> <?php echo $indirizzo['address'] . "<br>". $indirizzo['city_name'].", ". $indirizzo['code']. "<br>". $indirizzo['provinces_name']. "<br>";  ?></li>
-                        </ul>
+                        <h3 class="card-header text-center">Indirizzo <?php if ($indirizzo['principal'] == 1) echo " predefinito" ?> </h3>
+                        <li class="list-group-item"> <?php echo $indirizzo['address'] . "<br>" . $indirizzo['city_name'] . ", " . $indirizzo['code'] . "<br>" . $indirizzo['provinces_name'] . "<br>";  ?></li>
                         <div class="card-body text-center">
-
                             <form method="POST">
-                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" data-bs-whatever=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>                                
+                                <input class="form-control" id="shipmentID" name="shipmentID" type="text" hidden value="<?php echo $indirizzo['id_shipment']; ?>">
+                                <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" data-bs-whatever=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>
                                 <button class="btn btn-outline-danger btn-sm" name="delete" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Elimina</button>
                                 <div class="row"><br></div>
-                                <?php if  ($indirizzo['principal'] == 0)  :?>
-                                <button class="btn btn-outline-success btn-sm" name="set" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Rendi indirizzo predefinito</button>
+                                <?php if ($indirizzo['principal'] == 0) : ?>
+                                    <button class="btn btn-outline-success btn-sm" name="principal" type="submit" value=1>Rendi indirizzo predefinito</button>
                                 <?php else : ?>
-                                <button class="btn btn-outline-success btn-sm" name="unset" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Rimuovi indirizzo predefinito</button>
+                                    <button class="btn btn-outline-success btn-sm" name="principal" type="submit" value=0>Rimuovi indirizzo predefinito</button>
                                 <?php endif; ?>
                             </form>
                         </div>
@@ -74,7 +72,7 @@ $cities = $cityMgr->getAll();
     <form action="" method="POST">
         <div class="row">
             <div class="col-2">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi" >
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi">
                     Aggiungi nuovo indirizzo
                 </button>
             </div>
@@ -103,7 +101,6 @@ $cities = $cityMgr->getAll();
                                 <div class="row">
                                     <div class="col-12">
                                         <label class="form-label">Regione:</label><br>
-                                        <input class="form-control" id="shipmentID" name="shipmentID" type="text" hidden>
                                         <select class="form-select" id="regione" name="regione">
                                             <option selected>Seleziona la regione</option>
                                             <?php foreach ($regions as $region) : ?>
@@ -159,7 +156,7 @@ $cities = $cityMgr->getAll();
 
 
 <!-- Aggiunta nuovo indirizzo -->
-<?php 
+<?php
 
 if (isset($_POST['add'])) {
     $userID = $_SESSION['userid'];
@@ -174,8 +171,8 @@ if (isset($_POST['add'])) {
 
 ?>
 
-<!-- Modifunica di nuovo indirizzo -->
-<?php 
+<!-- Modifunica di un indirizzo -->
+<?php
 
 if (isset($_POST['update'])) {
     $shipmentID = $_POST['shipmentID'];
@@ -197,6 +194,18 @@ if (isset($_POST['delete'])) {
     $shipmentID = $_POST['delete'];
 
     $shipIMgr->remove($shipmentID);
+}
+
+?>
+
+<!-- Cambio indirizzo predefinito -->
+<?php
+
+if (isset($_POST['principal'])) {
+    $shipmentID = $_POST['shipmentID'];
+    $principal = $_POST['principal'];
+
+    $shipIMgr->setPrincipal($shipmentID, $principal);
 }
 
 ?>

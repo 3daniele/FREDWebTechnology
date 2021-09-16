@@ -56,7 +56,7 @@ class ShipmentInformationManager extends DbManager
 
   public function setPrincipal($id, $principal)
   {
-    return $this->db->query("UPDATE Shipment_information SET principal = $principal WHERE id` = $id");
+    return $this->db->query("UPDATE Shipment_information SET principal = $principal WHERE id = $id");
   }
 
   public function remove($shipmentInfoID)

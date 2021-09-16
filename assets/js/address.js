@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    console.log("ready");
-
     var addresses = jQuery.parseJSON($('#addresses').text());
     var regions = jQuery.parseJSON($('#regions').text());
     var provinces = jQuery.parseJSON($('#provinces').text());
@@ -59,7 +57,6 @@ $(document).ready(function () {
                     $('#address').val(addresses[i].address);
                 }
             }
-            $('#shipmentID').val(shipmentID);
             $('#modalBtn').attr('name', 'update');
         }
     });
