@@ -23,6 +23,19 @@ $payments = $paymentsMgr->getPayments($userID);
 
 ?>
 
+
+<!-- Aggiunta nuovo metodo -->
+<?php
+
+if (isset($_POST['add'])) {
+    $credit_card_number = $_POST['credit_card_number'];
+    $expiration = $_POST['expiration'];
+    $cvv = $_POST['cvv'];
+    
+    $paymentID = $paymentsMgr->addPayment($userID, $credit_card_number, $cvv, $expiration);
+}
+
+?>
 <div class="container" id="main-area" style="margin-top: 70px;">
     <div class="row">
         <?php if ($payments) : ?>
@@ -31,7 +44,7 @@ $payments = $paymentsMgr->getPayments($userID);
                     <div class="card mb-3">
                         <h3 class="card-header text-center">Metodo <?php if ($payment['principal'] == 1) echo " predefinito" ?></h3>
                         <li class="list-group-item"> Numero di carta: <?php echo $payment['credit_card_number'] ?></li>
-                        <li class="list-group-item"> Scadenza: <?php echo $payment['expiration'] ?></li>
+                        <li class="list-group-item"> Scadenza: <?php echo $payment['expiration1'] . "/" . $payment['expiration2']?></li>
                         <li class="list-group-item"> Cvv: <?php echo $payment['cvv'] ?></li>
                         <div class="card-body text-center">
                             <form method="POST">
@@ -126,7 +139,7 @@ if (isset($_POST['add'])) {
     $expiration = $_POST['expiration'];
     $cvv = $_POST['cvv'];
 
-    $paymentID = $paymentsMgr->addPayment($userID, $credit_card_number, $cvv, $expiration);
+    //$paymentID = $paymentsMgr->addPayment($userID, $credit_card_number, $cvv, $expiration);
 }
 
 ?>
