@@ -45,4 +45,14 @@ class ProductManager extends DbManager
     $small_descriptionbis= addslashes($small_description);
     return $this->db->query("UPDATE Product SET name='$name', description='$descriptionbis', small_description='$small_descriptionbis', price='$price', stock='$stock' WHERE id='$productID'");
   }
+
+  public function newProduct($name, $description, $small_description, $price, $stock,$manufacturer_id){
+    $descriptionbis = addslashes($description);
+    $small_descriptionbis= addslashes($small_description);
+    return $this->db->query("INSERT INTO Product (name,description,small_description,price,stock,manufacturer_id) VALUES ('$name','$description', '$small_description', '$price','$stock','$manufacturer_id')");
+  }
+
+  public function getLast(){
+    return $this->db->query("SELECT *FROM Product ORDER BY id DESC");
+  }
 }

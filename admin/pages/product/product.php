@@ -1,6 +1,6 @@
-<?php include "../../inc/init.php"; ?>
+<?php include "../../../inc/init.php"; ?>
 
-<?php if ($_SESSION["admin"] == 1) {
+<?php if (!isset($_SESSION["email"]) || $_SESSION["admin"] == 1) {
     header("Location: " . ROOT_URL);
 }
 ?>
@@ -51,7 +51,7 @@
             $products = $productMgr->getProductOrderByStock();
             ?>
             <?php foreach ($products as $product) : ?>
-            <?php $path = "admin/pages/edit-product.php?product=" . $product['id']; ?>
+            <?php $path = "admin/pages/product/edit-product.php?product=" . $product['id']; ?>
             <?php if ($product['stock'] >= 20) : ?>
                 <div class="row" style="cursor:pointer" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
                 <?php else : ?>

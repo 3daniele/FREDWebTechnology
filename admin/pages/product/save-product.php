@@ -1,4 +1,8 @@
-<?php include "../../inc/init.php";?>
+<?php include "../../../inc/init.php";?>
+<?php if (!isset($_SESSION["email"]) || $_SESSION["admin"] == 1) {
+    header("Location: " . ROOT_URL);
+}
+?>
 <?php
     $name = $_POST["name"];
     
@@ -15,6 +19,6 @@
     $productMgr = new ProductManager();
     $productMgr->updateProduct($id,$name,$description,$small_description,$price,$stock);
 
-    header("Location: ".ROOT_URL."admin/pages/edit-product.php?product=".$id);
+    header("Location: ".ROOT_URL."admin/pages/product/edit-product.php?product=".$id);
     
 ?>

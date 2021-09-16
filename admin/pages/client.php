@@ -1,6 +1,6 @@
 <?php include "../../inc/init.php"; ?>
 
-<?php if ($_SESSION["admin"] == 1) {
+<?php if (!isset($_SESSION["email"]) || $_SESSION["admin"] == 1) {
     header("Location: " . ROOT_URL);
 }
 ?>

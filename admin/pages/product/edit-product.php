@@ -1,17 +1,16 @@
-<?php include "../../inc/init.php"; ?>
+<?php include "../../../inc/init.php"; ?>
 <?php
 if (!defined('ROOT_URL')) {
     die;
 }
 
-if ($_GET["product"] == null || $_SESSION["admin"] == 1) {
+if ($_GET["product"] == null || $_SESSION["admin"] == 1 || !isset($_SESSION["email"])) {
     header("Location: " . ROOT_URL . "admin/index.php");
 }
 
 $productid = $_GET["product"];
 ?>
 <?php include ROOT_PATH . "public/template-parts/title.php" ?>
-<script type="text/javascript" src="<?php echo ROOT_URL; ?>assets/js/review.js"></script>
 
 <?php $productmgr = new ProductManager();
 $product = $productmgr->get($productid);
