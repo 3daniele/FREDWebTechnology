@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Set 16, 2021 alle 15:25
+-- Creato il: Set 17, 2021 alle 08:50
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart`
@@ -8492,12 +8492,20 @@ CREATE TABLE IF NOT EXISTS `Payments` (
   `user_id` int(11) NOT NULL,
   `credit_card_number` varchar(16) DEFAULT NULL,
   `cvv` int(3) DEFAULT NULL,
-  `expiration` varchar(5) DEFAULT NULL,
+  `expiration1` varchar(6) DEFAULT NULL,
+  `expiration2` varchar(2) DEFAULT NULL,
   `paypal` tinyint(1) DEFAULT NULL,
   `principal` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `Payments`
+--
+
+INSERT INTO `Payments` (`id`, `user_id`, `credit_card_number`, `cvv`, `expiration1`, `expiration2`, `paypal`, `principal`) VALUES
+(1, 2, '1234567891145879', 123, '05', '22', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -8601,7 +8609,7 @@ CREATE TABLE IF NOT EXISTS `Product` (
   `small_description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `manufacturer_id` (`manufacturer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Product`
