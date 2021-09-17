@@ -21,7 +21,7 @@ class OrdersManager extends DbManager {
   /* DASHBOARD */
 
   public function getLastOrders(){
-    return $this->db->query("SELECT * FROM Orders ORDER BY id DESC");                                 
+    return $this->db->query("SELECT * FROM Orders ORDER BY id DESC LIMIT 3");                                 
   }
 
 }
