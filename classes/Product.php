@@ -55,4 +55,8 @@ class ProductManager extends DbManager
   public function getLast(){
     return $this->db->query("SELECT *FROM Product ORDER BY id DESC");
   }
+
+  public function getName($id){
+    return $this->db->query("SELECT *FROM Product WHERE id='$id'");
+  }
 }

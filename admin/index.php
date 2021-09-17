@@ -132,7 +132,7 @@
                                 <h4><b>Nuove recensioni:</b></h4>
                             </div>
                             <div class="col-3 text-end">
-                                <a href="<?php echo ROOT_URL . 'admin/pages/review.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                                <a href="<?php echo ROOT_URL . 'admin/pages/review/review.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
                             </div>
                         </div>
                     </span>
@@ -205,7 +205,7 @@
                                 <h4><b>In esaurimento:</b></h4>
                             </div>
                             <div class="col-5 text-end">
-                                <a href="<?php echo ROOT_URL . 'admin/pages/product.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                                <a href="<?php echo ROOT_URL . 'admin/pages/product/product.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
                             </div>
                         </div>
                     </span>

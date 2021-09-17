@@ -13,7 +13,7 @@
 
 <?php include ROOT_PATH . "admin/pages/template-parts/adminSidebar.php"; ?>
 
-<main class="col-md-8 col-lg-9 px-md-4">
+<main class="col-md-9 col-lg-8 px-md-4">
     <div class="row border-bottom">
         <div class="col-4"><h2><strong class="text-primary">Prodotti</strong></h2></div>
         <div class="col-4"></div>
@@ -92,7 +92,7 @@
                 <?php endforeach; ?>
         </div>
 </main>
-<div class="col-md-1 col-lg-1 px-md-4"></div>
+<div class="col-lg-1 px-md-4"></div>
 
 
 

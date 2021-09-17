@@ -35,7 +35,7 @@ class ReviewManager extends DbManager
 
     $reviews = 0;
 
-    $result = $this->db->query("SELECT * FROM Review WHERE product_id = '$productID'");
+    $result = $this->db->query("SELECT * FROM Review WHERE product_id = '$productID' AND blocked = 0");
 
     if (count($result) > 0) {
       return $result;
@@ -50,13 +50,13 @@ class ReviewManager extends DbManager
 
   public function getAvg($productID)
   {
-    return $this->db->query("SELECT AVG(vote) AS 'media' FROM review WHERE product_id = $productID");
+    return $this->db->query("SELECT AVG(vote) AS 'media' FROM review WHERE product_id = $productID AND blocked=0");
   }
 
   public function checkReview($userID, $productID)
   {
 
-    $result = $this->db->query("SELECT * FROM Review WHERE user_id = '$userID' AND product_id = '$productID'");
+    $result = $this->db->query("SELECT * FROM Review WHERE user_id = '$userID' AND product_id = '$productID' AND blocked=0");
 
     if (count($result) > 0) {
       return true;
@@ -67,5 +67,17 @@ class ReviewManager extends DbManager
   /* FUNZIONIO PER LA DASHBOARD */
   public function getLastReview(){
     return $this->db->query("SELECT Review.vote AS 'vote', Review.title AS 'title', Review.message AS 'message', User.name AS 'user', Product.name AS 'product' FROM Review, User, Product WHERE user.id=Review.user_id AND product.id=Review.product_id ORDER BY Review.id DESC LIMIT 3");
+  }
+
+  public function getAllOrder(){
+    return $this->db->query("SELECT *FROM Review ORDER BY Review.id DESC");
+  }
+
+  public function blockReview($reviewID){
+    $this->db->query("UPDATE Review SET blocked=1 WHERE id=$reviewID");
+  }
+
+  public function unlockReview($reviewID){
+    $this->db->query("UPDATE Review SET blocked=0 WHERE id=$reviewID");
   }
 }
