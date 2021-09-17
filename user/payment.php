@@ -128,9 +128,6 @@ if (isset($_POST['add'])) {
     </div>
 </form>
 
-<?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
-
-
 <!-- Aggiunta nuovo metodo -->
 <?php
 

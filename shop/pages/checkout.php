@@ -11,7 +11,43 @@ if (!isset($_SESSION["email"])) {
 
 <?php include ROOT_PATH . "public/template-parts/header.php"; ?>
 
+<?php
+$shipmentMgr = new ShipmentInformationManager();
+$paymentsMgr = new PaymentsManager();
+$cartMgr = new CartManager();
+$cartItemMgr = new CartItemManager();
+$ordersMgr = new OrdersManager();
+$ordersItemMgr = new OrdersItemsManager();
+
+$userID = $_SESSION['userid'];
+
+$cartID = $cartMgr->findCart($userID);
+$cartItems = $cartItemMgr->getItems($cartID);
+$addresses = $shipmentMgr->getIndirizzi($userID);
+$payments = $paymentsMgr->getPayments($userID);
+?>
+
+<!-- Checkout -->
+<?php
+
+if (isset($_POST['checkout'])) {
+    $shipmentID = $_POST['shipmentID'];
+
+    $orderID = $ordersMgr->addOrder($userID, $shipmentID);
+   
+    foreach ($cartItems as $item) {
+        $productID = $item['product_id'];
+        $quantity = $item['quantity'];
+
+        $ordersItemMgr->addItem($orderID, $productID, $quantity);
+        $cartItemMgr->removeItem($item['id']);
+    } 
+}
+
+?>
+
 <div class="container" id="main-area" style="margin-top: 25px; ">
+<form method="POST">
     <div class="row">
         <div class="col-9">
             <div class="row">
@@ -20,11 +56,10 @@ if (!isset($_SESSION["email"])) {
                 </div>
                 <div class="col-9">
                     <form method="POST">
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Open this select menu</option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
+                        <select class="form-select" name="shipmentID" aria-label="Default select example">
+                            <?php foreach ($addresses as $address) : ?>
+                            <option <?php if ($address['principal'] == 1) echo selected; ?> value=<?php echo $address['id_shipment']; ?>><?php echo $address['address']." ". $address['city_name']." ".$address['code']." ".$address['provinces_name'];  ?></option>
+                            <?php endforeach ?>
                         </select>
                     </form>
                 </div>
@@ -35,26 +70,20 @@ if (!isset($_SESSION["email"])) {
                     <h4><strong>2. Modalità di pagamento:</strong></h4>
                 </div>
                 <div class="col-9">
-                    <form method="POST">
+                        <?php foreach ($payments as $payment) : ?>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id=<?php echo $payment['id'] ?>>
                             <label class="form-check-label" for="flexRadioDefault1">
-                                Default radio
+                                <?php echo "************" . substr($payment['credit_card_number'], 12, 16) ?>
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                            <label class="form-check-label" for="flexRadioDefault2">
-                                Default checked radio
-                            </label>
-                        </div>
+                        <?php endforeach ?>
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                             <label class="form-check-label" for="flexRadioDefault2">
                                 PayPal
                             </label>
                         </div>
-                    </form>
                 </div>
             </div>
             <hr>
@@ -104,20 +133,16 @@ if (!isset($_SESSION["email"])) {
                                         </div>
 
 
-                                        <div class="col-lg-3 col-6">
-                                            <form method="POST">
-                                                <div class="cart-buttons btn-group" role="group">
-                                                    <button name="minus" type="submit" class="btn btn-sm btn-primary" value=<?php echo $product->id ?>>-</button>
-                                                    <span class="text-muted"><?php echo $item['quantity']; ?></span>
-                                                    <button name="plus" type="submit" class="btn btn-sm btn-primary" value=<?php echo $product->id ?>>+</button>
-                                                    <input type="hidden" name="id" value="<?php echo $item['id'] ?>" />
-                                                </div>
-                                            </form>
+                                        <div class="col-lg-3 col-6 text-center">
+                                                <span class="text-muted"><?php echo $item['quantity']; ?></span>
+                                                <input type="hidden" name="productID" value="<?php echo $item['id'] ?>" />
                                         </div>
                                         <div class="col-lg-2 col-6">
-                                            <strong class="text-primary"><?php $sum = $sum + number_format($item['quantity'] * $product->price, 2);
-                                                                            echo number_format($item['quantity'] * $product->price, 2) ?>
-                                                €</strong>
+                                            <strong class="text-primary">
+                                                <?php $sum = $sum + number_format($item['quantity'] * $product->price, 2);
+                                                        echo number_format($item['quantity'] * $product->price, 2) 
+                                                ?> €
+                                            </strong>
                                         </div>
 
                                     </li>
@@ -132,14 +157,14 @@ if (!isset($_SESSION["email"])) {
                 <div class="col-12">
                     <ul class="list-group mb-3">
                         <li class="list-group-item d-flex justify-content-between lh-sm p-4">
-
-                            <div class="col-3"><button class="btn btn-primary btn-block" style="width: 100%;">Acquista ora &raquo;</button></div>
+                            <div class="col-3">
+                                <button name="checkout" type=submit class="btn btn-primary btn-block" style="width: 100%;">Acquista ora &raquo;</button>
+                            </div>
                             <div class="col-3">
                                 <span class="text-primary text-end" style="width: 100%;">
                                         <h4><b>Totale: <?php echo number_format($sum, 2) . " €" ?></b></h4>
                                 </span>
                             </div>
-
                         </li>
                     </ul>
                 </div>
@@ -148,6 +173,19 @@ if (!isset($_SESSION["email"])) {
         </div>
         <?php include ROOT_PATH . "public/template-parts/sidebar.php"; ?>
     </div>
+    </form>
 </div>
 
 <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
+
+<!-- Checkout -->
+<?php
+
+if (isset($_POST['checkout'])) {
+    $shipmentID = $_POST['shipmentID'];
+
+    echo $userID . "<br>" . $shipmentID;
+
+}
+
+?>
