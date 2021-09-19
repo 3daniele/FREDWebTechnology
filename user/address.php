@@ -48,7 +48,7 @@ $cities = $cityMgr->getAll();
                         <h3 class="card-header text-center">Indirizzo <?php if ($indirizzo['principal'] == 1) echo " predefinito" ?> </h3>
                         <li class="list-group-item"> <?php echo $indirizzo['address'] . "<br>" . $indirizzo['city_name'] . ", " . $indirizzo['code'] . "<br>" . $indirizzo['provinces_name'] . "<br>";  ?></li>
                         <div class="card-body text-center">
-                            <form method="POST">
+                            <form method="POST" action="./address-action.php">
                                 <input class="form-control" id="shipmentID" name="shipmentID" type="text" hidden value="<?php echo $indirizzo['id_shipment']; ?>">
                                 <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" data-bs-whatever=<?php echo $indirizzo['id_shipment']; ?>>Modifica</button>
                                 <button class="btn btn-outline-danger btn-sm" name="delete" type="submit" value="<?php echo $indirizzo['id_shipment']; ?>">Elimina</button>
@@ -69,7 +69,7 @@ $cities = $cityMgr->getAll();
     </div>
 </div>
 <div class="container" id="main-area" style="margin-top: 25px; ">
-    <form action="" method="POST">
+    <form action="./address-action.php" method="POST">
         <div class="row">
             <div class="col-2">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi">
@@ -84,7 +84,7 @@ $cities = $cityMgr->getAll();
 
 <!-- Finestra di dialogo per l'aggiunta di un nuovo indirizzzo -->
 <!-- Modal -->
-<form method="POST">
+<form method="POST" action="./address-action.php">
     <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -95,7 +95,7 @@ $cities = $cityMgr->getAll();
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" action="./address-action.php">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
@@ -153,59 +153,3 @@ $cities = $cityMgr->getAll();
         </div>
     </div>
 </form>
-
-
-<!-- Aggiunta nuovo indirizzo -->
-<?php
-
-if (isset($_POST['add'])) {
-    $userID = $_SESSION['userid'];
-    $regionID = $_POST['regione'];
-    $provinceID = $_POST['provincia'];
-    $cityID = $_POST['comune'];
-    $code = $_POST['cap'];
-    $address = $_POST['address'];
-
-    $shipID = $shipIMgr->addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address);
-}
-
-?>
-
-<!-- Modifunica di un indirizzo -->
-<?php
-
-if (isset($_POST['update'])) {
-    $shipmentID = $_POST['shipmentID'];
-    $regionID = $_POST['regione'];
-    $provinceID = $_POST['provincia'];
-    $cityID = $_POST['comune'];
-    $code = $_POST['cap'];
-    $address = $_POST['address'];
-
-    $shipID = $shipIMgr->updateShipmentInformation($shipmentID, $regionID, $provinceID, $cityID, $code, $address);
-}
-
-?>
-
-<!-- Eliminazione di un indirizzo-->
-<?php
-
-if (isset($_POST['delete'])) {
-    $shipmentID = $_POST['delete'];
-
-    $shipIMgr->remove($shipmentID);
-}
-
-?>
-
-<!-- Cambio indirizzo predefinito -->
-<?php
-
-if (isset($_POST['principal'])) {
-    $shipmentID = $_POST['shipmentID'];
-    $principal = $_POST['principal'];
-
-    $shipIMgr->setPrincipal($shipmentID, $principal);
-}
-
-?>

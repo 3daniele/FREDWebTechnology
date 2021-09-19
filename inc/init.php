@@ -28,5 +28,4 @@ require_once ROOT_PATH . 'classes/Payments.php';
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';
 
-
 ?>

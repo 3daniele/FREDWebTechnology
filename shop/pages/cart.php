@@ -67,7 +67,7 @@ include ROOT_PATH . "public/template-parts/title.php";
                             <span class="text-muted"><?php echo $product->price ?> €</span>
                         </div>
                         <div class="col-lg-3 col-6">
-                            <form method="POST">
+                            <form method="POST" action="../cart-action.php">
                                 <div class="cart-buttons btn-group" role="group">
                                     <button name="minus" type="submit" class="btn btn-sm btn-primary"
                                         value=<?php echo $product->id ?>>-</button>
@@ -115,16 +115,3 @@ include ROOT_PATH . "public/template-parts/title.php";
 
 
 <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
-
-<!-- Aggiunta e rimozione dal carrello -->
-<?php
- if (isset($_POST['minus'])) {
-  $cartMgr->removeFromCart($_POST['minus'],$cartID);
-  header("Location: " . ROOT_URL."shop/pages/cart");
-  }  
-  if (isset($_POST['plus'])) {
-    $cartMgr->addToCart($_POST['plus'],$cartID);
-    header("Location: " . ROOT_URL."shop/pages/cart");
-  } 
-
-?>

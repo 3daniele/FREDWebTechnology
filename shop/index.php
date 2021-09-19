@@ -109,7 +109,7 @@ if (isset($_GET["search"])) {
                             <li class="list-group-item"> <?php echo $product->price . " €" ?></li>
                         </ul>
                         <div class="card-body text-center">
-                            <form method="POST">
+                            <form method="POST" action="./cart-action.php">
                                 <a href=<?php echo ROOT_URL . 'shop/single-product.php?product=' . $product->id; ?> class="btn btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
                                 <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
                             </form>
@@ -128,33 +128,4 @@ if (isset($_GET["search"])) {
 </div>
 <?php
 include ROOT_PATH . 'public/template-parts/footer.php';
-?>
-
-
-<!-- AGGIUNTA AL CARRELLO -->
-<?php
-if (!defined('ROOT_URL')) {
-    die;
-}
-
-if (isset($_POST['product_id'])) {
-
-    $productID = $_POST['product_id'];
-
-    // addToCart Logic
-    $cartMgr = new CartManager();
-
-    if (isset($_SESSION['userid'])) {
-        $cartID = $cartMgr->findCart($_SESSION['userid']);
-        echo $cartID;
-    } else {
-        $cartID = $cartMgr->getCurrentCartId();
-        echo $cartID;
-    }
-    // aggiungi al carrello "cartID" il prodotto "productID"
-    $cartMgr->addToCart($productID, $cartID);
-}
-
-$id = htmlspecialchars(trim($_GET['product_id']));
-
 ?>

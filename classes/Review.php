@@ -48,6 +48,11 @@ class ReviewManager extends DbManager
     return $this->db->query("INSERT INTO Review (title, message, vote, user_id, product_id) VALUES('$title', '$message', '$vote', '$userID', '$productID')");
   }
 
+  public function updateReview($title, $message, $vote, $userID, $productID)
+  {
+    return $this->db->query("UPDATE Review SET title = '$title', message = '$message', vote = $vote WHERE user_id = $userID AND product_id = $productID");
+  }
+
   public function getAvg($productID)
   {
     return $this->db->query("SELECT AVG(vote) AS 'media' FROM review WHERE product_id = $productID AND blocked=0");

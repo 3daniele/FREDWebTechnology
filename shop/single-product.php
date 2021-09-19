@@ -26,6 +26,8 @@ if ($product->name == "") {
 
 <?php include ROOT_PATH . 'public/template-parts/header.php'; ?>
 
+<span id="userID" hidden><?php echo $_SESSION['userid'] ?></span>
+<span id="productID" hidden><?php echo $productid ?></span>
 
 <div class="container" id="main-area" style="margin-top: 70px;">
     <div class="row">
@@ -130,14 +132,23 @@ if ($product->name == "") {
             <?php echo $product->description; ?>
             <br><br><br>
             <div class="row">
-                <form method="POST">
-                    <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
-                    <?php if (!(isset($_SESSION["email"]))) : ?>
-                        <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" disabled value=<?php echo $product->id; ?>>Preferiti</button>
-                    <?php else : ?>
-                        <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" value=<?php echo $product->id; ?>>Preferiti</button>
-                    <?php endif; ?>
-                </form>
+                <div class="col-3">
+                    <form method="POST" action="./cart-action.php">
+                        <input type="hidden" name="singleProduct" value=1>
+                        <input type="text" class="form-control" name="productID" value=<?php echo $product->id ?> hidden>
+                        <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button>
+                    </form>
+                </div>
+                <div class="col-1">
+                    <form method="POST" action="./wishlist-action.php">
+                        <input type="text" class="form-control" name="productID" value=<?php echo $product->id ?> hidden>
+                        <?php if (!(isset($_SESSION["email"]))) : ?>
+                            <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" disabled value=<?php echo $product->id; ?>>Preferiti</button>
+                        <?php else : ?>
+                            <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" value=<?php echo $product->id; ?>>Preferiti</button>
+                        <?php endif; ?>
+                    </form>
+                </div>
             </div>
 
         </div>
@@ -162,11 +173,11 @@ if ($product->name == "") {
                             <?php
                             $check = $reviewMgr->checkReview($_SESSION['userid'], $product->id);
                             if ($check) : ?>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" <?php if (!isset($_SESSION['email'])) : ?> disabled <?php endif; ?>>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="update" <?php if (!isset($_SESSION['email'])) : ?> disabled <?php endif; ?>>
                                     Modifica la tua recensione
                                 </button>
                             <?php else : ?>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" <?php if (!isset($_SESSION['email'])) : ?> disabled <?php endif; ?>>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="add" <?php if (!isset($_SESSION['email'])) : ?> disabled <?php endif; ?>>
                                     Aggiungi una recensione
                                 </button>
                             <?php endif; ?>
@@ -176,12 +187,14 @@ if ($product->name == "") {
             </div>
 
             <?php
-
             $userMgr = new UserManager();
-
             $reviews = $reviewMgr->getReviews($product->id);
+            ?>
 
-            if ($reviews == 0) : ?>
+            <span id="reviews" hidden><?php echo json_encode($reviews) ?></span>
+
+
+            <?php if ($reviews == 0) : ?>
 
                 <ul class="list-group mb-3">
                     <li class="list-group-item d-flex justify-content-between lh-sm p-4">
@@ -232,12 +245,12 @@ if ($product->name == "") {
 
 <!-- Finestra di dialogo per la scrittura della recensione -->
 <!-- Modal -->
-<form method="POST">
-    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<form method="POST" action="./review-action.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="text-primary"><strong>Inserisci una recensione</strong></h5>
+                    <h5 class="text-primary"><strong id="modalTitle">Inserisci una recensione</strong></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"></span>
                     </button>
@@ -245,6 +258,7 @@ if ($product->name == "") {
                 <div class="modal-body">
                     <p>Titolo</p>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Inserisci un titolo">
+                    <input type="text" class="form-control" name="productID" value=<?php echo $product->id ?> hidden>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
@@ -262,63 +276,10 @@ if ($product->name == "") {
                         <textarea class="form-control" name="message" id="message" rows="4" placeholder="Inserisci una recensione"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary" name="add">Invia</button>
+                        <button id="modalBtn" type="submit" class="btn btn-primary" name="add">Invia</button>
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                     </div>
                 </div>
             </div>
         </div>
 </form>
-<!-- AGGIUNTA RECENSIONE -->
-<?php
-
-if (isset($_POST['add'])) {
-    $title = $_POST['title'];
-    $message = $_POST['message'];
-    $vote = $_POST['vote'];
-    $userID = $_SESSION['userid'];
-    $productID = $product->id;
-
-    $review = $reviewMgr->add($title, $message, $vote, $userID, $productID);
-}
-
-
-?>
-
-
-<!-- AGGIUNTA AL CARRELLO -->
-<?php
-if (!defined('ROOT_URL')) {
-    die;
-}
-
-if (isset($_POST['product_id'])) {
-
-    $productID = $_POST['product_id'];
-
-    // addToCart Logic
-    $cartMgr = new CartManager();
-
-    if (isset($_SESSION['userid'])) {
-        $cartID = $cartMgr->findCart($_SESSION['userid']);
-    } else {
-        $cartID = $cartMgr->getCurrentCartId();
-    }
-    // aggiungi al carrello "cartID" il prodotto "productID"
-    $cartMgr->addToCart($productID, $cartID);
-}
-
-if (isset($_POST["wishlist"])) {
-    $wishlistMgr = new WishlistManager();
-
-    $userid = $_SESSION["userid"];
-    $productID = $_POST["wishlist"];
-
-    $wishlistMgr->addProduct($userid, $productID);
-}
-
-
-$id = htmlspecialchars(trim($_GET['product_id']));
-
-
-?>

@@ -23,19 +23,6 @@ $payments = $paymentsMgr->getPayments($userID);
 
 ?>
 
-
-<!-- Aggiunta nuovo metodo -->
-<?php
-
-if (isset($_POST['add'])) {
-    $credit_card_number = $_POST['credit_card_number'];
-    $expiration = $_POST['expiration'];
-    $cvv = $_POST['cvv'];
-    
-    $paymentID = $paymentsMgr->addPayment($userID, $credit_card_number, $cvv, $expiration);
-}
-
-?>
 <div class="container" id="main-area" style="margin-top: 70px;">
     <div class="row">
         <?php if ($payments) : ?>
@@ -47,7 +34,7 @@ if (isset($_POST['add'])) {
                         <li class="list-group-item"> Scadenza: <?php echo $payment['expiration1'] . "/" . $payment['expiration2']?></li>
                         <li class="list-group-item"> Cvv: <?php echo $payment['cvv'] ?></li>
                         <div class="card-body text-center">
-                            <form method="POST">
+                            <form method="POST" action="./payment-action.php">
                                 <input class="form-control" id="paymentID" name="paymentID" type="text" hidden value="<?php echo $payment['id']; ?>">
                                 <?php if ($payment['principal'] == 0) : ?>
                                     <button class="btn btn-outline-success btn-sm" name="principal" type="submit" value=1>Rendi metodo predefinito</button>
@@ -66,7 +53,7 @@ if (isset($_POST['add'])) {
     </div>
 </div>
 <div class="container" id="main-area" style="margin-top: 25px; ">
-    <form action="" method="POST">
+    <form action="./payment-action.php" method="POST">
         <div class="row">
             <div class="col-2">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi">
@@ -81,7 +68,7 @@ if (isset($_POST['add'])) {
 
 <!-- Finestra di dialogo per l'aggiunta di un nuovo indirizzzo -->
 <!-- Modal -->
-<form method="POST">
+<form method="POST" action="./payment-action.php">
     <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -92,7 +79,7 @@ if (isset($_POST['add'])) {
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST">
+                    <form method="POST" action="./payment-action.php">
                         <div class="row">
                             <div class="col-12">
                                 <div class="row">
@@ -127,39 +114,3 @@ if (isset($_POST['add'])) {
         </div>
     </div>
 </form>
-
-<!-- Aggiunta nuovo metodo -->
-<?php
-
-if (isset($_POST['add'])) {
-    $credit_card_number = $_POST['credit_card_number'];
-    $expiration = $_POST['expiration'];
-    $cvv = $_POST['cvv'];
-
-    //$paymentID = $paymentsMgr->addPayment($userID, $credit_card_number, $cvv, $expiration);
-}
-
-?>
-
-<!-- Eliminazione di un metodo-->
-<?php
-
-if (isset($_POST['delete'])) {
-    $paymentID = $_POST['delete'];
-
-    $paymentsMgr->remove($paymentID);
-}
-
-?>
-
-<!-- Cambio metodo predefinito -->
-<?php
-
-if (isset($_POST['principal'])) {
-    $paymentID = $_POST['paymentID'];
-    $principal = $_POST['principal'];
-
-    $paymentsMgr->setPrincipal($paymentID, $principal);
-}
-
-?>
