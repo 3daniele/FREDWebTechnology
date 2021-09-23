@@ -20,7 +20,7 @@ class CategoryItemManager extends DbManager
   }
 
   public function getProductFromCategory($categoryID){
-    return $this->db->query("SELECT product_id FROM CategoryItemManager WHERE category_id = '$categoryID'");
+    return $this->db->query("SELECT product_id FROM Category_item WHERE category_id = '$categoryID'");
   }
 
 }

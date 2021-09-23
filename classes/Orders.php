@@ -14,7 +14,7 @@ class OrdersManager extends DbManager {
   }
 
   private function getLastOrder($userID, $shipmentID) {
-    $result = $this->db->query("SELECT * FROM Orders WHERE user_id = $userID AND shipment_user_info = $shipmentID ORDER BY ID DESC LIMIT 1");
+    $result = $this->db->query("SELECT * FROM Orders WHERE user_id = $userID AND shipment_user_info = $shipmentID ORDER BY id DESC LIMIT 1");
     return $result[0]['id'];
   }
 

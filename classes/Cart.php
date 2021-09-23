@@ -117,7 +117,7 @@ class CartManager extends DbManager
   {
     $cartID = 0;
 
-    $result = $this->db->query("SELECT * FROM cart WHERE client_id = '$this->clientId'");
+    $result = $this->db->query("SELECT * FROM Cart WHERE client_id = '$this->clientId'");
 
     if (count($result) > 0) {
       $cartID = $result[0]['id'];
@@ -132,7 +132,7 @@ class CartManager extends DbManager
   {
     $cartID = 0;
 
-    $result = $this->db->query("SELECT * FROM cart WHERE user_id = '$userID'");
+    $result = $this->db->query("SELECT * FROM Cart WHERE user_id = '$userID'");
 
     if (count($result) > 0) {
       $cartID = $result[0]['id'];
