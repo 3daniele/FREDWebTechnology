@@ -64,10 +64,20 @@ class UserManager extends DbManager
     return $this->db->query("SELECT * FROM User WHERE email = '$email'");
   }
 
-  public function getName($id){
+  public function getName($id)
+  {
     return $this->db->query("SELECT name, img FROM User WHERE id = $id");
   }
-  public function getSurname($id){
+
+  public function getSurname($id)
+  {
     return $this->db->query("SELECT surname, img FROM User WHERE id = $id");
+  }
+
+  /* DASHBOARD */
+
+  public function getClient()
+  {
+    return $this->db->query("SELECT *FROM User ORDER BY name");
   }
 }

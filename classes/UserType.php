@@ -8,4 +8,8 @@ class UserTypeManager extends DbManager {
     $this->tableName = 'User_type';
   }
 
+  public function getType($userTypeID){
+    return $this->db->query("SELECT * FROM User_type WHERE id = '$userTypeID'");
+  }
+
 }
