@@ -56,8 +56,8 @@
                                     <span class="text-muted"><?php echo $product->price ?> €</span>
                                 </div>
                                 <div class="col-lg-2 col-6">
-                                    <form method="POST">
-                                        <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button><br><br>
+                                    <form method="POST" action="../wishlist-action.php">
+                                        <button class="btn btn-outline-success btn-sm" name="addToCart" type="submit" value=<?php echo $product->id; ?>>Aggiungi al carrello</button><br><br>
                                         <button class="btn btn-outline-danger btn-sm" name="rimuovi" type="submit" value=<?php echo $product->id; ?>>Rimuovi</button>
                                     </form>
                                 </div>
@@ -75,41 +75,3 @@
             <?php endif; ?>
 
         </div>
-
-
-        <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
-
-        <!-- AGGIUNTA AL CARRELLO E RIMOZIONE DALLA LISTA -->
-        <?php
-        if (!defined('ROOT_URL')) {
-            die;
-        }
-
-        if (isset($_POST['product_id'])) {
-
-            $productID = $_POST['product_id'];
-
-            // addToCart Logic
-            $cartMgr = new CartManager();
-
-            if (isset($_SESSION['userid'])) {
-                $cartID = $cartMgr->findCart($_SESSION['userid']);
-            } else {
-                $cartID = $cartMgr->getCurrentCartId();
-            }
-            // aggiungi al carrello "cartID" il prodotto "productID"
-            $cartMgr->addToCart($productID, $cartID);
-        }
-
-        if (isset($_POST['rimuovi'])){
-            $productID = $_POST['rimuovi'];
-
-            $wishlistMgr->deleteByProductId($productID, $_SESSION["userid"]);
-
-            header("Location: ". ROOT_URL . "shop/pages/wishlist.php");
-        }
-
-        $id = htmlspecialchars(trim($_GET['product_id']));
-
-
-        ?>
