@@ -9,7 +9,10 @@ class OrdersManager extends DbManager {
   }
 
   public function addOrder($userID, $shipmentID) {
-    $this->db->execute("INSERT INTO Orders (user_id, stimate_delivery, shipment_user_info) VALUES ($userID, '2021-09-22', $shipmentID)");
+    $d = strtotime("+7 days");
+    $stimate_delivery = date("Y-m-d", $d);
+
+    $this->db->execute("INSERT INTO Orders (user_id, stimate_delivery, shipment_user_info) VALUES ($userID, '$stimate_delivery', $shipmentID)");
     return $this->getLastOrder($userID, $shipmentID);
   }
 
@@ -18,6 +21,10 @@ class OrdersManager extends DbManager {
     return $result[0]['id'];
   }
 
+  public function getOrder($userID) {
+    $result = $this->db->query("SELECT * FROM Orders WHERE user_id = $userID ");
+    return $result;
+  }
   /* DASHBOARD */
 
   public function getLastOrders(){

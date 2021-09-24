@@ -24,7 +24,7 @@
                               </a>
                               <ul class="dropdown-menu dropdown-menu-macos mx-0 shadow" style="width: 220px;">
                                   <li>
-                                      <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                                      <a class="dropdown-item d-flex gap-2 align-items-center" href="<?php echo ROOT_URL; ?>user/order.php">
                                           <img src="<?php echo ROOT_URL; ?>public/img/order.png" alt="" width="16" height="16">Ordini</a>
                                   </li>
                                   <li>
