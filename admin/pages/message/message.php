@@ -27,17 +27,71 @@
                 </svg></a>
         </div>
     </div>
-    <div class="row" style="margin-top: 5px;">
+    <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3 px-md-4">
-                Menu per le chat
+            <?php
+            $chatMgr = new ChatManager();
+            $userMgr = new UserManager();
+            $messageMgr = new MessageManager();
+            $chat = $chatMgr->getAllChat();
+            $i = 0;
+            foreach ($chat as $c) :
+
+                $user = $userMgr->get($c['user_id']);
+
+            ?>
+                <form method="GET">
+                <?php $path= "admin/pages/message/message.php?chat=".$c['id'];?>
+                    <?php if ($i == 0) : ?>
+                        <div class="card" style="cursor:pointer; width: 18rem;" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
+                        <?php else : ?>
+                            <div class="card" style="cursor:pointer; width: 18rem; border-top:none;" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
+                            <?php endif; ?>
+                            <div class="card-body">
+                                <p class="card-text">
+                                <div class="row">
+                                    <div class="col-4 text-end">
+                                        <?php if ($user->img != null) : ?>
+                                            <img alt="immagine" width=70px class="rounded-circle" src=<?php echo ROOT_URL . $user->img; ?>>
+                                        <?php else : ?>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width=70px fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                            </svg>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="row">
+                                            <?php if ($user->img != null) : ?>
+                                                <b><?php echo $user->name . " " . $user->surname; ?></b>
+                                            <?php else : ?>
+                                                <b>Broadcast</b>
+                                            <?php endif; ?>
+
+                                        </div>
+                                        <div class="row">
+                                            <?php $message = $messageMgr->getLast($c['id']);
+                                            echo substr($message[0]['message'], 0, 30) . "...";
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                            </div>
+                            </div>
+                </form>
+            <?php $i++;
+            endforeach; ?>
+
         </div>
         <div class="col-md-6 col-lg-5 px-md-4">
-            <strong>CIAO A TUTTI!</strong>
-            <br>
-            Questo è lo spazio per il caricamento dei messaggi della singola chat
+            <?php $chat_id=$_GET['chat']; 
+                echo $chat_id;
+            ?>
         </div>
     </div>
-    
+
 
 </main>
 <div class="col-lg-1 px-md-4"></div>

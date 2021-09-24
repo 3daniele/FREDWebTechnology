@@ -9,4 +9,8 @@ class MessageManager extends DbManager{
     $this->tableName = 'Message';
   }
 
+  public function getLast($chatID){
+    return $this->db->query("SELECT *FROM Message WHERE chat_id = '$chatID' ORDER BY date LIMIT 1");
+  }
+
 }
