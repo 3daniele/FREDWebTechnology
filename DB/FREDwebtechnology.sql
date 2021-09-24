@@ -9051,7 +9051,7 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 --
 DROP TABLE IF EXISTS `address`;
 
-CREATE VIEW `address`  AS   (select `shipment_information`.`id` AS `id_shipment`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address`,`shipment_information`.`principal` AS `principal` from (((`region` join `provinces`) join `city`) join `shipment_information`) where ((`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
+CREATE VIEW `address`  AS   (select `Shipment_information`.`id` AS `id_shipment`,`Shipment_information`.`user_id` AS `user`,`Region`.`id` AS `region_id`,`Region`.`name` AS `region_name`,`Provinces`.`id` AS `provinces_id`,`Provinces`.`name` AS `provinces_name`,`City`.`id` AS `city_id`,`City`.`name` AS `city_name`,`Shipment_information`.`code` AS `code`,`Shipment_information`.`address` AS `address`,`Shipment_information`.`principal` AS `principal` from (((`Region` join `Provinces`) join `City`) join `Shipment_information`) where ((`Shipment_information`.`region` = `Region`.`id`) and (`Shipment_information`.`province` = `Provinces`.`id`) and (`Shipment_information`.`city` = `City`.`id`)))  ;
 
 -- --------------------------------------------------------
 
@@ -9060,7 +9060,7 @@ CREATE VIEW `address`  AS   (select `shipment_information`.`id` AS `id_shipment`
 --
 DROP TABLE IF EXISTS `orderaddress`;
 
-CREATE VIEW `orderaddress`  AS   (select `orders`.`id` AS `order_id`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address` from ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) where ((`orders`.`shipment_user_info` = `shipment_information`.`id`) and (`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
+CREATE VIEW `orderaddress`  AS   (select `Orders`.`id` AS `order_id`,`Shipment_information`.`user_id` AS `user`,`Region`.`id` AS `region_id`,`Region`.`name` AS `region_name`,`Provinces`.`id` AS `provinces_id`,`Provinces`.`name` AS `provinces_name`,`City`.`id` AS `city_id`,`City`.`name` AS `city_name`,`Shipment_information`.`code` AS `code`,`Shipment_information`.`address` AS `address` from ((((`Region` join `Provinces`) join `City`) join `Shipment_information`) join `Orders`) where ((`Orders`.`shipment_user_info` = `Shipment_information`.`id`) and (`Shipment_information`.`region` = `Region`.`id`) and (`Shipment_information`.`province` = `Provinces`.`id`) and (`Shipment_information`.`city` = `City`.`id`)))  ;
 
 -- --------------------------------------------------------
 
@@ -9069,7 +9069,7 @@ CREATE VIEW `orderaddress`  AS   (select `orders`.`id` AS `order_id`,`shipment_i
 --
 DROP TABLE IF EXISTS `productcategory`;
 
-CREATE VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category` from ((`product` join `category`) join `category_item`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`)))  ;
+CREATE VIEW `productcategory`  AS   (select `Product`.`id` AS `id`,`Product`.`name` AS `name`,`Product`.`description` AS `description`,`Product`.`price` AS `price`,`Product`.`manufacturer_id` AS `manufacturer_id`,`Category`.`name` AS `category` from ((`Product` join `Category`) join `Category_item`) where ((`Product`.`id` = `Category_item`.`product_id`) and (`Category_item`.`category_id` = `Category`.`id`)))  ;
 
 --
 -- Indici per le tabelle scaricate
