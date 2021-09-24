@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Set 17, 2021 alle 08:50
+-- Creato il: Set 24, 2021 alle 11:05
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart`
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `cart_id` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart_item`
@@ -105,9 +105,7 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
 INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 (23, 5, 118, 2),
 (26, 5, 120, 1),
-(27, 6, 121, 2),
-(28, 6, 118, 1),
-(29, 6, 116, 2);
+(27, 9, 122, 1);
 
 -- --------------------------------------------------------
 
@@ -267,6 +265,29 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 (113, 147, 4),
 (114, 147, 11),
 (115, 148, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Struttura della tabella `Chat`
+--
+
+CREATE TABLE IF NOT EXISTS `Chat` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`,`user_id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `Chat`
+--
+
+INSERT INTO `Chat` (`id`, `user_id`, `date`) VALUES
+(1, NULL, '2021-09-24 11:03:46'),
+(4, 2, '2021-09-24 11:04:05');
 
 -- --------------------------------------------------------
 
@@ -8411,6 +8432,38 @@ INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `Message`
+--
+
+CREATE TABLE IF NOT EXISTS `Message` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `chat_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `displayed` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `Message`
+--
+
+INSERT INTO `Message` (`id`, `chat_id`, `message`, `date`, `displayed`) VALUES
+(1, 1, 'Benvenuti sul nostro nuovo sito, speriamo che la navigazione sia di vostro piacimento.', '2021-09-24 11:03:46', 0);
+
+--
+-- Trigger `Message`
+--
+DELIMITER $$
+CREATE TRIGGER `up_date` AFTER INSERT ON `Message` FOR EACH ROW UPDATE Chat
+SET date=CURRENT_TIMESTAMP()
+WHERE id=new.chat_id
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
 -- Struttura stand-in per le viste `orderaddress`
 -- (Vedi sotto per la vista effettiva)
 --
@@ -8444,7 +8497,7 @@ CREATE TABLE IF NOT EXISTS `Orders` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `shipment_user_info` (`shipment_user_info`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Orders`
@@ -8453,7 +8506,8 @@ CREATE TABLE IF NOT EXISTS `Orders` (
 INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_information`, `stimate_delivery`, `shipment_user_info`) VALUES
 (1, 2, '2021-09-13 14:22:00', 'Ordine ricevuto', NULL, '2021-09-16', 1),
 (2, 2, '2021-09-13 14:59:24', 'Ordine ricevuto', NULL, '2021-09-23', 1),
-(3, 1, '2021-09-13 15:01:35', 'Ordine ricevuto', NULL, '2021-09-30', 3);
+(3, 1, '2021-09-13 15:01:35', 'Ordine ricevuto', NULL, '2021-09-30', 3),
+(4, 1, '2021-09-17 13:45:10', 'Ordine ricevuto', NULL, '2021-09-22', 3);
 
 -- --------------------------------------------------------
 
@@ -8469,7 +8523,7 @@ CREATE TABLE IF NOT EXISTS `Orders_items` (
   PRIMARY KEY (`id`),
   KEY `order_id` (`order_id`),
   KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Orders_items`
@@ -8479,7 +8533,10 @@ INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
 (1, 1, 139, 1),
 (2, 2, 132, 2),
 (3, 3, 139, 1),
-(4, 3, 137, 1);
+(4, 3, 137, 1),
+(5, 4, 121, 1),
+(6, 4, 118, 1),
+(7, 4, 116, 1);
 
 -- --------------------------------------------------------
 
@@ -8498,14 +8555,15 @@ CREATE TABLE IF NOT EXISTS `Payments` (
   `principal` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Payments`
 --
 
 INSERT INTO `Payments` (`id`, `user_id`, `credit_card_number`, `cvv`, `expiration1`, `expiration2`, `paypal`, `principal`) VALUES
-(1, 2, '1234567891145879', 123, '05', '22', NULL, 0);
+(1, 2, '1234567891145879', 123, '05', '22', NULL, 0),
+(2, 1, '1238987456230543', 265, '9', '24', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -8636,7 +8694,7 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '16.55', 100, 1, 'La Crema Elicriso Bio di Verde Naturale è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.'),
 (134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.<br>\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n<br><br>\r\n Confezione da 200 ml.\r\n<br><br>\r\nVuoi regalare questo prodotto? <br>Aggiungi la confezione regalo!', '24.80', 100, 1, 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.'),
 (135, 'Deodorante Bio', 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici. <br>Ideale per contrastare i cattivi odori senza però impedire la normale sudorazione, proteggendo quindi l\'equilibrio della pelle.<br>\r\nIl risultato sarà una pelle fresca, igienizzata e profumata naturalmente.\r\n<br><br>\r\nDisponibile in 4 versioni:<br>\r\n- Spray (Senza Alcool) con Bicarbonato, Agrumi e Lavanda<br>\r\n- Roll-On con Salvia <br>\r\n- Roll-On con Salvia e Menta <br>\r\n- Roll-On con Timo e Malaleuca <br>', '7.20', 100, 1, 'Il Deodorante Bio di Verde Naturale è un prodotto naturale formulato grazie a preziosi estratti naturali biologici.'),
-(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 5, 1, 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni'),
+(136, 'Detergente intimo Bio', 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni, efficace senza essere aggressivo in quanto realizzato con ingredienti naturali.<br><br>\r\n\r\nDisponibile in due versioni:<br>\r\n\r\n- Con oli essenziali di salvia e timo: azione lenitiva, deodorante, rinfrescate e igienizzante.\r\n<br>\r\n- Con olio essenziale di lavanda: rispetta le mucose, azione antibatterica e rinfrescante.', '7.20', 25, 1, 'Detergente intimo Bio per l\'igiene della pelle e delle mucose dei genitali esterni'),
 (137, 'Diffusore in ceramica', '- Diffusore in ceramica decorato a mano <br>\r\n- Olio essenziale di lavanda grossò (10 ml)<br><br>\r\n\r\nLa confezione regalo è compresa nel prezzo.', '18.00', 9, 1, 'Diffusori in ceramica con olio essenziale di lavanda'),
 (138, 'Sacchetti + Diffusori', 'Questa confezione contiene:<br>\r\n\r\n2 Diffusori Ambientali (50 m) a scelta tra:<br>\r\n\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n<br>\r\nSacchetto profumato a scelta tra:<br>\r\n- Farfalla<br>\r\n- Gufetto<br>\r\n- Cuscino<br>\r\n- 2 sacchetti normali<br>\r\n<br>\r\nLa confezione regalo è inclusa nel prezzo', '21.50', 7, 1, 'Confezione da due diffusori ambientali.'),
 (139, '2 Diffusori Ambientali', 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.<br> Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br><br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. <br>Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\n', '25.50', 5, 2, 'I diffusori per ambienti di Iris Bio sono dei profumatori per ambienti disponibili in 6 fragranze diverse.'),
@@ -8849,7 +8907,7 @@ CREATE TABLE IF NOT EXISTS `Review` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Review`
@@ -8857,8 +8915,13 @@ CREATE TABLE IF NOT EXISTS `Review` (
 
 INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `product_id`) VALUES
 (1, 'Ottimo Prodotto', 'Super consigliato', '5', 0, 1, 116),
-(2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '3', 0, 1, 118),
-(3, 'Ottimo rapporto qualità prezzo', 'Donec euismod, lorem ac fringilla lobortis, dolor quam ullamcorper urna, in lacinia arcu ligula non velit. Nam quis nisl at purus faucibus consequat. Sed rhoncus auctor urna a imperdiet. Sed vel vestibulum leo. Fusce rhoncus, nisl eget vestibulum placerat, lectus mi eleifend massa, eu gravida enim lectus malesuada odio. Vivamus eu volutpat leo, eget eleifend lorem. Integer varius non felis sed sagittis. Aenean maximus elit vitae mauris suscipit molestie. Cras rhoncus, nunc a molestie imperdiet, risus elit porttitor justo, id facilisis odio turpis in nisi. Quisque at ullamcorper massa.', '4', 0, 3, 117);
+(2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '5', 0, 1, 118),
+(3, 'Ottimo rapporto qualità prezzo', 'Donec euismod, lorem ac fringilla lobortis, dolor quam ullamcorper urna, in lacinia arcu ligula non velit. Nam quis nisl at purus faucibus consequat. Sed rhoncus auctor urna a imperdiet. Sed vel vestibulum leo. Fusce rhoncus, nisl eget vestibulum placerat, lectus mi eleifend massa, eu gravida enim lectus malesuada odio. Vivamus eu volutpat leo, eget eleifend lorem. Integer varius non felis sed sagittis. Aenean maximus elit vitae mauris suscipit molestie. Cras rhoncus, nunc a molestie imperdiet, risus elit porttitor justo, id facilisis odio turpis in nisi. Quisque at ullamcorper massa.', '4', 0, 3, 117),
+(4, 'Pessimo', 'non l\'ho comprato, ma sono sicuro che il prodotto non meriti tutte queste stelle!', '1', 1, 3, 116),
+(5, 'Ottimo', 'Ma quale ottimo che costa troppo', '1', 1, 1, 119),
+(6, 'Ottimo', 'Ottimo prodotto, super consigliato a tutti!', '5', 0, 1, 119),
+(7, 'Bene ma...', 'Ho acquistato il prodotto ma mi aspettavo una durata più duratura', '3', 0, 1, 123),
+(8, 'Prova', 'ottimo da provare', '5', 0, 3, 122);
 
 -- --------------------------------------------------------
 
@@ -8988,7 +9051,7 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 --
 DROP TABLE IF EXISTS `address`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `address`  AS   (select `shipment_information`.`id` AS `id_shipment`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address`,`shipment_information`.`principal` AS `principal` from (((`region` join `provinces`) join `city`) join `shipment_information`) where ((`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
+CREATE VIEW `address`  AS   (select `shipment_information`.`id` AS `id_shipment`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address`,`shipment_information`.`principal` AS `principal` from (((`region` join `provinces`) join `city`) join `shipment_information`) where ((`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
 
 -- --------------------------------------------------------
 
@@ -8997,7 +9060,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `orderaddress`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderaddress`  AS   (select `orders`.`id` AS `order_id`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address` from ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) where ((`orders`.`shipment_user_info` = `shipment_information`.`id`) and (`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
+CREATE VIEW `orderaddress`  AS   (select `orders`.`id` AS `order_id`,`shipment_information`.`user_id` AS `user`,`region`.`id` AS `region_id`,`region`.`name` AS `region_name`,`provinces`.`id` AS `provinces_id`,`provinces`.`name` AS `provinces_name`,`city`.`id` AS `city_id`,`city`.`name` AS `city_name`,`shipment_information`.`code` AS `code`,`shipment_information`.`address` AS `address` from ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) where ((`orders`.`shipment_user_info` = `shipment_information`.`id`) and (`shipment_information`.`region` = `region`.`id`) and (`shipment_information`.`province` = `provinces`.`id`) and (`shipment_information`.`city` = `city`.`id`)))  ;
 
 -- --------------------------------------------------------
 
@@ -9006,7 +9069,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `productcategory`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category` from ((`product` join `category`) join `category_item`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`)))  ;
+CREATE VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category` from ((`product` join `category`) join `category_item`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`)))  ;
 
 --
 -- Indici per le tabelle scaricate
@@ -9052,6 +9115,12 @@ ALTER TABLE `Cart_item`
 ALTER TABLE `Category_item`
   ADD CONSTRAINT `category_item_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`),
   ADD CONSTRAINT `category_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
+
+--
+-- Limiti per la tabella `Chat`
+--
+ALTER TABLE `Chat`
+  ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
 -- Limiti per la tabella `City`

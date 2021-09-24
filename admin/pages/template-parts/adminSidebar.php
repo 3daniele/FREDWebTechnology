@@ -40,25 +40,6 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/product/product.php' ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true">
-                                <circle cx="9" cy="21" r="1"></circle>
-                                <circle cx="20" cy="21" r="1"></circle>
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-                            </svg>
-                            <?php if ($_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/product/product.php" || $_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/product/new-product.php" || substr($_SERVER['REQUEST_URI'],0,55) == "/FREDWebTechnology/admin/pages/product/edit-product.php") : ?>
-                            <strong>
-                                Prodotti
-                            </strong>
-                            <?php else : ?>
-                            Prodotti
-                            <?php endif; ?>
-
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/client.php' ?>">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -73,24 +54,26 @@
                                 Clienti
                             </strong>
                             <?php else : ?>
-                            Clienti
+                                Clienti
                             <?php endif; ?>
 
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/review/review.php' ?>">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                class="bi bi-star-half" viewBox="0 0 16 16">
-                                <path
-                                    d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/product/product.php' ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-shopping-cart" aria-hidden="true">
+                                <circle cx="9" cy="21" r="1"></circle>
+                                <circle cx="20" cy="21" r="1"></circle>
+                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
                             </svg>
-                            <?php if ($_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/review/review.php") : ?>
+                            <?php if ($_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/product/product.php" || $_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/product/new-product.php" || substr($_SERVER['REQUEST_URI'],0,55) == "/FREDWebTechnology/admin/pages/product/edit-product.php") : ?>
                             <strong>
-                                Recensioni
+                                Prodotti
                             </strong>
                             <?php else : ?>
-                            Recensioni
+                            Prodotti
                             <?php endif; ?>
 
                         </a>
@@ -112,7 +95,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/message.php' ?>">
+                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/message/message.php' ?>">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
                                 class="bi bi-chat-dots" viewBox="0 0 16 16">
@@ -121,13 +104,30 @@
                                 <path
                                     d="m2.165 15.803.02-.004c1.83-.363 2.948-.842 3.468-1.105A9.06 9.06 0 0 0 8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6a10.437 10.437 0 0 1-.524 2.318l-.003.011a10.722 10.722 0 0 1-.244.637c-.079.186.074.394.273.362a21.673 21.673 0 0 0 .693-.125zm.8-3.108a1 1 0 0 0-.287-.801C1.618 10.83 1 9.468 1 8c0-3.192 3.004-6 7-6s7 2.808 7 6c0 3.193-3.004 6-7 6a8.06 8.06 0 0 1-2.088-.272 1 1 0 0 0-.711.074c-.387.196-1.24.57-2.634.893a10.97 10.97 0 0 0 .398-2z" />
                             </svg>
-                            <?php if ($_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/message.php") : ?>
+                            <?php if (substr($_SERVER['REQUEST_URI'],0,39) == "/FREDWebTechnology/admin/pages/message/") : ?>
                             <strong>
                                 Messaggi
                             </strong>
                             <?php else : ?>
                             Messaggi
                             <?php endif; ?>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?php echo ROOT_URL . 'admin/pages/review/review.php' ?>">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                                class="bi bi-star-half" viewBox="0 0 16 16">
+                                <path
+                                    d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                            </svg>
+                            <?php if ($_SERVER['REQUEST_URI'] == "/FREDWebTechnology/admin/pages/review/review.php") : ?>
+                            <strong>
+                                Recensioni
+                            </strong>
+                            <?php else : ?>
+                            Recensioni
+                            <?php endif; ?>
+
                         </a>
                     </li>
                 </ul>
