@@ -28,20 +28,25 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
             <?php foreach ($ordini as $ordine) : ?>
                 <div class="col-12">
                     <div class="card mb-3">
-                        <div>
-                            <h3 class="card-header text-center">Ordine effettuato il <?php echo $ordine['date_order'] ?> </h3>
-                        </div>
-                        <br>
-                        <div class="row">
-                           
-                            <div class="col-lg-1 col-1"></div>
-                                <div class="col-lg-8 col-2"> <strong class="text-primary"> Stato ordine: <?php echo $ordine['status'] . "<br>" ?> </strong> </div>
-                                <div class="col-lg-2 col-9">
-                                    <form method="POST" action="./address-action.php">
-                                        <input class="form-control" id="shipmentID" name="shipmentID" type="text" hidden value="<?php echo $indirizzo['id_shipment']; ?>">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="modifica" data-bs-whatever=<?php echo $indirizzo['id_shipment']; ?>>Dettagli ordine</button>
+                        <a href="<?php echo ROOT_URL; ?>" class="btn text-start">
+                            <div>
+                                <?php
+                                $date = substr($ordine['date_order'], 0, 10);
+                                $yy = substr($date, 0, 4);
+                                $mm = substr($date, 5, 2);
+                                $dd = substr($date, 8, 10);
+                                $somma = $orderMgr->getsum($ordine["id"]);
+                                
+                                ?>
+                                <h3 class="card-header text-center"><strong >Ordine effettuato il </strong> <strong><?php echo $dd . "-" . $mm . "-" . $yy; ?> </strong></h3>
+                            </div>
+                            <br>
+                            <div class="row">
 
-                                    </form>
+                                <div class="col-lg-1 col-1"></div>
+                                <div class="col-lg-8 col-2"> <strong class="text-primary"> Stato ordine:</strong> <strong> <?php echo $ordine['status'] . "<br>"  ?></strong> </div>
+                                <div class="col-lg-2 col-9">
+                                    <strong class="text-primary"> Totale ordine : </strong> <strong><?php echo $somma[0]["totale"]. " €"  ?> </strong>
                                 </div>
                             </div>
                             <br>
@@ -70,7 +75,7 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
                                                         <img src=<?php echo ROOT_URL . $img[0]['link']; ?> alt="immagine" width=100px class="rounded-circle"></img>
                                                     </div>
                                                     <div class="col-lg-4 col-6">
-                                                        <h6 class="my-0 text-primary"><strong><?php echo $product->name ?></strong></h6>
+                                                        <h6 class="my-0 "><strong><?php echo $product->name ?></strong></h6>
                                                     </div>
 
                                                     <div class="col-lg-2 col-6">
@@ -90,23 +95,15 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
 
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-9 col-3"> </div>
-                                <div class="col-lg-3 col-9">
-                                    <strong class="text-primary"> Totale ordine :
-                                        <?php echo number_format($sum, 2);
-
-                                        ?>€
-                                    </strong>
-                                </div>
-                            </div>
-                        </div>
+                            
+                        </a>
                     </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <p>Nessun ordine presente...</p>
-            <?php endif; ?>
                 </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>Nessun ordine presente...</p>
+        <?php endif; ?>
     </div>
+</div>
 
-    <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
+<?php include ROOT_PATH . "public/template-parts/footer.php"; ?>

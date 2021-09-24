@@ -58,7 +58,7 @@ if (isset($_POST['checkout'])) {
                     <form method="POST">
                         <select class="form-select" name="shipmentID" aria-label="Default select example">
                             <?php foreach ($addresses as $address) : ?>
-                            <option <?php if ($address['principal'] == 1) echo selected; ?> value=<?php echo $address['id_shipment']; ?>><?php echo $address['address']." ". $address['city_name']." ".$address['code']." ".$address['provinces_name'];  ?></option>
+                            <option <?php if ($address['principal'] == 1) { echo "selected"; }?> value=<?php echo $address['id_shipment']; ?>><?php echo $address['address']." ". $address['city_name']." ".$address['code']." ".$address['provinces_name'];  ?></option>
                             <?php endforeach ?>
                         </select>
                     </form>

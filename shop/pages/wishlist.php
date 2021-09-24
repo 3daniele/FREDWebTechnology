@@ -75,3 +75,5 @@
             <?php endif; ?>
 
         </div>
+
+    <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
