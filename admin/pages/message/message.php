@@ -21,9 +21,13 @@
         <div class="col-4"></div>
         <div class="col-2 text-end">
         </div>
-        <div class="col-2 text-end" style="margin-top : 5px;"><a href="new-product.php"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+        <div class="col-2 text-end" style="margin-top : 5px;"><a href="new-product.php"><svg
+                    xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                 </svg></a>
         </div>
     </div>
@@ -40,55 +44,97 @@
                 $user = $userMgr->get($c['user_id']);
 
             ?>
-                <form method="GET">
-                <?php $path= "admin/pages/message/message.php?chat=".$c['id'];?>
-                    <?php if ($i == 0) : ?>
-                        <div class="card" style="cursor:pointer; width: 18rem;" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
-                        <?php else : ?>
-                            <div class="card" style="cursor:pointer; width: 18rem; border-top:none;" onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
-                            <?php endif; ?>
-                            <div class="card-body">
-                                <p class="card-text">
-                                <div class="row">
-                                    <div class="col-4 text-end">
+            <form method="GET">
+                <?php $path = "admin/pages/message/message.php?chat=" . $c['id']; ?>
+                <?php if ($i == 0) : ?>
+                <div class="card" style="cursor:pointer; width: 18rem;"
+                    onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
+                    <?php else : ?>
+                    <div class="card" style="cursor:pointer; width: 18rem; border-top:none;"
+                        onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
+                        <?php endif; ?>
+                        <div class="card-body">
+                            <p class="card-text">
+                            <div class="row">
+                                <div class="col-4 text-end">
+                                    <?php if ($user->img != null) : ?>
+                                    <img alt="immagine" width=70px class="rounded-circle"
+                                        src=<?php echo ROOT_URL . $user->img; ?>>
+                                    <?php else : ?>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width=70px fill="currentColor"
+                                        class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="col-7">
+                                    <div class="row">
                                         <?php if ($user->img != null) : ?>
-                                            <img alt="immagine" width=70px class="rounded-circle" src=<?php echo ROOT_URL . $user->img; ?>>
+                                        <b><?php echo $user->name . " " . $user->surname; ?></b>
                                         <?php else : ?>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width=70px fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
-                                                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
-                                                <path fill-rule="evenodd" d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
-                                                <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
-                                            </svg>
+                                        <b>Broadcast</b>
                                         <?php endif; ?>
-                                    </div>
-                                    <div class="col-7">
-                                        <div class="row">
-                                            <?php if ($user->img != null) : ?>
-                                                <b><?php echo $user->name . " " . $user->surname; ?></b>
-                                            <?php else : ?>
-                                                <b>Broadcast</b>
-                                            <?php endif; ?>
 
-                                        </div>
-                                        <div class="row">
-                                            <?php $message = $messageMgr->getLast($c['id']);
+                                    </div>
+                                    <div class="row">
+                                        <?php $message = $messageMgr->getLast($c['id']);
                                             echo substr($message[0]['message'], 0, 30) . "...";
                                             ?>
-                                        </div>
                                     </div>
                                 </div>
-                                </p>
                             </div>
-                            </div>
-                </form>
+                            </p>
+                        </div>
+                    </div>
+            </form>
             <?php $i++;
             endforeach; ?>
 
         </div>
-        <div class="col-md-6 col-lg-5 px-md-4">
-            <?php $chat_id=$_GET['chat']; 
-                echo $chat_id;
+        <div class="col-lg-1 px-md-4"></div>
+        <div class="col-md-9 col-lg-8 px-md-4">
+            <?php 
+                if(isset($_GET['chat'])) :
             ?>
+            <?php $chat_id = $_GET['chat'];  ?>
+            <div class="card">
+                <div class="card-header">
+                    <?php $user = $userMgr->get($chatMgr->get($chat_id)->user_id);?>
+                    <div class="row">
+                        <div class="col-1">
+                        <img alt="immagine" width=40px class="rounded-circle"
+                                        src=<?php echo ROOT_URL . $user->img; ?>>
+                        </div>
+                        <div class="col-11" style="margin-top: 6px;"><strong><?php echo $user->name." ".$user->surname; ?></strong> </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                
+            
+            <?php 
+                $messages = $messageMgr->getMessage($chat_id);
+                foreach($messages as $message) :
+            ?>
+            <p class="card-text"><h5>
+            <?php if($message['broadcast']==0) :?>
+                <span class="badge rounded-pill bg-primary">
+            <?php else: ?>
+                <span class="badge rounded-pill bg-success">
+            <?php endif; ?>
+            
+            <?php echo $message['message']; ?>
+            </span></h5>
+            <span style="font-size:smaller"><?php echo $message['date']; ?></span>
+            </p>
+
+            <?php endforeach; ?>
+            </div>
+            </div>
+            <?php endif;?>
         </div>
     </div>
 
