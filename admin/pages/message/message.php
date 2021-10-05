@@ -21,8 +21,8 @@
         <div class="col-4"></div>
         <div class="col-2 text-end">
         </div>
-        <div class="col-2 text-end" style="margin-top : 5px;"><a href="new-product.php"><svg
-                    xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+        <div class="col-2 text-end" style="margin-top : 5px;"><a href="" data-bs-toggle="modal" data-bs-target="#modal"
+                data-whatever="add"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                     <path
                         d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
@@ -106,34 +106,52 @@
                     <?php $user = $userMgr->get($chatMgr->get($chat_id)->user_id);?>
                     <div class="row">
                         <div class="col-1">
-                        <img alt="immagine" width=40px class="rounded-circle"
-                                        src=<?php echo ROOT_URL . $user->img; ?>>
+                            <img alt="immagine" width=40px class="rounded-circle"
+                                src=<?php echo ROOT_URL . $user->img; ?>>
                         </div>
-                        <div class="col-11" style="margin-top: 6px;"><strong><?php echo $user->name." ".$user->surname; ?></strong> </div>
+                        <div class="col-11" style="margin-top: 6px;">
+                            <strong><?php echo $user->name." ".$user->surname; ?></strong>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
-                
-            
-            <?php 
+
+
+                    <?php 
                 $messages = $messageMgr->getMessage($chat_id);
                 foreach($messages as $message) :
             ?>
-            <p class="card-text"><h5>
-            <?php if($message['broadcast']==0) :?>
-                <span class="badge rounded-pill bg-primary">
-            <?php else: ?>
-                <span class="badge rounded-pill bg-success">
-            <?php endif; ?>
-            
-            <?php echo $message['message']; ?>
-            </span></h5>
-            <span style="font-size:smaller"><?php echo $message['date']; ?></span>
-            </p>
+                    <p class="card-text">
+                    <h5>
+                        <?php if($message['broadcast']==0) :?>
+                        <span class="badge rounded-pill bg-primary">
+                            <?php else: ?>
+                            <span class="badge rounded-pill bg-success">
+                                <?php endif; ?>
 
-            <?php endforeach; ?>
+                                <?php echo $message['message']; ?>
+                            </span>
+                    </h5>
+                    <span style="font-size:smaller"><?php echo $message['date']; ?></span>
+                    </p>
+
+                    <?php endforeach; ?>
+                    <div class="row">
+                        <hr>
+                        <form action="send.php" method="POST">
+                            <input type="hidden" id="chat_id" name="chat_id" value="<?php echo $chat_id ?>">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="message" name="message"
+                                    placeholder="Cosa vuoi inviare?">
+                                <label for="floatingInput">Scrivi...</label>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm" value="Invia">
+                        </form>
+                    </div>
+                </div>
             </div>
-            </div>
+
+
             <?php endif;?>
         </div>
     </div>
@@ -145,3 +163,43 @@
 
 
 <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
+
+<!-- Finestra di dialogo per la scrittura della recensione -->
+<!-- Modal -->
+<form method="POST" action="./send.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-primary"><strong id="modalTitle">Scrivi un nuovo messaggio</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <?php
+                        $chats = $chatMgr->getAll();
+                    ?>
+                    <p>Seleziona utenti</p>
+                    <select class="form-select" aria-label="selezione utenti" aria-label="size 3" id="chat_id" name="chat_id">
+                        <option selected value="broadcast">Tutti</option>
+                        <?php foreach ($chats as $chat) : ?>
+                        <?php $user = $userMgr->get($chat->user_id);?>
+                        <option value="<?php echo $chat->id ?>"><?php echo $user->name." ".$user->surname; ?></option>
+                        <?php endforeach; ?>
+                        
+                    </select>
+                    <p></p>
+                    <p>Messaggio</p>
+                    <textarea class="form-control" name="message" id="message" name="message" rows="4"
+                        placeholder="Scrivi..."></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="modalBtn" type="submit" class="btn btn-primary" name="add">Invia</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+
+            </div>
+        </div>
+</form>
