@@ -9,7 +9,7 @@
                       </ul>
 
                       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action = "<?php echo ROOT_URL; ?>shop" method="GET">
-                          <input type="search" name="search" class="form-control" placeholder="Carca..." aria-label="Search">
+                          <input type="search" name="search" class="form-control" placeholder="Cerca..." aria-label="Search">
                       </form>
 
                       <ul class="nav col-12 col-lg-auto me-lg-3  mb-md-1">
