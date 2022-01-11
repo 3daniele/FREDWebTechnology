@@ -9,7 +9,11 @@ class SupportManager extends DbManager {
   }
 
 
-  /* DASHBOARD */ 
+  /* DASHBOARD */
+  public function showOpenTicket(){
+    return $this->db->query("SELECT *FROM Support WHERE Support.status=0 ORDER BY Support.date DESC LIMIT 3");
+  }
+  
   public function getOpenTicket(){
     return $this->db->query("SELECT *FROM Support WHERE Support.status=0 ORDER BY Support.date DESC");
   }
