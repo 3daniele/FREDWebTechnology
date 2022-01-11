@@ -27,6 +27,7 @@ require_once ROOT_PATH . 'classes/Manufacturer.php';
 require_once ROOT_PATH . 'classes/Payments.php';
 require_once ROOT_PATH . 'classes/Chat.php';
 require_once ROOT_PATH . 'classes/Message.php';
+require_once ROOT_PATH . 'classes/Support.php';
 
 
 require_once ROOT_PATH . 'public/auth/pages/login-action.php';

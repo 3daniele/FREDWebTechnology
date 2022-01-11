@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7deb1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Creato il: Set 26, 2021 alle 01:10
--- Versione del server: 8.0.26-0ubuntu0.21.04.3
--- Versione PHP: 7.4.16
+-- Host: localhost:8889
+-- Creato il: Gen 11, 2022 alle 17:16
+-- Versione del server: 5.7.34
+-- Versione PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -30,16 +29,16 @@ USE `FREDwebtechnology`;
 -- Struttura stand-in per le viste `address`
 -- (Vedi sotto per la vista effettiva)
 --
-CREATE TABLE IF NOT EXISTS `address` (
-`id_shipment` int
-,`user` int
-,`region_id` int
+CREATE TABLE `address` (
+`id_shipment` int(11)
+,`user` int(11)
+,`region_id` int(11)
 ,`region_name` varchar(100)
-,`provinces_id` int
+,`provinces_id` int(11)
 ,`provinces_name` varchar(100)
-,`city_id` int
+,`city_id` int(11)
 ,`city_name` varchar(100)
-,`code` int
+,`code` int(11)
 ,`address` varchar(70)
 ,`principal` tinyint(1)
 );
@@ -50,15 +49,12 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- Struttura della tabella `Answer`
 --
 
-CREATE TABLE IF NOT EXISTS `Answer` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `support_id` int NOT NULL,
-  `admin_id` int NOT NULL,
-  `message` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `support_id` (`support_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Answer` (
+  `id` int(11) NOT NULL,
+  `support_id` int(11) NOT NULL,
+  `admin_id` int(11) NOT NULL,
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -66,13 +62,11 @@ CREATE TABLE IF NOT EXISTS `Answer` (
 -- Struttura della tabella `Cart`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int DEFAULT NULL,
-  `client_id` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Cart` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `client_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart`
@@ -81,7 +75,24 @@ CREATE TABLE IF NOT EXISTS `Cart` (
 INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
 (5, 2, '8a890bae365cd72cdc37'),
 (6, 1, 'dc0c3af63a477914cf35'),
-(9, 3, 'aa23e0a8dfc7e1dd4722');
+(9, 3, 'aa23e0a8dfc7e1dd4722'),
+(11, NULL, 'd736aafdcba8b7561c95'),
+(12, NULL, 'd736aafdcba8b7561c95'),
+(13, NULL, 'd736aafdcba8b7561c95'),
+(14, NULL, 'd736aafdcba8b7561c95'),
+(15, NULL, 'd736aafdcba8b7561c95'),
+(16, NULL, 'd736aafdcba8b7561c95'),
+(17, NULL, 'd736aafdcba8b7561c95'),
+(18, NULL, 'd736aafdcba8b7561c95'),
+(19, NULL, 'd736aafdcba8b7561c95'),
+(20, NULL, 'd736aafdcba8b7561c95'),
+(21, NULL, 'd736aafdcba8b7561c95'),
+(22, NULL, 'd736aafdcba8b7561c95'),
+(23, NULL, 'd736aafdcba8b7561c95'),
+(24, NULL, 'd736aafdcba8b7561c95'),
+(25, NULL, 'd736aafdcba8b7561c95'),
+(27, NULL, '044e4fbc7db754c2a1de'),
+(28, NULL, '044e4fbc7db754c2a1de');
 
 -- --------------------------------------------------------
 
@@ -89,25 +100,38 @@ INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
 -- Struttura della tabella `Cart_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart_item` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `cart_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `cart_id` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Cart_item` (
+  `id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart_item`
 --
 
 INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
-(23, 5, 118, 2),
-(26, 5, 120, 1),
 (27, 9, 122, 1),
-(28, 6, 116, 1);
+(28, 6, 119, 1),
+(29, 11, 118, 2),
+(30, 12, 118, 1),
+(31, 13, 118, 1),
+(32, 14, 118, 1),
+(33, 15, 118, 1),
+(34, 16, 118, 1),
+(35, 17, 118, 1),
+(36, 18, 118, 1),
+(37, 19, 118, 1),
+(38, 20, 118, 1),
+(39, 21, 118, 1),
+(40, 22, 118, 1),
+(41, 24, 118, 1),
+(43, 27, 118, 1),
+(44, 5, 118, 1),
+(45, 5, 119, 1),
+(46, 5, 116, 1),
+(47, 6, 118, 1);
 
 -- --------------------------------------------------------
 
@@ -115,12 +139,11 @@ INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 -- Struttura della tabella `Category`
 --
 
-CREATE TABLE IF NOT EXISTS `Category` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Category` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb3;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Category`
@@ -148,14 +171,11 @@ INSERT INTO `Category` (`id`, `name`, `description`) VALUES
 -- Struttura della tabella `Category_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Category_item` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
-  `category_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `product_id` (`product_id`,`category_id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Category_item` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Category_item`
@@ -274,22 +294,20 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 -- Struttura della tabella `Chat`
 --
 
-CREATE TABLE IF NOT EXISTS `Chat` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Chat` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Chat`
 --
 
 INSERT INTO `Chat` (`id`, `user_id`, `date`) VALUES
-(4, 2, '2021-09-25 23:05:08'),
-(5, 3, '2021-09-25 23:05:17');
+(4, 2, '2022-01-11 17:11:33'),
+(5, 3, '2022-01-11 17:11:33'),
+(6, 1, '2022-01-11 17:11:33');
 
 -- --------------------------------------------------------
 
@@ -297,13 +315,11 @@ INSERT INTO `Chat` (`id`, `user_id`, `date`) VALUES
 -- Struttura della tabella `City`
 --
 
-CREATE TABLE IF NOT EXISTS `City` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `City` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `provinces_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `provinces_id` (`provinces_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110011 DEFAULT CHARSET=utf8mb3;
+  `provinces_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `City`
@@ -8415,13 +8431,12 @@ INSERT INTO `City` (`id`, `name`, `provinces_id`) VALUES
 -- Struttura della tabella `Manufacturer`
 --
 
-CREATE TABLE IF NOT EXISTS `Manufacturer` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Manufacturer` (
+  `id` int(11) NOT NULL,
   `name` varchar(70) NOT NULL,
   `info` text NOT NULL,
-  `site` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `site` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Manufacturer`
@@ -8437,16 +8452,14 @@ INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 -- Struttura della tabella `Message`
 --
 
-CREATE TABLE IF NOT EXISTS `Message` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `chat_id` int NOT NULL,
-  `broadcast` tinyint NOT NULL DEFAULT '0',
+CREATE TABLE `Message` (
+  `id` int(11) NOT NULL,
+  `chat_id` int(11) NOT NULL,
+  `broadcast` tinyint(4) NOT NULL DEFAULT '0',
   `message` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `displayed` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `chat_id` (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+  `displayed` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Message`
@@ -8457,7 +8470,18 @@ INSERT INTO `Message` (`id`, `chat_id`, `broadcast`, `message`, `date`, `display
 (3, 4, 0, 'Il tuo ordine è stato consegnato', '2021-09-25 23:00:57', 0),
 (4, 5, 0, 'Il tuo ordine recente è stato annullato!', '2021-09-25 23:01:51', 0),
 (5, 4, 1, 'Sistema in manutenzione dalle ore 15 alle ore 22 del giorno 27/09', '2021-09-25 23:05:08', 0),
-(6, 5, 1, 'Sistema in manutenzione dalle ore 15 alle ore 22 del giorno 27/09', '2021-09-25 23:05:17', 0);
+(6, 5, 1, 'Sistema in manutenzione dalle ore 15 alle ore 22 del giorno 27/09', '2021-09-25 23:05:17', 0),
+(7, 5, 0, 'ciao', '2021-10-09 15:04:23', 0),
+(8, 4, 1, 'Il sistema sarà offline dalle ore 2:00 alle ore 4:00 del giorno 11/10/2021', '2021-10-09 15:04:51', 0),
+(9, 5, 1, 'Il sistema sarà offline dalle ore 2:00 alle ore 4:00 del giorno 11/10/2021', '2021-10-09 15:04:51', 0),
+(10, 4, 1, 'Broadcast', '2021-11-15 16:33:28', 0),
+(11, 5, 1, 'Broadcast', '2021-11-15 16:33:28', 0),
+(12, 5, 0, 'Privato!', '2021-11-15 16:33:49', 0),
+(13, 6, 0, 'Ciao admin', '2022-01-11 17:11:14', 0),
+(14, 6, 0, 'Ciao anche ate', '2022-01-11 17:11:19', 0),
+(15, 4, 1, 'Salve popolo', '2022-01-11 17:11:33', 0),
+(16, 5, 1, 'Salve popolo', '2022-01-11 17:11:33', 0),
+(17, 6, 1, 'Salve popolo', '2022-01-11 17:11:33', 0);
 
 --
 -- Trigger `Message`
@@ -8475,16 +8499,16 @@ DELIMITER ;
 -- Struttura stand-in per le viste `orderaddress`
 -- (Vedi sotto per la vista effettiva)
 --
-CREATE TABLE IF NOT EXISTS `orderaddress` (
-`order_id` int
-,`user` int
-,`region_id` int
+CREATE TABLE `orderaddress` (
+`order_id` int(11)
+,`user` int(11)
+,`region_id` int(11)
 ,`region_name` varchar(100)
-,`provinces_id` int
+,`provinces_id` int(11)
 ,`provinces_name` varchar(100)
-,`city_id` int
+,`city_id` int(11)
 ,`city_name` varchar(100)
-,`code` int
+,`code` int(11)
 ,`address` varchar(70)
 );
 
@@ -8494,28 +8518,26 @@ CREATE TABLE IF NOT EXISTS `orderaddress` (
 -- Struttura della tabella `Orders`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+CREATE TABLE `Orders` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `date_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('Ordine ricevuto','In lavorazione','Spedito','In consegna','Consegnato') NOT NULL DEFAULT 'Ordine ricevuto',
   `tracking_information` text,
   `stimate_delivery` date NOT NULL,
-  `shipment_user_info` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `shipment_user_info` (`shipment_user_info`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+  `shipment_user_info` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Orders`
 --
 
-INSERT INTO `Orders` (`id`, `user_id`, `status`, `tracking_information`, `stimate_delivery`, `shipment_user_info`) VALUES
-(1, 2, 'Ordine ricevuto', NULL, '2021-09-16', 1),
-(2, 2, 'Ordine ricevuto', NULL, '2021-09-23', 1),
-(3, 1, 'Ordine ricevuto', NULL, '2021-09-30', 3),
-(4, 1, 'Ordine ricevuto', NULL, '2021-09-22', 3);
+INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_information`, `stimate_delivery`, `shipment_user_info`) VALUES
+(1, 2, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-16', 1),
+(2, 2, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-23', 1),
+(3, 1, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-30', 3),
+(4, 1, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-22', 3),
+(5, 1, '2021-11-15 16:15:24', 'Ordine ricevuto', NULL, '2021-11-22', 3);
 
 -- --------------------------------------------------------
 
@@ -8523,15 +8545,12 @@ INSERT INTO `Orders` (`id`, `user_id`, `status`, `tracking_information`, `stimat
 -- Struttura della tabella `Orders_items`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders_items` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `order_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  `quantity` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Orders_items` (
+  `id` int(11) NOT NULL,
+  `order_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Orders_items`
@@ -8544,7 +8563,8 @@ INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
 (4, 3, 137, 1),
 (5, 4, 121, 1),
 (6, 4, 118, 1),
-(7, 4, 116, 1);
+(7, 4, 116, 1),
+(8, 5, 116, 1);
 
 -- --------------------------------------------------------
 
@@ -8552,18 +8572,16 @@ INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
 -- Struttura della tabella `Payments`
 --
 
-CREATE TABLE IF NOT EXISTS `Payments` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+CREATE TABLE `Payments` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `credit_card_number` varchar(16) DEFAULT NULL,
-  `cvv` int DEFAULT NULL,
+  `cvv` int(11) DEFAULT NULL,
   `expiration1` varchar(6) DEFAULT NULL,
   `expiration2` varchar(2) DEFAULT NULL,
   `paypal` tinyint(1) DEFAULT NULL,
-  `principal` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+  `principal` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Payments`
@@ -8579,14 +8597,12 @@ INSERT INTO `Payments` (`id`, `user_id`, `credit_card_number`, `cvv`, `expiratio
 -- Struttura della tabella `Photo`
 --
 
-CREATE TABLE IF NOT EXISTS `Photo` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `product_id` int NOT NULL,
+CREATE TABLE `Photo` (
+  `id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
   `link` text NOT NULL,
-  `thumbnail` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8mb3;
+  `thumbnail` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Photo`
@@ -8665,17 +8681,15 @@ INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
 -- Struttura della tabella `Product`
 --
 
-CREATE TABLE IF NOT EXISTS `Product` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Product` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
-  `stock` int NOT NULL,
-  `manufacturer_id` int NOT NULL,
-  `small_description` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manufacturer_id` (`manufacturer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8mb3;
+  `stock` int(11) NOT NULL,
+  `manufacturer_id` int(11) NOT NULL,
+  `small_description` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Product`
@@ -8721,12 +8735,12 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 -- Struttura stand-in per le viste `productcategory`
 -- (Vedi sotto per la vista effettiva)
 --
-CREATE TABLE IF NOT EXISTS `productcategory` (
-`id` int
+CREATE TABLE `productcategory` (
+`id` int(11)
 ,`name` varchar(50)
 ,`description` text
 ,`price` decimal(10,2)
-,`manufacturer_id` int
+,`manufacturer_id` int(11)
 ,`category` varchar(50)
 );
 
@@ -8736,13 +8750,11 @@ CREATE TABLE IF NOT EXISTS `productcategory` (
 -- Struttura della tabella `Provinces`
 --
 
-CREATE TABLE IF NOT EXISTS `Provinces` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Provinces` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `region_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `region_id` (`region_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb3;
+  `region_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Provinces`
@@ -8866,11 +8878,10 @@ INSERT INTO `Provinces` (`id`, `name`, `region_id`) VALUES
 -- Struttura della tabella `Region`
 --
 
-CREATE TABLE IF NOT EXISTS `Region` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Region` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Region`
@@ -8904,18 +8915,15 @@ INSERT INTO `Region` (`id`, `name`) VALUES
 -- Struttura della tabella `Review`
 --
 
-CREATE TABLE IF NOT EXISTS `Review` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Review` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `vote` enum('1','2','3','4','5') NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3;
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Review`
@@ -8926,10 +8934,11 @@ INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `p
 (2, 'Bene ma non benissimo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam commodo sapien quis nisl dictum, ut sagittis nunc iaculis. Vestibulum ullamcorper eros quis lobortis sagittis. Morbi non sapien hendrerit, accumsan mauris at, aliquam nunc. Mauris ac est quis massa aliquet tincidunt sit amet nec erat. Nam fermentum consequat eros eget rutrum. Fusce fringilla lectus eget consectetur facilisis. Proin varius odio tellus, at tincidunt felis tincidunt id. Duis id placerat ligula, in mollis risus. Mauris ac lectus id nunc iaculis congue. Etiam non lorem convallis, placerat orci auctor, dictum erat. Nunc sagittis fermentum tortor, eu lobortis enim congue nec. Cras et est in lacus ultrices mattis.', '5', 0, 1, 118),
 (3, 'Ottimo rapporto qualità prezzo', 'Donec euismod, lorem ac fringilla lobortis, dolor quam ullamcorper urna, in lacinia arcu ligula non velit. Nam quis nisl at purus faucibus consequat. Sed rhoncus auctor urna a imperdiet. Sed vel vestibulum leo. Fusce rhoncus, nisl eget vestibulum placerat, lectus mi eleifend massa, eu gravida enim lectus malesuada odio. Vivamus eu volutpat leo, eget eleifend lorem. Integer varius non felis sed sagittis. Aenean maximus elit vitae mauris suscipit molestie. Cras rhoncus, nunc a molestie imperdiet, risus elit porttitor justo, id facilisis odio turpis in nisi. Quisque at ullamcorper massa.', '4', 0, 3, 117),
 (4, 'Pessimo', 'non l\'ho comprato, ma sono sicuro che il prodotto non meriti tutte queste stelle!', '1', 1, 3, 116),
-(5, 'Ottimo', 'Ma quale ottimo che costa troppo', '1', 1, 1, 119),
-(6, 'Ottimo', 'Ottimo prodotto, super consigliato a tutti!', '5', 0, 1, 119),
+(5, 'Ottimo', 'Ottimo prodotto, super consigliato a tutti!', '5', 0, 1, 119),
+(6, 'Ottimo', 'Ottimo prodotto, super consigliato a tutti!', '5', 1, 1, 119),
 (7, 'Bene ma...', 'Ho acquistato il prodotto ma mi aspettavo una durata più duratura', '3', 0, 1, 123),
-(8, 'Prova', 'ottimo da provare', '5', 0, 3, 122);
+(8, 'Prova', 'ottimo da provare', '5', 0, 3, 122),
+(9, 'Buono ma...', 'Sul mercato è possibile trovare di meglio allo stesso prezzo', '3', 0, 2, 117);
 
 -- --------------------------------------------------------
 
@@ -8937,21 +8946,16 @@ INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `p
 -- Struttura della tabella `Shipment_information`
 --
 
-CREATE TABLE IF NOT EXISTS `Shipment_information` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `region` int NOT NULL,
-  `province` int NOT NULL,
-  `city` int NOT NULL,
-  `code` int NOT NULL,
+CREATE TABLE `Shipment_information` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `region` int(11) NOT NULL,
+  `province` int(11) NOT NULL,
+  `city` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
   `address` varchar(70) NOT NULL,
-  `principal` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `region` (`region`),
-  KEY `city` (`city`),
-  KEY `province` (`province`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+  `principal` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Shipment_information`
@@ -8970,15 +8974,24 @@ INSERT INTO `Shipment_information` (`id`, `user_id`, `region`, `province`, `city
 -- Struttura della tabella `Support`
 --
 
-CREATE TABLE IF NOT EXISTS `Support` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
+CREATE TABLE `Support` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
+  `object` varchar(50) NOT NULL,
   `message` text NOT NULL,
-  `order_id` int DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `order_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `Support`
+--
+
+INSERT INTO `Support` (`id`, `user_id`, `status`, `object`, `message`, `date`, `order_id`) VALUES
+(1, 2, 0, 'Articoli mancanti', 'Nel mio ordine mancavano due prodotti!', '2022-01-11 15:49:06', 1),
+(2, 1, 0, 'Prova 1', 'Ticket di prova', '2022-01-11 16:14:34', NULL),
+(3, 3, 1, 'Prova 2', 'Ticket di prova chiuso.', '2022-01-11 16:15:10', NULL);
 
 -- --------------------------------------------------------
 
@@ -8986,17 +8999,15 @@ CREATE TABLE IF NOT EXISTS `Support` (
 -- Struttura della tabella `User`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
-  `id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `User` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(70) NOT NULL,
   `email` varchar(70) NOT NULL,
   `password` varchar(41) NOT NULL,
   `img` varchar(1000) NOT NULL DEFAULT 'public/img/account.svg',
-  `user_type` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_type` (`user_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+  `user_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `User`
@@ -9013,11 +9024,10 @@ INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_t
 -- Struttura della tabella `User_type`
 --
 
-CREATE TABLE IF NOT EXISTS `User_type` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `type` enum('Regular','Admin') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `User_type` (
+  `id` int(11) NOT NULL,
+  `type` enum('Regular','Admin') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `User_type`
@@ -9033,15 +9043,11 @@ INSERT INTO `User_type` (`id`, `type`) VALUES
 -- Struttura della tabella `Wishlist`
 --
 
-CREATE TABLE IF NOT EXISTS `Wishlist` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `user_id` int NOT NULL,
-  `product_id` int NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id_2` (`user_id`,`product_id`),
-  KEY `user_id` (`user_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
+CREATE TABLE `Wishlist` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Wishlist`
@@ -9059,7 +9065,7 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 --
 DROP TABLE IF EXISTS `address`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `address`  AS SELECT `Shipment_information`.`id` AS `id_shipment`, `Shipment_information`.`user_id` AS `user`, `Region`.`id` AS `region_id`, `Region`.`name` AS `region_name`, `Provinces`.`id` AS `provinces_id`, `Provinces`.`name` AS `provinces_name`, `City`.`id` AS `city_id`, `City`.`name` AS `city_name`, `Shipment_information`.`code` AS `code`, `Shipment_information`.`address` AS `address`, `Shipment_information`.`principal` AS `principal` FROM (((`Region` join `Provinces`) join `City`) join `Shipment_information`) WHERE ((`Shipment_information`.`region` = `Region`.`id`) AND (`Shipment_information`.`province` = `Provinces`.`id`) AND (`Shipment_information`.`city` = `City`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `address`  AS SELECT `shipment_information`.`id` AS `id_shipment`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address`, `shipment_information`.`principal` AS `principal` FROM (((`region` join `provinces`) join `city`) join `shipment_information`) WHERE ((`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -9068,7 +9074,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `addr
 --
 DROP TABLE IF EXISTS `orderaddress`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `orderaddress`  AS SELECT `Orders`.`id` AS `order_id`, `Shipment_information`.`user_id` AS `user`, `Region`.`id` AS `region_id`, `Region`.`name` AS `region_name`, `Provinces`.`id` AS `provinces_id`, `Provinces`.`name` AS `provinces_name`, `City`.`id` AS `city_id`, `City`.`name` AS `city_name`, `Shipment_information`.`code` AS `code`, `Shipment_information`.`address` AS `address` FROM ((((`Region` join `Provinces`) join `City`) join `Shipment_information`) join `Orders`) WHERE ((`Orders`.`shipment_user_info` = `Shipment_information`.`id`) AND (`Shipment_information`.`region` = `Region`.`id`) AND (`Shipment_information`.`province` = `Provinces`.`id`) AND (`Shipment_information`.`city` = `City`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `orderaddress`  AS SELECT `orders`.`id` AS `order_id`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address` FROM ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) WHERE ((`orders`.`shipment_user_info` = `shipment_information`.`id`) AND (`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -9077,21 +9083,312 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `orde
 --
 DROP TABLE IF EXISTS `productcategory`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `productcategory`  AS SELECT `Product`.`id` AS `id`, `Product`.`name` AS `name`, `Product`.`description` AS `description`, `Product`.`price` AS `price`, `Product`.`manufacturer_id` AS `manufacturer_id`, `Category`.`name` AS `category` FROM ((`Product` join `Category`) join `Category_item`) WHERE ((`Product`.`id` = `Category_item`.`product_id`) AND (`Category_item`.`category_id` = `Category`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`daniele`@`%` SQL SECURITY DEFINER VIEW `productcategory`  AS SELECT `product`.`id` AS `id`, `product`.`name` AS `name`, `product`.`description` AS `description`, `product`.`price` AS `price`, `product`.`manufacturer_id` AS `manufacturer_id`, `category`.`name` AS `category` FROM ((`product` join `category`) join `category_item`) WHERE ((`product`.`id` = `category_item`.`product_id`) AND (`category_item`.`category_id` = `category`.`id`)) ;
 
 --
 -- Indici per le tabelle scaricate
 --
 
 --
+-- Indici per le tabelle `Answer`
+--
+ALTER TABLE `Answer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `support_id` (`support_id`);
+
+--
+-- Indici per le tabelle `Cart`
+--
+ALTER TABLE `Cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indici per le tabelle `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `cart_id` (`cart_id`);
+
+--
 -- Indici per le tabelle `Category`
 --
+ALTER TABLE `Category`
+  ADD PRIMARY KEY (`id`);
 ALTER TABLE `Category` ADD FULLTEXT KEY `name` (`name`);
+
+--
+-- Indici per le tabelle `Category_item`
+--
+ALTER TABLE `Category_item`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_id` (`product_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indici per le tabelle `Chat`
+--
+ALTER TABLE `Chat`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indici per le tabelle `City`
+--
+ALTER TABLE `City`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `provinces_id` (`provinces_id`);
+
+--
+-- Indici per le tabelle `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `Message`
+--
+ALTER TABLE `Message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chat_id` (`chat_id`);
+
+--
+-- Indici per le tabelle `Orders`
+--
+ALTER TABLE `Orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `shipment_user_info` (`shipment_user_info`);
+
+--
+-- Indici per le tabelle `Orders_items`
+--
+ALTER TABLE `Orders_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indici per le tabelle `Payments`
+--
+ALTER TABLE `Payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indici per le tabelle `Photo`
+--
+ALTER TABLE `Photo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
 
 --
 -- Indici per le tabelle `Product`
 --
+ALTER TABLE `Product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manufacturer_id` (`manufacturer_id`);
 ALTER TABLE `Product` ADD FULLTEXT KEY `name` (`name`);
+
+--
+-- Indici per le tabelle `Provinces`
+--
+ALTER TABLE `Provinces`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `region_id` (`region_id`);
+
+--
+-- Indici per le tabelle `Region`
+--
+ALTER TABLE `Region`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `Review`
+--
+ALTER TABLE `Review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indici per le tabelle `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `region` (`region`),
+  ADD KEY `city` (`city`),
+  ADD KEY `province` (`province`);
+
+--
+-- Indici per le tabelle `Support`
+--
+ALTER TABLE `Support`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indici per le tabelle `User`
+--
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_type` (`user_type`);
+
+--
+-- Indici per le tabelle `User_type`
+--
+ALTER TABLE `User_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indici per le tabelle `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`,`product_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT per le tabelle scaricate
+--
+
+--
+-- AUTO_INCREMENT per la tabella `Answer`
+--
+ALTER TABLE `Answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT per la tabella `Cart`
+--
+ALTER TABLE `Cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+
+--
+-- AUTO_INCREMENT per la tabella `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT per la tabella `Category`
+--
+ALTER TABLE `Category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT per la tabella `Category_item`
+--
+ALTER TABLE `Category_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
+
+--
+-- AUTO_INCREMENT per la tabella `Chat`
+--
+ALTER TABLE `Chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT per la tabella `City`
+--
+ALTER TABLE `City`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110011;
+
+--
+-- AUTO_INCREMENT per la tabella `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `Message`
+--
+ALTER TABLE `Message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT per la tabella `Orders`
+--
+ALTER TABLE `Orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT per la tabella `Orders_items`
+--
+ALTER TABLE `Orders_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT per la tabella `Payments`
+--
+ALTER TABLE `Payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `Photo`
+--
+ALTER TABLE `Photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT per la tabella `Product`
+--
+ALTER TABLE `Product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=149;
+
+--
+-- AUTO_INCREMENT per la tabella `Provinces`
+--
+ALTER TABLE `Provinces`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT per la tabella `Region`
+--
+ALTER TABLE `Region`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT per la tabella `Review`
+--
+ALTER TABLE `Review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT per la tabella `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT per la tabella `Support`
+--
+ALTER TABLE `Support`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT per la tabella `User`
+--
+ALTER TABLE `User`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT per la tabella `User_type`
+--
+ALTER TABLE `User_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT per la tabella `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- Limiti per le tabelle scaricate
@@ -9140,7 +9437,7 @@ ALTER TABLE `City`
 -- Limiti per la tabella `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `Chat` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `Chat` (`id`);
 
 --
 -- Limiti per la tabella `Orders`
@@ -9200,7 +9497,8 @@ ALTER TABLE `Shipment_information`
 -- Limiti per la tabella `Support`
 --
 ALTER TABLE `Support`
-  ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
+  ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+  ADD CONSTRAINT `support_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`);
 
 --
 -- Limiti per la tabella `User`
