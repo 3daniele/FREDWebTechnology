@@ -1,0 +1,104 @@
+/* style.css */
+
+/* style product-card */
+.product-card {
+    padding: 0;
+    position: relative;
+    height: 250px;
+  }
+  
+  .product-card small {
+    position: absolute;
+    bottom: 60px;
+    right: 20px;
+  }
+  
+  .product-card .list-group-item {
+    height: 200px;
+  }
+  
+  .product-card .footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+  /* style product-card fine */
+  
+  /* Cart */
+  
+  .cart-buttons span {
+    width: 50px;
+    text-align: center;
+    border: 1px solid;
+  }
+  
+  .cart-total {
+    font-size: 20px;
+  }
+
+  /* style error messages */
+.error {
+  animation: shake 0.2s ease-in-out 0s 2;
+  box-shadow: 0 0 0.5em red;
+  }
+
+@keyframes shake {
+  0% { margin-left: 0rem; }
+  25% { margin-left: 0.5rem; }
+  75% { margin-left: -0.5rem; }
+  100% { margin-left: 0rem; }
+}
+
+.errorLabel {
+  display: true; 
+  width: 100%; 
+  margin-top: 0.25rem; 
+  font-size: 0.875em; 
+  color: #ff0039;
+} 
+
+.valutazione {
+  color: #daa520;
+}
+
+.ratings {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  direction: rtl;
+  text-align: left;
+}
+
+.star {
+  position: relative;
+  line-height: 60px;
+  display: inline-block;
+  transition: color 0.2s ease;
+  color: #ebebeb;
+}
+
+.star:before {
+  content: '\2605';
+  width: 60px;
+  height: 60px;
+  font-size: 60px;
+}
+
+.star:hover,
+.star.selected,
+.star:hover ~ .star,
+.star.selected ~ .star{
+  transition: color 0.8s ease;
+  color: #daa520;
+}
+
+.account{
+  color: #207bb8;
+}
+
+.disabled {
+  pointer-events: none;
+  cursor: default;
+  opacity: 0.6;
+}
