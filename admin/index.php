@@ -106,7 +106,7 @@
                                 <h4><b>Ticket aperti:</b></h4>
                             </div>
                             <div class="col-3 text-end">
-                                <a href="<?php echo ROOT_URL . 'admin/pages/support.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                                <a href="<?php echo ROOT_URL . 'admin/pages/support/support.php'; ?>" class="btn btn-primary btn-sm">Gestisci &raquo;</a>
                             </div>
                         </div>
                     </span>
@@ -114,11 +114,16 @@
 
                 </div>
                 <div class="card-body">
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <hr>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <?php $supportMgr = new SupportManager();
+                    $tickets = $supportMgr->showOpenTicket();
+                    $i = 0;
+                    foreach ($tickets as $ticket) : $i++;
+                    ?>
+                        <p class="card-text"><strong><?php echo $ticket['object'] ?></strong><br><?php echo $ticket['message'] ?></p>
+                        <?php if ($i < 3) : ?>
+                            <hr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
                 </div>
             </div>
             <hr>
