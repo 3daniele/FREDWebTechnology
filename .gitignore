@@ -95,4 +95,5 @@ Temporary Items
 
 #composer
 composer.phar
+composer.lock
 /vendor
