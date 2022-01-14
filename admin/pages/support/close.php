@@ -15,6 +15,6 @@
 
     $answerMgr->insertAnswer($_SESSION['userid'],$ticketid,$answer);
 
-    header("Location: " . ROOT_URL. 'FREDWebTechnology/admin/pages/support/ticket.php?ticket=' . $ticketid);
+    header("Location: " . ROOT_URL. 'admin/pages/support/ticket.php?ticket=' . $ticketid);
 
 ?>

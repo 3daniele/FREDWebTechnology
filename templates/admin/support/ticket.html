@@ -1,0 +1,173 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    {% if ticket.status == 1 %}
+    <form action="./open.php" method="POST">
+        {% else %}
+        <form action="./close.php" method="POST">
+            {% endif %}
+
+            <input type="text" hidden="hidden" id="id" name="id" value={{ticket.id}} style="visibility: none;"></input>
+            <div class="row border-bottom">
+                <div class="col-4">
+                    <h2><strong class="text-primary">Ticket numero:
+                            {{ticket.id}}
+                        </strong></h2>
+                </div>
+                <div class="col-4">
+                    <h2 class="text-primary">Aperto:{{ticket.date}}
+                    </h2>
+                </div>
+                <div class="col-3 text-end">
+                    <div class="row">
+                        <div class="col-4"></div>
+                        <div class="col-5 text-end">
+                            {% if ticket.order_id != null %}
+                            <input class="btn btn-primary" type="submit" value="Visualizza ordine"></input>
+                            {% endif %}
+                        </div>
+                        {% if ticket.status == 1 %}
+                        <div class="col-2 text-end"><input class="btn btn-success" type="submit" value="Apri"></input>
+                        </div>
+                        {% else %}
+                        <div class="col-2 text-end"><input class="btn btn-danger" type="submit" value="Chiudi"></input>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-1"></div>
+
+            </div>
+            <div class="row">
+                <br>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-lg-7">
+                    {% if ticket.order_id != null %}
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Data ordine:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <input class="form-control" disabled id="name" name="name" type="text" value={{order.date_order}}></input>
+
+
+                    </div>
+                    <hr>
+                    {% endif %}
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Oggetto:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <input class="form-control" id="object" name="object" type="text" value={{ticket.object}}
+                            disabled></input>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Descrizione:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <textarea class="form-control" id="description" name="description" type="text-area"
+                            style="width: 100%; height: 250px; " disabled>{{ticket.message}}</textarea>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Risposta:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <textarea class="form-control" id="answer" name="answer" type="text-area"
+                            style="width: 100%; height: 150px; " {% if ticket.status==1 %} disabled {% endif
+                            %}>{{answer}}</textarea>
+                    </div>
+                    <hr>
+                </div>
+                <div class="col-md-4 col-lg-4 px-md-4">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="row">
+                                <span class="text-primary">
+                                    <h4><strong>Codice utente:</strong></h4>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    <h5>
+                                        {{user.id}}
+                                    </h5>
+                                </label>
+
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <span class="text-primary">
+                                    <h4><strong>Nome:</strong></h4>
+                                </span>
+                            </div>
+                            <div class="row">
+                                <label>
+                                    <h5>
+                                        {{user.name}}
+                                    </h5>
+                                </label>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <span class="text-primary">
+                                    <h4><strong>Cognome:</strong></h4>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="card border-light " style="border:none;">
+                                <div class="text-center">
+                                    <img class="rounded-circle text-center" src={{imgpath}}
+                                    class="card-img-top" alt="..." width="250" height="250"></img>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <label>
+                            <h5>
+                                {{user.surname}}
+                            </h5>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Ticket aperti:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>
+                            <h5>
+                                {{countticket}}
+                            </h5>
+                        </label>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <span class="text-primary">
+                            <h4><strong>Ordini effettuati:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="row">
+                        <label>
+                            <h5>TOTALE ORDINI</h5>
+                        </label>
+                    </div>
+                    <hr>
+
+
+
+                </div>
+            </div>
+        </form>
+</main>
