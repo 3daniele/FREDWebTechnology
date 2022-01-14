@@ -1,0 +1,44 @@
+<title>Shop</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        {% if products %}
+        {% for product in products %}
+        <div class="col-3">
+            <div class="card mb-3">
+                <h3 class="card-header text-center">
+                    {{ product.name }}
+                </h3>
+                {% for img in imgs %}
+                    {% if img.product_id == product.id and img.thumbnail %}
+                        <img src='{{ ROOT_URL ~ img.link }}' class="d-block user-select-none" height="304px" width="304px" alt="test"></img>
+                    {% endif %}
+                {% endfor %}
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+
+                    </li>
+                    <li class="list-group-item">
+                        <span class="valutazione">
+
+                        </span>
+                    </li>
+                    <li class="list-group-item">
+                        {{ product.price ~ " €"}}
+                    </li>
+                </ul>
+                <div class="card-body text-center">
+                    <form method="POST" action="./cart-action.php">
+                        <a href="" class="btn
+                            btn-outline-primary btn-sm" style="margin-right: 18px">Dettagli</a>
+                        <button class="btn btn-outline-success btn-sm" name="product_id" type="submit" value="{{ product.id }}">Aggiungi al carrello</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Nessun prodotto disponibile...</p>
+        {% endif %}
+    </div>
+</div>
+</div>

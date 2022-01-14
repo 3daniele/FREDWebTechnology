@@ -3,6 +3,7 @@
 session_start();
 
 require_once 'config.php';
+require_once ROOT_PATH . '/vendor/autoload.php';
 require_once ROOT_PATH . 'inc/globals.php';
 require_once ROOT_PATH . 'inc/functions.php';
 
