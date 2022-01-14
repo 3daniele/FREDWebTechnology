@@ -28,7 +28,7 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
             <?php foreach ($ordini as $ordine) : ?>
                 <div class="col-12">
                     <div class="card mb-3">
-                        <a href="<?php echo ROOT_URL; ?>" class="btn text-start">
+                        <a href="<?php echo ROOT_URL . '/user/order-details.php?order=' . $ordine["id"]; ?>" class="btn text-start">
                             <div>
                                 <?php
                                 $date = substr($ordine['date_order'], 0, 10);
@@ -36,9 +36,9 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
                                 $mm = substr($date, 5, 2);
                                 $dd = substr($date, 8, 10);
                                 $somma = $orderMgr->getsum($ordine["id"]);
-                                
+
                                 ?>
-                                <h3 class="card-header text-center"><strong >Ordine effettuato il </strong> <strong><?php echo $dd . "-" . $mm . "-" . $yy; ?> </strong></h3>
+                                <h3 class="card-header text-center"><strong>Ordine effettuato il </strong> <strong><?php echo $dd . "-" . $mm . "-" . $yy; ?> </strong></h3>
                             </div>
                             <br>
                             <div class="row">
@@ -46,7 +46,7 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
                                 <div class="col-lg-1 col-1"></div>
                                 <div class="col-lg-8 col-2"> <strong class="text-primary"> Stato ordine:</strong> <strong> <?php echo $ordine['status'] . "<br>"  ?></strong> </div>
                                 <div class="col-lg-2 col-9">
-                                    <strong class="text-primary"> Totale ordine : </strong> <strong><?php echo $somma[0]["totale"]. " €"  ?> </strong>
+                                    <strong class="text-primary"> Totale ordine : </strong> <strong><?php echo $somma[0]["totale"] . " €"  ?> </strong>
                                 </div>
                             </div>
                             <br>
@@ -95,7 +95,7 @@ $ordini = $orderMgr->getOrder($_SESSION['userid']);
 
                                 </div>
                             </div>
-                            
+
                         </a>
                     </div>
                 </div>

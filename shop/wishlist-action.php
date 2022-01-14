@@ -1,4 +1,4 @@
-<?php include "../inc/init.php"; 
+<?php include "../inc/init.php";
 
 if (!isset($_SESSION["email"])) {
     header("Location: " . ROOT_URL);
@@ -34,14 +34,14 @@ if (isset($_POST['addToCart'])) {
     // aggiungi al carrello "cartID" il prodotto "productID"
     $cartMgr->addToCart($productID, $cartID);
 
-    header("Location: ". ROOT_URL . "shop/pages/wishlist.php");
+    header("Location: " . ROOT_URL . "shop/pages/wishlist.php");
 }
 
 // RIMOZIONE DALLA LISTA
-if (isset($_POST['rimuovi'])){
+if (isset($_POST['rimuovi'])) {
     $productID = $_POST['rimuovi'];
 
     $wishlistMgr->deleteByProductId($productID, $_SESSION["userid"]);
 
-    header("Location: ". ROOT_URL . "shop/pages/wishlist.php");
+    header("Location: " . ROOT_URL . "shop/pages/wishlist.php");
 }

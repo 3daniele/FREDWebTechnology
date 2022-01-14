@@ -26,4 +26,12 @@ class SupportManager extends DbManager {
     return $this->db->query("SELECT *FROM Support WHERE Support.id = '$ticketid'");
   }
 
+  public function countTicket($userid){
+    return $this->db->query("SELECT COUNT(id) AS nticket  FROM Support WHERE user_id = '$userid'");
+  }
+
+  public function updateTicket($supportid, $status){
+    return $this->db->query("UPDATE Support SET status='$status' WHERE id='$supportid';");
+  }
+
 }
