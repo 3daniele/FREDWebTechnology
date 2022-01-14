@@ -92,3 +92,8 @@ Temporary Items
 #files
 /inc/config.php
 /inc/config.php
+
+#composer
+composer.phar
+composer.lock
+/vendor
