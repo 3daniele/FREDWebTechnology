@@ -1,16 +1,11 @@
 <?php
 include "../../../inc/init.php";
-?>
-<?php
+
 include ROOT_PATH . "public/template-parts/title.php";
-?>
-<title>Sign-Up</title>
-<?php
+
 include ROOT_PATH . "public/template-parts/header.php";
-?>
 
-<?php
-
+/*
 // costanti
 define('NORMAL_FORM', 'class="form-control"');
 define('VALID_FORM', 'class="form-control is-valid"');
@@ -171,83 +166,68 @@ function testInput()
         }
     }
 }
-?>
+*/
 
+/*
 <!--div per stampare a video eventuali messaggi di errori-->
 <div class="row">
     <div class="col-4"></div>
     <div class="col-4">
-        <div class="alert alert-dismissible alert-danger text-center" <?php echo $display; ?>>
+        <div class="alert alert-dismissible alert-danger text-center"  echo $display; >
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-            <strong><?php echo $error ?></strong>
+            <strong> echo $error </strong>
         </div>
     </div>
 </div>
+*/
 
+$userMgr = new UserManager();
 
-<div class="container" id="main-area" style="margin-top: 70px;">
-    <div class="row">
-        <div class="col-4" style="margin-left: 9px;">
-            <main class="form-signin">
-                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+$name = $_POST["name"];
+$surname = $_POST["surname"];
+$email = $_POST["email"];
+$password = $_POST["password"];
+$confPassword = $_POST["confPassword"];
 
-                    <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+$passHash = hash("sha1", $password);
+$confPassHash = hash("sha1", $confPassword);
 
-                    <div class="form-floating">
-                        <input type="text" <?php echo $formName; ?> name="name" id="name" placeholder="Nome" <?php echo $nameValue; ?>>
-                        <label for="floatingPassword">Nome</label>
-                        <span>
-                            <div class="errorLabel"><?php echo $nameErr; ?></div>
-                        </span>
-                    </div>
-                    <br>
-                    <div class="form-floating">
-                        <input type="text" <?php echo $formSurname; ?> name="surname" id="surname" placeholder="Cognome" <?php echo $surnameValue; ?>>
-                        <label for="floatingPassword">Cognome</label>
-                        <span>
-                            <div class="errorLabel"><?php echo $surnameErr; ?></div>
-                        </span>
-                    </div>
-                    <br>
-                    <div class="form-floating">
-                        <input type="email" <?php echo $formEmail; ?> name="email" id="email" placeholder="name@example.com" <?php echo $emailValue; ?>>
-                        <label for="floatingInput">Indirizzo Email</label>
-                        <span>
-                            <div class="errorLabel"><?php echo $emailErr; ?></div>
-                        </span>
-                    </div>
-                    <br>
-                    <div class="form-floating">
-                        <input type="password" <?php echo $formPassword; ?> name="password" id="password" placeholder="Password">
-                        <label for="floatingPassword">Password</label>
-                        <span>
-                            <div class="errorLabel"><?php echo $passwordErr; ?></div>
-                        </span>
-                    </div>
-                    <br>
-                    <div class="form-floating">
-                        <input type="password" <?php echo $formConfPassword; ?> name="confPassword" id="confPassword" placeholder="Conferma Password">
-                        <label for="floatingPassword">Conferma Password</label>
-                        <span>
-                            <div class="errorLabel"><?php echo $confPasswordErr; ?></div>
-                        </span>
-                    </div>
-                    <br>
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="auth-cond" name="checkCond" id="checkCond"> Accetto le condizioni del sito
-                        </label>
-                    </div>
-                    <div class="checkbox mb-3">
-                        <label>
-                            <input type="checkbox" value="auth-data" name="checkData" id="checkData"> Acconsento al trattamento dei dati personali
-                        </label>
-                    </div>
-                    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrati</button>
-                </form>
-            </main>
-        </div>
+// creazione del nuovo utente
+$userID = $userMgr->register($name, $surname, $email, $passHash);
 
-        <div class="spazio" id="spazio_vuoto" style="margin-top: 110px;">
+if ($userID > 0) {
+    // login automatico dell'utente appena creato
+    $login = $userMgr->login($email, $passHash);
 
-            <?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
+    $_SESSION["email"] = $email;
+    foreach ($login as $log) {
+        $_SESSION["img"] = $log["img"];
+        $_SESSION["admin"] = $log["user_type"];
+        $_SESSION["name"] = $log["name"];
+        $_SESSION["userid"] = $log["id"];
+    }
+    // creazione e sincronizzazione dei carrelli
+    $cartMgr = new CartManager();
+
+    $cartID = $cartMgr->createCart();
+    $currentCartID = $cartMgr->getCurrentCartId();
+    if ($cartID != $currentCartID) {
+        $cartMgr->mergeCarts($cartID, $currentCartID);
+    }
+    // redirect alla home
+    //header("Location: " . ROOT_URL . "shop");
+} else {
+    /*
+    $display = TRUE;
+    $error = "Errore durante la registrazione, riprova più tardi!";
+    */
+}
+
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/public/auth');
+$twig = new \Twig\Environment($loader, []);
+
+echo $twig->render('register.html', [
+    'ROOT_URL' => ROOT_URL,
+]);
+
+include ROOT_PATH . "public/template-parts/footer.php";

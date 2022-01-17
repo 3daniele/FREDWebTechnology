@@ -33,7 +33,4 @@ require_once ROOT_PATH . 'classes/Message.php';
 require_once ROOT_PATH . 'classes/Support.php';
 require_once ROOT_PATH . 'classes/Answer.php';
 
-
-require_once ROOT_PATH . 'public/auth/pages/login-action.php';
-
 ?>
