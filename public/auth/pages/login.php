@@ -118,6 +118,7 @@ if ($login == null) {
         $_SESSION["img"] = $log["img"];
         $_SESSION["admin"] = $log["user_type"];
         $_SESSION["name"] = $log["name"];
+        $_SESSION["userid"] = $log["id"];
     }
     //header("Location: " . ROOT_URL . "shop");
 }
