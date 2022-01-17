@@ -12,6 +12,8 @@ $categoryItemMgr = new CategoryItemManager();
 $categoryMgr = new CategoryManager();
 $imgMgr = new ImgManager();
 $reviewMgr = new ReviewManager();
+$wishlistMgr = new WishlistManager();
+
 
 if (isset($_GET["search"])) {
     $search = $_GET["search"];
@@ -28,19 +30,24 @@ $imgs = $imgMgr->getAll();
 $categories = $categoryMgr->getAll();
 $categoryItems = $categoryItemMgr->getAll();
 $reviews = $reviewMgr->getAll();
-
-// var_dump($imgs[0]->thumbnail);
+$creme = $productCategoryMgr->getByCategory("creme");
+$cremeNumber = $productCategoryMgr->getNumberOf("creme");
+$most = $productCategoryMgr->getMostPurchased();
 
 $loader = new \Twig\Loader\FilesystemLoader('../templates');
 $twig = new \Twig\Environment($loader, []);
 
 echo $twig->render('index.html', [
+    'username' => $_SESSION['name'],
     'ROOT_URL' => ROOT_URL,
     'products' => $products,
     'imgs' => $imgs,
     'categories' => $categories,
     'categoryItems' => $categoryItems,
-    'reviews' => $reviews
+    'reviews' => $reviews,
+    'creme' => $creme,
+    'cremeNumber' => $cremeNumber[0]['number'],
+    'most' => $most
 ]);
 
 include ROOT_PATH . 'public/template-parts/footer.php';
