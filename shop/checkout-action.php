@@ -7,6 +7,7 @@ if (!defined('ROOT_URL')) {
 
 // Checkout
 if (isset($_POST['checkout'])) {
+
     $cartMgr = new CartManager();
     $cartItemMgr = new CartItemManager();
     $ordersMgr = new OrdersManager();
@@ -15,20 +16,19 @@ if (isset($_POST['checkout'])) {
     $userID = $_SESSION['userid'];
     $shipmentID = $_POST['shipmentID'];
 
-    echo $userID . '<br>';
-    echo $shipmentID;
-    //$cartID = $cartMgr->findCart($userID);
-    //$orderID = $ordersMgr->addOrder($userID, $shipmentID);
-   
-    $cartItems = $cartItemMgr->getItems($cartID);
+    $cartID = $cartMgr->findCart($userID);
+    $items = $cartItemMgr->getItems($cartID);
 
-    foreach ($cartItems as $item) {
+    $orderID = $ordersMgr->addOrder($userID, $shipmentID);
+   
+    foreach ($items as $item) {
         $productID = $item['product_id'];
         $quantity = $item['quantity'];
 
         $ordersItemMgr->addItem($orderID, $productID, $quantity);
         $cartItemMgr->removeItem($item['id']);
-    }
+    } 
 
-    //header("Location: " . ROOT_URL);
+    header("Location: " . ROOT_URL);
 }
+
