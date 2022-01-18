@@ -90,13 +90,13 @@
                                 placeholder="Cerca tra le recensioni">
                             <!-- Button trigger modal -->
                             {% if check %}
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="update" {% if not email %} disabled {% endif %}>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                                data-whatever="update" {% if not email %} disabled {% endif %}>
                                 Modifica la tua recensione
                             </button>
                             {% else %}
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
-                                data-whatever="add" <?php if (!isset($_SESSION['email'])) : ?> disabled
-                                <?php endif; ?>>
+                                data-whatever="add" {% if not email %} disabled {% endif %}>
                                 Aggiungi una recensione
                             </button>
                             {% endif %}
@@ -105,17 +105,12 @@
                 </div>
             </div>
 
-            <?php
-            $userMgr = new UserManager();
-            $reviews = $reviewMgr->getReviews($product->id);
-            ?>
-
             <span id="reviews" hidden>
-                <?php echo json_encode($reviews) ?>
+                {{json_review|raw}}
             </span>
 
 
-            <?php if ($reviews == 0) : ?>
+            {% if reviews == 0 %}
 
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm p-4">
@@ -127,50 +122,44 @@
                 </li>
             </ul>
 
-            <?php else :
+            {% else %}
 
-                foreach ($reviews as $review) :
-                    $user = $userMgr->getName($review['user_id']);
-                ?>
+            {% for review in reviews %}
+            {% for user in users %}
+
+            {% set c = ROOT_URL ~ user.img %}
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm p-4">
                     <div class="row w-100">
                         <div class="col-lg-2 col-6 text-center">
-                            <img class="rounded-circle" src=<?php echo ROOT_URL . $user[0]['img']; ?> alt="immagine"
-                            width=100px></img>
+                            <img class="rounded-circle" src="{{c}}" alt="immagine" width=100px></img>
                             </br>
                             </br>
                             <span class="my-0 text-primary"><small>
-                                    <?php echo $user[0]['name']; ?>
+                                    {{user.name}}
                                 </small></span>
                         </div>
                         <div class="col-lg-10 col-6">
                             <h5 class="my-0 text-primary"><strong>
-                                    <?php echo $review['title']; ?>
+                                    {{review.title}}
                                 </strong>
                                 <span class="valutazione">
-                                    <?php
-                                                                    for ($i = 1; $i <= $review['vote']; $i++) {
-                                                                        echo "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" fill=\"currentColor\" class=\"bi bi-star-fill\" viewBox=\"0 0 16 16\">
-                                            <path d=\"M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z\"/>
-                                            </svg>";
-                                                                    } ?>
                                 </span>
                             </h5>
                             <span class="my-0 text-muted"><small>
-                                    <?php echo $review['message'] ?>
+                                    {{review.message}}
                                 </small></span>
                         </div>
                     </div>
                 </li>
-                <?php endforeach; ?>
             </ul>
-            <?php endif; ?>
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
         </div>
     </div>
 </div>
 
-<?php include ROOT_PATH . 'public/template-parts/footer.php'; ?>
 
 <!-- Finestra di dialogo per la scrittura della recensione -->
 <!-- Modal -->
@@ -187,7 +176,7 @@
                 <div class="modal-body">
                     <p>Titolo</p>
                     <input type="text" class="form-control" name="title" id="title" placeholder="Inserisci un titolo">
-                    <input type="text" class="form-control" name="productID" value=<?php echo $product->id ?> hidden>
+                    <input type="text" class="form-control" name="productID" value={{product.id}} hidden>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
