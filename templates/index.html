@@ -12,42 +12,33 @@
                     aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="https://hd2.tudocdn.net/1015644?w=980&h=340" class="d-block w-100" alt="...">
+                <div class="carousel-item active" style="cursor:pointer;" onclick="location.href = '#1';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide1.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3><strong>Titolo1</strong></h3>
+                        <h3 class="text-primary"><strong>Lavandeto</strong></h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
                             ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Donec mollis finibus mi a imperdiet. Suspendisse non mollis
-                            lorem. Proin id cursus sapien. Integer in arcu ut ligula vulputate pretium. Aliquam erat
-                            volutpat. Integer in purus vitae ligula blandit lacinia. Donec convallis bibendum eleifend.
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
                         </p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://hd2.tudocdn.net/1015375?w=980&h=340" class="d-block w-100" alt="...">
+                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '#2';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide2.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3><strong>Titolo2</strong></h3>
+                        <h3 class="text-primary"><strong>Oli essenziali</strong></h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
                             ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Donec mollis finibus mi a imperdiet. Suspendisse non mollis
-                            lorem. Proin id cursus sapien. Integer in arcu ut ligula vulputate pretium. Aliquam erat
-                            volutpat. Integer in purus vitae ligula blandit lacinia. Donec convallis bibendum eleifend.
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
                         </p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <img src="https://hd2.tudocdn.net/1015635?w=980&h=340" class="d-block w-100" alt="...">
+                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '#3';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide3.png" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3><strong>Titolo3</strong></h3>
+                        <h3 class="text-primary"><strong>Processo</strong></h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
                             ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo. Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Donec mollis finibus mi a imperdiet. Suspendisse non mollis
-                            lorem. Proin id cursus sapien. Integer in arcu ut ligula vulputate pretium. Aliquam erat
-                            volutpat. Integer in purus vitae ligula blandit lacinia. Donec convallis bibendum eleifend.
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
                         </p>
                     </div>
                 </div>
@@ -70,11 +61,10 @@
         <br>
     </div>
 
+    <!-- Più acquistati -->
     <div class="row">
         <div class="container my-4">
-            <!--Carousel Wrapper-->
             <div id="multi-item-top" class="carousel slide carousel-multi-item" data-ride="carousel">
-                <!--Controls-->
                 <div class="row">
                     <div class="col-md-6 col-lg-10">
                         <span class="text-primary">
@@ -92,11 +82,8 @@
                         </div>
                     </div>
                 </div>
-                <!--/.Controls-->
-                <!--Slides-->
                 <div class="carousel-inner" role="listbox">
                     {% for m in most %}
-                    <!--First slide-->
                     {% if loop.index == 1 %}
                     <div class="carousel-item active">
                         <div class="row">
@@ -107,52 +94,50 @@
                                     {% endif %}
                                     {% endif %}
                                     {% set c = ROOT_URL ~ m.img %}
-                                    <div class="col-md-3 clearfix d-none d-md-block">
+                                    {% set link = redirect ~ m.id %}
+                                    <div class="col-md-3 clearfix d-none d-md-block" style="cursor:pointer;"
+                                        onclick="location.href = '{{link}}';">
                                         <div class="card mb-2">
-                                            <img class="card-img-top" src="{{c}}" alt="Card image cap">
+                                            <img class="card-img-top" src="{{c}}" height="304px" width="304px"
+                                                alt="Card image cap">
                                             <div class="card-body">
                                                 <h4 class="card-title">{{m.name}}</h4>
                                                 <p class="card-text">{{m.small_description}}</p>
                                                 <p class="card-text"><strong>{{m.price}}€</strong></p>
-                                                <a class="btn btn-primary">Button</a>
+                                                <form method="POST" action="{{ROOT_URL}}shop/cart-action.php">
+                                                    <button class="btn btn-primary btn-sm" name="product_id"
+                                                        type="submit" value={{m.id}}><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-cart-plus-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                        </svg></button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
-
-
-                                    <!-- if class row-->
                                     {% if ((loop.index0 == 13) or (loop.index is divisible by(4))) %}
                                 </div>
                             </div>
                             {% endif %}
-                            <!--/.First slide-->
-
-
-
                             {% endfor %}
                         </div>
-                        <!--/.Slides-->
-
                     </div>
-                    <!--/.Carousel Wrapper-->
-
-
                 </div>
             </div>
 
+            <!-- Idee regalo -->
             <div class="row">
                 <div class="container my-4">
-                    <!--Carousel Wrapper-->
                     <div id="multi-item-regali" class="carousel slide carousel-multi-item" data-ride="carousel">
-                        <!--Controls-->
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-md-6 col-lg-10">
                                 <span class="text-primary">
                                     <h4><strong>Idee regalo:</strong></h4>
                                 </span>
                             </div>
-                            <div class="col-6"></div>
-                            <div class="col-2">
+                            <div class="col-md-2 col-lg-2">
                                 <div class="controls-top text-end">
                                     <button class="btn btn-primary" type="button" data-bs-target="#multi-item-regali"
                                         data-bs-slide="prev"> <em class="fa fa-arrow-left"></em>
@@ -163,68 +148,62 @@
                                 </div>
                             </div>
                         </div>
-                        {{creme.length()}}
-                        <!--/.Controls-->
-                        <!--Slides-->
                         <div class="carousel-inner" role="listbox">
-                            {% for crema in creme %}
-                            <!--First slide-->
-                            {% if loop.index0 == 0 %}
+                            {% for ide in idee %}
+                            {% if loop.index == 1 %}
                             <div class="carousel-item active">
                                 <div class="row">
-                                    {% endif %}
-                                    {% if loop.index is divisible by(5) %}
+                                    {% else %}
+                                    {% if loop.index0 is divisible by(4) %}
                                     <div class="carousel-item">
                                         <div class="row">
                                             {% endif %}
-
-                                            {% set c = ROOT_URL ~ crema.img %}
-                                            <div class="col-md-3 clearfix d-none d-md-block">
+                                            {% endif %}
+                                            {% set c = ROOT_URL ~ ide.img %}
+                                            {% set link = redirect ~ ide.id %}
+                                            <div class="col-md-3 clearfix d-none d-md-block" style="cursor:pointer;"
+                                                onclick="location.href = '{{link}}';">
                                                 <div class="card mb-2">
-                                                    <img class="card-img-top" src="{{c}}" alt="Card image cap">
+                                                    <img class="card-img-top" src="{{c}}" height="304px" width="304px"
+                                                        alt="Card image cap">
                                                     <div class="card-body">
-                                                        <h4 class="card-title">{{crema.name}}</h4>
-                                                        <p class="card-text">{{crema.small_description}}</p>
-                                                        <p class="card-text"><strong>{{crema.price}}€</strong></p>
-                                                        <a class="btn btn-primary">Button</a>
+                                                        <h4 class="card-title">{{ide.name}}</h4>
+                                                        <p class="card-text">{{ide.small_description}}</p>
+                                                        <p class="card-text"><strong>{{ide.price}}€</strong></p>
+                                                        <form method="POST" action="{{ROOT_URL}}shop/cart-action.php">
+                                                            <button class="btn btn-primary btn-sm" name="product_id"
+                                                                type="submit" value={{ide.id}}><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                </svg></button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
-
-
-                                            <!-- if class row-->
-                                            {% if ((loop.index0 == cremeNumber) or (loop.index is divisible by(4))) %}
+                                            {% if ((loop.index0 == ideeNumber) or (loop.index is divisible by(4))) %}
                                         </div>
                                     </div>
                                     {% endif %}
-                                    <!--/.First slide-->
-
-
-
                                     {% endfor %}
                                 </div>
-                                <!--/.Slides-->
-
                             </div>
-                            <!--/.Carousel Wrapper-->
-
-
                         </div>
                     </div>
 
+                    <!-- Cura della persona -->
                     <div class="row">
                         <div class="container my-4">
-                            <!--Carousel Wrapper-->
                             <div id="multi-item-cura" class="carousel slide carousel-multi-item" data-ride="carousel">
-                                <!--Controls-->
                                 <div class="row">
-                                    <div class="col-4">
+                                    <div class="col-md-6 col-lg-10">
                                         <span class="text-primary">
                                             <h4><strong>Cura della persona:</strong></h4>
                                         </span>
                                     </div>
-                                    <div class="col-6"></div>
-                                    <div class="col-2">
+                                    <div class="col-md-2 col-lg-2">
                                         <div class="controls-top text-end">
                                             <button class="btn btn-primary" type="button"
                                                 data-bs-target="#multi-item-cura" data-bs-slide="prev"> <em
@@ -237,71 +216,67 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{creme.length()}}
-                                <!--/.Controls-->
-                                <!--Slides-->
                                 <div class="carousel-inner" role="listbox">
-                                    {% for crema in creme %}
-                                    <!--First slide-->
-                                    {% if loop.index0 == 0 %}
+                                    {% for cu in cura %}
+                                    {% if loop.index == 1 %}
                                     <div class="carousel-item active">
                                         <div class="row">
-                                            {% endif %}
-                                            {% if loop.index is divisible by(5) %}
+                                            {% else %}
+                                            {% if loop.index0 is divisible by(4) %}
                                             <div class="carousel-item">
                                                 <div class="row">
                                                     {% endif %}
-
-                                                    {% set c = ROOT_URL ~ crema.img %}
-                                                    <div class="col-md-3 clearfix d-none d-md-block">
+                                                    {% endif %}
+                                                    {% set c = ROOT_URL ~ cu.img %}
+                                                    {% set link = redirect ~ cu.id %}
+                                                    <div class="col-md-3 clearfix d-none d-md-block"
+                                                        style="cursor:pointer;" onclick="location.href = '{{link}}';">
                                                         <div class="card mb-2">
-                                                            <img class="card-img-top" src="{{c}}" alt="Card image cap">
+                                                            <img class="card-img-top" src="{{c}}" height="304px"
+                                                                width="304px" alt="Card image cap">
                                                             <div class="card-body">
-                                                                <h4 class="card-title">{{crema.name}}</h4>
-                                                                <p class="card-text">{{crema.small_description}}</p>
-                                                                <p class="card-text"><strong>{{crema.price}}€</strong>
-                                                                </p>
-                                                                <a class="btn btn-primary">Button</a>
+                                                                <h4 class="card-title">{{cu.name}}</h4>
+                                                                <p class="card-text">{{cu.small_description}}</p>
+                                                                <p class="card-text"><strong>{{cu.price}}€</strong></p>
+                                                                <form method="POST"
+                                                                    action="{{ROOT_URL}}shop/cart-action.php">
+                                                                    <button class="btn btn-primary btn-sm"
+                                                                        name="product_id" type="submit"
+                                                                        value={{cu.id}}><svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16" height="16" fill="currentColor"
+                                                                            class="bi bi-cart-plus-fill"
+                                                                            viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                        </svg></button>
+                                                                </form>
                                                             </div>
                                                         </div>
                                                     </div>
-
-
-                                                    <!-- if class row-->
-                                                    {% if ((loop.index0 == cremeNumber) or (loop.index is divisible
+                                                    {% if ((loop.index0 == curaNumber) or (loop.index is divisible
                                                     by(4))) %}
                                                 </div>
                                             </div>
                                             {% endif %}
-                                            <!--/.First slide-->
-
-
-
                                             {% endfor %}
                                         </div>
-                                        <!--/.Slides-->
-
                                     </div>
-                                    <!--/.Carousel Wrapper-->
-
-
                                 </div>
                             </div>
 
+                            <!-- Lavanda -->
                             <div class="row">
                                 <div class="container my-4">
-                                    <!--Carousel Wrapper-->
                                     <div id="multi-item-lavanda" class="carousel slide carousel-multi-item"
                                         data-ride="carousel">
-                                        <!--Controls-->
                                         <div class="row">
-                                            <div class="col-4">
+                                            <div class="col-md-6 col-lg-10">
                                                 <span class="text-primary">
                                                     <h4><strong>Lavanda:</strong></h4>
                                                 </span>
                                             </div>
-                                            <div class="col-6"></div>
-                                            <div class="col-2">
+                                            <div class="col-md-2 col-lg-2">
                                                 <div class="controls-top text-end">
                                                     <button class="btn btn-primary" type="button"
                                                         data-bs-target="#multi-item-lavanda" data-bs-slide="prev"> <em
@@ -314,59 +289,58 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{creme.length()}}
-                                        <!--/.Controls-->
-                                        <!--Slides-->
                                         <div class="carousel-inner" role="listbox">
-                                            {% for crema in creme %}
-                                            <!--First slide-->
-                                            {% if loop.index0 == 0 %}
+                                            {% for l in lavanda %}
+                                            {% if loop.index == 1 %}
                                             <div class="carousel-item active">
                                                 <div class="row">
-                                                    {% endif %}
-                                                    {% if loop.index is divisible by(5) %}
+                                                    {% else %}
+                                                    {% if loop.index0 is divisible by(4) %}
                                                     <div class="carousel-item">
                                                         <div class="row">
                                                             {% endif %}
-
-                                                            {% set c = ROOT_URL ~ crema.img %}
-                                                            <div class="col-md-3 clearfix d-none d-md-block">
+                                                            {% endif %}
+                                                            {% set c = ROOT_URL ~ l.img %}
+                                                            {% set link = redirect ~ l.id %}
+                                                            <div class="col-md-3 clearfix d-none d-md-block"
+                                                                style="cursor:pointer;"
+                                                                onclick="location.href = '{{link}}';">
                                                                 <div class="card mb-2">
-                                                                    <img class="card-img-top" src="{{c}}"
-                                                                        alt="Card image cap">
+                                                                    <img class="card-img-top" src="{{c}}" height="304px"
+                                                                        width="304px" alt="Card image cap">
                                                                     <div class="card-body">
-                                                                        <h4 class="card-title">{{crema.name}}</h4>
-                                                                        <p class="card-text">{{crema.small_description}}
-                                                                        </p>
+                                                                        <h4 class="card-title">{{l.name}}</h4>
+                                                                        <p class="card-text">{{l.small_description}}</p>
                                                                         <p class="card-text">
-                                                                            <strong>{{crema.price}}€</strong></p>
-                                                                        <a class="btn btn-primary">Button</a>
+                                                                            <strong>{{l.price}}€</strong></p>
+                                                                        <form method="POST"
+                                                                            action="{{ROOT_URL}}shop/cart-action.php">
+                                                                            <button class="btn btn-primary btn-sm"
+                                                                                name="product_id" type="submit"
+                                                                                value={{l.id}}><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    fill="currentColor"
+                                                                                    class="bi bi-cart-plus-fill"
+                                                                                    viewBox="0 0 16 16">
+                                                                                    <path
+                                                                                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                                </svg></button>
+                                                                        </form>
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-
-                                                            <!-- if class row-->
-                                                            {% if ((loop.index0 == cremeNumber) or (loop.index is
-                                                            divisible by(4))) %}
+                                                            {% if ((loop.index0 == lavandaNumber) or (loop.index is
+                                                            divisible
+                                                            by(4))) %}
                                                         </div>
                                                     </div>
                                                     {% endif %}
-                                                    <!--/.First slide-->
-
-
-
                                                     {% endfor %}
                                                 </div>
-                                                <!--/.Slides-->
-
                                             </div>
-                                            <!--/.Carousel Wrapper-->
-
-
                                         </div>
                                     </div>
-
 
                                     <div class="row">
                                         <br>

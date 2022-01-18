@@ -26,28 +26,29 @@ if (isset($_GET["search"])) {
     $products = $productMgr->getAll();
 }
 
-$imgs = $imgMgr->getAll();
-$categories = $categoryMgr->getAll();
-$categoryItems = $categoryItemMgr->getAll();
-$reviews = $reviewMgr->getAll();
-$creme = $productCategoryMgr->getByCategory("creme");
-$cremeNumber = $productCategoryMgr->getNumberOf("creme");
+$lavanda = $productCategoryMgr->getByCategory("lavanda");
+$lavandaNumber = $productCategoryMgr->getNumberOf("lavanda");
 $most = $productCategoryMgr->getMostPurchased();
+$cura = $productCategoryMgr->getByCategory("Cura della persona");
+$curaNumber = $productCategoryMgr->getNumberOf("Cura della persona");
+$idee = $productCategoryMgr->getByCategory("Idee regalo");
+$ideeNumber = $productCategoryMgr->getNumberOf("Idee regalo");
+$redirect = ROOT_URL . 'shop/single-product.php?product=';
 
 $loader = new \Twig\Loader\FilesystemLoader('../templates');
 $twig = new \Twig\Environment($loader, []);
 
 echo $twig->render('index.html', [
-    'username' => $_SESSION['name'],
     'ROOT_URL' => ROOT_URL,
     'products' => $products,
-    'imgs' => $imgs,
-    'categories' => $categories,
-    'categoryItems' => $categoryItems,
-    'reviews' => $reviews,
-    'creme' => $creme,
-    'cremeNumber' => $cremeNumber[0]['number'],
-    'most' => $most
+    'lavanda' => $lavanda,
+    'lavandaNumber' => $lavandaNumber[0]['number'],
+    'most' => $most,
+    'cura' => $cura,
+    'curaNumber' => $curaNumber[0]['number'],
+    'idee' => $idee,
+    'ideeNumber' => $ideeNumber[0]['number'],
+    'redirect' => $redirect
 ]);
 
 include ROOT_PATH . 'public/template-parts/footer.php';
