@@ -18,6 +18,8 @@ $chatMgr = new ChatManager();
 $userMgr = new UserManager();
 $messageMgr = new MessageManager();
 
+
+
 $chat = $chatMgr->getAllChat();
 
 
