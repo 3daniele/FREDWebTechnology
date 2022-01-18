@@ -1,0 +1,235 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2><strong class="text-primary">Dashboard</strong></h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-lg-7">
+            <div class="card">
+                <div class="card-header">
+
+                    <span class="text-primary">
+                        <div class="row">
+                            <div class="col-9">
+                                <h4><b>Ultimi ordini:</b></h4>
+                            </div>
+                            <div class="col-3 text-end">
+                                <a href="{{ROOT_URL}}admin/pages/order.php" class="btn btn-primary btn-sm">Gestisci
+                                    &raquo;</a>
+                            </div>
+                        </div>
+                    </span>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1">
+                            <b> #</b>
+                        </div>
+                        <div class="col-2">
+                            <b>Data</b>
+                        </div>
+                        <div class="col-2">
+                            <b>Stato</b>
+                        </div>
+                        <div class="col-2">
+                            <b>Utente</b>
+                        </div>
+                        <div class="col-5">
+                            <b>Indirizzo</b>
+                        </div>
+                    </div>
+                    <hr>
+                    {% set i = 0 %}
+                    {% for order in orders %}
+                    <div class="row">
+                        <p class="card-text">
+                        <div class="col-1">
+                            {{order.id}}
+                        </div>
+                        <div class="col-2">
+                            {{order.date_order}}
+                        </div>
+                        <div class="col-2">
+                            {{order.status}}
+                        </div>
+                        <div class="col-2">
+                            {{users[loop.index0]}}
+                        </div>
+                        <div class="col-5">
+                            {{addresses[loop.index0]}}
+                        </div>
+                        </p>
+                    </div>
+                    {% if loop.index != 3 %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+
+            <div class="card">
+                <div class="card-header">
+                    <span class="text-primary">
+                        <div class="row">
+                            <div class="col-9">
+                                <h4><b>Ticket aperti:</b></h4>
+                            </div>
+                            <div class="col-3 text-end">
+                                <a href="{{ROOT_URL}}admin/pages/support/support.php"
+                                    class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                            </div>
+                        </div>
+                    </span>
+
+
+                </div>
+                <div class="card-body">
+                    {% for ticket in tickets %}
+                    <p class="card-text"><strong>
+                            {{ticket.object}}
+                        </strong><br>
+                        {{ticket.message}}
+                    </p>
+                    {% if loop.index != 3 %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <hr>
+
+            <div class="card">
+                <div class="card-header">
+
+                    <span class="text-primary">
+                        <div class="row">
+                            <div class="col-9">
+                                <h4><b>Nuove recensioni:</b></h4>
+                            </div>
+                            <div class="col-3 text-end">
+                                <a href="{{ROOT_URL}}admin/pages/review/review.php"
+                                    class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                            </div>
+                        </div>
+                    </span>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-1">
+                            <b><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                    class="bi bi-star-half" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.354 5.119 7.538.792A.516.516 0 0 1 8 .5c.183 0 .366.097.465.292l2.184 4.327 4.898.696A.537.537 0 0 1 16 6.32a.548.548 0 0 1-.17.445l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256a.52.52 0 0 1-.146.05c-.342.06-.668-.254-.6-.642l.83-4.73L.173 6.765a.55.55 0 0 1-.172-.403.58.58 0 0 1 .085-.302.513.513 0 0 1 .37-.245l4.898-.696zM8 12.027a.5.5 0 0 1 .232.056l3.686 1.894-.694-3.957a.565.565 0 0 1 .162-.505l2.907-2.77-4.052-.576a.525.525 0 0 1-.393-.288L8.001 2.223 8 2.226v9.8z" />
+                                </svg></b>
+                        </div>
+                        <div class="col-2">
+                            <b>Titolo</b>
+                        </div>
+                        <div class="col-5">
+                            <b>Descrizione</b>
+                        </div>
+                        <div class="col-2">
+                            <b>Prodotto</b>
+                        </div>
+                        <div class="col-2">
+                            <b>Utente</b>
+                        </div>
+                    </div>
+                    <hr>
+                    {% for review in reviews %}
+                    <div class="row">
+                        <p class="card-text">
+                        <div class="col-1">
+                            {{review.vote}}
+                        </div>
+                        <div class="col-2">
+                            {{review.title}}
+                        </div>
+                        <div class="col-5">
+                            {{review.message}}
+                        </div>
+                        <div class="col-2">
+                            {{review.product}}
+                        </div>
+                        <div class="col-2">
+                            {{review.user}}
+                        </div>
+                        </p>
+                    </div>
+                    {% if loop.index != 3 %}
+                    <hr>
+                    {% endif %}
+                    {% endfor %}
+
+
+                </div>
+            </div>
+            <hr>
+
+        </div>
+        <div class="col-md-4 col-lg-4 px-md-4">
+            <div class="card">
+                <div class="card-header">
+
+                    <span class="text-primary">
+                        <div class="row">
+                            <div class="col-7">
+                                <h4><b>In esaurimento:</b></h4>
+                            </div>
+                            <div class="col-5 text-end">
+                                <a href="{{ROOT_URL}}admin/pages/product/product.php"
+                                    class="btn btn-primary btn-sm">Gestisci &raquo;</a>
+                            </div>
+                        </div>
+                    </span>
+
+
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-7">
+                            <b>Prodotto</b>
+                        </div>
+                        <div class="col-2"></div>
+                        <div class="col-3 text-end">
+                            <b>Stock</b>
+                        </div>
+                    </div>
+                    <hr>
+                    {% for product in products %}
+                    <div class="row">
+                        <p class="card-text">
+                        <div class="col-7">
+                            {{product.name}}
+                        </div>
+                        <div class="col-2"></div>
+                        {% if product.stock <= 5 %} <div class="col-3 text-end text-danger">
+                            {% else %}
+                            <div class="col-3 text-warning text-end">
+                                {% endif %}
+                                <b>{{product.stock}}</b></span>
+                            </div>
+                            </p>
+                            {% if loop.index != 15 %}
+                            <hr>
+                            {% endif %}
+                    </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+        </div>
+
+    </div>
+</main>
+
+
+
+<?php include ROOT_PATH . "public/template-parts/footer.php"; ?>
