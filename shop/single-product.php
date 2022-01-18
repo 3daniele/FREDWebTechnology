@@ -98,6 +98,6 @@ echo $twig->render('single-product.html', [
     'users' =>$user
 
 ]);
-?>
 
-<?php include ROOT_PATH . 'public/template-parts/footer.php'; ?>
+include ROOT_PATH . 'public/template-parts/footer.php';
+?>
