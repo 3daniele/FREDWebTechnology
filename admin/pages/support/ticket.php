@@ -36,11 +36,14 @@ $user = $userMgr->get($ticket->user_id);
 
 $imgpath = ROOT_URL . $user->img;
 
-$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/admin/support');
-$twig = new \Twig\Environment($loader, []);
-
 $counttickets = $supportMgr->countTicket($user->id);
 $countticket = $counttickets[0]['nticket'];
+
+$orderUser = $orderMgr->getOrder($user->id);
+$countOrder = count($orderUser);
+
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/admin/support');
+$twig = new \Twig\Environment($loader, []);
 
 echo $twig->render('ticket.html', [
     'ticket' => $ticket,
@@ -48,7 +51,8 @@ echo $twig->render('ticket.html', [
     'answer' => $answer,
     'user' => $user,
     'countticket' => $countticket,
-    'imgpath' => $imgpath
+    'imgpath' => $imgpath,
+    'countorder' => $countOrder
 
 ]);
 
