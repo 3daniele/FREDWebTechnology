@@ -76,6 +76,7 @@ echo $twig->render('order.html', [
     'ordiniConsegnati' =>$consegnati,
     'utentiR' => $userRicevuti,
     'utentiL' => $userLavorazione,
+    'utentiS' => $userSpedito,
     'utentiC' => $userConsegna,
     'utentiCC' => $userConsegnati,
     'indirizziR' => $indirizziR,
