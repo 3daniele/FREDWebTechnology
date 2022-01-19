@@ -14,7 +14,7 @@ class MessageManager extends DbManager{
   }
 
   public function getMessage($chatID){
-    return $this->db->query("SELECT *FROM Message WHERE chat_id = '$chatID'");
+    return $this->db->query("SELECT *FROM Message WHERE chat_id = '$chatID' ORDER BY date DESC LIMIT 5 ");
   }
 
   public function newMessage($chatID, $message){

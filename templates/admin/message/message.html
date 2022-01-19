@@ -18,34 +18,23 @@
     </div>
     <div class="row" style="margin-top: 10px;">
         <div class="col-md-3 col-lg-3 px-md-4">
-            <?php
-            $chatMgr = new ChatManager();
-            $userMgr = new UserManager();
-            $messageMgr = new MessageManager();
-            $chat = $chatMgr->getAllChat();
-            $i = 0;
-            foreach ($chat as $c) :
-
-                $user = $userMgr->get($c['user_id']);
-
-            ?>
+            {% for c in chat %}
             <form method="GET">
-                <?php $path = "admin/pages/message/message.php?chat=" . $c['id']; ?>
-                <?php if ($i == 0) : ?>
-                <div class="card" style="cursor:pointer; width: 18rem;"
-                    onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
-                    <?php else : ?>
+                {% set path = ROOT_URL ~ "admin/pages/message/message.php?chat=" ~ c.id %}
+                {% if loop.index0 == 0 %}
+                <div class="card" style="cursor:pointer; width: 18rem;" onclick="location.href='{{path}}'">
+                    {% else %}
                     <div class="card" style="cursor:pointer; width: 18rem; border-top:none;"
-                        onclick="location.href='<?php echo ROOT_URL . $path; ?>'">
-                        <?php endif; ?>
+                        onclick="location.href='{{path}}'">
+                        {% endif %}
                         <div class="card-body">
                             <p class="card-text">
                             <div class="row">
                                 <div class="col-4 text-end">
-                                    <?php if ($user->img != null) : ?>
+                                    {% if users[loop.index0].img != null %}
                                     <img alt="immagine" width=70px class="rounded-circle"
-                                        src=<?php echo ROOT_URL . $user->img; ?>>
-                                    <?php else : ?>
+                                        src={{ROOT_URL}}{{users[loop.index0].img}}>
+                                    {% else %}
                                     <svg xmlns="http://www.w3.org/2000/svg" width=70px fill="currentColor"
                                         class="bi bi-people-fill" viewBox="0 0 16 16">
                                         <path
@@ -54,77 +43,73 @@
                                             d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
                                         <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
                                     </svg>
-                                    <?php endif; ?>
+                                    {% endif %}
                                 </div>
                                 <div class="col-7">
                                     <div class="row">
-                                        <?php if ($user->img != null) : ?>
-                                        <b><?php echo $user->name . " " . $user->surname; ?></b>
-                                        <?php else : ?>
-                                        <b>Broadcast</b>
-                                        <?php endif; ?>
-
+                                        <br>
                                     </div>
                                     <div class="row">
-                                        <?php $message = $messageMgr->getLast($c['id']);
-                                            echo substr($message[0]['message'], 0, 30) . "...";
-                                            ?>
+                                        {% if users[loop.index0].img != null %}
+                                        <strong>
+                                            {% set string = users[loop.index0].name ~ " " ~ users[loop.index0].surname
+                                            %}
+                                            {{string}}
+                                        </strong>
+                                        {% else %}
+                                        <strong>Broadcast</strong>
+                                        {% endif %}
                                     </div>
+
                                 </div>
                             </div>
                             </p>
                         </div>
                     </div>
             </form>
-            <?php $i++;
-            endforeach; ?>
+            {% endfor %}
 
         </div>
         <div class="col-lg-1 px-md-4"></div>
         <div class="col-md-9 col-lg-8 px-md-4">
-            <?php 
-                if(isset($_GET['chat'])) :
-            ?>
-            <?php $chat_id = $_GET['chat'];  ?>
+            {% if chat_id != null %}
             <div class="card">
                 <div class="card-header">
-                    <?php $user = $userMgr->get($chatMgr->get($chat_id)->user_id);?>
                     <div class="row">
                         <div class="col-1">
-                            <img alt="immagine" width=40px class="rounded-circle"
-                                src=<?php echo ROOT_URL . $user->img; ?>>
+                            <img alt="immagine" width=40px class="rounded-circle" src={{ROOT_URL}}{{chatuser.img}}>
                         </div>
                         <div class="col-11" style="margin-top: 6px;">
-                            <strong><?php echo $user->name." ".$user->surname; ?></strong>
+                            <strong>
+                                {% set string = chatuser.name ~ " " ~ chatuser.surname %}
+                                {{string}}
+                            </strong>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
-
-
-                    <?php 
-                $messages = $messageMgr->getMessage($chat_id);
-                foreach($messages as $message) :
-            ?>
+                    {% for message in messages %}
                     <p class="card-text">
                     <h5>
+                        {% if message.broadcast == 0 %}
                         <?php if($message['broadcast']==0) :?>
                         <span class="badge rounded-pill bg-primary">
-                            <?php else: ?>
+                            {% else %}
                             <span class="badge rounded-pill bg-success">
-                                <?php endif; ?>
-
-                                <?php echo $message['message']; ?>
+                                {% endif %}
+                                {{message.message}}
                             </span>
                     </h5>
-                    <span style="font-size:smaller"><?php echo $message['date']; ?></span>
+                    <span style="font-size:smaller">
+                        {{ message.date }}
+                    </span>
                     </p>
 
-                    <?php endforeach; ?>
+                    {% endfor %}
                     <div class="row">
                         <hr>
-                        <form action="send.php" method="POST">
-                            <input type="hidden" id="chat_id" name="chat_id" value="<?php echo $chat_id ?>">
+                        <form action="{{ROOT_URL}}admin/pages/message/send.php" method="POST">
+                            <input type="hidden" id="chat_id" name="chat_id" value={{chat_id}}>
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="message" name="message"
                                     placeholder="Cosa vuoi inviare?">
@@ -135,9 +120,7 @@
                     </div>
                 </div>
             </div>
-
-
-            <?php endif;?>
+            {% endif %}
         </div>
     </div>
 
@@ -147,7 +130,7 @@
 
 <!-- Finestra di dialogo per la scrittura della recensione -->
 <!-- Modal -->
-<form method="POST" action="./send.php">
+<form method="POST" action="{{ROOT_URL}}admin/pages/message/send.php">
     <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -158,17 +141,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <?php
-                        $chats = $chatMgr->getAll();
-                    ?>
                     <p>Seleziona utenti</p>
-                    <select class="form-select" aria-label="selezione utenti" aria-label="size 3" id="chat_id" name="chat_id">
+                    <select class="form-select" aria-label="selezione utenti" aria-label="size 3" id="chat_id"
+                        name="chat_id">
                         <option selected value="broadcast">Tutti</option>
-                        <?php foreach ($chats as $chat) : ?>
-                        <?php $user = $userMgr->get($chat->user_id);?>
-                        <option value="<?php echo $chat->id ?>"><?php echo $user->name." ".$user->surname; ?></option>
-                        <?php endforeach; ?>
-                        
+                        {% for c in chat %}
+                        <option value="{{c.id}}">
+                            {% set string = users[loop.index0].name ~ " " ~ users[loop.index0].surname
+                            %}
+                            {{string}}
+                        </option>
+                        {% endfor %}
+
                     </select>
                     <p></p>
                     <p>Messaggio</p>
@@ -183,4 +167,5 @@
 
             </div>
         </div>
+    </div>
 </form>

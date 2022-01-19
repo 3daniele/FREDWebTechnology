@@ -48,4 +48,29 @@ class OrdersManager extends DbManager
   {
     return $this->db->query("SELECT * FROM Orders ORDER BY id DESC LIMIT 3");
   }
+
+  public function getRicevuti()
+  {
+    return $this->db->query("SELECT * FROM Orders WHERE status='Ordine ricevuto' ORDER BY id DESC");
+  }
+
+  public function getLavorazione()
+  {
+    return $this->db->query("SELECT * FROM Orders WHERE status='In lavorazione' ORDER BY id DESC");
+  }
+
+  public function getSpediti()
+  {
+    return $this->db->query("SELECT * FROM Orders WHERE status='Spedito' ORDER BY id DESC");
+  }
+
+  public function getConsegna()
+  {
+    return $this->db->query("SELECT * FROM Orders WHERE status='In consegna' ORDER BY id DESC");
+  }
+
+  public function getConsegnati()
+  {
+    return $this->db->query("SELECT * FROM Orders WHERE status='Consegnato' ORDER BY id DESC");
+  }
 }
