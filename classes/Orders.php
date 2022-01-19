@@ -33,7 +33,7 @@ class OrdersManager extends DbManager
 
   public function getOrder($userID)
   {
-    $result = $this->db->query("SELECT * FROM Orders WHERE user_id = $userID ");
+    $result = $this->db->query("SELECT * FROM Orders WHERE user_id = $userID ORDER BY date_order DESC");
     return $result;
   }
 
