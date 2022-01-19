@@ -1,0 +1,76 @@
+<title>Dettaglio Ordine</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        <div class="col-12">
+            <div class="card mb-3">
+                <div>
+                    <h3 class="card-header text-center">
+                        <strong>Ordine effettuato il </strong>
+                        <strong>{{ date }}</strong>
+                    </h3>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1 col-1"></div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-lg-3 col-4">
+                                <strong class="text-primary"> Stato ordine: </strong>
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                {{ order['status'] }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1 col-1"></div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-lg-3 col-4">
+                                <strong class="text-primary"> In arrivo entro il: </strong>
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                {{ stimateDate }}
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1 col-1"></div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-lg-3 col-4">
+                                <strong class="text-primary">Indizzo consegna: </strong>
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                <h6 class="my-0 ">
+                                    {{ address['city_name'] ~ ', ' ~ address['provinces_name'] ~ ' ' ~ address['code'] }}
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-lg-1 col-1"></div>
+                    <div class="col-9">
+                        <div class="row">
+                            <div class="col-lg-3 col-4">
+                                <strong class="text-primary"> Numero di spedizione: </strong>
+                            </div>
+                            <div class="col-lg-2 col-4">
+                                {{ ordine['tracking_information'] }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
