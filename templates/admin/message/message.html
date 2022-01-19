@@ -1,0 +1,171 @@
+<main class="col-md-9 col-lg-8 px-md-4">
+    <div class="row border-bottom">
+        <div class="col-4">
+            <h2><strong class="text-primary">Messaggi</strong></h2>
+        </div>
+        <div class="col-4"></div>
+        <div class="col-2 text-end">
+        </div>
+        <div class="col-2 text-end" style="margin-top : 5px;"><a href="" data-bs-toggle="modal" data-bs-target="#modal"
+                data-whatever="add"><svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor"
+                    class="bi bi-pencil-square" viewBox="0 0 16 16">
+                    <path
+                        d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                    <path fill-rule="evenodd"
+                        d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                </svg></a>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+        <div class="col-md-3 col-lg-3 px-md-4">
+            {% for c in chat %}
+            <form method="GET">
+                {% set path = ROOT_URL ~ "admin/pages/message/message.php?chat=" ~ c.id %}
+                {% if loop.index0 == 0 %}
+                <div class="card" style="cursor:pointer; width: 18rem;" onclick="location.href='{{path}}'">
+                    {% else %}
+                    <div class="card" style="cursor:pointer; width: 18rem; border-top:none;"
+                        onclick="location.href='{{path}}'">
+                        {% endif %}
+                        <div class="card-body">
+                            <p class="card-text">
+                            <div class="row">
+                                <div class="col-4 text-end">
+                                    {% if users[loop.index0].img != null %}
+                                    <img alt="immagine" width=70px class="rounded-circle"
+                                        src={{ROOT_URL}}{{users[loop.index0].img}}>
+                                    {% else %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width=70px fill="currentColor"
+                                        class="bi bi-people-fill" viewBox="0 0 16 16">
+                                        <path
+                                            d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M5.216 14A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216z" />
+                                        <path d="M4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z" />
+                                    </svg>
+                                    {% endif %}
+                                </div>
+                                <div class="col-7">
+                                    <div class="row">
+                                        <br>
+                                    </div>
+                                    <div class="row">
+                                        {% if users[loop.index0].img != null %}
+                                        <strong>
+                                            {% set string = users[loop.index0].name ~ " " ~ users[loop.index0].surname
+                                            %}
+                                            {{string}}
+                                        </strong>
+                                        {% else %}
+                                        <strong>Broadcast</strong>
+                                        {% endif %}
+                                    </div>
+
+                                </div>
+                            </div>
+                            </p>
+                        </div>
+                    </div>
+            </form>
+            {% endfor %}
+
+        </div>
+        <div class="col-lg-1 px-md-4"></div>
+        <div class="col-md-9 col-lg-8 px-md-4">
+            {% if chat_id != null %}
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-1">
+                            <img alt="immagine" width=40px class="rounded-circle" src={{ROOT_URL}}{{chatuser.img}}>
+                        </div>
+                        <div class="col-11" style="margin-top: 6px;">
+                            <strong>
+                                {% set string = chatuser.name ~ " " ~ chatuser.surname %}
+                                {{string}}
+                            </strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    {% for message in messages %}
+                    <p class="card-text">
+                    <h5>
+                        {% if message.broadcast == 0 %}
+                        <?php if($message['broadcast']==0) :?>
+                        <span class="badge rounded-pill bg-primary">
+                            {% else %}
+                            <span class="badge rounded-pill bg-success">
+                                {% endif %}
+                                {{message.message}}
+                            </span>
+                    </h5>
+                    <span style="font-size:smaller">
+                        {{ message.date }}
+                    </span>
+                    </p>
+
+                    {% endfor %}
+                    <div class="row">
+                        <hr>
+                        <form action="{{ROOT_URL}}admin/pages/message/send.php" method="POST">
+                            <input type="hidden" id="chat_id" name="chat_id" value={{chat_id}}>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="message" name="message"
+                                    placeholder="Cosa vuoi inviare?">
+                                <label for="floatingInput">Scrivi...</label>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm" value="Invia">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+
+</main>
+<div class="col-lg-1 px-md-4"></div>
+
+<!-- Finestra di dialogo per la scrittura della recensione -->
+<!-- Modal -->
+<form method="POST" action="{{ROOT_URL}}admin/pages/message/send.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-primary"><strong id="modalTitle">Scrivi un nuovo messaggio</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Seleziona utenti</p>
+                    <select class="form-select" aria-label="selezione utenti" aria-label="size 3" id="chat_id"
+                        name="chat_id">
+                        <option selected value="broadcast">Tutti</option>
+                        {% for c in chat %}
+                        <option value="{{c.id}}">
+                            {% set string = users[loop.index0].name ~ " " ~ users[loop.index0].surname
+                            %}
+                            {{string}}
+                        </option>
+                        {% endfor %}
+
+                    </select>
+                    <p></p>
+                    <p>Messaggio</p>
+                    <textarea class="form-control" name="message" id="message" name="message" rows="4"
+                        placeholder="Scrivi..."></textarea>
+                </div>
+
+                <div class="modal-footer">
+                    <button id="modalBtn" type="submit" class="btn btn-primary" name="add">Invia</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>

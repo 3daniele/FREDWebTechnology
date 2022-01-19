@@ -1,0 +1,67 @@
+<title>Preferiti</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    {% if user %}
+    <div class="row">
+        <h2 class="text-primary">
+            {{ "Benvenuto " ~ user }}
+        </h2>
+        <hr>
+    </div>
+    {% else %}
+    {% endif %}
+    <div class="row">
+        <div class="col-12">
+            {% if count %}
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Preferiti</span>
+            </h4>
+            <ul class="list-group mb-3">
+                {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between lh-sm p-4">
+                    <div class="row w-100">
+                        <div class="col-lg-3 col-6">
+                            <h6 class="my-0 text-primary">
+                                <strong>
+                                    {{ product.name }}
+                                </strong>
+                            </h6>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            {% for img in imgs %}
+                            {% if img['product_id'] == product.id %}
+                            <img src="{{ ROOT_URL ~ img['link'] }}" alt="immagine" width=100px></img>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+
+                        <div class="col-lg-3 col-6">
+                            <span class="text-muted">
+                                {{ product.small_description }}
+                                <a href="{{ ROOT_URL }}shop/single-product.php?product={{ product.id }}">continua</a>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-2 col-6">
+                            <span class="text-muted">
+                                {{ product.price ~ " €" }}
+                            </span>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <form method="POST" action="../../shop/wishlist-action.php">
+                                <button class="btn btn-outline-success btn-sm" name="addToCart" type="submit"
+                                    value="{{ product.id }}">Aggiungi al carrello</button><br><br>
+                                <button class="btn btn-outline-danger btn-sm" name="rimuovi" type="submit"
+                                    value="{{ product.id }}">Rimuovi</button>
+                            </form>
+                        </div>
+
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+            <p class="lead">Nessun elemento nella lista...</p>
+            <a href="{{ ROOT_URL }}shop?page=products-list" class="btn btn-primary btn-lg mb-5 mt-3">Vai
+                allo Shopping &raquo;</a>
+            {% endif %}
+        </div>

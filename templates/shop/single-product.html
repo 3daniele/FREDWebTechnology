@@ -1,0 +1,212 @@
+<span id="userID" hidden>{{userid}}</span>
+<span id="productID" hidden>{{product.id}}</span>
+
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        <div class="col-4">
+            <section style="width: 18rem;">
+                <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ROOT_URL}}{{thumbnail}}" class="d-block w-100" alt="...">
+                        </div>
+                        {% for img in imgs %}
+                        {% set c = ROOT_URL ~ img['link'] %}
+                        <div class="carousel-item">
+                            <img src="{{c}}" class="d-block w-100" alt="..." width: 18rem;>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <div class="col-8">
+            <h2 class="text-primary">{{product.name}}
+                <p class="valutazione">
+                    {{star|raw}}
+                </p>
+            </h2>
+            <hr>
+            <h4>
+                {{product.price}}
+            </h4>
+            <hr>
+            {{product.description|raw}}
+            <br><br><br>
+            <div class="row">
+                <div class="col-3">
+                    <form method="POST" action="./cart-action.php">
+                        <input type="hidden" name="singleProduct" value=1>
+                        <input type="text" class="form-control" name="productID" value={{product.id}} hidden>
+                        <button class="btn btn-outline-success btn-sm" name="product_id" type="submit"
+                            value={{product.id}}>Aggiungi al carrello</button>
+                    </form>
+                </div>
+                <div class="col-1">
+                    <form method="POST" action="./wishlist-action.php">
+                        <input type="text" class="form-control" name="productID" value={{product.id}} hidden>
+                        {% if email == null %}
+                        <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit" disabled
+                            value={{product.id}}>Preferiti</button>
+                        {% else %}
+                        <button class="btn btn-outline-primary btn-sm" name="wishlist" type="submit"
+                            value={{product.id}}>Preferiti</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row"><br></div>
+    <div class="row"><br></div>
+    <div class="row">
+        <!-- Tabella recensioni -->
+        <div class="col-12">
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary"><strong>Recensioni</strong></span>
+            </h4>
+
+            <div class="row">
+                <div class="col-lg-12 col-6">
+                    <form class="card p-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="floatingInput"
+                                placeholder="Cerca tra le recensioni">
+                            <!-- Button trigger modal -->
+                            {% if check %}
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                                data-whatever="update" {% if not email %} disabled {% endif %}>
+                                Modifica la tua recensione
+                            </button>
+                            {% else %}
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                                data-whatever="add" {% if not email %} disabled {% endif %}>
+                                Aggiungi una recensione
+                            </button>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <span id="reviews" hidden>
+                {{json_review|raw}}
+            </span>
+
+
+            {% if reviews == 0 %}
+
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm p-4">
+                    <div class="row w-100">
+                        <div class="col-lg-12 col-6">
+                            <h5 class="my-0 text-muted">Nessuna recensione presente, scrivi tu la prima!</h5>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+            {% else %}
+
+            {% for review in reviews %}
+            {% for user in users %}
+
+            {% set c = ROOT_URL ~ user.img %}
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm p-4">
+                    <div class="row w-100">
+                        <div class="col-lg-2 col-6 text-center">
+                            <img class="rounded-circle" src="{{c}}" alt="immagine" width=100px></img>
+                            </br>
+                            </br>
+                            <span class="my-0 text-primary"><small>
+                                    {{user.name}}
+                                </small></span>
+                        </div>
+                        <div class="col-lg-10 col-6">
+                            <h5 class="my-0 text-primary"><strong>
+                                    {{review.title}}
+                                </strong>
+                                <span class="valutazione">
+                                    
+                                    {% for i in 1..review.vote %}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
+                                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                                      </svg>
+                                    {% endfor %}
+                                    
+                                </span>
+                            </h5>
+                            <span class="my-0 text-muted"><small>
+                                    {{review.message}}
+                                </small></span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            {% endfor %}
+            {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+<!-- Finestra di dialogo per la scrittura della recensione -->
+<!-- Modal -->
+<form method="POST" action="./review-action.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-primary"><strong id="modalTitle">Inserisci una recensione</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Titolo</p>
+                    <input type="text" class="form-control" name="title" id="title" placeholder="Inserisci un titolo">
+                    <input type="text" class="form-control" name="productID" value={{product.id}} hidden>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <ul class="ratings">
+                            <li class="star" value="5"></li>
+                            <li class="star" value="4"></li>
+                            <li class="star" value="3"></li>
+                            <li class="star" value="2"></li>
+                            <li class="star" value="1"></li>
+                            <input type="hidden" name="vote" id="starValue" value=1></input>
+                        </ul>
+                    </div>
+                    <div class="modal-body">
+                        <p>Descrizione</p>
+                        <textarea class="form-control" name="message" id="message" rows="4"
+                            placeholder="Inserisci una recensione"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="modalBtn" type="submit" class="btn btn-primary" name="add">Invia</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

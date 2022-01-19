@@ -1,0 +1,71 @@
+<main class="col-md-9 col-lg-8 px-md-4">
+    <div class="row border-bottom">
+        <div class="col-4"><h2><strong class="text-primary">Prodotti</strong></h2></div>
+        <div class="col-4"></div>
+        <div class="col-2 text-end"><form>
+          <input type="search" class="form-control" placeholder="Cerca nella lista" aria-label="Search">
+        </form></div>
+        <div class="col-2 text-end"><a class="btn btn-primary" href="{{ROOT_URL}}admin/pages/product/new-product.php">Nuovo Prodotto</a>
+        </div>
+    </div>
+    <div class="card" style="border: none;">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-1">
+                    <h5><b>ID</b></h5>
+                </div>
+                <div class="col-2">
+                    <h5><b>Nome</b></h5>
+                </div>
+                <div class="col-3">
+                    <h5><b>Descrizione</b></h5>
+                </div>
+                <div class="col-2">
+                    <h5><b>Produttore</b></h5>
+                </div>
+                <div class="col-2 text-end">
+                    <h5><b>Prezzo</b></h5>
+                </div>
+                <div class="col-2 text-end">
+                    <h5><b>Giacenza</b></h5>
+                </div>
+            </div>
+            <hr>
+            {% for product in products %}
+            {% set path = "admin/pages/product/edit-product.php?product=" ~ product.id %}
+            {% if product.stock >= 20 %}
+                <div class="row" style="cursor:pointer" onclick="location.href='{{ROOT_URL}}{{path}}'">
+            {% else %}
+            {% if product.stock < 20 and product.stock >= 10 %}
+                    <div class="row text-warning" style="cursor:pointer" onclick="location.href='{{ROOT_URL}}{{path}}'">
+            {% else %}
+                    <div class="row text-danger" style="cursor:pointer" onclick="location.href='{{ROOT_URL}}{{path}}'">
+            {% endif %}
+            {% endif %}
+                
+                    <p class="card-text">
+                    <div class="col-1">
+                        {{product.id}}
+                    </div>
+                    <div class="col-2">
+                        {{product.name}}
+                    </div>
+                    <div class="col-3">
+                        {{product.small_description}}
+                    </div>
+                    <div class="col-2">
+                        {{manufacture[loop.index0].name}}
+                    </div>
+                    <div class="col-2 text-end">
+                        {{product.price}}€
+                    </div>
+                    <div class="col-2 text-end">
+                        {{product.stock}}
+                    </div>
+                    </p>
+                </div>
+                <hr>
+                {% endfor %}
+        </div>
+</main>
+<div class="col-lg-1 px-md-4"></div>

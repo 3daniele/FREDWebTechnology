@@ -1,0 +1,348 @@
+<title>Shop</title>
+
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                    aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                    aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                    aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="cursor:pointer;" onclick="location.href = '#1';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide1.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="text-primary"><strong>Lavandeto</strong></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
+                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '#2';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide2.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="text-primary"><strong>Oli essenziali</strong></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
+                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
+                        </p>
+                    </div>
+                </div>
+                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '#3';">
+                    <img src="{{ROOT_URL}}public/img/slider/slide3.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3 class="text-primary"><strong>Processo</strong></h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
+                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
+                            augue pellentesque, cursus lorem vel, scelerisque justo.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="row">
+        <br>
+        <br>
+    </div>
+
+    <!-- Più acquistati -->
+    <div class="row">
+        <div class="container my-4">
+            <div id="multi-item-top" class="carousel slide carousel-multi-item" data-ride="carousel">
+                <div class="row">
+                    <div class="col-md-6 col-lg-10">
+                        <span class="text-primary">
+                            <h4><strong>Più acquistati:</strong></h4>
+                        </span>
+                    </div>
+                    <div class="col-md-2 col-lg-2">
+                        <div class="controls-top text-end">
+                            <button class="btn btn-primary" type="button" data-bs-target="#multi-item-top"
+                                data-bs-slide="prev"> <em class="fa fa-arrow-left"></em>
+                            </button>
+                            <button class="btn btn-primary" type="button" data-bs-target="#multi-item-top"
+                                data-bs-slide="next"><em class="fa fa-arrow-right"></em>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-inner" role="listbox">
+                    {% for m in most %}
+                    {% if loop.index == 1 %}
+                    <div class="carousel-item active">
+                        <div class="row">
+                            {% else %}
+                            {% if loop.index0 is divisible by(4) %}
+                            <div class="carousel-item">
+                                <div class="row">
+                                    {% endif %}
+                                    {% endif %}
+                                    {% set c = ROOT_URL ~ m.img %}
+                                    {% set link = redirect ~ m.id %}
+                                    <div class="col-md-3 clearfix d-none d-md-block" style="cursor:pointer;"
+                                        onclick="location.href = '{{link}}';">
+                                        <div class="card mb-2">
+                                            <img class="card-img-top" src="{{c}}" height="304px" width="304px"
+                                                alt="Card image cap">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{m.name}}</h4>
+                                                <p class="card-text">{{m.small_description}}</p>
+                                                <p class="card-text"><strong>{{m.price}}€</strong></p>
+                                                <form method="POST" action="{{ROOT_URL}}shop/cart-action.php">
+                                                    <button class="btn btn-primary btn-sm" name="product_id"
+                                                        type="submit" value={{m.id}}><svg
+                                                            xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-cart-plus-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                        </svg></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {% if ((loop.index0 == 13) or (loop.index is divisible by(4))) %}
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Idee regalo -->
+            <div class="row">
+                <div class="container my-4">
+                    <div id="multi-item-regali" class="carousel slide carousel-multi-item" data-ride="carousel">
+                        <div class="row">
+                            <div class="col-md-6 col-lg-10">
+                                <span class="text-primary">
+                                    <h4><strong>Idee regalo:</strong></h4>
+                                </span>
+                            </div>
+                            <div class="col-md-2 col-lg-2">
+                                <div class="controls-top text-end">
+                                    <button class="btn btn-primary" type="button" data-bs-target="#multi-item-regali"
+                                        data-bs-slide="prev"> <em class="fa fa-arrow-left"></em>
+                                    </button>
+                                    <button class="btn btn-primary" type="button" data-bs-target="#multi-item-regali"
+                                        data-bs-slide="next"><em class="fa fa-arrow-right"></em>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-inner" role="listbox">
+                            {% for ide in idee %}
+                            {% if loop.index == 1 %}
+                            <div class="carousel-item active">
+                                <div class="row">
+                                    {% else %}
+                                    {% if loop.index0 is divisible by(4) %}
+                                    <div class="carousel-item">
+                                        <div class="row">
+                                            {% endif %}
+                                            {% endif %}
+                                            {% set c = ROOT_URL ~ ide.img %}
+                                            {% set link = redirect ~ ide.id %}
+                                            <div class="col-md-3 clearfix d-none d-md-block" style="cursor:pointer;"
+                                                onclick="location.href = '{{link}}';">
+                                                <div class="card mb-2">
+                                                    <img class="card-img-top" src="{{c}}" height="304px" width="304px"
+                                                        alt="Card image cap">
+                                                    <div class="card-body">
+                                                        <h4 class="card-title">{{ide.name}}</h4>
+                                                        <p class="card-text">{{ide.small_description}}</p>
+                                                        <p class="card-text"><strong>{{ide.price}}€</strong></p>
+                                                        <form method="POST" action="{{ROOT_URL}}shop/cart-action.php">
+                                                            <button class="btn btn-primary btn-sm" name="product_id"
+                                                                type="submit" value={{ide.id}}><svg
+                                                                    xmlns="http://www.w3.org/2000/svg" width="16"
+                                                                    height="16" fill="currentColor"
+                                                                    class="bi bi-cart-plus-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                </svg></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% if ((loop.index0 == ideeNumber) or (loop.index is divisible by(4))) %}
+                                        </div>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cura della persona -->
+                    <div class="row">
+                        <div class="container my-4">
+                            <div id="multi-item-cura" class="carousel slide carousel-multi-item" data-ride="carousel">
+                                <div class="row">
+                                    <div class="col-md-6 col-lg-10">
+                                        <span class="text-primary">
+                                            <h4><strong>Cura della persona:</strong></h4>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-2 col-lg-2">
+                                        <div class="controls-top text-end">
+                                            <button class="btn btn-primary" type="button"
+                                                data-bs-target="#multi-item-cura" data-bs-slide="prev"> <em
+                                                    class="fa fa-arrow-left"></em>
+                                            </button>
+                                            <button class="btn btn-primary" type="button"
+                                                data-bs-target="#multi-item-cura" data-bs-slide="next"><em
+                                                    class="fa fa-arrow-right"></em>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-inner" role="listbox">
+                                    {% for cu in cura %}
+                                    {% if loop.index == 1 %}
+                                    <div class="carousel-item active">
+                                        <div class="row">
+                                            {% else %}
+                                            {% if loop.index0 is divisible by(4) %}
+                                            <div class="carousel-item">
+                                                <div class="row">
+                                                    {% endif %}
+                                                    {% endif %}
+                                                    {% set c = ROOT_URL ~ cu.img %}
+                                                    {% set link = redirect ~ cu.id %}
+                                                    <div class="col-md-3 clearfix d-none d-md-block"
+                                                        style="cursor:pointer;" onclick="location.href = '{{link}}';">
+                                                        <div class="card mb-2">
+                                                            <img class="card-img-top" src="{{c}}" height="304px"
+                                                                width="304px" alt="Card image cap">
+                                                            <div class="card-body">
+                                                                <h4 class="card-title">{{cu.name}}</h4>
+                                                                <p class="card-text">{{cu.small_description}}</p>
+                                                                <p class="card-text"><strong>{{cu.price}}€</strong></p>
+                                                                <form method="POST"
+                                                                    action="{{ROOT_URL}}shop/cart-action.php">
+                                                                    <button class="btn btn-primary btn-sm"
+                                                                        name="product_id" type="submit"
+                                                                        value={{cu.id}}><svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            width="16" height="16" fill="currentColor"
+                                                                            class="bi bi-cart-plus-fill"
+                                                                            viewBox="0 0 16 16">
+                                                                            <path
+                                                                                d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                        </svg></button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {% if ((loop.index0 == curaNumber) or (loop.index is divisible
+                                                    by(4))) %}
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Lavanda -->
+                            <div class="row">
+                                <div class="container my-4">
+                                    <div id="multi-item-lavanda" class="carousel slide carousel-multi-item"
+                                        data-ride="carousel">
+                                        <div class="row">
+                                            <div class="col-md-6 col-lg-10">
+                                                <span class="text-primary">
+                                                    <h4><strong>Lavanda:</strong></h4>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-2 col-lg-2">
+                                                <div class="controls-top text-end">
+                                                    <button class="btn btn-primary" type="button"
+                                                        data-bs-target="#multi-item-lavanda" data-bs-slide="prev"> <em
+                                                            class="fa fa-arrow-left"></em>
+                                                    </button>
+                                                    <button class="btn btn-primary" type="button"
+                                                        data-bs-target="#multi-item-lavanda" data-bs-slide="next"><em
+                                                            class="fa fa-arrow-right"></em>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-inner" role="listbox">
+                                            {% for l in lavanda %}
+                                            {% if loop.index == 1 %}
+                                            <div class="carousel-item active">
+                                                <div class="row">
+                                                    {% else %}
+                                                    {% if loop.index0 is divisible by(4) %}
+                                                    <div class="carousel-item">
+                                                        <div class="row">
+                                                            {% endif %}
+                                                            {% endif %}
+                                                            {% set c = ROOT_URL ~ l.img %}
+                                                            {% set link = redirect ~ l.id %}
+                                                            <div class="col-md-3 clearfix d-none d-md-block"
+                                                                style="cursor:pointer;"
+                                                                onclick="location.href = '{{link}}';">
+                                                                <div class="card mb-2">
+                                                                    <img class="card-img-top" src="{{c}}" height="304px"
+                                                                        width="304px" alt="Card image cap">
+                                                                    <div class="card-body">
+                                                                        <h4 class="card-title">{{l.name}}</h4>
+                                                                        <p class="card-text">{{l.small_description}}</p>
+                                                                        <p class="card-text">
+                                                                            <strong>{{l.price}}€</strong></p>
+                                                                        <form method="POST"
+                                                                            action="{{ROOT_URL}}shop/cart-action.php">
+                                                                            <button class="btn btn-primary btn-sm"
+                                                                                name="product_id" type="submit"
+                                                                                value={{l.id}}><svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    width="16" height="16"
+                                                                                    fill="currentColor"
+                                                                                    class="bi bi-cart-plus-fill"
+                                                                                    viewBox="0 0 16 16">
+                                                                                    <path
+                                                                                        d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM9 5.5V7h1.5a.5.5 0 0 1 0 1H9v1.5a.5.5 0 0 1-1 0V8H6.5a.5.5 0 0 1 0-1H8V5.5a.5.5 0 0 1 1 0z" />
+                                                                                </svg></button>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {% if ((loop.index0 == lavandaNumber) or (loop.index is
+                                                            divisible
+                                                            by(4))) %}
+                                                        </div>
+                                                    </div>
+                                                    {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <br>
+                                        <br>
+                                    </div>

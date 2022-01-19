@@ -1,0 +1,257 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="chartjs-size-monitor">
+        <div class="chartjs-size-monitor-expand">
+            <div class=""></div>
+        </div>
+        <div class="chartjs-size-monitor-shrink">
+            <div class=""></div>
+        </div>
+    </div>
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h2><strong class="text-primary">Ordini</strong></h2>
+    </div>
+    <div class="row">
+        <div class="col-10">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#ricevuti">Ricevuti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#lavorazione">In Lavorazione</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#spediti">Spediti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#consegna">In consegna</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#consegnati">Consegnati</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active show" id="ricevuti">
+                    <br>
+                    <div class="card" style="border: none;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <h5><b>#</b></h5>
+                                </div>
+                                <div class="col-2">
+                                    <h5><b>Data</b></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5><b>Utente</b></h5>
+                                </div>
+                                <div class="col-5">
+                                    <h5><b>Indirizzo</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for order in ordiniRicevuti %}
+                            {% set path = redirect ~ order.id %}
+                            <div class="row" style="cursor:pointer" onclick="location.href='{{path}}'">
+                                <p class="card-text">
+                                <div class="col-1">
+                                    {{order.id}}
+                                </div>
+                                <div class="col-2">
+                                    {{order.date_order}}
+                                </div>
+                                <div class="col-4">
+                                    {% set utente = utentiR[loop.index0].name ~ ", " ~ utentiR[loop.index0].surname %}
+                                    {{utente}}
+                                </div>
+                                <div class="col-5">
+                                    {% set indirizzo = indirizziR[loop.index0].address ~ ", " ~ indirizziR[loop.index0].city_name ~ ", " ~ indirizziR[loop.index0].code ~ ", " ~ indirizziR[loop.index0].provinces_name %}
+                                    {{indirizzo}}
+                                </div>
+                                </p>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="lavorazione">
+                    <br>
+                    <div class="card" style="border: none;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <h5><b>#</b></h5>
+                                </div>
+                                <div class="col-2">
+                                    <h5><b>Data</b></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5><b>Utente</b></h5>
+                                </div>
+                                <div class="col-5">
+                                    <h5><b>Indirizzo</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for order in ordiniLavorazione %}
+                            {% set path = redirect ~ order.id %}
+                            <div class="row" style="cursor:pointer" onclick="location.href='{{path}}'">
+                                <p class="card-text">
+                                <div class="col-1">
+                                    {{order.id}}
+                                </div>
+                                <div class="col-2">
+                                    {{order.date_order}}
+                                </div>
+                                <div class="col-4">
+                                    {% set utente = utentiL[loop.index0].name ~ ", " ~ utentiL[loop.index0].surname %}
+                                    {{utente}}
+                                </div>
+                                <div class="col-5">
+                                    {% set indirizzo = indirizziL[loop.index0].address ~ ", " ~ indirizziL[loop.index0].city_name ~ ", " ~ indirizziL[loop.index0].code ~ ", " ~ indirizziL[loop.index0].provinces_name %}
+                                    {{indirizzo}}
+                                </div>
+                                </p>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="tab-pane fade" id="spediti">
+                    <br>
+                    <div class="card" style="border: none;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <h5><b>#</b></h5>
+                                </div>
+                                <div class="col-2">
+                                    <h5><b>Data</b></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5><b>Utente</b></h5>
+                                </div>
+                                <div class="col-5">
+                                    <h5><b>Indirizzo</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for order in ordiniSpedizione %}
+                            {% set path = redirect ~ order.id %}
+                            <div class="row" style="cursor:pointer" onclick="location.href='{{path}}'">
+                                <p class="card-text">
+                                <div class="col-1">
+                                    {{order.id}}
+                                </div>
+                                <div class="col-2">
+                                    {{order.date_order}}
+                                </div>
+                                <div class="col-4">
+                                    {% set utente = utentiS[loop.index0].name ~ ", " ~ utentiS[loop.index0].surname %}
+                                    {{utente}}
+                                </div>
+                                <div class="col-5">
+                                    {% set indirizzo = indirizziS[loop.index0].address ~ ", " ~ indirizziS[loop.index0].city_name ~ ", " ~ indirizziS[loop.index0].code ~ ", " ~ indirizziS[loop.index0].provinces_name %}
+                                    {{indirizzo}}
+                                </div>
+                                </p>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="consegna">
+                    <br>
+                    <div class="card" style="border: none;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <h5><b>#</b></h5>
+                                </div>
+                                <div class="col-2">
+                                    <h5><b>Data</b></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5><b>Utente</b></h5>
+                                </div>
+                                <div class="col-5">
+                                    <h5><b>Indirizzo</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for order in ordiniConsegna %}
+                            {% set path = redirect ~ order.id %}
+                            <div class="row" style="cursor:pointer" onclick="location.href='{{path}}'">
+                                <p class="card-text">
+                                <div class="col-1">
+                                    {{order.id}}
+                                </div>
+                                <div class="col-2">
+                                    {{order.date_order}}
+                                </div>
+                                <div class="col-4">
+                                    {% set utente = utentiC[loop.index0].name ~ ", " ~ utentiC[loop.index0].surname %}
+                                    {{utente}}
+                                </div>
+                                <div class="col-5">
+                                    {% set indirizzo = indirizziC[loop.index0].address ~ ", " ~ indirizziC[loop.index0].city_name ~ ", " ~ indirizziC[loop.index0].code ~ ", " ~ indirizziC[loop.index0].provinces_name %}
+                                    {{indirizzo}}
+                                </div>
+                                </p>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="consegnati">
+                    <br>
+                    <div class="card" style="border: none;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-1">
+                                    <h5><b>#</b></h5>
+                                </div>
+                                <div class="col-2">
+                                    <h5><b>Data</b></h5>
+                                </div>
+                                <div class="col-4">
+                                    <h5><b>Utente</b></h5>
+                                </div>
+                                <div class="col-5">
+                                    <h5><b>Indirizzo</b></h5>
+                                </div>
+                            </div>
+                            <hr>
+                            {% for order in ordiniConsegnati %}
+                            {% set path = redirect ~ order.id %}
+                            <div class="row" style="cursor:pointer" onclick="location.href='{{path}}'">
+                                <p class="card-text">
+                                <div class="col-1">
+                                    {{order.id}}
+                                </div>
+                                <div class="col-2">
+                                    {{order.date_order}}
+                                </div>
+                                <div class="col-4">
+                                    {% set utente = utentiCC[loop.index0].name ~ ", " ~ utentiCC[loop.index0].surname %}
+                                    {{utente}}
+                                </div>
+                                <div class="col-5">
+                                    {% set indirizzo = indirizziCC[loop.index0].address ~ ", " ~ indirizziCC[loop.index0].city_name ~ ", " ~ indirizziCC[loop.index0].code ~ ", " ~ indirizziCC[loop.index0].provinces_name %}
+                                    {{indirizzo}}
+                                </div>
+                                </p>
+                            </div>
+                            <hr>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+</main>

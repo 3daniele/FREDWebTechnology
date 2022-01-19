@@ -1,0 +1,79 @@
+<title>Sign-Up</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        <div class="col-4" style="margin-left: 9px;">
+            <main class="form-signin">
+                <form action="{{ ROOT_URL }}public/auth/register-action.php" method="POST">
+
+                    <h1 class="h3 mb-3 fw-normal">Registrazione</h1>
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="name" id="name" placeholder="Nome">
+                        <label for="floatingPassword">Nome</label>
+                        <span>
+                            <div class="errorLabel">
+                                <!--error message-->
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" name="surname" id="surname" placeholder="Cognome">
+                        <label for="floatingPassword">Cognome</label>
+                        <span>
+                            <div class="errorLabel">
+                                <!--error message-->
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <input type="email" class="form-control" name="email" id="email" placeholder="name@example.com">
+                        <label for="floatingInput">Indirizzo Email</label>
+                        <span>
+                            <div class="errorLabel">
+                                <!--error message-->
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="password" id="password"
+                            placeholder="Password">
+                        <label for="floatingPassword">Password</label>
+                        <span>
+                            <div class="errorLabel">
+                                <!--error message-->
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="form-floating">
+                        <input type="password" class="form-control" name="confPassword" id="confPassword"
+                            placeholder="Conferma Password">
+                        <label for="floatingPassword">Conferma Password</label>
+                        <span>
+                            <div class="errorLabel">
+                                <!--error message-->
+                            </div>
+                        </span>
+                    </div>
+                    <br>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="auth-cond" name="checkCond" id="checkCond"> Accetto le
+                            condizioni del sito
+                        </label>
+                    </div>
+                    <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="auth-data" name="checkData" id="checkData"> Acconsento al
+                            trattamento dei dati personali
+                        </label>
+                    </div>
+                    <button class="w-100 btn btn-lg btn-primary" type="submit">Registrati</button>
+                </form>
+            </main>
+        </div>
+
+        <div class="spazio" id="spazio_vuoto" style="margin-top: 110px;">

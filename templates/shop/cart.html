@@ -1,0 +1,101 @@
+<title>Carrello</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    {% if user %}
+    <div class="row">
+        <h2 class="text-primary">
+            {{ "Benvenuto " ~ user }}
+        </h2>
+        <hr>
+    </div>
+    {% else %}
+    <div class="row">
+        <a href="{{ ROOT_URL }}public/auth/pages/login.php" class="btn btn-primary">Loggati</a>
+        <hr>
+        <hr>
+    </div>
+    {% endif %}
+    <div class="row">
+        <div class="col-9">
+            {% if quantity > 0 %}
+            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                <span class="text-primary">Carrello</span>
+                <span class="badge bg-primary rounded-pill text-white">
+                    {{ quantity ~ " elementi nel carrello" }}
+                </span>
+            </h4>
+            <ul class="list-group mb-3">
+                {% set sum = 0 %}
+                {% for product in products %}
+                <li class="list-group-item d-flex justify-content-between lh-sm p-4">
+                    <div class="row w-100">
+                        <div class="col-lg-3 col-6">
+                            <h6 class="my-0 text-primary"><strong>
+                                    {{ product.name }}
+                                </strong></h6>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            {% for img in imgs %}
+                            {% if img['product_id'] == product.id %}
+                            <img src="{{ ROOT_URL ~ img['link'] }}" alt="immagine" width=100px></img>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <span class="text-muted">
+                                {{ product.price ~ " €" }}
+                            </span>
+                        </div>
+                        {% for item in items %}
+                        {% if item.product_id == product.id %}
+                        {% set singleProductSum = 0 %}
+                        <div class="col-lg-3 col-6">
+                            <form method="POST" action="../../shop/cart-action.php">
+                                <div class="cart-buttons btn-group" role="group">
+                                    <button name="minus" type="submit" class="btn btn-sm btn-primary"
+                                        value="{{ product.id }}">-</button>
+                                    <span class="text-muted">
+                                        {{ item.quantity }}
+                                    </span>
+                                    <button name="plus" type="submit" class="btn btn-sm btn-primary"
+                                        value="{{ product.id }}">+</button>
+                                    <input type="hidden" name="id" value="{{ item.id }}" />
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <strong class="text-primary">
+                                {% set singleProductSum = singleProductSum + (item.quantity * product.price) %}
+                                {% set sum = sum + (item.quantity * product.price) %}
+                                {{ singleProductSum|number_format(2) ~ " €"}}
+                            </strong>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm p-4">
+                    <div class="row w-100">
+                        <div class="col-lg-3 col-6">
+                            <h6 class="my-0 text-primary"><strong>Totale</strong></h6>
+                        </div>
+                        <div class="col-lg-7 col-6">
+                        </div>
+                        <div class="col-lg-2 col-6">
+                            <strong class="text-primary">
+                                {{ sum|number_format(2) ~ " €"}}
+                            </strong>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <hr>
+            <a href="{{ ROOT_URL }}shop/pages/checkout.php" class="btn btn-primary btn-block">Checkout</a>
+            {% else %}
+            <p class="lead">Nessun elemento nel carrello...</p>
+            <a href="{{ ROOT_URL }}shop?page=products-list'" class="btn btn-primary btn-lg mb-5 mt-3">Vai allo Shopping
+                &raquo;</a>
+            {% endif %}
+        </div>

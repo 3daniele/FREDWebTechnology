@@ -1,0 +1,97 @@
+
+<script type="text/javascript" src="{{ ROOT_URL }}assets/js/payment.js"></script>
+<title>Informazioni pagamento</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        {% if payments %}
+            {% for payment in payments %}
+                <div class="col-3">
+                    <div class="card mb-3">
+                        <h3 class="card-header text-center">
+                            Metodo
+                            {% if (payment['principal'] == 1) %} 
+                            {{ " predefinito" }}
+                            {% endif %}
+                        </h3>
+                        <li class="list-group-item"> Numero di carta: {{ payment['credit_card_number'] }}</li>
+                        <li class="list-group-item"> Scadenza: {{ payment['expiration1'] ~ "/" ~ payment['expiration2'] }}</li>
+                        <li class="list-group-item"> Cvv: <?php echo $payment['cvv'] ?></li>
+                        <div class="card-body text-center">
+                            <form method="POST" action="./payment-action.php">
+                                <input class="form-control" id="paymentID" name="paymentID" type="text" hidden value="{{ payment['id'] }}">
+                                {% if payment['principal'] == 0 %}
+                                    <button class="btn btn-outline-success btn-sm" name="principal" type="submit" value=1>Rendi metodo predefinito</button>
+                                {% else %}
+                                    <button class="btn btn-outline-success btn-sm" name="principal" type="submit" value=0>Rimuovi metodo predefinito</button>
+                                {% endif %}                             
+                                <button class="btn btn-outline-danger btn-sm" name="delete" type="submit" value="{{ payment['id'] }}">Elimina</button>                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Nessun metodo di pagamento presente...</p>
+        {% endif %}
+    </div>
+</div>
+<div class="container" id="main-area" style="margin-top: 25px; ">
+    <form action="./payment-action.php" method="POST">
+        <div class="row">
+            <div class="col-2">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" data-whatever="aggiungi">
+                    Aggiungi nuovo metodo
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Finestra di dialogo per l'aggiunta di un nuovo indirizzzo -->
+<!-- Modal -->
+<form method="POST" action="{{ ROOT_URL }}user/payment-action.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-primary"><strong id="modalTitle">Inserisci un nuovo metodo di pagamento</strong></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ ROOT_URL }}user/payment-action.php">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form-label">Numero di carta:</label><br>
+                                        <input class="form-control" id="credit_card_number" name="credit_card_number" type="text" placeholder="1234xxx">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <label class="form-label">Scadenza:</label><br>
+                                        <input class="form-control" id="expiration" name="expiration" type="text" placeholder="05/22">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <label class="form-label" for="disabledInput">Cvv:</label><br>
+                                        <input class="form-control" id="cvv" name="cvv" type="text" placeholder="123">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="modalBtn" class="btn btn-primary" name="add">Invia</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

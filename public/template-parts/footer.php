@@ -1,17 +1,10 @@
-<footer class="py-3 my-4">
-    <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Chi siamo</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Dove siamo</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Cookie Policy</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Privacy Policy</a></li>
-        <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Contatti</a></li>
-    </ul>
-    <p class="text-center text-muted">© 2017-2021 FRED</p>
-</footer>
-<script src="https://bootswatch.com/_vendor/jquery/dist/jquery.min.js"></script>
-<script src="https://bootswatch.com/_vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://bootswatch.com/_vendor/prismjs/prism.js"></script>
-<script src="https://bootswatch.com/_assets/js/custom.js"></script>
-</body>
+<?php 
 
-</html>
+include "../inc/init.php";
+
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/public/template-parts');
+$twig = new \Twig\Environment($loader, []);
+
+echo $twig->render('footer.html', [
+    'ROOT_URL' => ROOT_URL,
+]);

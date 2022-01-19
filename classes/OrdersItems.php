@@ -13,6 +13,7 @@ class OrdersItemsManager extends DbManager {
   }
 
   public function getItems($orderID) {
-    return $this->db->query("SELECT * FROM Orders_items WHERE order_id = $orderID");
+    $result = $this->db->query("SELECT * FROM Orders_items WHERE order_id = $orderID");
+    return $result;
   }
 }

@@ -1,0 +1,68 @@
+<title>Ordini</title>
+<div class="container" id="main-area" style="margin-top: 70px;">
+    <div class="row">
+        {% if orders %}
+        {% for i in 0..size-1 %}
+        <div class="col-12">
+            <div class="card mb-3">
+                <a href="{{ ROOT_URL }}user/order-details.php?order={{ orders[i].id }}" class="btn text-start">
+                    <div>
+                        <h3 class="card-header text-center">
+                            <strong>Ordine effettuato il </strong>
+                            <strong>{{ dates[i] }}</strong>
+                        </h3>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-1 col-1"></div>
+                        <div class="col-lg-8 col-2">
+                            <strong class="text-primary">Stato ordine:</strong>
+                            <strong>{{ orders[i]['status'] }}<br></strong>
+                        </div>
+                        <div class="col-lg-2 col-9">
+                            <strong class="text-primary"> Totale ordine : </strong>
+                            <strong>{{ sums[i][0]['totale'] }}</strong>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-1"></div>
+                        <div class="col-9">
+                            <div class="col-12">
+                                <h4><strong class="text-primary">Prodotti:</strong></h4>
+                                <br>
+                                <ul class="list-group mb-3">
+                                    {% for j in 0..sizeItems[i]-1 %}
+                                    {% set singleProductSum = 0 %}
+                                    <li class="list-group-item d-flex" style="border:none; margin-left: 0px;">
+                                        <div class="col-lg-3 col-6">
+                                            <img src="{{ ROOT_URL ~ imgs[i][j]['link'] }}" alt="immagine" width=100px
+                                                class="rounded-circle"></img>
+                                        </div>
+                                        <div class="col-lg-4 col-6">
+                                            <h6 class="my-0 ">
+                                                <strong>{{ products[i][j].name }}</strong>
+                                            </h6>
+                                        </div>
+                                        <div class="col-lg-2 col-6">
+                                            <strong class="text-primary">
+                                                {% set singleProductSum = singleProductSum + (items[i][j].quantity *
+                                                products[i][j].price) %}
+                                                {{ singleProductSum|number_format(2) ~ " €"}}
+                                            </strong>
+                                        </div>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Nessun ordine presente...</p>
+        {% endif %}
+    </div>
+</div>
