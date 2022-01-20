@@ -2,7 +2,7 @@
 
 <div class="container" id="main-area" style="margin-top: 25px; ">
    
-    <form action="" method="POST">
+    <form  method="POST" action="{{ROOT_URL}}user/accountUpdate.php" >
         <div class="row">
 
             <div class="col-7">
@@ -11,21 +11,21 @@
                     <h4><label class="form-label">Informazioni personali:</label></h4>
                     <hr>
                     <label class="form-label">Nome</label>
-                    <input class="form-control" id="disabledInput" type="text" value= {{ user[0]['name'] }}> 
+                    <input class="form-control" id="name_user"  name= "name_user" type="text" value= {{ user[0]['name'] }}> 
                     <label class="form-label" for="disabledInput">Cognome</label>
-                    <input class="form-control" id="disabledInput" type="text" value={{ user[0]['surname'] }}>
+                    <input class="form-control" id="surname_user" name= "surname_user" type="text" value={{ user[0]['surname'] }}>
                     <label class="form-label" for="disabledInput">Email</label>
-                    <input class="form-control" id="disabledInput" type="text" value={{ user[0]['email'] }}>
+                    <input class="form-control" id="email_user" name="email_user" type="text" value={{ user[0]['email'] }}>
 
                     <br><br>
                     <h4><label class="form-label">Aggiorna password</label></h4>
                     <hr>
                     <label class="form-label">Password attuale</label>
-                    <input class="form-control" id="disabledInput" type="password" value="">
+                    <input class="form-control" id="password" name= "password" type="password" value="">
                     <label class="form-label" for="disabledInput">Nuova password</label>
-                    <input class="form-control" id="disabledInput" type="password" value="********">
+                    <input class="form-control" id="new_password" name ="new_password" type="password" value="********">
                     <label class="form-label" for="disabledInput">Conferma password</label>
-                    <input class="form-control" id="disabledInput" type="password" value="********">
+                    <input class="form-control" id="new_password2" name ="new_password2" type="password" value="********">
 
              
             </div>
