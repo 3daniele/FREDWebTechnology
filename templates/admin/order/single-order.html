@@ -1,0 +1,154 @@
+<main class="col-md-9 col-lg-8 px-md-4">
+    <div class="container" id="main-area" style="margin-top: 70px;">
+        <form action="{{ROOT_URL}}admin/pages/order/update-order.php" method="post">
+            <input type="hidden" class="form-control" id="orderID" name="orderID" value={{ order.id }}></input>
+            <div class="row">
+                <div class="col-12">
+                    <div class="card mb-3">
+                        <div>
+                            <h3 class="card-header text-center">
+                                <strong>Ordine effettuato il </strong>
+                                <strong>{{ date }}</strong>
+                            </h3>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <strong class="text-primary"> Ordine numero: </strong>
+                                    </div>
+                                    <div class="col-lg-3 col-4">
+                                        <div class="form-group">
+                                            {{order.id}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <strong class="text-primary"> Stato ordine: </strong>
+                                    </div>
+                                    <div class="col-lg-3 col-4">
+                                        <div class="form-group">
+                                            <select class="form-select" id="status" name="status">
+                                                <option value="Ordine ricevuto" {% if order['status']=="Ordine ricevuto"
+                                                    %} selected {% endif %}>Ordine ricevuto</option>
+                                                <option value="In lavorazione" {% if order['status']=="In lavorazione"
+                                                    %} selected {% endif %}>In lavorazione</option>
+                                                <option value="Spedito" {% if order['status']=="Spedito" %} selected {%
+                                                    endif %}>Spedito</option>
+                                                <option value="In consegna" {% if order['status']=="In consegna" %}
+                                                    selected {% endif %}>In consegna</option>
+                                                <option value="Consegnato" {% if order['status']=="Consegnato" %}
+                                                    selected {% endif %}>Consegnato</option>
+                                                {{ order['status'] }}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <strong class="text-primary"> In arrivo entro il: </strong>
+                                    </div>
+                                    <div class="col-lg-3 col-4">
+                                        <input type="date" class="form-control" placeholder="data di consegna"
+                                            id="stimate" name="stimate" value={{ order.stimate_delivery }}></input>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <strong class="text-primary">Indizzo consegna: </strong>
+                                    </div>
+                                    <div class="col-lg-4 col-4">
+                                        <h6 class="my-0 ">
+                                            {{ address['address'] ~ ', ' ~ address['city_name'] ~ ', ' ~
+                                            address['provinces_name'] ~ ' ' ~
+                                            address['code'] }}
+                                        </h6>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <strong class="text-primary"> Numero di spedizione: </strong>
+                                    </div>
+                                    <div class="col-lg-3 col-4">
+
+                                        <input type="text" class="form-control" placeholder="Traking information"
+                                            id="tracking_info" name="tracking_info"
+                                            value="{{ order['tracking_information'] }}"></input>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <button type="submit" class="btn btn-primary mb-3">Aggiorna</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-1 col-1"></div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="col-lg-3 col-4">
+                                        <h4><strong class="text-primary">Prodotti:</strong></h4>
+                                    </div>
+                                </div>
+                                {% for product in products %}
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-4">
+                                        {{product.name}}
+                                    </div>
+                                    <div class="col-lg-2 col-4">
+                                        <img src="{{ROOT_URL}}{{imgs[loop.index0].link}}" width=100px height=100px
+                                            class="rounded-circle">
+                                    </div>
+                                    <div class="col-lg-2 col-4 text-end">
+                                        {{quantity[loop.index0].quantity}}
+                                    </div>
+                                </div>
+                                <br>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>

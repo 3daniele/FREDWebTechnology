@@ -73,4 +73,9 @@ class OrdersManager extends DbManager
   {
     return $this->db->query("SELECT * FROM Orders WHERE status='Consegnato' ORDER BY id DESC");
   }
+
+  public function updateOrder($orderID, $status, $stimate, $traking_info)
+  {
+    $this->db->execute("UPDATE Orders SET stimate_delivery = '$stimate', status = '$status', tracking_information = '$traking_info' WHERE id = '$orderID'");
+  }
 }
