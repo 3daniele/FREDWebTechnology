@@ -80,4 +80,10 @@ class UserManager extends DbManager
   {
     return $this->db->query("SELECT *FROM User ORDER BY name");
   }
+
+  /* Aggiornamento */
+
+  public function updateUser($id,$name, $surname, $email, $password){
+    $this->db->query("UPDATE User SET name = '$name', surname = '$surname', email ='$email', password = '$password'  WHERE id =$id");
+  }
 }

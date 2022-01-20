@@ -1,0 +1,136 @@
+<div class="container" id="main-area">
+    <div class="row">
+        <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <div class="col-4">
+                <h2><strong class="text-primary">Supporto</strong></h2>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-2">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal"
+                    data-whatever="aggiungi">
+                    Apri un nuovo ticket
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#open">Aperti</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#close">Chiusi</a>
+                </li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active show" id="open">
+                    <br>
+                    {% if openTicket %}
+                    {% for ticket in openTicket %}
+                    {% set c = redirect ~ ticket.id %}
+                    <div class="card" style="cursor:pointer;" onclick="location.href = '{{c}}';">
+                        <div class="card-header">
+                            {{ticket.object}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ticket.message}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    {% else %}
+                    <div class="card" style="cursor:pointer;">
+                        <div class="card-header">
+                            Non ci sono ticket aperti!
+                        </div>
+                    </div>
+                    <hr>
+                    {% endif %}
+                </div>
+                <div class="tab-pane fade" id="close">
+                    <br>
+                    {% if closeTicket %}
+                    {% for ticket in closeTicket %}
+                    {% set c = redirect ~ ticket.id %}
+                    <div class="card" style="cursor:pointer;" onclick="location.href = '{{c}}';">
+                        <div class="card-header">
+                            {{ticket.object}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{ticket.message}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                    {% else %}
+                    <div class="card" style="cursor:pointer;">
+                        <div class="card-header">
+                            Non ci sono ticket chiusi!
+                        </div>
+                    </div>
+                    <hr>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Finestra di dialogo per l'aggiunta di un nuovo indirizzzo -->
+<!-- Modal -->
+<form method="POST" action="{{ ROOT_URL }}user/support-action.php">
+    <div class="modal" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="text-primary"><strong id="modalTitle">Apri nuovo ticket</strong>
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{{ ROOT_URL }}user/support-action.php">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form-label">Oggetto:</label><br>
+                                        <input class="form-control" id="object" name="object"
+                                            type="text" placeholder="Oggetto">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form-label">Messaggio:</label><br>
+                                        <input class="form-control" id="message" name="message" type="text-area" style="width: 100%; height: 100px;"placeholder="Messaggio">
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <label class="form-label" for="disabledInput">Seleziona ordine:</label><br>
+                                        <div class="form-group">
+                                            <select class="form-select" id="orderid" name="orderid">
+                                                <option value="NULL" selected>Nessuno</option>
+                                                {% for order in orders %}
+                                                <option value="{{order.id}}">Ordine #: {{order.id}}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" id="modalBtn" class="btn btn-primary" name="add">Invia</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

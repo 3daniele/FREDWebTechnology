@@ -1,0 +1,67 @@
+<div class="container" id="main-area">
+    <input type="text" hidden="hidden" id="id" name="id" value={{ticket.id}} style="visibility: none;"></input>
+    <div class="row border-bottom">
+        <div class="col-4">
+            <h2><strong class="text-primary">Ticket numero:
+                    {{ticket.id}}
+                </strong></h2>
+        </div>
+        <div class="col-4">
+            <h2 class="text-primary">Aperto:{{ticket.date}}
+            </h2>
+        </div>
+        <div class="col-4">
+            <h2 class="text-primary text-end">Status: {% if ticket.status == 0 %} Aperto {% else %} Chiuso {% endif %}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <br>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            {% if ticket.order_id != null %}
+            <div class="row">
+                <span class="text-primary">
+                    <h4><strong>Data ordine:</strong></h4>
+                </span>
+            </div>
+            <div class="row">
+                <input class="form-control" disabled id="name" name="name" type="text"
+                    value={{order.date_order}}></input>
+            </div>
+            <hr>
+            {% endif %}
+            <div class="row">
+                <span class="text-primary">
+                    <h4><strong>Oggetto:</strong></h4>
+                </span>
+            </div>
+            <div class="row">
+                <input class="form-control" id="object" name="object" type="text" value={{ticket.object}}
+                    disabled></input>
+            </div>
+            <hr>
+            <div class="row">
+                <span class="text-primary">
+                    <h4><strong>Descrizione:</strong></h4>
+                </span>
+            </div>
+            <div class="row">
+                <textarea class="form-control" id="description" name="description" type="text-area"
+                    style="width: 100%; height: 250px; " disabled>{{ticket.message}}</textarea>
+            </div>
+            <hr>
+            <div class="row">
+                <span class="text-primary">
+                    <h4><strong>Risposta:</strong></h4>
+                </span>
+            </div>
+            <div class="row">
+                <textarea class="form-control" id="answer" name="answer" type="text-area"
+                    style="width: 100%; height: 150px; " disabled>{{answer}}</textarea>
+            </div>
+            <hr>
+        </div>
+    </div>
+</div>

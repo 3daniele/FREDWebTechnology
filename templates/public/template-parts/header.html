@@ -8,7 +8,7 @@
                     <li><a href="{{ ROOT_URL }}" class="nav-link px-2 link-secondary"><img
                                 src="{{ ROOT_URL }}public/img/logo.jpg" alt="BIO" width="300px"></img></a></li>
                 </ul>
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{{ ROOT_URL }}shop" method="GET">
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" action="{{ ROOT_URL }}shop/search.php" method="POST">
                     <input type="search" name="search" class="form-control" placeholder="Cerca..." aria-label="Search">
                 </form>
 
@@ -39,7 +39,7 @@
                                 <img src="{{ ROOT_URL }}public/img/star.png" alt="" width="16" height="16">Preferiti</a>
                         </li>
                         <li>
-                            <a class="dropdown-item d-flex gap-2 align-items-center" href="#">
+                            <a class="dropdown-item d-flex gap-2 align-items-center" href="{{ROOT_URL}}user/support.php">
                                 <img src="{{ ROOT_URL }}public/img/support.png" alt="" width="16" height="16">
                                 Supporto
                             </a>
