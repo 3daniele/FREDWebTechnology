@@ -26,6 +26,9 @@ class ProductCategoryManager extends DBManager
     return $this->db->query("SELECT DISTINCT id, name, description, small_description, price, img FROM productcategory ORDER BY price DESC LIMIT 14");
   }
 
+  public function getCategoryByProduct($productId){
+    return $this->db->query("SELECT *FROM productcategory WHERE id = '$productId'");
+  }
   
   
 }
