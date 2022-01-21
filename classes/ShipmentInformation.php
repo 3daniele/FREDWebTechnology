@@ -44,6 +44,11 @@ class ShipmentInformationManager extends DbManager
     return $this->db->query("SELECT * FROM address WHERE user = '$userid'");
   }
 
+  public function getFatturazionePrincipale ($userid)
+  {
+    return $this->db->query("SELECT * FROM Shipment_information WHERE user_id = '$userid' AND principal = 1 LIMIT 1");
+  }
+
   public function addShipmentInformation($userID, $regionID, $provinceID, $cityID, $code, $address)
   {
     return $this->db->query("INSERT INTO Shipment_information (user_id, region, province, city, code, address) VALUES($userID, $regionID, $provinceID, $cityID, '$code', '$address')");
@@ -59,11 +64,16 @@ class ShipmentInformationManager extends DbManager
     return $this->db->query("UPDATE Shipment_information SET principal = $principal WHERE id = $id");
   }
 
+ 
+
   public function remove($shipmentInfoID)
   {
     return $this->delete($shipmentInfoID);
   }
+  
 }
+
+
 
 class AddressManager extends DBManager
 {

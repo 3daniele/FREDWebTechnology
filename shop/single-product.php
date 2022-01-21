@@ -28,6 +28,8 @@ if ($product->name == "") {
 
 <?php
 $imgMgr = new ImgManager();
+$categoryMgr = new ProductCategoryManager();
+
 $img = $imgMgr->get_thumbnail($product->id);
 $imgs = $imgMgr->get_all_photo($product->id);
 
@@ -79,6 +81,8 @@ foreach($reviews as $review){
     array_push($user, $userMgr->get($review['user_id']));
 }
 
+$category = $categoryMgr->getCategoryByProduct($productid);
+
 
 
 $loader = new \Twig\Loader\FilesystemLoader('../templates/shop/');
@@ -95,7 +99,8 @@ echo $twig->render('single-product.html', [
     'check' => $check,
     'json_review' => $json_review,
     'reviews' => $reviews,
-    'users' =>$user
+    'users' =>$user,
+    'category' => $category
 
 ]);
 

@@ -1,4 +1,18 @@
 <title>Login</title>
+
+<!--div per stampare a video eventuali messaggi di errori-->
+{% if error %}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <div class="alert alert-dismissible alert-danger text-center">
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            <strong>Password errata!</strong>
+        </div>
+    </div>
+</div>
+{% endif %}
+
 <div class="container" id="main-area" style="margin-top: 25px;">
     <div class="row">
         <div class="col-4" style="margin-left: 9px;">

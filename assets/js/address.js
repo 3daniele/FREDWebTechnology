@@ -39,6 +39,12 @@ $(document).ready(function () {
 
             $('#modalTitle').text('Modifica il tuo indirizzo');
 
+            $("#regione").empty();
+            $('#regione').append('<option value="' + 0 + '">' + 'Seleziona la regione' + '</option>');
+            for (let i in regions) {
+                $('#regione').append('<option value="' + regions[i].id + '">' + regions[i].name + '</option>');
+            }
+
             $('#provincia').attr('disabled', true);
             $('#comune').attr('disabled', true);
             $('#cap').attr('disabled', true);
