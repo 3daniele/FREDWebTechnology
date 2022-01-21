@@ -1,23 +1,67 @@
-<?php 
-
+<?php
 include "../inc/init.php";
 
 include ROOT_PATH . "public/template-parts/title.php";
 
-include ROOT_PATH . 'public/template-parts/header.php'; 
+echo "<title>Ricerca</title>";
 
+include ROOT_PATH . 'public/template-parts/header.php';
 
-if (isset($_POST["search"])) {
-    $search = $_POST["search"];
+include ROOT_PATH . 'shop/searchBar.php';
+
+if (isset($_GET["search"])) {
+    $search = $_GET["search"];
 }
 
-echo $search;
+$categorie = array();
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates/shop');
-$twig = new \Twig\Environment($loader, []);
+if (isset($_POST["selezionato"])) {
+    $all = $_POST["selezionato"];
+    foreach ($all as $i)
+        array_push($categorie, $i);
+        $search = $_POST['search'];
+}
 
-echo $twig->render('search.html', [
-    'ROOT_URL' => ROOT_URL
-]);
+$categoryMgr = new CategoryManager();
 
-include ROOT_PATH . 'public/template-parts/footer.php';
+$category = $categoryMgr->getAll();
+
+$productCategoryMgr = new ProductCategoryManager();
+$products = $productCategoryMgr->search($search);//ricerca tramite nome cercato
+
+$provvisori = array();
+foreach($categorie as $cat){
+    array_push($provvisori,$productCategoryMgr->search($cat));
+}
+var_dump($provvisori[0][0]);
+
+
+/*
+foreach($provvisori as $p){
+    if(!in_array($p, $products)){
+        array_push($products,$p);
+    }    
+}
+*/
+
+$imgMgr = new ImgManager();
+$img = array();
+
+
+
+    $loader = new \Twig\Loader\FilesystemLoader('../templates/shop');
+    $twig = new \Twig\Environment($loader, []);
+
+    echo $twig->render('search.html', [
+        'ROOT_URL' => ROOT_URL,
+        'search' => $search,
+        'product' => $products,
+        'selected' => $categorie,
+        'category' => $category,
+        'provvisori' => $provvisori,
+        'redirect' => ROOT_URL . "shop/single-product.php?product=",
+        'REQUEST_URI' => $_SERVER['REQUEST_URI']
+    ]);
+
+    include ROOT_PATH . 'public/template-parts/footer.php';
+
