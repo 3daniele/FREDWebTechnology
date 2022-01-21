@@ -19,6 +19,10 @@ if (substr($_SERVER['REQUEST_URI'], 0, 39) == "/FREDWebTechnology/admin/pages/su
     $request = substr($_SERVER['REQUEST_URI'], 0, 39);
 }
 
+if (substr($_SERVER['REQUEST_URI'], 0, 39) == "/FREDWebTechnology/admin/pages/article/"){
+    $request = substr($_SERVER['REQUEST_URI'], 0, 39);
+}
+
 if (substr($_SERVER['REQUEST_URI'], 0, 39) == "/FREDWebTechnology/admin/pages/message/"){
     $request = substr($_SERVER['REQUEST_URI'], 0, 39);
 }
