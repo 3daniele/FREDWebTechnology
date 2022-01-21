@@ -21,7 +21,7 @@
                         <div class="col-4"></div>
                         <div class="col-5 text-end">
                             {% if ticket.order_id != null %}
-                            <input class="btn btn-primary" type="submit" value="Visualizza ordine"></input>
+                            <a href="{{ROOT_URL}}admin/pages/order/single-order.php?order={{ticket.order_id}}" class="btn btn-primary">Visualizza ordine</a>
                             {% endif %}
                         </div>
                         {% if ticket.status == 1 %}

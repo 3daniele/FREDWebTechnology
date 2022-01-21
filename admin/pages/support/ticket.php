@@ -46,6 +46,7 @@ $loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/admin/support
 $twig = new \Twig\Environment($loader, []);
 
 echo $twig->render('ticket.html', [
+    'ROOT_URL' => ROOT_URL,
     'ticket' => $ticket,
     'order' => $order,
     'answer' => $answer,
