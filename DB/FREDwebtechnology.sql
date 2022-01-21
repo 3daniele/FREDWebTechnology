@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Gen 20, 2022 alle 19:14
+-- Creato il: Gen 21, 2022 alle 21:02
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `Answer` (
 
 INSERT INTO `Answer` (`id`, `support_id`, `admin_id`, `message`) VALUES
 (5, 1, 1, ''),
-(25, 3, 1, '');
+(25, 3, 1, 'Abbiamo provveduto a chiudere il suo ticket');
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,7 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `cart_id` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart_item`
@@ -143,7 +143,9 @@ INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 (39, 21, 118, 1),
 (40, 22, 118, 1),
 (41, 24, 118, 1),
-(43, 27, 118, 1);
+(43, 27, 118, 1),
+(45, 6, 121, 1),
+(46, 6, 117, 2);
 
 -- --------------------------------------------------------
 
@@ -175,8 +177,7 @@ INSERT INTO `Category` (`id`, `name`, `description`) VALUES
 (10, 'Idee regalo', '!'),
 (11, 'Lavanda', '!'),
 (12, 'Rosmarino', '!'),
-(13, 'Timo', '!'),
-(14, 'Prova', '!!');
+(13, 'Timo', '!');
 
 -- --------------------------------------------------------
 
@@ -203,7 +204,6 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 (3, 116, 4),
 (4, 116, 11),
 (5, 116, 12),
-(116, 116, 14),
 (9, 117, 3),
 (11, 117, 10),
 (10, 117, 11),
@@ -8747,7 +8747,7 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (117, 'Crema Corpo Bio', 'La Crema Corpo Biologica di Verde Naturale, grazie alla presenza dell’olio essenziale di Lavanda Officinale e dell’Olio d’Argan, idrata e nutre ogni tipo di pelle garantendone la corretta fisiologia, prevenendone l’invecchiamento cutaneo e la formazione di smagliature.\r\n<br><br>\r\nQuesta crema è eco-friendly: non testata sugli animali e senza sostanze aggressive e tossiche.', '19.70', 100, 1, 'La Crema Corpo Biologica di Verde Naturale, idrata e nutre ogni tipo di pelle garantendone la fisiologia'),
 (118, 'Crema Lavanda Bio', 'La Crema Lavanda Bio di Verde Naturale, grazie alla presenza di olii vegetali biologici(di Lavanda Officinale, d’Argan, d’oliva) ha un forte effetto emolliente ed idratante.<br>\r\nE’ indicata per tutti i tipi di pelle, in particolare per riequilibrare la corretta fisiologia delle pelli secche.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '10.35', 100, 1, 'La Crema Lavanda Bio di Verde Naturale, grazie alla presenza di olii vegetali biologici ha un effetto idratante.'),
 (119, 'Crema Viso Elicriso', 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso e Lavanda (di nostra produzione) è idratante, lenitiva, emoliente e tonica. <br>Gli oli essenziali scelti hanno un’azione delicata purificante e normalizzante cutanea.<br>\r\nÈ adatta ad ogni tipo di pelle, anche alle più sensibili.\r\n<br><br>\r\nConfezione da 50 ml\r\n', '16.60', 100, 1, 'La Crema Viso di Verde Naturale, grazie alla presenza degli oli essenziali di Elicriso è idratante, lenitiva e tonica. '),
-(120, 'Diffusore Ambientale', 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. <br>Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n', '8.30', 100, 1, 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. '),
+(120, 'Diffusore Ambientale', 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze diverse. <br>Grazie alla loro composizione priva di sostanze chimiche o sintetiche sono assolutamente sicuri per la salute: il 100% degli ingredienti è Bio.<br>\r\nNella confezione, oltre al contenitore in vetro, troverete 6 bastoncini (circa) necessari per l\'utilizzo.\r\n<br>\r\nModalità d\'uso: aprire il flacone, inserire i bastoncini. Di tanto in tanto estrarre i bastoncini, capovolgerli ed inserire nel flacone la parte dei bastoncini che non è stata a contatto con il liquido fino a quel momento.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda Officianale<br>\r\n- Lavanda<br>\r\n- Lavanda & Rosmarino<br>\r\n- Menta<br>\r\n- Agrumi<br>\r\n', '8.30', 100, 1, 'I diffusori per ambienti di Verde Naturale sono dei profumatori per ambienti disponibili in 6 fragranze. '),
 (121, 'Oli essenziali', 'Oli essenziali Biologici prodotti da Verde Naturale.<br>\r\n', '28.95', 100, 1, 'Oli essenziali Biologici prodotti da Verde Naturale, disponibili in diverse fragranze e formati.'),
 (122, 'Profumauto', 'Immagina di entrare in macchina ed essere travolto dalla delicatezza della lavanda, dalla freschezza della menta, o dall’intensità dell’alloro e del cipresso.. e ora immagina che non serva immaginarlo: i nostri Profumauto, naturali al 100%, sono pensati proprio per questo!\r\n<br>\r\nI piccoli flaconcini in vetro contengono 5 ml di olio essenziale puro che viene assorbito e diffuso nell’aria da un apposito tappo in legno, provvisto di gancio e nastro per appendere il prodotto all’auto.\r\n<br><br>\r\nÈ possibile scegliere tra:<br>\r\n- Lavanda<br>\r\n- Lavanda Officinale<br>\r\n- Menta<br>\r\n- Cipresso<br>\r\n- Alloro<br>\r\n- Rosmarino<br>', '6.20', 100, 1, 'Deodoranti ambientali per auto, contengono 5 ml di olio essenziale ed è disponibile i 6 fragranze diverse.'),
 (123, 'Sacchetti profumati', 'Sacchetti cuciti a mano contenenti fiori essicati di lavanda.<br>\r\nIdeali per profumare i capi e proteggerli dalle tarme.', '2.00', 100, 1, 'Sacchetti cuciti a mano contenenti fiori essicati di lavanda. Ideali per profumare i capi.'),
@@ -8758,7 +8758,7 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (128, 'Cura della persona N°1', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale?<br>\r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:\r\n<br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Bagno Doccia BIO Lavanda (200 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Sapone Liquido Mani BIO Lavanda (250 ml) <br><br>\r\n\r\nNel prezzo è inclusa la scatola.', '28.00', 100, 1, 'Shampoo, bagno doccia, balsamo e sapone liquido per mani in una sola confezione.'),
 (129, 'Cura della persona N°2', 'In questa confezione trovi:\r\n<br>\r\n- Burrocacao Lavanda & Elicriso<br>\r\n- Shampoo BIO Rosmarino (100 ml)<br>\r\n- Bagno Doccia BIO Lavanda (100 ml)<br>\r\n- Balsamo BIO (200 ml)<br>\r\n- Latte Detergente (250 ml)<br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.00', 8, 1, 'Burrocacao, shampoo, bagno doccia, balsamo e latte detergente in un\'unica confezione.'),
 (130, 'Cura della persona N°3', 'In questa confezione trovi:<br>\r\n\r\n- Deodorante Spray BIO con Bicarbonato, Agrumi e Lavanda <br>\r\n- Shampoo BIO Lavanda (200 ml)<br>\r\n- Detergente Intimo Salvia e Timo BIO\r\nSapone Liquido Lavanda BIO <br>\r\n<br>\r\nNel prezzo è inclusa la confezione.', '27.50', 15, 1, 'Confezione contenente: deodorante, shampoo, detergente intimo e sapone liquido.'),
-(131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? <br><br> \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:<br>\r\n- Crema corpo BIO (200 ml)<br>\r\n- Crema Viso BIO (50 ml)<br>\r\n- Crema Mani Lavanda (100 ml) <br>\r\n- Burrocacao BIO <br>\r\n- Deo Spray BIO<br>\r\n- Sacchetto Lavanda<br>\r\n<br><br>\r\nNel prezzo è inclusa la scatola.\r\n', '60.00', 100, 1, 'Crema corpo, crema viso, crema mani, burrocacao, deodorante e un bellissimo sacchetto tutto in una sola confezione.'),
+(131, 'Confezione Cosmetici', 'Cerchi un’idea regalo originale per Natale o per una ricorrenza speciale? <br><br> \r\nL’azienda agricola Verde Naturale propone confezioni regalo per gli amanti del biologico e della cosmesi naturale, realizzate con prodotti provenienti da agricoltura biologica e coltivati direttamente da noi.<br>\r\nRegalare prodotti biologici è una scelta etica e intelligente: i prodotti di VerdeNaturale sono biologici certificati quindi garantiscono qualità, sicurezza e genuinità, si prendono cura di voi e dell\'ambiente.<br><br>\r\n\r\nIn questa confezione trovi:<br>\r\n- Crema corpo BIO (200 ml)<br>\r\n- Crema Viso BIO (50 ml)<br>\r\n- Crema Mani Lavanda (100 ml) <br>\r\n- Burrocacao BIO <br>\r\n- Deo Spray BIO<br>\r\n- Sacchetto Lavanda<br>\r\n<br><br>\r\nNel prezzo è inclusa la scatola.\r\n', '60.00', 100, 1, 'Crema corpo, crema viso, crema mani, burrocacao, deodorante e un bellissimo sacchetto.'),
 (132, 'Confezione Top Creme', 'In questa confezione troverai:<br>\r\n- Crema Corpo BIO 200 ml (Lavanda)<br>\r\n- Crema Silhouette BIO 200 ml (Rosmarino)<br>\r\n- Crema Viso BIO 50 ml (Lavanda e Elicriso)<br>\r\n- Crema Lavanda BIO 100 ml<br>\r\n- Crema Elicriso BIO 100 ml\r\n<br><br>\r\nLa scatola è inclusa nel prezzo.', '90.00', 8, 1, 'Crema corpo, crema silhouette, crema viso, crema lavanda e crema elicriso tutto in una sola confezione.'),
 (133, 'Crema elicriso Bio', 'La Crema Elicriso Bio di Verde Naturale, grazie alla presenza dell’olio di Elicriso e alle sue proprietà decongestionanti e protettive, è indicata per lenire e sfiammare la pelle in caso di psoriasi, herpes, eczemi, ustioni ed eritema solare, irritazioni della pelle sensibile.<br><br>\r\nQuesta crema è eco-friendly: non testate sugli animali e senza sostanze aggressive e tossiche.', '16.55', 100, 1, 'La Crema Elicriso Bio di Verde Naturale è indicata per lenire e sfiammare la pelle in caso di psoriasi, e irritazioni.'),
 (134, 'Crema Silhouette', 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.<br>\r\nLa formula, già ricca di ingredienti attivi, viene attivata dall\'efficace azione dell\'olio essenziale di rosmarino: specifico riattivatore degli equilibri circolatori.\r\n<br><br>\r\n Confezione da 200 ml.\r\n<br><br>\r\nVuoi regalare questo prodotto? <br>Aggiungi la confezione regalo!', '24.80', 100, 1, 'La Crema Silhouette è un prodotto cosmetico attivo contro gli inestetismi della cellulite.'),
@@ -8773,7 +8773,7 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (143, 'Olio Tonificante Bio', 'Olio tonificante drenante Bio.\r\n<br>\r\nConfezione da 100 ml<br>\r\nTantissimi fragranze diverse.', '13.45', 8, 2, 'Olio tonificante drenante Bio. Disponibile in confezioni da 100ml e tantissimi fragranze diverse.'),
 (145, 'Set Spezie', 'Set spezie BIO + Confezione Regalo\r\n<br><br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>', '40.00', 100, 2, 'Rosmarino, timo, maggiorana, santoreggia, origano, peperoncino e salvia.'),
 (146, 'Set Spezie Bio', 'Spezie Bio in confezioni da 25 g con dispenser.\r\n<br>\r\n<br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br>\r\n<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>\r\n- Mix Patate<br>', '15.00', 100, 2, 'Rosmarino, timo, maggiorana, santoreggia, origano, peperoncino e salvia.'),
-(147, 'Tonico Bio', 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. <br> Fresco, legger, delicato, questo tonico viso è a base di estratti naturali e più nello specifico di idrolati.<br>\r\nPer ottenere una pelle luminosa, rivitalizzata e distesa.<br><br>\r\nConfezione da 200 ml', '3.60', 100, 2, 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. '),
+(147, 'Tonico Bio', 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. <br> Fresco, legger, delicato, questo tonico viso è a base di estratti naturali e più nello specifico di idrolati.<br>\r\nPer ottenere una pelle luminosa, rivitalizzata e distesa.<br><br>\r\nConfezione da 200 ml', '3.60', 100, 2, 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura, detergenza delle pelli sensibili. '),
 (148, 'ZanziNo ', 'Repellente per zanzare BIO', '9.30', 99, 2, 'Repellente per zanzare BIO, perfetto per tutti i tipi di pelle e completamente anallergico.');
 
 -- --------------------------------------------------------
@@ -9046,7 +9046,7 @@ CREATE TABLE IF NOT EXISTS `Support` (
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Support`
@@ -9056,7 +9056,8 @@ INSERT INTO `Support` (`id`, `user_id`, `status`, `object`, `message`, `date`, `
 (1, 2, 0, 'Articoli mancanti', 'Nel mio ordine mancavano due prodotti!', '2022-01-11 15:49:06', 1),
 (2, 1, 0, 'Prova 1', 'Ticket di prova', '2022-01-11 16:14:34', NULL),
 (3, 3, 1, 'Prova 2', 'Ticket di prova chiuso.', '2022-01-11 16:15:10', NULL),
-(4, 2, 0, 'Problemi con il mio ordine', 'Nel mio ordine risultavano assenti 2 dei prodotti ordinati', '2022-01-14 23:13:39', 5);
+(4, 2, 0, 'Problemi con il mio ordine', 'Nel mio ordine risultavano assenti 2 dei prodotti ordinati', '2022-01-14 23:13:39', 5),
+(7, 1, 0, 'Problemi', 'Ho notato che il mio ordine non è ancora stato elaborato come mai?', '2022-01-20 22:34:03', 6);
 
 -- --------------------------------------------------------
 
@@ -9138,7 +9139,7 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 --
 DROP TABLE IF EXISTS `address`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `address`  AS SELECT `shipment_information`.`id` AS `id_shipment`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address`, `shipment_information`.`principal` AS `principal` FROM (((`region` join `provinces`) join `city`) join `shipment_information`) WHERE ((`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
+CREATE VIEW `address`  AS SELECT `shipment_information`.`id` AS `id_shipment`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address`, `shipment_information`.`principal` AS `principal` FROM (((`region` join `provinces`) join `city`) join `shipment_information`) WHERE ((`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -9147,7 +9148,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `orderaddress`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderaddress`  AS SELECT `orders`.`id` AS `order_id`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address` FROM ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) WHERE ((`orders`.`shipment_user_info` = `shipment_information`.`id`) AND (`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
+CREATE VIEW `orderaddress`  AS SELECT `orders`.`id` AS `order_id`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address` FROM ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) WHERE ((`orders`.`shipment_user_info` = `shipment_information`.`id`) AND (`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -9156,7 +9157,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `productcategory`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`small_description` AS `small_description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category`,`photo`.`link` AS `img` from (((`product` join `category`) join `category_item`) join `photo`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`) and (`photo`.`product_id` = `product`.`id`) and (`photo`.`thumbnail` = 1)))  ;
+CREATE VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`small_description` AS `small_description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category`,`photo`.`link` AS `img` from (((`product` join `category`) join `category_item`) join `photo`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`) and (`photo`.`product_id` = `product`.`id`) and (`photo`.`thumbnail` = 1)))  ;
 
 --
 -- Indici per le tabelle scaricate
