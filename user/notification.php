@@ -6,13 +6,13 @@ if (!isset($_SESSION["email"])) {
 include ROOT_PATH . "public/template-parts/title.php";
 include ROOT_PATH . "public/template-parts/header.php";
 
-$chatMg = new ChatManager();
-$massageMg = new MessageManager();
+$chatMgr = new ChatManager();
+$messageMgr = new MessageManager();
 
-$chatUer = $chatMg->getUserChat($_SESSION["userid"]);
-var_dump($chatUer);
-for ($i = 0; $i < count($chatUer); $i++) {
-    $messages[] = $massageMg->getMessageTotal($chatUer[$i]['id']);
+$chatUser = $chatMgr->getUserChat($_SESSION["userid"]);
+
+for ($i = 0; $i < count($chatUser); $i++) {
+    $messages[] = $messageMgr->getMessageTotal($chatUser[$i]['id']);
 }
 
 $loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . 'templates/user');
@@ -20,8 +20,7 @@ $twig = new \Twig\Environment($loader, []);
 
     echo $twig->render('notification.html', [
         'ROOT_URL' => ROOT_URL,
-        'messages' => $messages,
-        
+        'messages' => $messages  
     ]);
 ?>
 
