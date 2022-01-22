@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Gen 21, 2022 alle 21:02
+-- Creato il: Gen 22, 2022 alle 11:24
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -70,6 +70,29 @@ INSERT INTO `Answer` (`id`, `support_id`, `admin_id`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struttura della tabella `Article`
+--
+
+CREATE TABLE IF NOT EXISTS `Article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(100) NOT NULL,
+  `text` text NOT NULL,
+  `img` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `Article`
+--
+
+INSERT INTO `Article` (`id`, `title`, `text`, `img`) VALUES
+(1, 'Lavandeto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide1.png'),
+(2, 'Oli essenziali', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide2.png'),
+(3, 'Processo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide3.png');
+
+-- --------------------------------------------------------
+
+--
 -- Struttura della tabella `Cart`
 --
 
@@ -79,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `Cart` (
   `client_id` varchar(50) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart`
@@ -106,7 +129,8 @@ INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
 (25, NULL, 'd736aafdcba8b7561c95'),
 (27, NULL, '044e4fbc7db754c2a1de'),
 (28, NULL, '044e4fbc7db754c2a1de'),
-(30, 4, '798996ea171599459eaf');
+(30, 4, '798996ea171599459eaf'),
+(31, NULL, 'b255ed6cda9d8ed8927f');
 
 -- --------------------------------------------------------
 
@@ -122,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `Cart_item` (
   PRIMARY KEY (`id`),
   KEY `product_id` (`product_id`),
   KEY `cart_id` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Cart_item`
@@ -145,7 +169,9 @@ INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 (41, 24, 118, 1),
 (43, 27, 118, 1),
 (45, 6, 121, 1),
-(46, 6, 117, 2);
+(46, 6, 117, 2),
+(47, 31, 145, 1),
+(48, 5, 145, 1);
 
 -- --------------------------------------------------------
 
@@ -158,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `Category` (
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Category`
@@ -192,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `Category_item` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `product_id` (`product_id`,`category_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 --
 -- Dump dei dati per la tabella `Category_item`
@@ -8566,7 +8592,7 @@ INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_informa
 (4, 1, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-22', 3),
 (5, 1, '2022-01-20 17:15:04', 'Ordine ricevuto', '', '2021-11-24', 3),
 (6, 1, '2022-01-20 17:29:24', 'In lavorazione', '', '2022-01-27', 3),
-(7, 2, '2022-01-20 17:49:08', 'Ordine ricevuto', NULL, '2022-01-27', 1);
+(7, 2, '2022-01-21 21:38:58', 'Spedito', '913D60428965F', '2022-01-27', 1);
 
 -- --------------------------------------------------------
 
@@ -8654,71 +8680,71 @@ CREATE TABLE IF NOT EXISTS `Photo` (
 --
 
 INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
-(5, 116, 'public/img/product/Bagnodocciabio/1.png', 1),
-(6, 116, 'public/img/product/Bagnodocciabio/2.png', 0),
-(7, 117, 'public/img/product/Cremacorpobio/1.png', 1),
-(8, 117, 'public/img/product/Cremacorpobio/2.png', 0),
-(10, 118, 'public/img/product/Cremalavandabio/1.png', 1),
-(11, 120, 'public/img/product/Diffusori/1.png', 1),
-(12, 120, 'public/img/product/Diffusori/2.png', 0),
-(13, 120, 'public/img/product/Diffusori/3.png', 0),
-(14, 120, 'public/img/product/Diffusori/4.png', 0),
-(15, 120, 'public/img/product/Diffusori/5.png', 0),
-(16, 120, 'public/img/product/Diffusori/6.png', 0),
-(17, 120, 'public/img/product/Diffusori/7.png', 0),
-(18, 121, 'public/img/product/Oliessenziali/1.png', 1),
-(19, 122, 'public/img/product/Profumauto/1.png', 1),
-(20, 122, 'public/img/product/Profumauto/2.png', 0),
-(21, 122, 'public/img/product/Profumauto/3.png', 0),
-(22, 122, 'public/img/product/Profumauto/4.png', 0),
-(23, 122, 'public/img/product/Profumauto/5.png', 0),
-(24, 119, 'public/img/product/Cremavisobio/1.png', 1),
-(25, 119, 'public/img/product/Cremavisobio/2.png', 0),
-(26, 123, 'public/img/product/Sacchettiprofumati/1.png', 1),
-(27, 123, 'public/img/product/Sacchettiprofumati/2.png', 0),
-(28, 123, 'public/img/product/Sacchettiprofumati/3.png', 0),
-(29, 123, 'public/img/product/Sacchettiprofumati/4.png', 0),
-(30, 123, 'public/img/product/Sacchettiprofumati/5.png', 0),
-(31, 123, 'public/img/product/Sacchettiprofumati/6.png', 0),
-(32, 124, 'public/img/product/Saponeliquido/1.png', 1),
-(33, 124, 'public/img/product/Saponeliquido/2.png', 0),
-(34, 125, 'public/img/product/Shampo/1.png', 1),
-(35, 126, 'public/img/product/Balsamo/1.png', 1),
-(36, 127, 'public/img/product/Burrocacao/1.png', 1),
-(37, 128, 'public/img/product/Confezione1/1.png', 1),
-(38, 128, 'public/img/product/Confezione1/2.png', 0),
-(39, 129, 'public/img/product/Confezione2/1.png', 1),
-(40, 129, 'public/img/product/Confezione2/2.png', 0),
-(41, 130, 'public/img/product/Confezione3/1.png', 1),
-(42, 130, 'public/img/product/Confezione3/1.png', 0),
-(43, 131, 'public/img/product/Confezionecosmetici/1.png', 1),
-(44, 131, 'public/img/product/Confezionecosmetici/2.png', 0),
-(45, 132, 'public/img/product/Confezionetopcreme/1.png', 1),
-(46, 132, 'public/img/product/Confezionetopcreme/2.png', 0),
-(47, 133, 'public/img/product/Cremaelicriso/1.png', 1),
-(48, 134, 'public/img/product/Cremasilhouette/1.png', 1),
-(49, 134, 'public/img/product/Cremasilhouette/2.png', 0),
-(50, 134, 'public/img/product/Cremasilhouette/3.png', 0),
-(51, 135, 'public/img/product/Deodorante/1.png', 1),
-(52, 136, 'public/img/product/Detergenteintimo/1.png', 1),
-(53, 137, 'public/img/product/Diffusoreinceramica/1.png', 1),
-(54, 137, 'public/img/product/Diffusoreinceramica/2.png', 0),
-(55, 138, 'public/img/product/Diffusoriambienti/1.png', 1),
-(56, 138, 'public/img/product/Diffusoriambienti/1.png', 0),
-(57, 138, 'public/img/product/Diffusoriambienti/2.png', 0),
-(58, 139, 'public/img/product/Diffusoreambientiset/1.png', 1),
-(59, 139, 'public/img/product/Diffusoreambientiset/2.png', 0),
-(60, 140, 'public/img/product/Idrolatibio/1.png', 1),
-(61, 140, 'public/img/product/Idrolatibio/1.png', 0),
-(62, 141, 'public/img/product/Lattedetergente/1.png', 1),
-(63, 142, 'public/img/product/Olioessenzialesacchetto/1.png', 1),
-(64, 142, 'public/img/product/Olioessenzialesacchetto/2.png', 0),
-(65, 143, 'public/img/product/Oliotonificante/1.png', 1),
-(67, 145, 'public/img/product/Setspezie/1.png', 1),
-(68, 145, 'public/img/product/Setspezie/2.png', 0),
-(69, 146, 'public/img/product/Setspeziebio/1.png', 1),
-(70, 147, 'public/img/product/Tonico/1.png', 1),
-(71, 148, 'public/img/product/Zanzino/1.png', 1);
+(5, 116, 'public/img/product/116/1.png', 1),
+(6, 116, 'public/img/product/116/2.png', 0),
+(7, 117, 'public/img/product/117/1.png', 1),
+(8, 117, 'public/img/product/117/2.png', 0),
+(10, 118, 'public/img/product/118/1.png', 1),
+(11, 120, 'public/img/product/120/1.png', 1),
+(12, 120, 'public/img/product/120/2.png', 0),
+(13, 120, 'public/img/product/120/3.png', 0),
+(14, 120, 'public/img/product/120/4.png', 0),
+(15, 120, 'public/img/product/120/5.png', 0),
+(16, 120, 'public/img/product/120/6.png', 0),
+(17, 120, 'public/img/product/120/7.png', 0),
+(18, 121, 'public/img/product/121/1.png', 1),
+(19, 122, 'public/img/product/122/1.png', 1),
+(20, 122, 'public/img/product/122/2.png', 0),
+(21, 122, 'public/img/product/122/3.png', 0),
+(22, 122, 'public/img/product/122/4.png', 0),
+(23, 122, 'public/img/product/122/5.png', 0),
+(24, 119, 'public/img/product/119/1.png', 1),
+(25, 119, 'public/img/product/119/2.png', 0),
+(26, 123, 'public/img/product/123/1.png', 1),
+(27, 123, 'public/img/product/123/2.png', 0),
+(28, 123, 'public/img/product/123/3.png', 0),
+(29, 123, 'public/img/product/123/4.png', 0),
+(30, 123, 'public/img/product/123/5.png', 0),
+(31, 123, 'public/img/product/123/6.png', 0),
+(32, 124, 'public/img/product/124/1.png', 1),
+(33, 124, 'public/img/product/124/2.png', 0),
+(34, 125, 'public/img/product/125/1.png', 1),
+(35, 126, 'public/img/product/126/1.png', 1),
+(36, 127, 'public/img/product/127/1.png', 1),
+(37, 128, 'public/img/product/128/1.png', 1),
+(38, 128, 'public/img/product/128/2.png', 0),
+(39, 129, 'public/img/product/129/1.png', 1),
+(40, 129, 'public/img/product/129/2.png', 0),
+(41, 130, 'public/img/product/130/1.png', 1),
+(42, 130, 'public/img/product/130/1.png', 0),
+(43, 131, 'public/img/product/131/1.png', 1),
+(44, 131, 'public/img/product/131/2.png', 0),
+(45, 132, 'public/img/product/132/1.png', 1),
+(46, 132, 'public/img/product/132/2.png', 0),
+(47, 133, 'public/img/product/133/1.png', 1),
+(48, 134, 'public/img/product/134/1.png', 1),
+(49, 134, 'public/img/product/134/2.png', 0),
+(50, 134, 'public/img/product/134/3.png', 0),
+(51, 135, 'public/img/product/135/1.png', 1),
+(52, 136, 'public/img/product/136/1.png', 1),
+(53, 137, 'public/img/product/137/1.png', 1),
+(54, 137, 'public/img/product/137/2.png', 0),
+(55, 138, 'public/img/product/138/1.png', 1),
+(56, 138, 'public/img/product/138/1.png', 0),
+(57, 138, 'public/img/product/138/2.png', 0),
+(58, 139, 'public/img/product/139/1.png', 1),
+(59, 139, 'public/img/product/139/2.png', 0),
+(60, 140, 'public/img/product/140/1.png', 1),
+(61, 140, 'public/img/product/140/1.png', 0),
+(62, 141, 'public/img/product/141/1.png', 1),
+(63, 142, 'public/img/product/142/1.png', 1),
+(64, 142, 'public/img/product/142/2.png', 0),
+(65, 143, 'public/img/product/143/1.png', 1),
+(67, 145, 'public/img/product/145/1.png', 1),
+(68, 145, 'public/img/product/145/2.png', 0),
+(69, 146, 'public/img/product/146/1.png', 1),
+(70, 147, 'public/img/product/147/1.png', 1),
+(71, 148, 'public/img/product/148/1.png', 1);
 
 -- --------------------------------------------------------
 
