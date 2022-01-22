@@ -73,6 +73,6 @@ foreach ($selezionati as $s) {
     $categoryItemMgr->addCategoryProduct($s,$id);
 }
 
-//header("Location: " . ROOT_URL . "admin/pages/product/edit-product.php?product=" . $id);
+header("Location: " . ROOT_URL . "admin/pages/product/edit-product.php?product=" . $id);
 
 ?>
