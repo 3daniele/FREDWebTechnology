@@ -34,7 +34,6 @@ if($article->title == ""){
 
 <?php 
 
-
     $loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/templates/admin/article/');
     $twig = new \Twig\Environment($loader, []);
     

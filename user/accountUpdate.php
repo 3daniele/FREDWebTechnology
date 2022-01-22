@@ -29,14 +29,11 @@ if (isset($_FILES)) {
 
     if (is_uploaded_file($tmp)) {
         $uploadDir = $folder . $name . $ext; //aggiungo il folder di destinazione
-        echo $_SESSION['img'];
-        echo "<br>";
         if (move_uploaded_file($tmp, $uploadDir)) {
             $userID = $_SESSION['userid'];
             $email = $_SESSION['email'];
             $_SESSION['img'] = "public/img/user/" . $email . ".png";
-            echo $_SESSION['img'];
-            echo "<br>";
+            
             $userMgr->updateImg($userID, $email);
         } else {
             echo "Non è stato possibile caricare l'immagine<br/>";

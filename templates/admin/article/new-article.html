@@ -1,5 +1,5 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <form action="{{ROOT_URL}}admin/pages/article/save.php" method="POST">
+    <form action="{{ROOT_URL}}admin/pages/article/save.php" method="POST" enctype="multipart/form-data">
         <div class="row border-bottom">
             <div class="col-4">
                 <h2><strong class="text-primary">Nuovo articolo</strong></h2>
@@ -46,24 +46,13 @@
                 <div class="row">
                     <span class="text-primary">
                         <h4><strong>Foto:</strong></h4>
-                        Modifica
                     </span>
                 </div>
                 <div class="row"><div class="row">
                     <span class="text-primary">
-                        <h4><strong>Img path:</strong></h4>
+                        <input type="file" class="form-control" value="scegli immagine" name="image"/> 
                     </span>
                 </div>
-                <div class="row">
-                    <textarea class="form-control" id="img" name="img" type="text-area" style="width: 100%; height: 250px; "></textarea>
-                </div>
-                <hr>
-
-                </div>
-                <div class="row">
-
-                </div>
-                <hr>
             </div>
         </div>
     </form>

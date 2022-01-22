@@ -27,4 +27,8 @@ class ArticleManager extends DbManager{
     return $this->db->query("UPDATE Article SET title='$titlebis', text='$textbis', img='$imgbis' WHERE id='$id'");
   }
 
+  public function updateImg($id) {
+    $imgbis = "/public/img/slider/slide" . $id . ".png";
+    return $this->db->query("UPDATE Article SET img='$imgbis' WHERE id='$id'");
+  }
 }
