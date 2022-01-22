@@ -74,6 +74,11 @@ class UserManager extends DbManager
     return $this->db->query("SELECT surname, img FROM User WHERE id = $id");
   }
 
+  public function updateImg($userID, $email) {
+    $url = "public/img/user/" . $email . ".png";
+    return $this->db->execute("UPDATE User SET img = '$url' WHERE id = $userID");
+  }
+
   /* DASHBOARD */
 
   public function getClient()
