@@ -20,6 +20,10 @@ if ($articleid == "") {
     header("Location: " . ROOT_URL);
 }
 
+if($article->title == ""){
+    header("Location: " . ROOT_URL);
+}
+
 ?>
 
 <title>Modifica:<?php echo " " . $article->title; ?></title>
