@@ -16,6 +16,8 @@ $stock = (int)$_POST["stock"];
 
 $id = (int)$_POST["id"];
 
+$selezionati = $_POST['selezionato'];
+
 $productMgr = new ProductManager();
 $productMgr->updateProduct($id, $name, $description, $small_description, $price, $stock);
 
@@ -61,6 +63,14 @@ if (isset($_FILES)) {
             }
         }
     }
+}
+
+$categoryItemMgr = new CategoryItemManager();
+
+$categoryItemMgr->deleteProduct($id);
+
+foreach ($selezionati as $s) {
+    $categoryItemMgr->addCategoryProduct($s,$id);
 }
 
 //header("Location: " . ROOT_URL . "admin/pages/product/edit-product.php?product=" . $id);

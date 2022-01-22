@@ -2,8 +2,6 @@
 
 class CategoryItemManager extends DbManager
 {
-//private $categoryid;
-
   public function __construct()
   {
     parent::__construct();
@@ -21,6 +19,14 @@ class CategoryItemManager extends DbManager
 
   public function getProductFromCategory($categoryID){
     return $this->db->query("SELECT product_id FROM Category_item WHERE category_id = '$categoryID'");
+  }
+
+  public function addCategoryProduct($categoryID,$productID){
+    return $this->db->execute("INSERT INTO Category_item(product_id, category_id) VALUES ('$productID', '$categoryID')");
+  }
+
+  public function deleteProduct($productID){
+    return $this->db->execute("DELETE FROM Category_item WHERE product_id = '$productID'");
   }
 
 }

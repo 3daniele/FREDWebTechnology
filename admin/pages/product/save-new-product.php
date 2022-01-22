@@ -21,6 +21,14 @@
 
     $id = $productMgr->getLast();
 
+    $categoryMgr = new CategoryItemManager();
+
+    $category = $_POST["selezionato"];
+
+    foreach($category as $cat){
+        $categoryMgr->addCategoryProduct($cat,$id[0]['id']);
+    }
+
     header("Location: ".ROOT_URL."admin/pages/product/edit-product.php?product=".$id[0]['id']);
     
 ?>
