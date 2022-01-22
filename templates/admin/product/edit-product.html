@@ -1,5 +1,5 @@
 <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-    <form action="{{ROOT_URL}}admin/pages/product/save-product.php" method="POST">
+    <form action="{{ROOT_URL}}admin/pages/product/save-product.php" method="POST" enctype="multipart/form-data">
         <input type="text" hidden="hidden" id="id" name="id" value="{{product.id}}" style="visibility: none;"></input>
         <div class="row border-bottom">
             <div class="col-4">
@@ -84,11 +84,19 @@
                                 <img src={{ROOT_URL}}{{img.link}} alt="immagine" width=100px height=100px class="rounded-circle"></img>
                             </div>
                             <div class="col-9 text-end" style="margin-top: 35px;">
-                                {{img.link}}
+                                <input type="file" class="form-control" value="scegli immagine" name="image"/> 
+                                <br>
+                                <button class="btn btn-outline-primary btn-sm" name="edit" type="submit" value="{{ img.id }}">Modifica</button>
                             </div>
                         </div>
                     {% endfor %}
-
+                </div>
+                <div class="row" style="margin-top: 5px;">
+                    <div class="col-3">
+                        <button class="btn btn-outline-success btn-sm" name="add" type="submit">Aggiungi</button>
+                    </div>
+                    <div class="col-9">
+                    </div>
                 </div>
                 <hr>
                 <div class="row">
