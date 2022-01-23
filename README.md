@@ -16,6 +16,7 @@ Progetto realizzato per il corso di Tecnologie del web
 `cp config-example.php config.php`
 5. Importare il database presente nella cartella DB<br>
 ###### Motore di templating utilizzato twig: https://twig.symfony.com/
+###### Le immagini e i marchi appartengono a: https://www.verdenaturale.it/
 ## Indirizzi email:
 - <b>Domenico Bonali</b>, 254023, domenico.bonali@student.univaq.it;
 - <b>Daniele Di Desidero</b>, 251850, daniele.desidero@student.univaq.it;
