@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Gen 21, 2022 alle 21:02
--- Versione del server: 5.7.34
--- Versione PHP: 7.4.21
+-- Generation Time: Jan 22, 2022 at 06:24 PM
+-- Server version: 5.7.34
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,10 +26,10 @@ USE `FREDwebtechnology`;
 -- --------------------------------------------------------
 
 --
--- Struttura stand-in per le viste `address`
--- (Vedi sotto per la vista effettiva)
+-- Stand-in structure for view `address`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `address` (
+CREATE TABLE `address` (
 `id_shipment` int(11)
 ,`user` int(11)
 ,`region_id` int(11)
@@ -46,21 +46,18 @@ CREATE TABLE IF NOT EXISTS `address` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Answer`
+-- Table structure for table `Answer`
 --
 
-CREATE TABLE IF NOT EXISTS `Answer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Answer` (
+  `id` int(11) NOT NULL,
   `support_id` int(11) NOT NULL,
   `admin_id` int(11) NOT NULL,
-  `message` text NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `admin_id` (`admin_id`),
-  KEY `support_id` (`support_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
+  `message` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Answer`
+-- Dumping data for table `Answer`
 --
 
 INSERT INTO `Answer` (`id`, `support_id`, `admin_id`, `message`) VALUES
@@ -70,19 +67,39 @@ INSERT INTO `Answer` (`id`, `support_id`, `admin_id`, `message`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Cart`
+-- Table structure for table `Article`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Article` (
+  `id` int(11) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `text` text NOT NULL,
+  `img` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `Article`
+--
+
+INSERT INTO `Article` (`id`, `title`, `text`, `img`) VALUES
+(1, 'Lavandeto', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide1.png'),
+(2, 'Oli essenziali', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide2.png'),
+(3, 'Processo', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris fringilla, eros et maximus accumsan, ex erat hendrerit ligula, ut pharetra orci elit id magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Morbi tristique volutpat turpis, id bibendum magna scelerisque in. Nunc eu lobortis metus. Sed quis velit mauris. Morbi et nisi aliquet, scelerisque ex at, viverra lacus. Phasellus at feugiat turpis, id ullamcorper metus. Ut quis tellus a ex rutrum imperdiet. Nulla facilisi. Cras nec neque pellentesque ex ultrices ornare eget id justo. Vivamus sit amet turpis auctor, gravida nunc eget, tempus nunc. Sed commodo massa leo, vel pharetra mauris venenatis at. Praesent finibus nulla vitae sapien iaculis iaculis. Aliquam nec iaculis sem. In hac habitasse platea dictumst. Praesent sit amet diam at sapien tempus laoreet non sed eros. Etiam sed hendrerit sem. Integer dignissim in magna non ornare. Quisque tempus lacus non lacus maximus, eu eleifend leo euismod. Quisque interdum diam et ante varius bibendum. Donec fringilla tellus ut nisl dictum egestas. In in nisi non arcu ullamcorper malesuada fermentum eget orci. Morbi placerat urna a dignissim semper. In hac habitasse platea dictumst. Donec semper scelerisque neque, eget interdum orci pretium vitae. Nam varius nulla vitae dolor fringilla molestie. Aenean sodales vestibulum urna at cursus. Integer vel orci at erat lacinia dapibus. Proin scelerisque ipsum eros, sit amet eleifend mauris porttitor in. Mauris a nibh placerat, malesuada lorem sed, pretium nisi. Ut lorem justo, imperdiet in iaculis a, auctor id ex. Suspendisse eleifend maximus consequat. Duis ultricies at risus ac porta. Donec lectus mi, dapibus in finibus tincidunt, tempor egestas lorem. Etiam ac nisl erat. Phasellus gravida eget quam non pellentesque. Aenean sodales dui a neque dignissim, quis euismod diam facilisis. Phasellus ullamcorper velit leo, eu sodales est lobortis sed. Donec vel quam id mi fermentum elementum tincidunt et est. In non auctor nisi, non aliquet dolor. Integer eget iaculis dolor, ut volutpat neque. Etiam scelerisque, lacus vitae feugiat commodo, ex arcu consectetur massa, vitae finibus magna enim ac velit. Suspendisse ac elit quam. Fusce turpis ligula, tincidunt id nibh eget, faucibus viverra mi. Cras vitae lectus at mauris malesuada imperdiet. Aliquam fringilla justo nunc, eget viverra sapien pretium sed. Nulla id lacus commodo, congue nisl sit amet, lobortis diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur dictum felis id mauris malesuada, in elementum libero suscipit. Sed malesuada convallis augue, nec facilisis nulla aliquet nec. Vivamus semper massa sit amet dui mattis iaculis. Curabitur id eleifend lacus. Nunc nulla tortor, sollicitudin non eleifend eu, porttitor non mi. Quisque porta metus ut neque placerat dictum. Cras consectetur maximus ex nec dapibus. Sed imperdiet nulla a cursus pulvinar. Cras eget felis faucibus, ultricies justo sit amet, malesuada sem. Duis sollicitudin dui in scelerisque tincidunt. Nulla fringilla sem id euismod fermentum. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer sit amet feugiat risus. Curabitur et libero commodo, vulputate dui non, rutrum odio. Donec in sollicitudin nibh. Curabitur vel viverra libero. Vestibulum condimentum nunc vel erat lobortis, eu pretium velit iaculis. Mauris eleifend ex et urna ultrices, et ornare tortor tempus. Integer elementum pellentesque nibh nec euismod. Nulla auctor ex vitae imperdiet condimentum. Vivamus lobortis elit non massa rhoncus sagittis. Phasellus ut ante leo. Proin malesuada neque dui, in placerat lacus ullamcorper quis. Donec malesuada nisl ac quam scelerisque condimentum. Mauris sit amet velit sagittis lorem convallis accumsan. Nulla bibendum nisi eget tempus accumsan. Sed varius mattis tortor, elementum rhoncus neque consectetur id. Vivamus ut odio ac ipsum pretium dignissim sit amet quis tellus. Duis sit amet ligula vel nisi eleifend laoreet. Aenean et sem nec nisi egestas laoreet. Vestibulum volutpat vitae libero id maximus. Phasellus a sapien dolor. Quisque justo arcu, bibendum ac accumsan ac, eleifend feugiat enim. Etiam ac pharetra elit, sit amet finibus erat. Praesent sapien risus, rutrum a turpis et, finibus placerat ante. Quisque ornare id velit sed finibus. Quisque egestas sagittis nibh, sed porttitor enim dignissim quis. Phasellus varius urna a accumsan sollicitudin. Maecenas porta dui at mauris facilisis lobortis. Donec vitae ultricies dolor. Sed non dignissim erat, ut facilisis metus. Maecenas maximus nisl sed neque sagittis elementum. Sed nec finibus quam. Morbi congue sapien enim, eu finibus est lacinia id. In mollis turpis vitae ligula sollicitudin rhoncus. In id ligula nec dolor malesuada ultricies ullamcorper a urna. Nam euismod mollis lacus id condimentum. Aenean semper a neque vel blandit. Aliquam molestie fermentum diam. Aliquam tristique nec nisi at gravida. Nulla sagittis nisi fermentum egestas lobortis. Pellentesque ac blandit nunc. Quisque venenatis consectetur enim sed dignissim. Proin auctor interdum feugiat. Pellentesque vulputate velit leo, at condimentum sem posuere non. Proin facilisis sapien purus. Nam nunc massa, congue a turpis ut, dignissim varius turpis. Nullam ut urna commodo erat scelerisque suscipit. Proin vehicula vestibulum arcu, a pretium dui. Sed at venenatis augue, sit amet tincidunt erat. Pellentesque et ex ex. Suspendisse elementum imperdiet libero nec sodales. Ut dui quam, tincidunt ac dui dignissim, imperdiet malesuada neque. Duis egestas tristique erat, id dignissim tortor auctor sed. Curabitur pretium neque eget tristique ornare. Ut arcu justo, hendrerit sit amet neque vitae, dignissim rhoncus leo. Pellentesque felis justo, eleifend non urna at, laoreet malesuada orci. Ut sit amet rhoncus velit. Vestibulum placerat velit ac lacus congue volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam sagittis elit a mauris imperdiet venenatis.', 'public/img/slider/slide3.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Cart`
+--
+
+CREATE TABLE `Cart` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
-  `client_id` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+  `client_id` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Cart`
+-- Dumping data for table `Cart`
 --
 
 INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
@@ -106,26 +123,24 @@ INSERT INTO `Cart` (`id`, `user_id`, `client_id`) VALUES
 (25, NULL, 'd736aafdcba8b7561c95'),
 (27, NULL, '044e4fbc7db754c2a1de'),
 (28, NULL, '044e4fbc7db754c2a1de'),
-(30, 4, '798996ea171599459eaf');
+(30, 4, '798996ea171599459eaf'),
+(31, NULL, 'b255ed6cda9d8ed8927f');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Cart_item`
+-- Table structure for table `Cart_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Cart_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Cart_item` (
+  `id` int(11) NOT NULL,
   `cart_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `cart_id` (`cart_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Cart_item`
+-- Dumping data for table `Cart_item`
 --
 
 INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
@@ -145,23 +160,24 @@ INSERT INTO `Cart_item` (`id`, `cart_id`, `product_id`, `quantity`) VALUES
 (41, 24, 118, 1),
 (43, 27, 118, 1),
 (45, 6, 121, 1),
-(46, 6, 117, 2);
+(46, 6, 117, 2),
+(47, 31, 145, 1),
+(48, 5, 145, 1);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Category`
+-- Table structure for table `Category`
 --
 
-CREATE TABLE IF NOT EXISTS `Category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Category` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `description` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  `description` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Category`
+-- Dumping data for table `Category`
 --
 
 INSERT INTO `Category` (`id`, `name`, `description`) VALUES
@@ -182,20 +198,17 @@ INSERT INTO `Category` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Category_item`
+-- Table structure for table `Category_item`
 --
 
-CREATE TABLE IF NOT EXISTS `Category_item` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Category_item` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `category_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `product_id` (`product_id`,`category_id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Category_item`
+-- Dumping data for table `Category_item`
 --
 
 INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
@@ -302,25 +315,25 @@ INSERT INTO `Category_item` (`id`, `product_id`, `category_id`) VALUES
 (112, 147, 1),
 (113, 147, 4),
 (114, 147, 11),
-(115, 148, 4);
+(115, 148, 4),
+(134, 152, 3),
+(135, 152, 4),
+(136, 152, 6);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Chat`
+-- Table structure for table `Chat`
 --
 
-CREATE TABLE IF NOT EXISTS `Chat` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Chat` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`,`user_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Chat`
+-- Dumping data for table `Chat`
 --
 
 INSERT INTO `Chat` (`id`, `user_id`, `date`) VALUES
@@ -331,19 +344,17 @@ INSERT INTO `Chat` (`id`, `user_id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `City`
+-- Table structure for table `City`
 --
 
-CREATE TABLE IF NOT EXISTS `City` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `City` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `provinces_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `provinces_id` (`provinces_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=110011 DEFAULT CHARSET=utf8;
+  `provinces_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `City`
+-- Dumping data for table `City`
 --
 
 INSERT INTO `City` (`id`, `name`, `provinces_id`) VALUES
@@ -8449,19 +8460,18 @@ INSERT INTO `City` (`id`, `name`, `provinces_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Manufacturer`
+-- Table structure for table `Manufacturer`
 --
 
-CREATE TABLE IF NOT EXISTS `Manufacturer` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Manufacturer` (
+  `id` int(11) NOT NULL,
   `name` varchar(70) NOT NULL,
   `info` text NOT NULL,
-  `site` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `site` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Manufacturer`
+-- Dumping data for table `Manufacturer`
 --
 
 INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
@@ -8471,22 +8481,20 @@ INSERT INTO `Manufacturer` (`id`, `name`, `info`, `site`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Message`
+-- Table structure for table `Message`
 --
 
-CREATE TABLE IF NOT EXISTS `Message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Message` (
+  `id` int(11) NOT NULL,
   `chat_id` int(11) NOT NULL,
   `broadcast` tinyint(4) NOT NULL DEFAULT '0',
   `message` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `displayed` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `chat_id` (`chat_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  `displayed` tinyint(4) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Message`
+-- Dumping data for table `Message`
 --
 
 INSERT INTO `Message` (`id`, `chat_id`, `broadcast`, `message`, `date`, `displayed`) VALUES
@@ -8508,7 +8516,7 @@ INSERT INTO `Message` (`id`, `chat_id`, `broadcast`, `message`, `date`, `display
 (17, 6, 1, 'Salve popolo', '2022-01-11 17:11:33', 0);
 
 --
--- Trigger `Message`
+-- Triggers `Message`
 --
 DELIMITER $$
 CREATE TRIGGER `up_date` AFTER INSERT ON `Message` FOR EACH ROW UPDATE Chat
@@ -8520,10 +8528,10 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Struttura stand-in per le viste `orderaddress`
--- (Vedi sotto per la vista effettiva)
+-- Stand-in structure for view `orderaddress`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `orderaddress` (
+CREATE TABLE `orderaddress` (
 `order_id` int(11)
 ,`user` int(11)
 ,`region_id` int(11)
@@ -8539,24 +8547,21 @@ CREATE TABLE IF NOT EXISTS `orderaddress` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Orders`
+-- Table structure for table `Orders`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Orders` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `date_order` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` enum('Ordine ricevuto','In lavorazione','Spedito','In consegna','Consegnato') NOT NULL DEFAULT 'Ordine ricevuto',
   `tracking_information` text,
   `stimate_delivery` date NOT NULL,
-  `shipment_user_info` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `shipment_user_info` (`shipment_user_info`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `shipment_user_info` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Orders`
+-- Dumping data for table `Orders`
 --
 
 INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_information`, `stimate_delivery`, `shipment_user_info`) VALUES
@@ -8566,26 +8571,23 @@ INSERT INTO `Orders` (`id`, `user_id`, `date_order`, `status`, `tracking_informa
 (4, 1, '2021-10-09 15:03:41', 'Ordine ricevuto', NULL, '2021-09-22', 3),
 (5, 1, '2022-01-20 17:15:04', 'Ordine ricevuto', '', '2021-11-24', 3),
 (6, 1, '2022-01-20 17:29:24', 'In lavorazione', '', '2022-01-27', 3),
-(7, 2, '2022-01-20 17:49:08', 'Ordine ricevuto', NULL, '2022-01-27', 1);
+(7, 2, '2022-01-21 21:38:58', 'Spedito', '913D60428965F', '2022-01-27', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Orders_items`
+-- Table structure for table `Orders_items`
 --
 
-CREATE TABLE IF NOT EXISTS `Orders_items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Orders_items` (
+  `id` int(11) NOT NULL,
   `order_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `quantity` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `order_id` (`order_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+  `quantity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Orders_items`
+-- Dumping data for table `Orders_items`
 --
 
 INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
@@ -8610,24 +8612,22 @@ INSERT INTO `Orders_items` (`id`, `order_id`, `product_id`, `quantity`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Payments`
+-- Table structure for table `Payments`
 --
 
-CREATE TABLE IF NOT EXISTS `Payments` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Payments` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `credit_card_number` varchar(16) DEFAULT NULL,
   `cvv` int(11) DEFAULT NULL,
   `expiration1` varchar(6) DEFAULT NULL,
   `expiration2` varchar(2) DEFAULT NULL,
   `paypal` tinyint(1) DEFAULT NULL,
-  `principal` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  `principal` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Payments`
+-- Dumping data for table `Payments`
 --
 
 INSERT INTO `Payments` (`id`, `user_id`, `credit_card_number`, `cvv`, `expiration1`, `expiration2`, `paypal`, `principal`) VALUES
@@ -8637,109 +8637,105 @@ INSERT INTO `Payments` (`id`, `user_id`, `credit_card_number`, `cvv`, `expiratio
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Photo`
+-- Table structure for table `Photo`
 --
 
-CREATE TABLE IF NOT EXISTS `Photo` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Photo` (
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
-  `link` text NOT NULL,
-  `thumbnail` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+  `link` text,
+  `thumbnail` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Photo`
+-- Dumping data for table `Photo`
 --
 
 INSERT INTO `Photo` (`id`, `product_id`, `link`, `thumbnail`) VALUES
-(5, 116, 'public/img/product/Bagnodocciabio/1.png', 1),
-(6, 116, 'public/img/product/Bagnodocciabio/2.png', 0),
-(7, 117, 'public/img/product/Cremacorpobio/1.png', 1),
-(8, 117, 'public/img/product/Cremacorpobio/2.png', 0),
-(10, 118, 'public/img/product/Cremalavandabio/1.png', 1),
-(11, 120, 'public/img/product/Diffusori/1.png', 1),
-(12, 120, 'public/img/product/Diffusori/2.png', 0),
-(13, 120, 'public/img/product/Diffusori/3.png', 0),
-(14, 120, 'public/img/product/Diffusori/4.png', 0),
-(15, 120, 'public/img/product/Diffusori/5.png', 0),
-(16, 120, 'public/img/product/Diffusori/6.png', 0),
-(17, 120, 'public/img/product/Diffusori/7.png', 0),
-(18, 121, 'public/img/product/Oliessenziali/1.png', 1),
-(19, 122, 'public/img/product/Profumauto/1.png', 1),
-(20, 122, 'public/img/product/Profumauto/2.png', 0),
-(21, 122, 'public/img/product/Profumauto/3.png', 0),
-(22, 122, 'public/img/product/Profumauto/4.png', 0),
-(23, 122, 'public/img/product/Profumauto/5.png', 0),
-(24, 119, 'public/img/product/Cremavisobio/1.png', 1),
-(25, 119, 'public/img/product/Cremavisobio/2.png', 0),
-(26, 123, 'public/img/product/Sacchettiprofumati/1.png', 1),
-(27, 123, 'public/img/product/Sacchettiprofumati/2.png', 0),
-(28, 123, 'public/img/product/Sacchettiprofumati/3.png', 0),
-(29, 123, 'public/img/product/Sacchettiprofumati/4.png', 0),
-(30, 123, 'public/img/product/Sacchettiprofumati/5.png', 0),
-(31, 123, 'public/img/product/Sacchettiprofumati/6.png', 0),
-(32, 124, 'public/img/product/Saponeliquido/1.png', 1),
-(33, 124, 'public/img/product/Saponeliquido/2.png', 0),
-(34, 125, 'public/img/product/Shampo/1.png', 1),
-(35, 126, 'public/img/product/Balsamo/1.png', 1),
-(36, 127, 'public/img/product/Burrocacao/1.png', 1),
-(37, 128, 'public/img/product/Confezione1/1.png', 1),
-(38, 128, 'public/img/product/Confezione1/2.png', 0),
-(39, 129, 'public/img/product/Confezione2/1.png', 1),
-(40, 129, 'public/img/product/Confezione2/2.png', 0),
-(41, 130, 'public/img/product/Confezione3/1.png', 1),
-(42, 130, 'public/img/product/Confezione3/1.png', 0),
-(43, 131, 'public/img/product/Confezionecosmetici/1.png', 1),
-(44, 131, 'public/img/product/Confezionecosmetici/2.png', 0),
-(45, 132, 'public/img/product/Confezionetopcreme/1.png', 1),
-(46, 132, 'public/img/product/Confezionetopcreme/2.png', 0),
-(47, 133, 'public/img/product/Cremaelicriso/1.png', 1),
-(48, 134, 'public/img/product/Cremasilhouette/1.png', 1),
-(49, 134, 'public/img/product/Cremasilhouette/2.png', 0),
-(50, 134, 'public/img/product/Cremasilhouette/3.png', 0),
-(51, 135, 'public/img/product/Deodorante/1.png', 1),
-(52, 136, 'public/img/product/Detergenteintimo/1.png', 1),
-(53, 137, 'public/img/product/Diffusoreinceramica/1.png', 1),
-(54, 137, 'public/img/product/Diffusoreinceramica/2.png', 0),
-(55, 138, 'public/img/product/Diffusoriambienti/1.png', 1),
-(56, 138, 'public/img/product/Diffusoriambienti/1.png', 0),
-(57, 138, 'public/img/product/Diffusoriambienti/2.png', 0),
-(58, 139, 'public/img/product/Diffusoreambientiset/1.png', 1),
-(59, 139, 'public/img/product/Diffusoreambientiset/2.png', 0),
-(60, 140, 'public/img/product/Idrolatibio/1.png', 1),
-(61, 140, 'public/img/product/Idrolatibio/1.png', 0),
-(62, 141, 'public/img/product/Lattedetergente/1.png', 1),
-(63, 142, 'public/img/product/Olioessenzialesacchetto/1.png', 1),
-(64, 142, 'public/img/product/Olioessenzialesacchetto/2.png', 0),
-(65, 143, 'public/img/product/Oliotonificante/1.png', 1),
-(67, 145, 'public/img/product/Setspezie/1.png', 1),
-(68, 145, 'public/img/product/Setspezie/2.png', 0),
-(69, 146, 'public/img/product/Setspeziebio/1.png', 1),
-(70, 147, 'public/img/product/Tonico/1.png', 1),
-(71, 148, 'public/img/product/Zanzino/1.png', 1);
+(5, 116, 'public/img/product/116/1.png', 1),
+(6, 116, 'public/img/product/116/2.png', 0),
+(7, 117, 'public/img/product/117/1.png', 1),
+(8, 117, 'public/img/product/117/2.png', 0),
+(10, 118, 'public/img/product/118/1.png', 1),
+(11, 120, 'public/img/product/120/1.png', 1),
+(12, 120, 'public/img/product/120/2.png', 0),
+(13, 120, 'public/img/product/120/3.png', 0),
+(14, 120, 'public/img/product/120/4.png', 0),
+(15, 120, 'public/img/product/120/5.png', 0),
+(16, 120, 'public/img/product/120/6.png', 0),
+(17, 120, 'public/img/product/120/7.png', 0),
+(18, 121, 'public/img/product/121/1.png', 1),
+(19, 122, 'public/img/product/122/1.png', 1),
+(20, 122, 'public/img/product/122/2.png', 0),
+(21, 122, 'public/img/product/122/3.png', 0),
+(22, 122, 'public/img/product/122/4.png', 0),
+(23, 122, 'public/img/product/122/5.png', 0),
+(24, 119, 'public/img/product/119/1.png', 1),
+(25, 119, 'public/img/product/119/2.png', 0),
+(26, 123, 'public/img/product/123/1.png', 1),
+(27, 123, 'public/img/product/123/2.png', 0),
+(28, 123, 'public/img/product/123/3.png', 0),
+(29, 123, 'public/img/product/123/4.png', 0),
+(30, 123, 'public/img/product/123/5.png', 0),
+(31, 123, 'public/img/product/123/6.png', 0),
+(32, 124, 'public/img/product/124/1.png', 1),
+(33, 124, 'public/img/product/124/2.png', 0),
+(34, 125, 'public/img/product/125/1.png', 1),
+(35, 126, 'public/img/product/126/1.png', 1),
+(36, 127, 'public/img/product/127/1.png', 1),
+(37, 128, 'public/img/product/128/1.png', 1),
+(38, 128, 'public/img/product/128/2.png', 0),
+(39, 129, 'public/img/product/129/1.png', 1),
+(40, 129, 'public/img/product/129/2.png', 0),
+(41, 130, 'public/img/product/130/1.png', 1),
+(42, 130, 'public/img/product/130/1.png', 0),
+(43, 131, 'public/img/product/131/1.png', 1),
+(44, 131, 'public/img/product/131/2.png', 0),
+(45, 132, 'public/img/product/132/1.png', 1),
+(46, 132, 'public/img/product/132/2.png', 0),
+(47, 133, 'public/img/product/133/1.png', 1),
+(48, 134, 'public/img/product/134/1.png', 1),
+(49, 134, 'public/img/product/134/2.png', 0),
+(50, 134, 'public/img/product/134/3.png', 0),
+(51, 135, 'public/img/product/135/1.png', 1),
+(52, 136, 'public/img/product/136/1.png', 1),
+(53, 137, 'public/img/product/137/1.png', 1),
+(54, 137, 'public/img/product/137/2.png', 0),
+(55, 138, 'public/img/product/138/1.png', 1),
+(56, 138, 'public/img/product/138/1.png', 0),
+(57, 138, 'public/img/product/138/2.png', 0),
+(58, 139, 'public/img/product/139/1.png', 1),
+(59, 139, 'public/img/product/139/2.png', 0),
+(60, 140, 'public/img/product/140/1.png', 1),
+(61, 140, 'public/img/product/140/1.png', 0),
+(62, 141, 'public/img/product/141/1.png', 1),
+(63, 142, 'public/img/product/142/1.png', 1),
+(64, 142, 'public/img/product/142/2.png', 0),
+(65, 143, 'public/img/product/143/1.png', 1),
+(67, 145, 'public/img/product/145/1.png', 1),
+(68, 145, 'public/img/product/145/2.png', 0),
+(69, 146, 'public/img/product/146/1.png', 1),
+(70, 147, 'public/img/product/147/1.png', 1),
+(71, 148, 'public/img/product/148/1.png', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Product`
+-- Table structure for table `Product`
 --
 
-CREATE TABLE IF NOT EXISTS `Product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Product` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `description` text NOT NULL,
   `price` decimal(10,2) NOT NULL,
   `stock` int(11) NOT NULL,
   `manufacturer_id` int(11) NOT NULL,
-  `small_description` varchar(200) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `manufacturer_id` (`manufacturer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=149 DEFAULT CHARSET=utf8;
+  `small_description` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Product`
+-- Dumping data for table `Product`
 --
 
 INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufacturer_id`, `small_description`) VALUES
@@ -8774,15 +8770,16 @@ INSERT INTO `Product` (`id`, `name`, `description`, `price`, `stock`, `manufactu
 (145, 'Set Spezie', 'Set spezie BIO + Confezione Regalo\r\n<br><br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>', '40.00', 100, 2, 'Rosmarino, timo, maggiorana, santoreggia, origano, peperoncino e salvia.'),
 (146, 'Set Spezie Bio', 'Spezie Bio in confezioni da 25 g con dispenser.\r\n<br>\r\n<br>\r\nSPEZIE SINGOLE<br>\r\n- Rosmarino<br>\r\n- Timo<br>\r\n- Maggiorana<br>\r\n- Santoreggia<br>\r\n- Origano<br>\r\n- Peperoncino Cayenna<br>\r\n- Salvia<br>\r\n- Alloro<br>\r\n<br><br>\r\nMIX DI SPEZIE<br>\r\n- Mix Carne<br>\r\n- Mix Pesce<br>\r\n- Mix Arrosto<br>\r\n- Mix Patate<br>', '15.00', 100, 2, 'Rosmarino, timo, maggiorana, santoreggia, origano, peperoncino e salvia.'),
 (147, 'Tonico Bio', 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura ed alla detergenza delle pelli delicate e sensibili. <br> Fresco, legger, delicato, questo tonico viso è a base di estratti naturali e più nello specifico di idrolati.<br>\r\nPer ottenere una pelle luminosa, rivitalizzata e distesa.<br><br>\r\nConfezione da 200 ml', '3.60', 100, 2, 'Il Tonico Bio di Verde Naturale è un prodotto dedicato alla cura, detergenza delle pelli sensibili. '),
-(148, 'ZanziNo ', 'Repellente per zanzare BIO', '9.30', 99, 2, 'Repellente per zanzare BIO, perfetto per tutti i tipi di pelle e completamente anallergico.');
+(148, 'ZanziNo ', 'Repellente per zanzare BIO', '9.30', 99, 2, 'Repellente per zanzare BIO, perfetto per tutti i tipi di pelle e completamente anallergico.'),
+(152, 'asdasd', 'afafa', '23.00', 1, 2, 'afaffa');
 
 -- --------------------------------------------------------
 
 --
--- Struttura stand-in per le viste `productcategory`
--- (Vedi sotto per la vista effettiva)
+-- Stand-in structure for view `productcategory`
+-- (See below for the actual view)
 --
-CREATE TABLE IF NOT EXISTS `productcategory` (
+CREATE TABLE `productcategory` (
 `id` int(11)
 ,`name` varchar(50)
 ,`description` text
@@ -8796,19 +8793,17 @@ CREATE TABLE IF NOT EXISTS `productcategory` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Provinces`
+-- Table structure for table `Provinces`
 --
 
-CREATE TABLE IF NOT EXISTS `Provinces` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Provinces` (
+  `id` int(11) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `region_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `region_id` (`region_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8;
+  `region_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Provinces`
+-- Dumping data for table `Provinces`
 --
 
 INSERT INTO `Provinces` (`id`, `name`, `region_id`) VALUES
@@ -8926,17 +8921,16 @@ INSERT INTO `Provinces` (`id`, `name`, `region_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Region`
+-- Table structure for table `Region`
 --
 
-CREATE TABLE IF NOT EXISTS `Region` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+CREATE TABLE `Region` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Region`
+-- Dumping data for table `Region`
 --
 
 INSERT INTO `Region` (`id`, `name`) VALUES
@@ -8964,24 +8958,21 @@ INSERT INTO `Region` (`id`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Review`
+-- Table structure for table `Review`
 --
 
-CREATE TABLE IF NOT EXISTS `Review` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Review` (
+  `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `vote` enum('1','2','3','4','5') NOT NULL,
   `blocked` tinyint(1) NOT NULL DEFAULT '0',
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `product_id` (`product_id`),
-  KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Review`
+-- Dumping data for table `Review`
 --
 
 INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `product_id`) VALUES
@@ -8999,27 +8990,22 @@ INSERT INTO `Review` (`id`, `title`, `message`, `vote`, `blocked`, `user_id`, `p
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Shipment_information`
+-- Table structure for table `Shipment_information`
 --
 
-CREATE TABLE IF NOT EXISTS `Shipment_information` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Shipment_information` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `region` int(11) NOT NULL,
   `province` int(11) NOT NULL,
   `city` int(11) NOT NULL,
   `code` int(11) NOT NULL,
   `address` varchar(70) NOT NULL,
-  `principal` tinyint(1) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `region` (`region`),
-  KEY `city` (`city`),
-  KEY `province` (`province`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+  `principal` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Shipment_information`
+-- Dumping data for table `Shipment_information`
 --
 
 INSERT INTO `Shipment_information` (`id`, `user_id`, `region`, `province`, `city`, `code`, `address`, `principal`) VALUES
@@ -9032,24 +9018,21 @@ INSERT INTO `Shipment_information` (`id`, `user_id`, `region`, `province`, `city
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Support`
+-- Table structure for table `Support`
 --
 
-CREATE TABLE IF NOT EXISTS `Support` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Support` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL DEFAULT '0',
   `object` varchar(50) NOT NULL,
   `message` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `order_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id` (`user_id`),
-  KEY `order_id` (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+  `order_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Support`
+-- Dumping data for table `Support`
 --
 
 INSERT INTO `Support` (`id`, `user_id`, `status`, `object`, `message`, `date`, `order_id`) VALUES
@@ -9062,23 +9045,21 @@ INSERT INTO `Support` (`id`, `user_id`, `status`, `object`, `message`, `date`, `
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `User`
+-- Table structure for table `User`
 --
 
-CREATE TABLE IF NOT EXISTS `User` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `User` (
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `surname` varchar(70) NOT NULL,
   `email` varchar(70) NOT NULL,
   `password` varchar(41) NOT NULL,
   `img` varchar(1000) NOT NULL DEFAULT 'public/img/account.svg',
-  `user_type` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_type` (`user_type`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+  `user_type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `User`
+-- Dumping data for table `User`
 --
 
 INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_type`) VALUES
@@ -9090,17 +9071,16 @@ INSERT INTO `User` (`id`, `name`, `surname`, `email`, `password`, `img`, `user_t
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `User_type`
+-- Table structure for table `User_type`
 --
 
-CREATE TABLE IF NOT EXISTS `User_type` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` enum('Regular','Admin') NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `User_type` (
+  `id` int(11) NOT NULL,
+  `type` enum('Regular','Admin') NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `User_type`
+-- Dumping data for table `User_type`
 --
 
 INSERT INTO `User_type` (`id`, `type`) VALUES
@@ -9110,21 +9090,17 @@ INSERT INTO `User_type` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Wishlist`
+-- Table structure for table `Wishlist`
 --
 
-CREATE TABLE IF NOT EXISTS `Wishlist` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `Wishlist` (
+  `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `product_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `user_id_2` (`user_id`,`product_id`),
-  KEY `user_id` (`user_id`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+  `product_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Wishlist`
+-- Dumping data for table `Wishlist`
 --
 
 INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
@@ -9135,140 +9111,443 @@ INSERT INTO `Wishlist` (`id`, `user_id`, `product_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura per vista `address`
+-- Structure for view `address`
 --
 DROP TABLE IF EXISTS `address`;
 
-CREATE VIEW `address`  AS SELECT `shipment_information`.`id` AS `id_shipment`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address`, `shipment_information`.`principal` AS `principal` FROM (((`region` join `provinces`) join `city`) join `shipment_information`) WHERE ((`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `address`  AS SELECT `shipment_information`.`id` AS `id_shipment`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address`, `shipment_information`.`principal` AS `principal` FROM (((`region` join `provinces`) join `city`) join `shipment_information`) WHERE ((`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura per vista `orderaddress`
+-- Structure for view `orderaddress`
 --
 DROP TABLE IF EXISTS `orderaddress`;
 
-CREATE VIEW `orderaddress`  AS SELECT `orders`.`id` AS `order_id`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address` FROM ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) WHERE ((`orders`.`shipment_user_info` = `shipment_information`.`id`) AND (`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `orderaddress`  AS SELECT `orders`.`id` AS `order_id`, `shipment_information`.`user_id` AS `user`, `region`.`id` AS `region_id`, `region`.`name` AS `region_name`, `provinces`.`id` AS `provinces_id`, `provinces`.`name` AS `provinces_name`, `city`.`id` AS `city_id`, `city`.`name` AS `city_name`, `shipment_information`.`code` AS `code`, `shipment_information`.`address` AS `address` FROM ((((`region` join `provinces`) join `city`) join `shipment_information`) join `orders`) WHERE ((`orders`.`shipment_user_info` = `shipment_information`.`id`) AND (`shipment_information`.`region` = `region`.`id`) AND (`shipment_information`.`province` = `provinces`.`id`) AND (`shipment_information`.`city` = `city`.`id`)) ;
 
 -- --------------------------------------------------------
 
 --
--- Struttura per vista `productcategory`
+-- Structure for view `productcategory`
 --
 DROP TABLE IF EXISTS `productcategory`;
 
-CREATE VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`small_description` AS `small_description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category`,`photo`.`link` AS `img` from (((`product` join `category`) join `category_item`) join `photo`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`) and (`photo`.`product_id` = `product`.`id`) and (`photo`.`thumbnail` = 1)))  ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `productcategory`  AS   (select `product`.`id` AS `id`,`product`.`name` AS `name`,`product`.`description` AS `description`,`product`.`small_description` AS `small_description`,`product`.`price` AS `price`,`product`.`manufacturer_id` AS `manufacturer_id`,`category`.`name` AS `category`,`photo`.`link` AS `img` from (((`product` join `category`) join `category_item`) join `photo`) where ((`product`.`id` = `category_item`.`product_id`) and (`category_item`.`category_id` = `category`.`id`) and (`photo`.`product_id` = `product`.`id`) and (`photo`.`thumbnail` = 1)))  ;
 
 --
--- Indici per le tabelle scaricate
+-- Indexes for dumped tables
 --
 
 --
--- Indici per le tabelle `Category`
+-- Indexes for table `Answer`
 --
+ALTER TABLE `Answer`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `admin_id` (`admin_id`),
+  ADD KEY `support_id` (`support_id`);
+
+--
+-- Indexes for table `Article`
+--
+ALTER TABLE `Article`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Cart`
+--
+ALTER TABLE `Cart`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `cart_id` (`cart_id`);
+
+--
+-- Indexes for table `Category`
+--
+ALTER TABLE `Category`
+  ADD PRIMARY KEY (`id`);
 ALTER TABLE `Category` ADD FULLTEXT KEY `name` (`name`);
 
 --
--- Indici per le tabelle `Product`
+-- Indexes for table `Category_item`
 --
+ALTER TABLE `Category_item`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `product_id` (`product_id`,`category_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Indexes for table `Chat`
+--
+ALTER TABLE `Chat`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `id` (`id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `City`
+--
+ALTER TABLE `City`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `provinces_id` (`provinces_id`);
+
+--
+-- Indexes for table `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Message`
+--
+ALTER TABLE `Message`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `chat_id` (`chat_id`);
+
+--
+-- Indexes for table `Orders`
+--
+ALTER TABLE `Orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `shipment_user_info` (`shipment_user_info`);
+
+--
+-- Indexes for table `Orders_items`
+--
+ALTER TABLE `Orders_items`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_id` (`order_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `Payments`
+--
+ALTER TABLE `Payments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Photo`
+--
+ALTER TABLE `Photo`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- Indexes for table `Product`
+--
+ALTER TABLE `Product`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `manufacturer_id` (`manufacturer_id`);
 ALTER TABLE `Product` ADD FULLTEXT KEY `name` (`name`);
 
 --
--- Limiti per le tabelle scaricate
+-- Indexes for table `Provinces`
+--
+ALTER TABLE `Provinces`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `region_id` (`region_id`);
+
+--
+-- Indexes for table `Region`
+--
+ALTER TABLE `Region`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Review`
+--
+ALTER TABLE `Review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `product_id` (`product_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `region` (`region`),
+  ADD KEY `city` (`city`),
+  ADD KEY `province` (`province`);
+
+--
+-- Indexes for table `Support`
+--
+ALTER TABLE `Support`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `order_id` (`order_id`);
+
+--
+-- Indexes for table `User`
+--
+ALTER TABLE `User`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_type` (`user_type`);
+
+--
+-- Indexes for table `User_type`
+--
+ALTER TABLE `User_type`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id_2` (`user_id`,`product_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `product_id` (`product_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- Limiti per la tabella `Answer`
+-- AUTO_INCREMENT for table `Answer`
+--
+ALTER TABLE `Answer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT for table `Article`
+--
+ALTER TABLE `Article`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `Cart`
+--
+ALTER TABLE `Cart`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+
+--
+-- AUTO_INCREMENT for table `Cart_item`
+--
+ALTER TABLE `Cart_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT for table `Category`
+--
+ALTER TABLE `Category`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `Category_item`
+--
+ALTER TABLE `Category_item`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=137;
+
+--
+-- AUTO_INCREMENT for table `Chat`
+--
+ALTER TABLE `Chat`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `City`
+--
+ALTER TABLE `City`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110011;
+
+--
+-- AUTO_INCREMENT for table `Manufacturer`
+--
+ALTER TABLE `Manufacturer`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Message`
+--
+ALTER TABLE `Message`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `Orders`
+--
+ALTER TABLE `Orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `Orders_items`
+--
+ALTER TABLE `Orders_items`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `Payments`
+--
+ALTER TABLE `Payments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Photo`
+--
+ALTER TABLE `Photo`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+
+--
+-- AUTO_INCREMENT for table `Product`
+--
+ALTER TABLE `Product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+
+--
+-- AUTO_INCREMENT for table `Provinces`
+--
+ALTER TABLE `Provinces`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+
+--
+-- AUTO_INCREMENT for table `Region`
+--
+ALTER TABLE `Region`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+
+--
+-- AUTO_INCREMENT for table `Review`
+--
+ALTER TABLE `Review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `Shipment_information`
+--
+ALTER TABLE `Shipment_information`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `Support`
+--
+ALTER TABLE `Support`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `User`
+--
+ALTER TABLE `User`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `User_type`
+--
+ALTER TABLE `User_type`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `Wishlist`
+--
+ALTER TABLE `Wishlist`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `Answer`
 --
 ALTER TABLE `Answer`
   ADD CONSTRAINT `answer_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `User` (`id`),
   ADD CONSTRAINT `answer_ibfk_2` FOREIGN KEY (`support_id`) REFERENCES `Support` (`id`);
 
 --
--- Limiti per la tabella `Cart`
+-- Constraints for table `Cart`
 --
 ALTER TABLE `Cart`
   ADD CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Limiti per la tabella `Cart_item`
+-- Constraints for table `Cart_item`
 --
 ALTER TABLE `Cart_item`
   ADD CONSTRAINT `cart_item_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`),
   ADD CONSTRAINT `cart_item_ibfk_2` FOREIGN KEY (`cart_id`) REFERENCES `Cart` (`id`);
 
 --
--- Limiti per la tabella `Category_item`
+-- Constraints for table `Category_item`
 --
 ALTER TABLE `Category_item`
   ADD CONSTRAINT `category_item_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `Category` (`id`),
   ADD CONSTRAINT `category_item_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
 --
--- Limiti per la tabella `Chat`
+-- Constraints for table `Chat`
 --
 ALTER TABLE `Chat`
   ADD CONSTRAINT `chat_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Limiti per la tabella `City`
+-- Constraints for table `City`
 --
 ALTER TABLE `City`
   ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`provinces_id`) REFERENCES `Provinces` (`id`);
 
 --
--- Limiti per la tabella `Message`
+-- Constraints for table `Message`
 --
 ALTER TABLE `Message`
   ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`chat_id`) REFERENCES `Chat` (`id`);
 
 --
--- Limiti per la tabella `Orders`
+-- Constraints for table `Orders`
 --
 ALTER TABLE `Orders`
   ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`shipment_user_info`) REFERENCES `Shipment_information` (`id`);
 
 --
--- Limiti per la tabella `Orders_items`
+-- Constraints for table `Orders_items`
 --
 ALTER TABLE `Orders_items`
   ADD CONSTRAINT `orders_items_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`),
   ADD CONSTRAINT `orders_items_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
 --
--- Limiti per la tabella `Payments`
+-- Constraints for table `Payments`
 --
 ALTER TABLE `Payments`
   ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Limiti per la tabella `Photo`
+-- Constraints for table `Photo`
 --
 ALTER TABLE `Photo`
   ADD CONSTRAINT `photo_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`);
 
 --
--- Limiti per la tabella `Product`
+-- Constraints for table `Product`
 --
 ALTER TABLE `Product`
   ADD CONSTRAINT `product_ibfk_1` FOREIGN KEY (`manufacturer_id`) REFERENCES `Manufacturer` (`id`);
 
 --
--- Limiti per la tabella `Provinces`
+-- Constraints for table `Provinces`
 --
 ALTER TABLE `Provinces`
   ADD CONSTRAINT `provinces_ibfk_1` FOREIGN KEY (`region_id`) REFERENCES `Region` (`id`);
 
 --
--- Limiti per la tabella `Review`
+-- Constraints for table `Review`
 --
 ALTER TABLE `Review`
   ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `Product` (`id`),
   ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 
 --
--- Limiti per la tabella `Shipment_information`
+-- Constraints for table `Shipment_information`
 --
 ALTER TABLE `Shipment_information`
   ADD CONSTRAINT `shipment_information_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
@@ -9277,20 +9556,20 @@ ALTER TABLE `Shipment_information`
   ADD CONSTRAINT `shipment_information_ibfk_4` FOREIGN KEY (`city`) REFERENCES `City` (`id`);
 
 --
--- Limiti per la tabella `Support`
+-- Constraints for table `Support`
 --
 ALTER TABLE `Support`
   ADD CONSTRAINT `support_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
   ADD CONSTRAINT `support_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `Orders` (`id`);
 
 --
--- Limiti per la tabella `User`
+-- Constraints for table `User`
 --
 ALTER TABLE `User`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`user_type`) REFERENCES `User_type` (`id`);
 
 --
--- Limiti per la tabella `Wishlist`
+-- Constraints for table `Wishlist`
 --
 ALTER TABLE `Wishlist`
   ADD CONSTRAINT `wishlist_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),

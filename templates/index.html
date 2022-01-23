@@ -4,44 +4,25 @@
     <div class="row">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
+                {% for article in articles %}
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{loop.index0}}" {% if loop.index0 == 0 %} class="active" aria-current="true" {% endif %}  aria-label="Slide {{loop.index}}"></button>    
+                {% endfor %}
             </div>
             <div class="carousel-inner">
-                <div class="carousel-item active" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}public/template-parts/single-page.php';">
-                    <img src="{{ROOT_URL}}public/img/slider/slide1.png" class="d-block w-100" alt="...">
+                {% for article in articles %}
+                    {% if loop.index0 == 0 %}
+                    <div class="carousel-item active" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}shop/article.php?article={{article.id}}';">
+                    {% else %}
+                    <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}shop/article.php?article={{article.id}}';">
+                    {% endif %}
+                    <img src="{{ROOT_URL}}{{article.img}}" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
-                        <h3 class="text-primary"><strong>Lavandeto</strong></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
-                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo.
+                        <h3 class="text-primary"><strong>{{article.title}}</strong></h3>
+                        <p>{{articletxt[loop.index0]}}
                         </p>
                     </div>
                 </div>
-                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}public/template-parts/single-page.php';">
-                    <img src="{{ROOT_URL}}public/img/slider/slide2.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3 class="text-primary"><strong>Oli essenziali</strong></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
-                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo.
-                        </p>
-                    </div>
-                </div>
-                <div class="carousel-item" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}public/template-parts/single-page.php';">
-                    <img src="{{ROOT_URL}}public/img/slider/slide3.png" class="d-block w-100" alt="...">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h3 class="text-primary"><strong>Processo</strong></h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas orci est, commodo et quam
-                            ut, iaculis aliquam dui. Suspendisse condimentum dignissim urna vitae rhoncus. Mauris et
-                            augue pellentesque, cursus lorem vel, scelerisque justo.
-                        </p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">

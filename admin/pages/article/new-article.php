@@ -14,7 +14,7 @@ if ($_SESSION["admin"] == 1) {
 
 
 
-<title>Nuovo prodotto</title>
+<title>Nuovo articolo</title>
 
 <?php include ROOT_PATH . 'public/template-parts/header.php'; ?>
 
@@ -23,18 +23,15 @@ if ($_SESSION["admin"] == 1) {
 <?php
 
 $manufacturerMgr = new ManufacturerManager();
-$categoryMgr = new CategoryManager();
-
-$category = $categoryMgr->getAll();
 $manufacturers = $manufacturerMgr->getAll();
 
-$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/templates/admin/product/');
+$loader = new \Twig\Loader\FilesystemLoader(ROOT_PATH . '/templates/admin/article/');
 $twig = new \Twig\Environment($loader, []);
 
-echo $twig->render('new-product.html', [
+echo $twig->render('new-article.html', [
     'ROOT_URL' => ROOT_URL,
-    'manufacturers' => $manufacturers,
-    'category' => $category
+    'manufacturers' => $manufacturers
+    
 ]);
 
 ?>

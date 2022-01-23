@@ -35,15 +35,17 @@ if ($product->name == "") {
     $categoryItemMgr = new CategoryItemManager();
     $categoryMgr = new CategoryManager();
 
+    $allCategory = $categoryMgr->getAll();
+
     $categories = $categoryItemMgr->get_category_id_by_product($product->id);
 
-    $categorie = array();
+    $categorieS = array();
 
     foreach ($categories as $category) {
         $results = $categoryMgr->getCategory($category['category_id']);
         foreach ($results as $result) {
-            $string = $result['name'];
-            array_push($categorie, $string); 
+            $string = $result['id'];
+            array_push($categorieS, $string); 
         }
     }
 
@@ -57,7 +59,8 @@ if ($product->name == "") {
         'ROOT_URL' => ROOT_URL,
         'product' => $product,
         'imgs' => $imgs,
-        'category' => $categorie
+        'category' => $categorieS,
+        'allCategory' => $allCategory
         
     ]);
 ?>

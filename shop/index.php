@@ -13,6 +13,7 @@ $categoryMgr = new CategoryManager();
 $imgMgr = new ImgManager();
 $reviewMgr = new ReviewManager();
 $wishlistMgr = new WishlistManager();
+$articleMgr = new ArticleManager();
 
 
 if (isset($_GET["search"])) {
@@ -34,6 +35,13 @@ $curaNumber = $productCategoryMgr->getNumberOf("Cura della persona");
 $idee = $productCategoryMgr->getByCategory("Idee regalo");
 $ideeNumber = $productCategoryMgr->getNumberOf("Idee regalo");
 $redirect = ROOT_URL . 'shop/single-product.php?product=';
+$articles = $articleMgr->getAll();
+
+$articletxt = array();
+
+foreach($articles as $article){
+    array_push($articletxt,substr($article->text,0,220));
+}
 
 $loader = new \Twig\Loader\FilesystemLoader('../templates');
 $twig = new \Twig\Environment($loader, []);
@@ -48,7 +56,9 @@ echo $twig->render('index.html', [
     'curaNumber' => $curaNumber[0]['number'],
     'idee' => $idee,
     'ideeNumber' => $ideeNumber[0]['number'],
-    'redirect' => $redirect
+    'redirect' => $redirect,
+    'articles' => $articles,
+    'articletxt' => $articletxt
 ]);
 
 include ROOT_PATH . 'public/template-parts/footer.php';

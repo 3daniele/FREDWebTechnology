@@ -1,0 +1,28 @@
+<main class="col-md-9 col-lg-8 px-md-4">
+    
+    <div class="row border-bottom">
+        <div class="col-4"><h2><strong class="text-primary">Articoli</strong></h2></div>
+        <div class="col-4"></div>
+        <div class="col-2 text-end"></div>
+        <div class="col-2 text-end"><a class="btn btn-primary" href="{{ROOT_URL}}admin/pages/article/new-article.php">Nuovo Articolo</a>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-12">
+                    {% for article in articles %}
+                    <div class="card" style="cursor:pointer;" onclick="location.href = '{{ROOT_URL}}admin/pages/article/edit-article.php?article={{article.id}}';">
+                        <div class="card-header">
+                            {{article.title}}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">{{articletxt[loop.index0]}}</p>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
