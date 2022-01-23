@@ -44,20 +44,18 @@ if (isset($_FILES)) {
             }
         }
 
-        echo $link;
-        echo "<br>";
+        $number = count($imgs);
 
         $tmp = $_FILES['image']['tmp_name'];
-        var_dump($_FILES['image']);
-        echo "<br>";
         
         if (is_uploaded_file($tmp)) {
             $uploadDir = ROOT_PATH . $link; //aggiungo il folder di destinazione
             echo $uploadDir;
             echo "<br>";
             if (move_uploaded_file($tmp, $uploadDir)) {
-                // OK
-                echo $uploadDir;
+                if ($number == 1) {
+                    $imgMgr->addThumbnail($imgID);
+                }
             } else {
                 echo "Non è stato possibile caricare l'immagine<br/>";
             }

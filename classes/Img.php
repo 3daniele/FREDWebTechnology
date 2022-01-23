@@ -31,6 +31,10 @@ class ImgManager extends DbManager
     return $this->db->query("UPDATE Photo SET link = '$img' WHERE id = $imgID");
   }
 
+  public function addThumbnail($imgID) {
+    return $this->db->query("UPDATE Photo SET thumbnail = 1 WHERE id = $imgID");
+  }
+
   public function addImg($productID)
   {
     return $this->db->query("INSERT INTO Photo (product_id, thumbnail) VALUES ($productID, 0)");
